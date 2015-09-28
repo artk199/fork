@@ -259,5 +259,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.3" level="project" />
+    <orderEntry type="library" name="grails-3.0.4" level="application" />
   </component>
 </module>
