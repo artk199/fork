@@ -1,0 +1,259 @@
+body{
+	text-align:center;
+	font-family:'Arial';
+	margin:0 auto;
+	padding:0;
+	background: #22262d;
+}
+
+a:link, a:visited{
+	text-decoration:none;
+	color:#7b90b4;
+}
+
+a:active, a:hover{
+	color:#9171b1;
+}
+
+#header{
+	background: #22262d;
+	float:left;
+	width:100%;
+	height: 85px;
+	border-top:2px #383e46 solid;
+	border-bottom:2px #383e46 solid;
+}
+
+.center{
+	width:1000px;
+	margin:0 auto;
+}
+
+#header .logo{
+	float:left;
+	width:240px;
+	margin-top:12px;
+}
+
+#header .logo h1{
+	text-align:left;
+	color:#fff;
+	float:left;
+	padding:0;
+	margin:3px 0 0 0;
+	text-transform: capitalize;
+	font-size:45px;
+}
+
+#header .logo img{
+	float:left;
+	width:55px;
+	height:55px;
+	margin-right:10px;
+}
+
+#header .menu{
+	float:right;
+}
+
+#header .menu ul{
+	list-style: none;
+	font-size: 17px;
+	color: #fff;
+	line-height: 55px;
+}
+
+#header .menu ul li{
+	float:left;
+	padding: 0 15px;
+}
+
+#header .menu ul li a:link, #header .menu ul li a:visited{
+	text-decoration: none;
+	color: #fff;
+}
+
+#header .menu ul li a:active, #header .menu ul li a:hover{
+	color:#3664b4;
+}
+
+#main-content{
+	width:100%;
+	float:left;
+	background:#e4e6ea;
+	color:#22262d;
+}
+
+#main-content .section{
+	float:left;
+	width:100%;
+	min-height:300px;
+}
+
+#main-content .informations{
+	color:#fff;
+	background:#52ABE3;
+}
+
+#banner{
+	float:left;
+	width:100%;
+	height:550px;
+	border-bottom:2px #383e46 solid;
+}
+
+.paris{
+	background:#1b2d40 url(img/background-paris.png) no-repeat center center;
+}
+
+.new-york{
+	background:#1b2d40 url(img/background-new_york.png) no-repeat center center;
+}
+
+#banner .wrapper{
+	position:relative;
+	height:550px;
+}
+
+#banner .wrapper .phone{
+	position:absolute;
+	background: url(img/telephone.png) no-repeat;
+	width: 484px;
+	height: 381px;
+	right:0;
+	bottom:0;
+}
+
+#banner .wrapper .info{
+	position: absolute;
+	bottom:50px;
+	width:580px;
+}
+
+#banner .info .title{
+	color:#fff;
+	font-size:40px;
+	text-align:left;
+	margin:0;
+	padding:0;
+}
+
+#banner .info .additional{
+	color:#fff;
+	font-size:20px;
+	text-align:left;
+	padding:5px 5px 5px 25px;
+	margin:0;
+}
+
+#banner .info .search {
+	width: 430px;
+	margin: 15px 5px;
+	float: left;
+}
+
+#banner .info .search .field{
+	float:left;
+	width:340px;
+	height:40px;
+	background:#d7dbe5;
+	border:1px solid #71767b;
+	padding:5px 15px;
+	font-size: 20px;
+	color:#767b88;
+}
+
+#banner .info .search .submit{
+	width: 45px;
+	height: 45px;
+	background: url(img/search_button.png) no-repeat;
+	display:block;
+	float:left;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+#foot{
+	float:left;
+	width:100%;
+}
+
+.foot-dark{
+	background:#22262d;
+	color:#e4e6ea;	
+	border-top:5px #383e46 solid;
+}
+
+.foot-light{
+	background:#e4e6ea;
+	color:#22262d;
+	border-top:1px #b4b9c3 solid;
+}
+
+#foot .part{
+	width:100%;
+	float:left;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+
+#foot .logo{
+	float:left;
+	width:240px;
+}
+
+#foot .logo h5{
+	text-align:left;
+	float:left;
+	padding:0;
+	margin:3px 0 0 0;
+	text-transform: capitalize;
+	font-size:25px;
+}
+
+#foot .logo img{
+	float:left;
+	width:35px;
+	height:35px;
+	margin-right:10px;
+}
+
+#foot .authors{
+	float:right;
+}
+
+#foot .authors p{
+	font-size: 10px;
+	text-align:right;
+	margin:0;
+	padding: 2px;
+}
+
+#foot .section{
+	height: 150px;
+	width: 180px;
+	float: left;
+	margin: 10px 30px;
+}
+
+#foot .section h4{
+	width: 100%;
+	font-size: 20px;
+	text-align: left;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #b4b9c3;
+	float: left;
+	margin: 0;
+	text-transform: capitalize;
+}
+
+#foot .section ul{
+	font-size: 13px;
+	list-style: square;
+	text-align: left;
+	clear: both;
+	float: left;
+	width: 100%;
+	margin: 10px 0 0 30px;
+	padding: 0;
+}
