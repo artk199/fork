@@ -1,4 +1,0 @@
-- jest dedykowana glownie na polski rynek
-- wiecej funkcji społecznosciowych
-- zorientowana bardziej na lokalne atrakcje 
-- tworzona przez uzytkownikow
