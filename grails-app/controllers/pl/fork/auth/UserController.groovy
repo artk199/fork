@@ -3,7 +3,6 @@ package pl.fork.auth
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
 class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -17,33 +16,32 @@ class UserController {
         respond user
     }
 
-    def create() {
-        respond new User(params)
+    def register() {
+        render(view:'create', model:[user:new User(params)])
     }
 
-    @Transactional
     def save(User user) {
+
+        /* Przypisanie z r�ki potwierdzenia has�a, automatycznie nie chce przypisa�... dunno why.*/
+        user.password_confirm = params.password_confirm
+
+        userService.register(user)
+        println user.errors
+
         if (user == null) {
-            transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
         if (user.hasErrors()) {
-            transactionStatus.setRollbackOnly()
             respond user.errors, view:'create'
             return
         }
 
-        user.save flush:true
+        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
-            }
-            '*' { respond user, [status: CREATED] }
-        }
+        redirect(uri:'/')
+
     }
 
     def edit(User user) {
