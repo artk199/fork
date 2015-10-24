@@ -8,6 +8,7 @@ class User implements Serializable {
 
 	String username
 	String password
+	String password_confirm
 	String email
 
 	boolean enabled = true
@@ -56,13 +57,14 @@ class User implements Serializable {
 
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
-	}
+    }
 
-	static transients = ['springSecurityService']
+	static transients = ['springSecurityService','password_confirm']
 
 	static constraints = {
-		username blank: false, unique: true
-		password blank: false
+		username blank: false, unique: true, size: 3..25
+		password size: 5..64, blank: false
+		email email: true, blank: false, unique: true
 	}
 
 	static mapping = {

@@ -27,7 +27,14 @@
             </g:hasErrors>
             <g:form action="save">
                 <fieldset class="form">
-                    <f:all bean="user"/>
+                    <f:field bean="${user}" property="username" label="${g.message(code:'user.username')}" />
+                    <f:field bean="${user}" property="password" label="${g.message(code:'user.password')}">
+                        <g:passwordField name="password"/>
+                    </f:field>
+                    <f:field bean="${user}" property="password_confirm" required="true" label="${g.message(code:'user.password_confirm')}" >
+                        <g:passwordField name="password_confirm"/>
+                    </f:field>
+                    <f:field bean="${user}" property="email" label="${g.message(code:'user.email')}" />
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
