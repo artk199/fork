@@ -11,3 +11,236 @@
 *= require mobile
 *= require_self
 */
+
+body{
+    text-align:center;
+    font-family:'Arial';
+}
+
+.fork-layout-navbar{
+    height:85px;
+    margin-bottom:6px !important;
+}
+
+.fork-layout-header{
+    background: #22262d;;
+    border-top: 2px #383e46 solid;
+    border-bottom: 2px #383e46 solid;
+}
+
+.fork-layout-header-logo{
+    float:left;
+    margin-right:10px;
+    margin-top: 15px;
+    cursor: default;
+}
+
+.fork-layout-header-title{
+    text-align:left;
+    color:#fff;
+    float:left;
+    text-transform: capitalize;
+    font-size:45px;
+    float:left;
+    line-height:85px;
+    cursor: default;
+}
+
+.fork-layout-header-links > li > a {
+    font-size: 17px;
+    color: white !important;
+    height: 85px;
+}
+
+.fork-layout-header-links > li > a > span {
+    position:relative;
+    top:20px;
+}
+
+.fork-layout-header-links > li > a:hover {
+    font-size: 17px;
+    color: white !important;
+    background: greenyellow !important;
+}
+
+.fork-content{
+    background: #1b2d40;
+}
+
+.fork-inner-content{
+
+}
+
+.fork-content-main-banner{
+    background:#1b2d40 url(img/background-new_york.png) no-repeat center center;
+    height: 550px;
+}
+
+.fork-content-main-info{
+    position: relative;
+    top: 320px;
+    z-index:1;
+}
+
+.fork-content-main-title{
+    color:#fff;
+    font-size:40px;
+    text-align:left;
+    margin:0;
+    padding:0;
+}
+
+.fork-content-main-subtitle{
+    color:#fff;
+    font-size:20px;
+    text-align:left;
+    padding:5px 5px 5px 25px;
+    margin:0;
+}
+
+.fork-content-main-search{
+    margin: 15px 5px;
+    float: left;
+}
+
+.fork-content-main-search-field{
+    float:left;
+    height:40px;
+    background:#d7dbe5;
+    border:1px solid #71767b;
+    padding:5px 15px;
+    font-size: 20px;
+    color:#767b88;
+}
+
+.fork-content-main-search-submit{
+    height: 45px;
+    background: url(img/search_button.png) no-repeat;
+    display:block;
+    float:left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.fork-content-main-phone{
+    position: relative;
+    top: 13px;
+}
+
+a:link, a:visited{
+    text-decoration:none;
+    color:#7b90b4;
+}
+
+a:active, a:hover{
+    color:#9171b1;
+}
+
+#banner{
+    float:left;
+    width:100%;
+    height:550px;
+    border-bottom:2px #383e46 solid;
+}
+
+.paris{
+    background:#1b2d40 url(img/background-paris.png) no-repeat center center;
+}
+
+.new-york{
+    background:#1b2d40 url(img/background-new_york.png) no-repeat center center;
+}
+
+#banner .wrapper .phone{
+    position:absolute;
+    background: url(img/telephone.png) no-repeat;
+    width: 484px;
+    height: 381px;
+    right:0;
+    bottom:0;
+}
+
+#foot{
+    float:left;
+    width:100%;
+}
+
+.foot-dark{
+    background:#22262d;
+    color:#e4e6ea;
+    border-top:5px #383e46 solid;
+}
+
+.foot-light{
+    background:#e4e6ea;
+    color:#22262d;
+    border-top:1px #b4b9c3 solid;
+}
+
+#foot .part{
+    width:100%;
+    float:left;
+    margin-top:10px;
+    margin-bottom:5px;
+}
+
+#foot .logo{
+    float:left;
+    width:240px;
+}
+
+#foot .logo h5{
+    text-align:left;
+    float:left;
+    padding:0;
+    margin:3px 0 0 0;
+    text-transform: capitalize;
+    font-size:25px;
+}
+
+#foot .logo img{
+    float:left;
+    width:35px;
+    height:35px;
+    margin-right:10px;
+}
+
+#foot .authors{
+    float:right;
+}
+
+#foot .authors p{
+    font-size: 10px;
+    text-align:right;
+    margin:0;
+    padding: 2px;
+}
+
+#foot .section{
+    height: 150px;
+    width: 180px;
+    float: left;
+    margin: 10px 30px;
+}
+
+#foot .section h4{
+    width: 100%;
+    font-size: 20px;
+    text-align: left;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #b4b9c3;
+    float: left;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+#foot .section ul{
+    font-size: 13px;
+    list-style: square;
+    text-align: left;
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 10px 0 0 30px;
+    padding: 0;
+}

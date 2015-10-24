@@ -8,32 +8,21 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-
-    UserService userService
-
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        render(view:'index', model:[userList: User.list(params), userCount: User.count()])
+        respond User.list(params), model:[userCount: User.count()]
     }
 
     def show(User user) {
-        render(view:'show', model:[user:user])
+        respond user
     }
 
     def create() {
-        render(view:'create', model:[user:new User(params)])
+        respond new User(params)
     }
 
     @Transactional
-    def save() {
-
-        String username = params.username
-        String password = params.password
-        String email    = params.email
-
-        User user = userService.register(username,password,email)
-
+    def save(User user) {
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()

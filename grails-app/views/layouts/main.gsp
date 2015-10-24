@@ -1,19 +1,32 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><g:layoutTitle default="Grails"/></title>
+        <title><g:layoutTitle default="Fork"/></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <asset:stylesheet src="application.css"/>
+        <asset:stylesheet src="bootstrap.min.css"/>
+        <asset:stylesheet src="bootstrap-theme.min.css"/>
         <asset:javascript src="application.js"/>
-
+        <asset:javascript src="bootstrap.min.js"/>
+        <asset:javascript src="npm.js"/>
         <g:layoutHead/>
     </head>
     <body>
-        <div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a></div>
-        <g:layoutBody/>
-        <div class="footer" role="contentinfo"></div>
-        <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+            <g:render template="/layouts/header"/>
+            <div class="container-fluid ">
+                <div class="row"><%-- FIRST ROW IS BUGGED FOR SOME REASON? STARTS AT 75% OF PAGE WIDTH--%></div>
+                <div class="row fork-content">
+                    <div class="col-md-2 col-sm-1 hidden-xs"></div>
+                    <div class="col-md-8 col-sm-10 col-xs-12">
+                        <div class="fork-inner-content">
+                            <g:layoutBody/>
+                            <g:render template="/layouts/footer"/>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-1 hidden-xs"></div>
+                </div>
+            </div>
     </body>
 </html>
