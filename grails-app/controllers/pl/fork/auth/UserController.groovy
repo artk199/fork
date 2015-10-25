@@ -5,6 +5,8 @@ import grails.transaction.Transactional
 
 class UserController {
 
+    UserService userService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
