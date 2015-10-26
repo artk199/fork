@@ -19,7 +19,12 @@
                             <li><a href="${createLink(uri:'/')}"><span><g:message code="layout.header.link.home"/></span></a></li>
                             <li><a href="${createLink(controller:'place',action:'index')}"><span><g:message code="layout.header.link.place"/></span></a></li>
                             <li><a href="${createLink(controller:'event',action:'index')}"><span><g:message code="layout.header.link.event"/></span></a></li>
-                            <li><a href="${createLink(controller:'user',action:'index')}"><span><g:message code="layout.header.link.login"/></span></a></li>
+                            <sec:ifLoggedIn>
+                                <li><a href="${createLink(controller:'logout')}"><span><g:message code="auth.logout"/></span></a></li>
+                            </sec:ifLoggedIn>
+                            <sec:ifNotLoggedIn>
+                                <li><a href="${createLink(controller:'login',action:'auth')}"><span><g:message code="layout.header.link.login"/></span></a></li>
+                            </sec:ifNotLoggedIn>
                         </ul>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import org.springframework.validation.FieldError
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.converters.JSON
 
 @Transactional(readOnly = true)
 class PlaceController {
@@ -112,4 +113,22 @@ class PlaceController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def search(){
+
+        println params.search
+
+        Map zabytek_1 = [:]
+        zabytek_1['name'] = 'Fontanna Neptuna'
+        zabytek_1['description'] = 'Sika na wszystkich przechodniow od poczatku istnienia tego miasta'
+
+        Map zabytek_2 = [:]
+        zabytek_2['name'] = 'Dom Artura'
+        zabytek_2['description'] = 'Relikt PRLowej Polski w ruinie'
+
+        List zabytki = [zabytek_1, zabytek_2]
+
+        render zabytki as JSON
+    }
+
 }

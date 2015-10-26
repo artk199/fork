@@ -1,4 +1,4 @@
-    <div class="row">
+<div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="fork-content-main-banner">
             <div class="row">
@@ -8,8 +8,7 @@
                         <h2 class='fork-content-main-title'><g:message code="home.main.title"/></h2>
                         <h3 class='fork-content-main-subtitle'><g:message code="home.main.subtitle"/></h3>
                         <div class='fork-content-main-search'>
-                            <input type='text' class='fork-content-main-search-field' value='${g.message(code:"home.main.search")}'/>
-                            <a href='#' class='fork-content-main-search-submit'>&nbsp;</a>
+                            <search-input/>
                         </div>
                     </div>
 
