@@ -24,7 +24,7 @@ class PlaceController {
     }
 
     def get(int id){
-        placeService.get(id) as JSON
+        render placeService.get(id) as JSON
     }
 
     def create() {
@@ -83,15 +83,14 @@ class PlaceController {
         }
     }
 
-    @Transactional
     def delete(Place place) {
 
         if (place == null) {
-            transactionStatus.setRollbackOnly()
             notFound()
             return
         }
-        place.delete flush:true
+
+        placeService.delete(place)
 
         request.withFormat {
             form multipartForm {

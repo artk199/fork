@@ -16,5 +16,7 @@ class PlaceService {
         place.save(flush:true);
     }
 
-
+    def delete(Place place) {
+        place.delete(flush:true);
+    }
 }
