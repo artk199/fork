@@ -129,13 +129,19 @@ body{
     font-size: 20px;
     color:#767b88;
     position:absolute;
+    cursor:default;
 }
 
 .fork-content-main-search-result{
     padding:5px;
 }
 
-.fork-content-main-search-result:hover{
+.fork-content-main-search-more{
+    margin-top:5px;
+    border-top:1px dashed #71767b;
+}
+
+.fork-content-main-search-result:hover, .fork-content-main-search-more:hover{
     background: #A6A8AB;
 }
 

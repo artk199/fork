@@ -1,5 +1,6 @@
 package pl.fork.place
 
+import pl.fork.auth.User
 import pl.fork.event.Event
 
 class Place {
@@ -9,6 +10,7 @@ class Place {
         email nullable:true
         phone nullable:true
         website nullable:true
+        owner nullable:true
         types minSize: 1
     }
 
@@ -21,6 +23,7 @@ class Place {
     String email
     String phone
     String website
+    User owner
 
     boolean verified
 
