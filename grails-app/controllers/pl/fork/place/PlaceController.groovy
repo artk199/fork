@@ -1,5 +1,6 @@
 package pl.fork.place
 
+import grails.converters.JSON
 import org.springframework.validation.FieldError
 
 import static org.springframework.http.HttpStatus.*
@@ -7,6 +8,8 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PlaceController {
+
+    PlaceService placeService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -19,33 +22,28 @@ class PlaceController {
         respond place
     }
 
+    def get(int id){
+        placeService.get(id) as JSON
+    }
+
     def create() {
         respond new Place(params)
     }
 
-    @Transactional
     def save(Place place) {
+
         if (place == null) {
-            transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
+        placeService.save(place);
+
         if (place.hasErrors()) {
-            transactionStatus.setRollbackOnly()
             respond place.errors, view: 'create'
             return
         }
 
-        place.validate()
-        if (!place.hasErrors()){
-            place.save flush: true
-        }
-        else{
-            place.errors.fieldErrors.each{ FieldError error ->
-                error.field
-            }
-        }
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'place.label', default: 'Place'), place.id])
