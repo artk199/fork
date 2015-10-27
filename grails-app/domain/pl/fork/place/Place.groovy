@@ -25,6 +25,9 @@ class Place {
     String website
     User owner
 
+    //date is automatically filled with current timestamp
+    Date dateCreated;
+
     boolean verified
 
     int x
