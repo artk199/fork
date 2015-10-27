@@ -11,12 +11,20 @@ class PlaceController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+        println("asd");
+        println(params.name);
         params.max = Math.min(max ?: 10, 100)
         respond Place.list(params), model:[placeCount: Place.count()]
     }
 
     def show(Place place) {
         respond place
+    }
+
+    def filter(PlaceService placeService) {
+        println("filter");
+        println(placeService.getName());
+        redirect Place.list(params), model:[placeCount: Place.count()]
     }
 
     def create() {

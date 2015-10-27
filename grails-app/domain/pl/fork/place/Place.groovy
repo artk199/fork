@@ -22,6 +22,9 @@ class Place {
     String phone
     String website
 
+    //date is automatically filled with current timestamp
+    Date dateCreated;
+
     boolean verified
 
     int x
