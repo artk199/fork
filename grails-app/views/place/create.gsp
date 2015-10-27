@@ -27,7 +27,12 @@
             </g:hasErrors>
             <g:form action="save">
                 <fieldset class="form">
-                    <f:all bean="place"/>
+                    <f:field bean="place" property="name" label="assa"/>
+                    <f:field bean="place" property="description"/>
+                    <f:field bean="place" property="address"/>
+                    <f:field bean="place" property="email"/>
+                    <f:field bean="place" property="phone"/>
+                    <f:field bean="place" property="website"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
