@@ -15,11 +15,16 @@
 body{
     text-align:center;
     font-family:'Arial';
+    background: #22262d!important;
 }
 
 .fork-layout-navbar{
     height:85px;
     margin-bottom:6px !important;
+    border-top:0!important;
+    border-left:0!important;
+    border-right:0!important;
+    border-bottom:5px solid #000!important;
 }
 
 .fork-layout-header{
@@ -57,14 +62,19 @@ body{
     top:20px;
 }
 
+.center{
+    width:1000px;
+    margin:auto;
+}
+
 .fork-layout-header-links > li > a:hover {
     font-size: 17px;
-    color: white !important;
-    background: greenyellow !important;
+    color: #448EC9!important;
+    background: none !important;
 }
 
 .fork-content{
-    background: #1b2d40;
+    background: #f1f1f1;
 }
 
 .fork-inner-content{
@@ -78,8 +88,9 @@ body{
 
 .fork-content-main-info{
     position: relative;
-    top: 220px;
+    top: 150px;
     z-index:1;
+    left:20px;
 }
 
 .fork-content-main-title{
@@ -181,6 +192,16 @@ a:active, a:hover{
     height: 381px;
     right:0;
     bottom:0;
+}
+
+.banner-row{
+    position:relative;
+    height:550px;
+}
+
+.banner-inner-div{
+    position:absolute!important;
+    bottom:0px!important;
 }
 
 #foot{

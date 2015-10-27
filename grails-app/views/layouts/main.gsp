@@ -17,18 +17,9 @@
     </head>
     <body>
         <g:render template="/layouts/header"/>
-        <div class="container-fluid ">
-            <div class="row"><%-- FIRST ROW IS BUGGED FOR SOME REASON? STARTS AT 75% OF PAGE WIDTH--%></div>
-            <div class="row fork-content">
-                <div class="col-md-2 col-sm-1 hidden-xs"></div>
-                <div class="col-md-8 col-sm-10 col-xs-12">
-                    <div class="fork-inner-content">
-                        <g:layoutBody/>
-                        <g:render template="/layouts/footer"/>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-1 hidden-xs"></div>
-            </div>
+        <div class="container-fluid fork-content">
+            <g:layoutBody/>
+            <g:render template="/layouts/footer"/>
         </div>
         <asset:javascript src="fork.js"/>
     </body>
