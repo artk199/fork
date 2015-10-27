@@ -20,7 +20,6 @@
 </sec:ifLoggedIn>
 <sec:ifNotLoggedIn>
     <g:link controller='user' action='register'><g:message code="auth.register" /></g:link>
-    <g:link controller='login' action='auth'><g:message code="auth.login" /></g:link>
 </sec:ifNotLoggedIn>
 
     <g:render template="/home/content"/>
