@@ -2,6 +2,9 @@ package pl.fork.place
 
 import grails.transaction.Transactional
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 @Transactional
 class PlaceService {
 
@@ -9,6 +12,35 @@ class PlaceService {
 
     Place get(int id){
         return Place.get(id)
+    }
+
+    List<Place> filter(String name, String town, String timeAfter, String timeBefore) {
+
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
+        String minDate = "1000/01/01 00:00";
+        String maxDate = "3000/12/31 23:59"
+
+        Date dateAfter = timeAfter != null && !"".equals(timeAfter) ? format.parse(timeAfter) : format.parse(minDate);
+        Date dateBefore = timeBefore != null && !"".equals(timeBefore) ? format.parse(timeBefore) : format.parse(maxDate);
+
+        List<Place> places = Place.createCriteria().list {
+            if (name != null && !"".equals(name)) {
+                eq("name", name)
+            }
+
+            if(timeAfter != null) {
+                gt("dateCreated", dateAfter)
+            }
+
+            if(timeBefore != null) {
+                lt("dateCreated", dateBefore)
+            }
+
+            if(town != null && !"".equals(town)) {
+                eq("town", town)
+            }
+        }
+        return places;
     }
 
     Place save(Place place) {

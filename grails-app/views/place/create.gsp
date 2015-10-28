@@ -27,8 +27,9 @@
             </g:hasErrors>
             <g:form action="save">
                 <fieldset class="form">
-                    <f:field bean="place" property="name" label="assa"/>
+                    <f:field bean="place" property="name"/>
                     <f:field bean="place" property="description"/>
+                    <f:field bean="place" property="town"/>
                     <f:field bean="place" property="address"/>
                     <f:field bean="place" property="email"/>
                     <f:field bean="place" property="phone"/>

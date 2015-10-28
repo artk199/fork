@@ -15,10 +15,8 @@ class PlaceController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        println("asd");
-        println(params.name);
         params.max = Math.min(max ?: 10, 100)
-        respond Place.list(params), model:[placeCount: Place.count()]
+        respond placeService.filter(params.name, params.town, params.timeAfter, params.timeBefore), model:[placeCount: Place.count()]
     }
 
     def show(Place place) {
@@ -27,12 +25,6 @@ class PlaceController {
 
     def get(int id){
         render placeService.get(id) as JSON
-    }
-
-    def filter(PlaceService placeService) {
-        println("filter");
-        println(placeService.getName());
-        redirect Place.list(params), model:[placeCount: Place.count()]
     }
 
     def create() {

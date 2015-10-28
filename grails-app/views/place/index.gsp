@@ -10,12 +10,12 @@
     </head>
     <body>
         <button type="button" data-toggle="collapse" data-target="#filterCollapse" aria-expanded="false">
-            <g:message code="custom.filter" default="Filter"/>
+            <g:message code="custom.filterCollapse" default="Show/hide filter"/>
         </button>
         <div class="collapse" id="filterCollapse">
             <g:form action="index" controller="place">
                 <g:message code="placeList.created.after" default="Created after"/>
-                <input id="datetimepicker1" type="text" name="timeBefore">
+                <input id="datetimepicker1" type="text" name="timeAfter">
                 <g:message code="placeList.created.before" default="before"/>
                 <input id="datetimepicker2" type="text" name="timeBefore">
                 <g:message code="placeList.name" default="Name"/>
@@ -30,10 +30,10 @@
                     $('#datetimepicker1').datetimepicker();
                     $('#datetimepicker2').datetimepicker();
                 </script>
-                <g:submitButton name="index" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                <g:submitButton name="index" class="save" value="${message(code: 'custom.filter', default: 'Filter')}" />
             </g:form>
-
         </div>
+        <br>
         <a href="#list-place" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>

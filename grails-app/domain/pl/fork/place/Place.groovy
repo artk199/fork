@@ -7,6 +7,7 @@ class Place {
 
     static constraints = {
         address nullable:true
+        town nullable:true
         email nullable:true
         phone nullable:true
         website nullable:true
@@ -20,6 +21,7 @@ class Place {
     String name
     String description
     String address
+    String town
     String email
     String phone
     String website
