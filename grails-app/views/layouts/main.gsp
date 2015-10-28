@@ -5,10 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title><g:layoutTitle default="Fork"/></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
         <asset:stylesheet src="application.css"/>
         <asset:stylesheet src="bootstrap.min.css"/>
         <asset:stylesheet src="bootstrap-theme.min.css"/>
+
+        <asset:javascript src="angular.js"/>
         <asset:javascript src="application.js"/>
         <asset:javascript src="bootstrap.min.js"/>
         <asset:javascript src="npm.js"/>
