@@ -312,7 +312,7 @@ a:active, a:hover{
 }
 
 .fork-tile-image-container > div:nth-child(2){
-    position: absolute;
+    position: fixed;
     background: white;
     z-index: 1;
     height: 175px;
@@ -321,7 +321,7 @@ a:active, a:hover{
 }
 
 .fork-tile-image-container > div:nth-child(3){
-    position: absolute;
+    position: fixed;
     background: white;
     z-index: 1;
     height: 175px;

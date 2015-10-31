@@ -156,16 +156,19 @@ forkApp.directive('tileImage', function($window, $location){
             $scope.overlay = false;
             $scope.top = 0;
             $scope.left = 0;
-            $scope.offsetTopConst = -137;
-            $scope.offsetLeftConst = 146;
             $scope.blockEvent = false;
 
             $scope.getTop = function(){
-                return $scope.top + $scope.offsetTopConst + 'px';
+                return $scope.top + 'px';
             }
 
-            $scope.getLeft = function(){
-                return $scope.left + $scope.offsetLeftConst + 'px';
+            $scope.getLeft = function(mode){
+                if( mode == 1 ){
+                    return $scope.left + 'px';
+                }
+                else if ( mode == 2 ){
+                    return $scope.left + 150 + 'px';
+                }
             }
 
             $scope.shiftLeft = function(){
@@ -198,12 +201,16 @@ forkApp.directive('tileImage', function($window, $location){
         }],
         link: function (scope, element) {
             var top = element[0].getBoundingClientRect().top;
+            var left = element[0].getBoundingClientRect().left;
             var doc = element[0].ownerDocument;
-            var off = $window.pageYOffset;
+            var offY = $window.pageYOffset;
+            var offX = $window.pageXOffset;
             var cTop = doc.documentElement.clientTop;
+            var cLeft = doc.documentElement.clientLeft;
 
-            scope.top = top + off - cTop;
-            scope.left = element.prop('offsetLeft');
+            scope.top = top + offY - cTop;
+
+            scope.left = left + offX - cLeft;
 
             element.bind('mouseover', function(){
                 scope.$apply(function(){
@@ -233,8 +240,8 @@ forkApp.directive('tileImage', function($window, $location){
         },
         template:"<div class='fork-tile-image-container'>" +
         "           <img class='fork-tile-image' data-ng-src='{{images[currentPicture]}}'>" +
-        "           <div ng-show='showOverlay()' ng-style='{top: getTop()}' tile-image-left></div> " +
-        "           <div ng-show='showOverlay()' ng-style='{top: getTop(), left: getLeft()}' tile-image-right></div>" +
+        "           <div ng-show='showOverlay()' ng-style='{top: getTop(), left: getLeft(1)}' tile-image-left></div> " +
+        "           <div ng-show='showOverlay()' ng-style='{top: getTop(), left: getLeft(2) }' tile-image-right></div>" +
         "         </div>"
     }
 });
