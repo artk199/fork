@@ -13,7 +13,7 @@
         <br>
         <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 
-        <div class="row">
+        <div class="row" style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none; user-select: none;">
             <div class="col-md-3 col-sm-2 hidden-xs"></div>
             <div class="col-md-6 col-sm-8 col-xs-12">
                 <g:each var="place" in="${placeList}">
