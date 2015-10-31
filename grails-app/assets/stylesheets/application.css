@@ -345,3 +345,65 @@ a:active, a:hover{
     background: orange;
     height:100%;
 }
+
+#show-place h1{
+    text-align: left;
+    border-bottom: 1px solid #000;
+}
+
+.blue-section{
+    background: #498fff;
+    color: #fff;
+}
+
+iframe{
+    border:none;
+    width: 90%;
+    height: 500px;
+    margin: 15px;
+}
+
+#show-place .bar-section{
+    float: left;
+    height: 50px;
+    margin-right: 20px;
+    margin-top: 20px;
+    position: relative;
+}
+
+#show-place .bar-section img{
+    float: left;
+    margin-right: 10px;
+    height: 25px;
+}
+#show-place .bar-section span{
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display:block;
+    float:left;
+    margin-top:2px;
+}
+
+#show-place .bar-section a:link, #show-place .bar-section a:visited{
+    position: absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    text-decoration: none;
+}
+
+#show-place .localisation-info{
+    float: left;
+    clear:both;
+    text-align:left;
+    margin-left:30px;
+}
+
+#show-place .localisation-info img{
+    float:left;
+    height: 12px;
+    margin-top: 4px;
+    margin-right: 5px;
+}
