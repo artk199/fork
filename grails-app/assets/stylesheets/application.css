@@ -328,3 +328,20 @@ a:active, a:hover{
     width: 30px;
     opacity:0.5;
 }
+
+.fork-tile-score{
+    width: 15px;
+    height: 10px;
+    background: grey;
+    display: inline-block;
+    margin-right: 5px;
+    z-index: 2;
+    border: 1px solid black;
+    top: -11px;
+    position: relative;
+}
+
+.fork-tile-score > div{
+    background: orange;
+    height:100%;
+}

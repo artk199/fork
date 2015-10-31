@@ -273,3 +273,30 @@ forkApp.directive('tileImageRight', function(){
         }
     }
 });
+
+forkApp.directive('tileScore', function() {
+    return {
+        restrict: 'E',
+        scope: {
+            score: '@'
+        },
+        controller: ['$scope', function($scope) {
+            $scope.getNumbers = function(num){
+                return new Array(Math.floor(num));
+            }
+
+            $scope.getWidth = function(num){
+                if( $scope.score >= num ){
+                    return '100%';
+                }
+                if( num - $scope.score < 1 ){
+                    return (num-$scope.score) * 100+'%';
+                }
+                return '0%';
+            }
+        }],
+        template:"<div ng-repeat='i in getNumbers(5) track by $index' class='fork-tile-score'>" +
+        "           <div ng-style='{width: getWidth($index+1)}'></div>" +
+        "         </div>"
+    }
+});

@@ -15,8 +15,10 @@ class Place {
         types minSize: 1
     }
 
+
     /*TODO: Uncomment services and sucessfully compile project */
     static hasMany = [scores: Score, types:PlaceType, /*services:AdditionalService,*/ events: Event]
+    static transients = ['avgScore']
 
     String name
     String description
@@ -34,5 +36,21 @@ class Place {
 
     int x
     int y
+
+    double getAvgScore(){
+        double scoresAmount, scoresTotal
+
+        if( this.scores.isEmpty() ){
+            return -1;
+        }
+        scoresAmount = this.scores.size()
+        scoresTotal = 0
+        scores.each { Score score ->
+            scoresTotal += score.score
+        }
+
+        return scoresTotal / scoresAmount
+    }
+
     //Point coordinates
 }
