@@ -9,48 +9,21 @@
         <asset:stylesheet src="jquery.datetimepicker.css"/>
     </head>
     <body>
-        <button type="button" data-toggle="collapse" data-target="#filterCollapse" aria-expanded="false">
-            <g:message code="custom.filterCollapse" default="Show/hide filter"/>
-        </button>
-        <div class="collapse" id="filterCollapse">
-            <g:form action="index" controller="place">
-                <g:message code="placeList.created.after" default="Created after"/>
-                <input id="datetimepicker1" type="text" name="timeAfter">
-                <g:message code="placeList.created.before" default="before"/>
-                <input id="datetimepicker2" type="text" name="timeBefore">
-                <g:message code="placeList.name" default="Name"/>
-                <input id="name" type="text" name="name">
-                <g:message code="placeList.type" default="Type"/>
-                <input id="type" type="text" name="type">
-                <g:message code="placeList.town" default="Town"/>
-                <input id="town" type="text" name="town">
-                <g:message code="placeList.distance" default="Distance"/>
-                <input id="distance" type="text" name="distance">
-                <script>
-                    $('#datetimepicker1').datetimepicker();
-                    $('#datetimepicker2').datetimepicker();
-                </script>
-                <g:submitButton name="index" class="save" value="${message(code: 'custom.filter', default: 'Filter')}" />
-            </g:form>
-        </div>
+        <g:render template="filter"/>
         <br>
-        <a href="#list-place" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-place" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${placeList}" />
+        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 
-            <div class="pagination">
-                <g:paginate total="${placeCount ?: 0}" />
+        <div class="row">
+            <div class="col-md-3 col-sm-2 hidden-xs"></div>
+            <div class="col-md-6 col-sm-8 col-xs-12">
+                <g:each var="place" in="${placeList}">
+                    <g:render template="tile" model="[place:place]"/>
+                </g:each>
             </div>
+            <div class="col-md-3 col-sm-2 hidden-xs"></div>
         </div>
+
+        <div style="height:50px"></div>
+
     </body>
 </html>

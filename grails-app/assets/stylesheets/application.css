@@ -294,3 +294,37 @@ a:active, a:hover{
     margin: 10px 0 0 30px;
     padding: 0;
 }
+
+.fork-tile-image-container{
+    width:100%;
+    height:100%;
+    opacity:1;
+    cursor:pointer;
+}
+
+.fork-tile-image-container:hover{
+    opacity: 0.8;
+}
+
+.fork-tile-image-container > img{
+    width:100%;
+    height:100%;
+}
+
+.fork-tile-image-container > div:nth-child(2){
+    position: absolute;
+    background: white;
+    z-index: 1;
+    height: 175px;
+    width: 30px;
+    opacity:0.5;
+}
+
+.fork-tile-image-container > div:nth-child(3){
+    position: absolute;
+    background: white;
+    z-index: 1;
+    height: 175px;
+    width: 30px;
+    opacity:0.5;
+}

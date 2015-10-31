@@ -142,3 +142,127 @@ forkApp.directive('onFinishRender', function () {
         }
     }
 });
+
+
+
+forkApp.directive('tileImage', function($window, $location){
+    return {
+        restrict: 'E',
+        scope: {
+            id: '@'
+        },
+        controller: ['$scope', function($scope) {
+            $scope.currentPicture = 0;
+            $scope.overlay = false;
+            $scope.top = 0;
+            $scope.left = 0;
+            $scope.offsetTopConst = -137;
+            $scope.offsetLeftConst = 146;
+            $scope.blockEvent = false;
+
+            $scope.getTop = function(){
+                return $scope.top + $scope.offsetTopConst + 'px';
+            }
+
+            $scope.getLeft = function(){
+                return $scope.left + $scope.offsetLeftConst + 'px';
+            }
+
+            $scope.shiftLeft = function(){
+                if( $scope.currentPicture == 0 ){
+                    $scope.currentPicture = $scope.images.length - 1;
+                }
+                else{
+                    $scope.currentPicture--;
+                }
+            }
+
+            $scope.shiftRight = function(){
+                if( $scope.currentPicture == $scope.images.length - 1 ){
+                    $scope.currentPicture = 0;
+                }
+                else{
+                    $scope.currentPicture++;
+                }
+            }
+
+            $scope.showOverlay = function(){
+                if($scope.overlay && $scope.images.length > 1 ) {
+                    return true;
+                }
+                return false;
+            }
+
+            $scope.images = ['http://www.demilked.com/magazine/wp-content/uploads/2014/03/zoomed-out-landmarks-2-1.jpg', 'http://theclassytraveler.com/wp-content/uploads/2013/01/Paris-France-Landmarks-Arc-De-Triomphe-1.jpg' , 'http://designlike.com/wp-content/uploads/2011/12/Giza-Pyramids1-600x450.jpg']
+
+        }],
+        link: function (scope, element) {
+            var top = element[0].getBoundingClientRect().top;
+            var doc = element[0].ownerDocument;
+            var off = $window.pageYOffset;
+            var cTop = doc.documentElement.clientTop;
+
+            scope.top = top + off - cTop;
+            scope.left = element.prop('offsetLeft');
+
+            element.bind('mouseover', function(){
+                scope.$apply(function(){
+                    scope.overlay = true;
+                });
+            });
+            element.bind('mouseout', function(){
+                scope.$apply(function(){
+                    scope.overlay = false;
+                });
+            });
+            element.bind('click', function(){
+                if(document.selection && document.selection.empty) {
+                    document.selection.empty();
+                } else if($window.getSelection) {
+                    var sel = $window.getSelection();
+                    sel.removeAllRanges();
+                }
+
+                if( !scope.blockEvent ){
+                    var baseUrl = $location.absUrl().toString();
+                    $window.location.href = baseUrl.substring(0,baseUrl.indexOf('index')) + 'show/' + scope.id;
+                }
+                scope.blockEvent = false;
+
+            });
+        },
+        template:"<div class='fork-tile-image-container'>" +
+        "           <img class='fork-tile-image' data-ng-src='{{images[currentPicture]}}'>" +
+        "           <div ng-show='showOverlay()' ng-style='{top: getTop()}' tile-image-left></div> " +
+        "           <div ng-show='showOverlay()' ng-style='{top: getTop(), left: getLeft()}' tile-image-right></div>" +
+        "         </div>"
+    }
+});
+
+forkApp.directive('tileImageLeft', function(){
+    return {
+        restrict: 'A',
+        link: function (scope, element){
+            element.bind('click', function(){
+                scope.$apply(function(){
+                    scope.blockEvent = true
+                    scope.shiftLeft();
+                });
+            });
+        }
+    }
+});
+
+forkApp.directive('tileImageRight', function(){
+    return {
+        restrict: 'A',
+        link: function (scope, element){
+            element.bind('click', function(){
+                scope.$apply(function(){
+                    scope.blockEvent = true;
+                    scope.shiftRight();
+                });
+            });
+        }
+    }
+});
