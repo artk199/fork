@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <g:render template="scores" model="[place:place]"/>
+            <g:render template="scores" model="[place:place, score:score]"/>
         </div>
         <div class="col-md-2 col-sm-1 hidden-xs"></div>
     </div>

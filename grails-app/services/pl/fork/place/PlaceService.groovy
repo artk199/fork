@@ -1,6 +1,7 @@
 package pl.fork.place
 
 import grails.transaction.Transactional
+import org.apache.commons.collections.CollectionUtils
 import pl.fork.auth.User
 
 import java.text.DateFormat
@@ -116,6 +117,23 @@ class PlaceService {
             return null
         }
         score
+    }
+
+    Score getUserScore(Place place) {
+        User currentUser = User.findByUsername(springSecurityService.currentUser);
+        List<Score> scores = Score.createCriteria().list {
+            if (currentUser) {
+                eq("owner", currentUser)
+            }
+
+            if(place) {
+                eq("place", place)
+            }
+        }
+        if (!CollectionUtils.isEmpty(scores)) {
+            return scores.get(0);
+        }
+        return null;
     }
 
 }
