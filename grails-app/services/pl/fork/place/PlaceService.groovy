@@ -86,6 +86,15 @@ class PlaceService {
         [zabytek_1, zabytek_2, zabytek_3, zabytek_4, zabytek_5]
     }
 
+    List<Place> getAll(){
+        return Place.getAll();
+    }
+
+    List<Place> getNear(def latitude, def longitude){
+        //TODO: Implement method
+        return getAll()
+    }
+
 
     List<Score> getScores(Place place){
         place.scores.isEmpty() ? [] : place.scores

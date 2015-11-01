@@ -28,6 +28,10 @@ class PlaceController {
         render placeService.get(id) as JSON
     }
 
+    def getAll(float latitude,float longitude){
+        render placeService.getNear(latitude,longitude) as JSON
+    }
+
     def create() {
         respond new Place(params)
     }
