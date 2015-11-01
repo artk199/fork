@@ -33,8 +33,23 @@ class BootStrap {
             name = "Ratusz Nowego Miasta"
             description = "Ten ładniejszy ratusz często pokazywany na pocztówkach."
         }
+
+        Place fontanna = new Place()
+        fontanna.with{
+            name = "Fontanna Neptuna"
+            description = "Fontanna Neptuna przy Dworze Artusa."
+        }
+
+        Place artus = new Place()
+        artus.with{
+            name = "Dwór artusa"
+            description = "Kamienica przy Fontannie Neptuna."
+        }
+
         grzybowo.save(flush:true)
         ratusz.save(flush:true)
+        fontanna.save(flush:true)
+        artus.save(flush:true)
 
         println "Deployed."
     }

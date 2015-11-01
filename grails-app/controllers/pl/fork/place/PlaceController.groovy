@@ -16,6 +16,7 @@ class PlaceController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        println params
         respond placeService.filter(params.name, params.town, params.timeAfter, params.timeBefore), model:[placeCount: Place.count()]
     }
 

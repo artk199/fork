@@ -295,6 +295,19 @@ a:active, a:hover{
     padding: 0;
 }
 
+.fork-tile-container{
+    width:175px;
+    height:225px;
+    background: #D6E6C3;
+    display:inline-block;
+    float: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #eceae2;
+}
+
 .fork-tile-image-container{
     width:100%;
     height:100%;
@@ -406,4 +419,29 @@ iframe{
     height: 12px;
     margin-top: 4px;
     margin-right: 5px;
+}
+
+.fork-filter-bar{
+    background: #D6E6C3;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #eceae2;
+}
+
+.fork-filter-input-container > div{
+    padding: 5px;
+    border-bottom: 1px solid #ABB89C;
+}
+
+.fork-filter-input-container > div:last-child{
+    border-bottom: 0px solid #ABB89C;
+}
+
+.fork-filter-input-container > div > input{
+    float:left;
+    background:white;
+    border:1px solid #71767b;
+    padding:5px 15px;
+    font-size: 14px;
+    color:#767b88;
+    width: 100%;
 }

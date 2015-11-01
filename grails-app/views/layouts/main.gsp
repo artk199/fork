@@ -8,9 +8,13 @@
         <asset:stylesheet src="application.css"/>
         <asset:stylesheet src="bootstrap.min.css"/>
         <asset:stylesheet src="bootstrap-theme.min.css"/>
+        <asset:stylesheet src="jquery.datetimepicker.css"/>
 
-        <asset:javascript src="angular.js"/>
         <asset:javascript src="application.js"/>
+        <asset:javascript src="angular.js"/>
+
+        <asset:javascript src="jquery.datetimepicker.full.min.js"/>
+
         <asset:javascript src="bootstrap.min.js"/>
         <asset:javascript src="npm.js"/>
 

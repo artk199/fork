@@ -300,3 +300,21 @@ forkApp.directive('tileScore', function() {
         "         </div>"
     }
 });
+
+
+
+forkApp.directive('filterDate', function(){
+   return {
+       restrict: 'A',
+       scope: {
+           placeholder: '@'
+       },
+       link: function (scope, element){
+           element.datetimepicker({
+               timepicker:false,
+               format:'Y/m/d',
+               maxDate:'0'
+           });
+       }
+   }
+});
