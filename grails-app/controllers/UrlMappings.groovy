@@ -9,7 +9,10 @@ class UrlMappings {
 
         "/place/search"(controller:"place", action:"search")
         "/place/search/all"(controller:"place", action:"searchAll")
-
+        "/place/$id/score"{
+            controller = "place"
+            action = [GET:'getScores', POST:'addScore']
+        }
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')

@@ -27,5 +27,6 @@
             <g:render template="/layouts/footer"/>
         </div>
         <asset:javascript src="fork.js"/>
+        <asset:javascript src="score/scoreController.js"/>
     </body>
 </html>

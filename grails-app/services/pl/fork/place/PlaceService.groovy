@@ -1,6 +1,7 @@
 package pl.fork.place
 
 import grails.transaction.Transactional
+import pl.fork.auth.User
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -11,6 +12,10 @@ class PlaceService {
     def springSecurityService
 
     Place get(int id){
+        return Place.get(id)
+    }
+
+    Place get(Long id){
         return Place.get(id)
     }
 
@@ -81,5 +86,27 @@ class PlaceService {
         [zabytek_1, zabytek_2, zabytek_3, zabytek_4, zabytek_5]
     }
 
+
+    List<Score> getScores(Place place){
+        place.scores.isEmpty() ? [] : place.scores
+    }
+
+    Score addScoreToPlace(Place place, parameters){
+        Score score = new Score(parameters)
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        score.language = 'PL'
+        score.place = place
+        score.owner = currentUser
+        score.validate()
+        if( score && !score.hasErrors() ){
+            place.addToScores(score)
+            score.save(flush:true)
+            place.save(flush:true)
+        }
+        else{
+            return null
+        }
+        score
+    }
 
 }

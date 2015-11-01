@@ -5,7 +5,7 @@ import org.springframework.validation.FieldError
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-import grails.converters.JSON
+import org.grails.web.json.JSONObject
 
 @Transactional(readOnly = true)
 class PlaceController {
@@ -125,5 +125,20 @@ class PlaceController {
 
         render view:'/place/index_2', model:[places:foundPlaces]
     }
+
+    def getScores(Long id){
+        Place place = placeService.get(id)
+        List scores = placeService.getScores(place)
+        println scores
+        render scores as JSON
+    }
+
+    def addScore(Long id){
+        JSONObject parameters = new JSONObject(request.reader.text)
+        Place place = placeService.get(id)
+        Score score = placeService.addScoreToPlace(place,parameters)
+        render score as JSON
+    }
+
 
 }

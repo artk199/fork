@@ -15,10 +15,12 @@ class Place {
         types minSize: 1
     }
 
+    List scores
 
     /*TODO: Uncomment services and sucessfully compile project */
     static hasMany = [scores: Score, types:PlaceType, /*services:AdditionalService,*/ events: Event]
     static transients = ['avgScore']
+
 
     String name
     String description
