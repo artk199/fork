@@ -144,5 +144,9 @@ class PlaceController {
         render score as JSON
     }
 
+    /** Metoda do testowania logowania */
+    def getPlace(){
+        return Place.get(1) as JSON;
+    }
 
 }
