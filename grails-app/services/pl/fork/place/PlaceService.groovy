@@ -136,4 +136,18 @@ class PlaceService {
         return null;
     }
 
+    public String getGoogleMapString(Place place){
+        String result
+        if(place.town.empty || place.address.empty){
+            result = place.name
+        }
+        else{
+            result = place.town + "," + place.address
+        }
+        result = result.replaceAll(' ', '+')
+
+        return result
+    }
+
+
 }
