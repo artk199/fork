@@ -1,5 +1,5 @@
 <div class="row" ng-controller="ScoreController" ng-init="init('${place.id}')">
-    <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12" style="border-bottom: solid black 1px;     margin-bottom: 15px;">
+    <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
         <h1 style="float:left;"><g:message code="place.scores.title"/>
     </div>
     <div ng-show="noScores()">
