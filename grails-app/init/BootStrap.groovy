@@ -2,6 +2,8 @@ import pl.fork.auth.Role
 import pl.fork.auth.User
 import pl.fork.auth.UserService
 import pl.fork.place.Place
+import grails.converters.JSON
+import pl.fork.place.Score
 
 class BootStrap {
 
@@ -50,6 +52,31 @@ class BootStrap {
         ratusz.save(flush:true)
         fontanna.save(flush:true)
         artus.save(flush:true)
+
+        JSON.registerObjectMarshaller( Score ) { Score score ->
+            return [
+                    owner : score.owner,
+                    id : score.id,
+                    score : score.score,
+                    place : score.place,
+                    review : score.review,
+                    language : score.language,
+                    title : score.title,
+            ]
+        }
+
+        JSON.registerObjectMarshaller( User ) { User user ->
+            return [
+                    username : user.username,
+                    id : user.id
+            ]
+        }
+
+        JSON.registerObjectMarshaller( Place ) { Place place ->
+            return [
+                    id : place.id
+            ]
+        }
 
         println "Deployed."
     }
