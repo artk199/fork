@@ -363,6 +363,8 @@ a:active, a:hover{
 #show-place h1{
     text-align: left;
     border-bottom: 1px solid #000;
+    width:100%;
+    padding:5px;
 }
 
 .blue-section{
@@ -385,18 +387,30 @@ iframe{
     position: relative;
 }
 
-#show-place .bar-section img{
-    float: left;
+#show-place .nav-tabs{
+    border-bottom:none!important;
+    margin: 10px!important;
+}
+
+#show-place .nav-tabs img{
     margin-right: 10px;
     height: 25px;
 }
-#show-place .bar-section span{
+#show-place .nav-tabs span{
     text-decoration: none;
     color: #fff;
-    font-size: 18px;
-    display:block;
-    float:left;
-    margin-top:2px;
+}
+
+#show-place .nav-tabs>li.active>a, #show-place .nav-tabs>li.active>a:focus,
+#show-place .nav-tabs>li.active>a:hover, #show-place .nav-tabs>li.active>a:link {
+    background: #2C5588!important;
+    border:none!important;
+    border-radius:0!important;
+}
+
+#show-place .nav-tabs>li a:active, #show-place .nav-tabs>li a:hover{
+    background:none!important;
+    border-radius:0!important;
 }
 
 #show-place .bar-section a:link, #show-place .bar-section a:visited{

@@ -53,6 +53,6 @@ class Place {
 
         return scoresTotal / scoresAmount
     }
-
+    
     //Point coordinates
 }

@@ -21,7 +21,8 @@ class PlaceController {
     }
 
     def show(Place place) {
-        respond place
+        Score score = placeService.getUserScore(place);
+        respond place, model:[score:score]
     }
 
     def get(int id){
@@ -133,7 +134,6 @@ class PlaceController {
     def getScores(Long id){
         Place place = placeService.get(id)
         List scores = placeService.getScores(place)
-        println scores
         render scores as JSON
     }
 

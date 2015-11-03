@@ -6,77 +6,41 @@
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 <body>
-    <div class="row">
-        <div class="col-md-2 col-sm-1 hidden-xs"></div>
-        <div class="col-md-8 col-sm-10 col-xs-12">
-            <div class="row">
-                <div class=" col-sm-12 col-xs-12 col-lg-12 col-md-12">
-                    <h1>${this.place.town} - ${this.place.name}</h1>
-                    <div class="row">
-                        <div class="col-md-4">
-                            image
-                        </div>
+    <div id="show-place">
+        <div class="row">
+            <div class="col-md-2 col-sm-1 hidden-xs"></div>
+            <div class="col-md-8 col-sm-10 col-xs-12">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
+                        <h1>${this.place.town} - ${this.place.name}</h1>
+                        <div class="row">
+                            <div class="col-md-4">
+                                image
+                            </div>
 
-                        <div class="col-md-8">
-                            <p class="desc">
-                                ${this.place.description}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="show-place" class="blue-section">
-                <div class="bar blue-section">
-                    <div class="bar-section">
-                        <g:img  file="logo.png"/>
-                        <span>Lokalizacja</span>
-                        <a href="#">&nbsp;</a>
-                    </div>
-                    <div class="bar-section">
-                        <g:img  file="logo.png"/>
-                        <span>Kontakt</span>
-                        <a href="#">&nbsp;</a>
-                    </div>
-                    <div class="bar-section">
-                        <g:img  file="logo.png"/>
-                        <span>Cennik</span>
-                        <a href="#">&nbsp;</a>
-                    </div>
-                    <div class="bar-section">
-                        <g:img  file="logo.png"/>
-                        <span>Organizuj wycieczkę</span>
-                        <a href="#">&nbsp;</a>
-                    </div>
-                    <div class="bar-section">
-                        <g:img  file="logo.png"/>
-                        <span>Zdjęcia użytkowników</span>
-                        <a href="#">&nbsp;</a>
-                    </div>
-                    <div class="bar-section">
-                        <g:img  file="logo.png"/>
-                        <span>Coś jeszcze</span>
-                        <a href="#">&nbsp;</a>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="localisation-info">
-                                <g:img  file="logo.png"/>
-                                <span><strong> Miasto: </strong> ${this.place.town}</span>
-                            </div>
-                            <div class="localisation-info">
-                                <g:img  file="logo.png"/>
-                                <span><strong> Adres: </strong> ${this.place.address}</span>
-                            </div>
-                            <div class="map">
-                                -<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCQcP1mIycA9POYLolLblZeqc3dLG9iVjQ&q=${this.place.town}+${this.place.address}"></iframe>
+                            <div class="col-md-8">
+                                <p class="desc">
+                                    ${this.place.description}
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <g:render template="scores" model="[place:place]"/>
+            <div class="col-md-2 col-sm-1 hidden-xs"></div>
         </div>
-        <div class="col-md-2 col-sm-1 hidden-xs"></div>
+        <div class="row blue-section">
+            <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
+                <g:render template="tabs" model="[place:place]"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-1 hidden-xs"></div>
+            <div class="col-md-8 col-sm-10 col-xs-12">
+                <g:render template="scores" model="[place:place, score:score]"/>
+            </div>
+            <div class="col-md-2 col-sm-1 hidden-xs"></div>
+        </div>
     </div>
 </body>
 </html>
