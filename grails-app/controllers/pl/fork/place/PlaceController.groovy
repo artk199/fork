@@ -146,7 +146,13 @@ class PlaceController {
 
     /** Metoda do testowania logowania */
     def getPlace(){
-        return Place.get(1) as JSON;
+        render Place.get(1) as JSON;
+    }
+
+    /** G*/
+    def test(params){
+        println params
+        render "test";
     }
 
 }
