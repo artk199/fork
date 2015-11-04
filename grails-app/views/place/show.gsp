@@ -19,7 +19,7 @@
                             </div>
 
                             <div class="col-md-8">
-                                <p class="desc">
+                                <p class="text-left">
                                     ${this.place.description}
                                 </p>
                             </div>

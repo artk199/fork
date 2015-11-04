@@ -381,6 +381,8 @@ a:active, a:hover{
 .blue-section{
     background: #498fff;
     color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .blue-section a:link, .blue-section a:visited{
@@ -404,7 +406,6 @@ iframe{
 
 #show-place .nav-tabs{
     border-bottom:none!important;
-    margin: 10px!important;
 }
 
 #show-place .nav-tabs .glyphicon{
