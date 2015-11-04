@@ -6,39 +6,89 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-place" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="create-place" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${this.place}">
-            <ul class="errors" role="alert">
-                <g:eachError bean="${this.place}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                </g:eachError>
-            </ul>
-            </g:hasErrors>
-            <g:form action="save">
-                <fieldset class="form">
-                    <f:field bean="place" property="name"/>
-                    <f:field bean="place" property="description"/>
-                    <f:field bean="place" property="town"/>
-                    <f:field bean="place" property="address"/>
-                    <f:field bean="place" property="email"/>
-                    <f:field bean="place" property="phone"/>
-                    <f:field bean="place" property="website"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
-            </g:form>
+        <div class="row" role="main">
+            <div  class="col-md-8 col-md-offset-2">
+                <h1><g:message code="add.new.place" args="[entityName]" /></h1>
+                <g:if test="${flash.message}">
+                    <div class="message" role="status">${flash.message}</div>
+                </g:if>
+                <g:hasErrors bean="${this.place}">
+                    <ul class="errors" role="alert">
+                        <g:eachError bean="${this.place}" var="error">
+                            <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                        </g:eachError>
+                    </ul>
+                </g:hasErrors>
+                <g:form action="save" class="form-horizontal">
+                    <fieldset class="form">
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-4 control-label">
+                    <g:message code="place.name" />
+                    </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="name" id="name" value="${place.name}"/>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="col-sm-4 control-label">
+                            <g:message code="place.description" />
+                        </label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="description" id="description" value="${place.description}"> </textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="town" class="col-sm-4 control-label">
+                            <g:message code="place.town" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="town" id="town" value="${place.town}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-4 control-label">
+                            <g:message code="place.address" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="address" id="address" value="${place.address}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-4 control-label">
+                            <g:message code="place.email" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="email" id="email" value="${place.email}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-4 control-label">
+                            <g:message code="place.phone" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="phone" id="phone" value="${place.phone}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website" class="col-sm-4 control-label">
+                            <g:message code="place.website" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="website" id="website" value="${place.website}"/>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Dodaj!')}" />
+                    </fieldset>
+                </g:form>
+            </div>
         </div>
     </body>
 </html>

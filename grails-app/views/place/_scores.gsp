@@ -48,10 +48,13 @@
                 <div class="row">
                     <div class="col-md-2 col-sm-3 col-xs-3" style="height: 125px;">
                         <div class="pull-left">
-                            <img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" style="width:75px;height:75px"/>
-                            <div style="text-aling:left">
-                                {{ score.user }}
-                            </div>
+                                <g:set var="ownerId" value="{{ score.owner.id }}" />
+                                <a href="${createLink(controller: 'user', action: 'show', id: ownerId)}">
+                                    <img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" style="width:75px;height:75px"/>
+                                    <div style="text-aling:left" ng-app>
+                                        {{ score.owner.username }}
+                                    </div>
+                                </a>
                         </div>
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" style="background:#D6E6C3;border: 3px solid #fff;box-shadow: 0 0 0 3px #eceae2;border-radius: 10px;">

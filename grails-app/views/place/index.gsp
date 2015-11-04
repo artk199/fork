@@ -28,6 +28,13 @@
         </div>
 
         <div style="height:50px"></div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 ">
+                <g:link action="create" class="btn btn-default btn-block" ><g:message code="place.add" /></g:link>
+            </div>
+        </div>
+        <div style="height:50px"></div>
+
 
     </body>
 </html>
