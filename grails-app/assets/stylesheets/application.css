@@ -366,9 +366,24 @@ a:active, a:hover{
     padding:5px;
 }
 
+#show-place h2{
+    text-align: left;
+    border-bottom: 1px solid #59c8ff;
+    padding: 10px;
+}
+
+#show-place h2 .glyphicon{
+    font-size:18px;
+    margin: 5px 10px 0 0;
+}
+
 .blue-section{
     background: #498fff;
     color: #fff;
+}
+
+.blue-section a:link, .blue-section a:visited{
+    color: #fffb48;
 }
 
 iframe{
@@ -391,13 +406,20 @@ iframe{
     margin: 10px!important;
 }
 
-#show-place .nav-tabs img{
+#show-place .nav-tabs .glyphicon{
     margin-right: 10px;
-    height: 25px;
+    font-size: 20px;
+    float: left;
+    margin-top: -2px;
 }
 #show-place .nav-tabs span{
     text-decoration: none;
     color: #fff;
+}
+
+#show-place .nav-tabs .title{
+    padding:0;
+    margin-top:-5px;
 }
 
 #show-place .nav-tabs>li.active>a, #show-place .nav-tabs>li.active>a:focus,
@@ -421,18 +443,9 @@ iframe{
     text-decoration: none;
 }
 
-#show-place .localisation-info{
-    float: left;
-    clear:both;
-    text-align:left;
-    margin-left:30px;
-}
-
-#show-place .localisation-info img{
-    float:left;
-    height: 12px;
-    margin-top: 4px;
-    margin-right: 5px;
+.tab-content .glyphicon{
+    margin:3px 5px;
+    font-size: 11px;
 }
 
 .fork-filter-bar{
