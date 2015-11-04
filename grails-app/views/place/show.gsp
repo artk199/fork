@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
         </div>
-        <div class="row blue-section">
+        <div class="row page-section blue-section">
             <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
                 <g:render template="tabs" model="[place:place]"/>
             </div>

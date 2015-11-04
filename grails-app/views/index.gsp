@@ -12,6 +12,7 @@
 
     <g:render template="/home/main"/>
 
+<%--
 <sec:ifLoggedIn>
     <g:loggedInUser />
     <form name="logout" method="POST" action="${createLink(controller:'logout') }">
@@ -20,7 +21,7 @@
 </sec:ifLoggedIn>
 <sec:ifNotLoggedIn>
     <g:link controller='user' action='register'><g:message code="auth.register" /></g:link>
-</sec:ifNotLoggedIn>
+</sec:ifNotLoggedIn> --%>
 
     <g:render template="/home/content"/>
 

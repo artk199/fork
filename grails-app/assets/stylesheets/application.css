@@ -210,34 +210,24 @@ a:active, a:hover{
     bottom:0px!important;
 }
 
-#foot{
-    margin-top: 20px;
-    float:left;
-    width:100%;
+a.btn:link, a.btn:visited{
+    background: #ff7408;
+    border-radius:0;
+    color:#fff!important;
+    border:1px solid #ff7408;
 }
 
-.foot-dark{
-    background:#22262d;
-    color:#e4e6ea;
-    border-top:5px #383e46 solid;
+a.btn:active, a.btn:hover{
+    border:1px solid #fff!important;
+}
+a.btn:active{
+    color:#ff7408!important;
 }
 
 .foot-light{
     background:#e4e6ea;
     color:#22262d;
     border-top:1px #b4b9c3 solid;
-}
-
-#foot .part{
-    width:100%;
-    float:left;
-    margin-top:10px;
-    margin-bottom:5px;
-}
-
-#foot .logo{
-    float:left;
-    width:240px;
 }
 
 #foot .logo h5{
@@ -256,10 +246,6 @@ a:active, a:hover{
     margin-right:10px;
 }
 
-#foot .authors{
-    float:right;
-}
-
 #foot .authors p{
     font-size: 10px;
     text-align:right;
@@ -267,14 +253,7 @@ a:active, a:hover{
     padding: 2px;
 }
 
-#foot .section{
-    height: 150px;
-    width: 180px;
-    float: left;
-    margin: 10px 30px;
-}
-
-#foot .section h4{
+#foot h4{
     width: 100%;
     font-size: 20px;
     text-align: left;
@@ -285,7 +264,7 @@ a:active, a:hover{
     text-transform: capitalize;
 }
 
-#foot .section ul{
+#foot ul{
     font-size: 13px;
     list-style: square;
     text-align: left;
@@ -367,22 +346,35 @@ a:active, a:hover{
     padding:5px;
 }
 
-#show-place h2{
-    text-align: left;
-    border-bottom: 1px solid #59c8ff;
-    padding: 10px;
+.page-section{
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
-#show-place h2 .glyphicon{
+.page-section h2{
+    width:100%;
+    border-bottom: 1px solid rgba(177, 193, 220, 0.69);
+    padding:10px;
+    margin: 0 0 20px 0;
+}
+
+.page-section h2 .glyphicon{
     font-size:18px;
-    margin: 5px 10px 0 0;
+    margin: 5px 10px 0 5px;
 }
 
 .blue-section{
     background: #498fff;
     color: #fff;
-    padding-top: 20px;
-    padding-bottom: 20px;
+}
+
+.page-footer{
+    border-top:5px #383e46 solid;
+}
+
+.dark-section{
+    background:#22262d;
+    color:#e4e6ea;
 }
 
 .blue-section a:link, .blue-section a:visited{
