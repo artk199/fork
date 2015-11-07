@@ -13,9 +13,11 @@ class Place {
         website nullable:true
         owner nullable:true
         types minSize: 1
+        file nullable:true
     }
 
     List scores
+    File file
 
     /*TODO: Uncomment services and sucessfully compile project */
     static hasMany = [scores: Score, types:PlaceType, /*services:AdditionalService,*/ events: Event]

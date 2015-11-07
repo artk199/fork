@@ -155,4 +155,21 @@ class PlaceController {
         render "test";
     }
 
+    def uploadFile(Place place) {
+        // Get the avatar file from the multi-part request
+        def f = request.getFile('avatar')
+        // Save the image and mime type
+        place.file = new File();
+        place.file.source = f.bytes
+        place.file.fileType = f.contentType
+        log.info("File uploaded: $place.file.fileType")
+
+        // Validation works, will check if the image is too big
+        if (!place.save()) {
+            return
+        }
+        flash.message = "Avatar (${place.file.fileType}, ${place.file.source.size()} bytes) uploaded."
+        redirect(action:'show')
+    }
+
 }
