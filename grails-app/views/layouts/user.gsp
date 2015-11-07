@@ -15,8 +15,6 @@
 
         <asset:javascript src="jquery.datetimepicker.full.min.js"/>
 
-        <asset:javascript src="bootstrap.min.js"/>
-        <asset:javascript src="npm.js"/>
 
         <g:layoutHead/>
     </head>
@@ -26,6 +24,7 @@
             <g:layoutBody/>
             <g:render template="/layouts/footer"/>
         </div>
+        <asset:javascript src="bootstrap.min.js"/>
         <asset:javascript src="angular.js"/>
         <asset:javascript src="angular-animate.js"/>
         <asset:javascript src="fork.js"/>
