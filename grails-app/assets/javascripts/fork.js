@@ -209,7 +209,6 @@ forkApp.directive('userImages', function(){
             $scope.readyToReverse = false;
             $scope.images = [];
             $scope.maxDimension = 200;
-            $scope.activeImg = '/user/1/image/0';
             $scope.selectedImage = -1;
 
             $scope.requestImages = function() {
@@ -235,9 +234,9 @@ forkApp.directive('userImages', function(){
         link: function(scope, element){
             scope.requestImages();
         },
-        template: "<div class='row' style='padding-top:10px;'>" +
-        "               <div class='col-md-12' ng-show='isSelected()'>" +
-        "                   <img ng-src='{{getSelectedUrl()}}'/>" +
+        template: "<div class='row' style='padding-top:10px; margin-left: 15px; margin-right:25px;'>" +
+        "               <div class='col-md-12' style='padding:0px; margin:10px; overflow-x:auto;overflow-y:hidden;' ng-show='isSelected()'>" +
+        "                   <img full-image ng-src='{{getSelectedUrl()}}'/>" +
         "               </div>" +
         "               <div class='col-md-12'>" +
             "               <div style='display:inline-block; margin: 5px;' ng-repeat='image in images'>" +
@@ -248,9 +247,9 @@ forkApp.directive('userImages', function(){
     }
 });
 
-forkApp.directive('userImage', function($timeout){
+forkApp.directive('userImage',  ['$timeout', function($timeout) {
     return {
-        link: function (scope, element) {
+        link: function (scope, element, attrs) {
 
             $timeout(function () { //Without specifying delay this method will fire after full render is complete
 
@@ -268,32 +267,35 @@ forkApp.directive('userImage', function($timeout){
 
                 var watcher = scope.$watch( function(){ return scope.$parent.readyToRead; } , function(newVal) {
                     if( newVal ) {
-                        var height = element[0].getBoundingClientRect().height;
-                        var width = element[0].getBoundingClientRect().width;
 
-                        var biggerDimension = height > width ? height : width;
+                        var newImg = new Image();
 
-                        console.log(height);
+                        newImg.onload = function() {
+                            var height = newImg.height;
+                            var width = newImg.width;
 
-                        if( biggerDimension > scope.$parent.maxDimension ) {
-                            var ratio = scope.$parent.maxDimension / biggerDimension;
-                            var newHeight = height*ratio + 'px';
-                            var newWidth = width*ratio + 'px';
-                            console.log('this is my new height ' + newHeight);
-                            element.css('height', newHeight );
-                            element.css('width', newWidth);
-                            element.parent().css('height', '200px');
-                            element.parent().css('line-height','200px');
-                            element.parent().css('width', newWidth);
+                            var biggerDimension = height > width ? height : width;
+
+                            if( biggerDimension > scope.$parent.maxDimension ) {
+                                var ratio = scope.$parent.maxDimension / biggerDimension;
+                                var newHeight = height*ratio + 'px';
+                                var newWidth = width*ratio + 'px';
+                                element.css('height', newHeight );
+                                element.css('width', newWidth);
+                                element.parent().css('height', '200px');
+                                element.parent().css('line-height','200px');
+                                element.parent().css('width', newWidth);
+                            }
+
+
+                            if( scope.$last ){
+                                scope.$parent.readyToReverse = true;
+                            }
+
+                            watcher();
                         }
 
-                        console.log("i did my calculus");
-
-                        if( scope.$last ){
-                            console.log("messanger of doom");
-                            scope.$parent.readyToReverse = true;
-                        }
-                        watcher();
+                        newImg.src = attrs.ngSrc;
                     }
                 });
 
@@ -312,13 +314,42 @@ forkApp.directive('userImage', function($timeout){
                     });
                 }
 
-            }, 500 ); //TODO: <--
+            } );
 
             element.bind('click', function(){
-               scope.$parent.$apply(function(){
-                   scope.$parent.selectedImage = scope.$index;
-               });
+                if( scope.$parent.selectedImage != scope.$index ) {
+                    scope.$parent.$apply(function () {
+                        scope.$parent.selectedImage = scope.$index;
+                    });
+                }
             });
         }
     }
-});
+}]);
+
+forkApp.directive('fullImage', ['$animateCss', function($animateCss) {
+    return {
+        link: function (scope, element) {
+            scope.$watch( function(){
+                return scope.getSelectedUrl();
+            }, function(newval, oldval){
+
+                var oldheight = element[0].getBoundingClientRect().height;
+
+                var newImg = new Image();
+
+                newImg.onload = function() {
+                    var newheight = newImg.height;
+                    $animateCss(element, {
+                        from:{ height: oldheight+'px' },
+                        to: {height: newheight+'px'},
+                        duration: 1,
+                    }).start();
+
+                }
+
+                newImg.src = newval;
+            });
+        }
+    }
+}]);

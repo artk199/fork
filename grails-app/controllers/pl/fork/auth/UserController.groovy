@@ -117,6 +117,9 @@ class UserController {
         if( imageID == 13 ){
             template = g.resource(dir:"images",file:"stock_2.png", absolute:"true")
         }
+        else if( imageID == 22 ){
+            template = g.resource(dir:"images",file:"background-new_york.png", absolute:"true")
+        }
         else{
             template = g.resource(dir:"images",file:"stock.png", absolute:"true")
         }
