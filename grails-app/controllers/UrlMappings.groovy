@@ -13,6 +13,14 @@ class UrlMappings {
             controller = "place"
             action = [GET:'getScores', POST:'addScore']
         }
+        "/user/$userID/image/$imageID"{
+            controller = "user"
+            action = [GET:'getImage']
+        }
+        "/user/$userID/image"{
+            controller = "user"
+            action = [GET:'getAllImages']
+        }
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')

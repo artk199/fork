@@ -30,26 +30,26 @@
 <div class="tab-content">
     <!-- LOCALISATION OF THE OBJECT  !-->
     <div id="localisation" class="tab-pane fade in active">
-        <g:render template="tabs_localisation" model="[place:place]"/>
+        <g:render template="tabs/tabs_localisation" model="[place:place]"/>
     </div>
 
     <!-- CONTACT WITH THE OWNER OF OBJECT  !-->
     <div id="contact" class="tab-pane fade">
-        <g:render template="tabs_contact" model="[place:place]"/>
+        <g:render template="tabs/tabs_contact" model="[place:place]"/>
     </div>
 
     <!-- PRICES (MENU) OF THE ATTRACTIONS  !-->
     <div id="prices" class="tab-pane fade">
-        <g:render template="tabs_prices" model="[place:place]"/>
+        <g:render template="tabs/tabs_prices" model="[place:place]"/>
     </div>
 
     <!-- EVENTS BOUNDED WITH THE OBJECT !-->
     <div id="events" class="tab-pane fade">
-        <g:render template="tabs_events" model="[place:place]"/>
+        <g:render template="tabs/tabs_events" model="[place:place]"/>
     </div>
 
     <!-- USERS PHOTOS WITH THE OBJECT !-->
     <div id="photos" class="tab-pane fade">
-     <g:render template="tabs_photos" model="[place:place]"/>
+     <g:render template="tabs/tabs_photos" model="[place:place]"/>
     </div>
 </div>

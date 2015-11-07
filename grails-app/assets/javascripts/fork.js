@@ -1,4 +1,4 @@
-var forkApp = angular.module('forkApp', []);
+var forkApp = angular.module('forkApp', ['ngAnimate']);
 
 forkApp.directive('tileImage', [ '$window', '$location', function($window, $location){
     return {
@@ -172,4 +172,153 @@ forkApp.directive('filterDate', function(){
            });
        }
    }
+});
+
+
+
+
+forkApp.directive('userPanel', ['$animate', function($animate) {
+    return {
+        link: function(scope, element){
+            scope.state = false;
+            var className = 'open';
+            element.bind('click', function(){
+                scope.$apply(function(){
+                    if( scope.state ){
+                        $animate.removeClass(element, className);
+                    }
+                    else{
+                        $animate.addClass(element,className);
+                    }
+                    scope.state = !scope.state;
+                });
+
+            });
+        }
+    }
+}]);
+
+
+
+forkApp.directive('userImages', function(){
+    return {
+        restrict: 'E',
+        controller: ['$scope', '$http', function($scope, $http) {
+
+            $scope.readyToRead = false;
+            $scope.readyToReverse = false;
+            $scope.images = [];
+            $scope.maxDimension = 200;
+            $scope.activeImg = '/user/1/image/0';
+            $scope.selectedImage = -1;
+
+            $scope.requestImages = function() {
+                $http.get('/user/' + $scope.id + '/image')
+                    .success(function (data) {
+                        $scope.images = data;
+                    });
+            }
+
+            $scope.getSelectedUrl = function(){
+                return '/user/'+$scope.id+'/image/'+$scope.images[$scope.selectedImage];
+            }
+
+            $scope.isSelected = function(){
+                if( $scope.selectedImage != -1 ){
+                    return true;
+                }
+                return false;
+            }
+
+        }],
+        scope: { id : '@'},
+        link: function(scope, element){
+            scope.requestImages();
+        },
+        template: "<div class='row' style='padding-top:10px;'>" +
+        "               <div class='col-md-12' ng-show='isSelected()'>" +
+        "                   <img ng-src='{{getSelectedUrl()}}'/>" +
+        "               </div>" +
+        "               <div class='col-md-12'>" +
+            "               <div style='display:inline-block; margin: 5px;' ng-repeat='image in images'>" +
+            "                   <img style='border:1px black solid;' ng-src='/user/{{id}}/image/{{image}}' user-image/>"+
+            "               </div>" +
+        "               </div>"+
+        "          </div>"
+    }
+});
+
+forkApp.directive('userImage', function($timeout){
+    return {
+        link: function (scope, element) {
+
+            $timeout(function () { //Without specifying delay this method will fire after full render is complete
+
+                if( scope.$first ){ //We want to make image visible before getting its dimensions otherwise they are always 0 and 0
+                    var elementIterator = element.parent().parent();
+                    var counter = 0;
+                    while( elementIterator[0].getBoundingClientRect().width == 0 && elementIterator[0].getBoundingClientRect().height == 0 ){
+                        elementIterator.css('display','block');
+                        elementIterator = elementIterator.parent();
+                        counter++;
+                    }
+                    scope.$parent.readyToRead = true;
+                    scope.$parent.counter = counter;
+                }
+
+                var watcher = scope.$watch( function(){ return scope.$parent.readyToRead; } , function(newVal) {
+                    if( newVal ) {
+                        var height = element[0].getBoundingClientRect().height;
+                        var width = element[0].getBoundingClientRect().width;
+
+                        var biggerDimension = height > width ? height : width;
+
+                        console.log(height);
+
+                        if( biggerDimension > scope.$parent.maxDimension ) {
+                            var ratio = scope.$parent.maxDimension / biggerDimension;
+                            var newHeight = height*ratio + 'px';
+                            var newWidth = width*ratio + 'px';
+                            console.log('this is my new height ' + newHeight);
+                            element.css('height', newHeight );
+                            element.css('width', newWidth);
+                            element.parent().css('height', '200px');
+                            element.parent().css('line-height','200px');
+                            element.parent().css('width', newWidth);
+                        }
+
+                        console.log("i did my calculus");
+
+                        if( scope.$last ){
+                            console.log("messanger of doom");
+                            scope.$parent.readyToReverse = true;
+                        }
+                        watcher();
+                    }
+                });
+
+                if( scope.$last ){
+
+                    var sec_watcher = scope.$watch( function(){ return scope.$parent.readyToReverse; } , function(newVal) {
+                        if( newVal ) {
+                            console.log("destruvtion");
+                            var elementIterator = element.parent().parent();
+                            for (var i = 0; i < scope.$parent.counter; i++) {
+                                elementIterator.css('display', '');
+                                elementIterator = elementIterator.parent();
+                            }
+                            sec_watcher();
+                        }
+                    });
+                }
+
+            }, 500 ); //TODO: <--
+
+            element.bind('click', function(){
+               scope.$parent.$apply(function(){
+                   scope.$parent.selectedImage = scope.$index;
+               });
+            });
+        }
+    }
 });
