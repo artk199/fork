@@ -209,8 +209,9 @@ forkApp.directive('userImages', function(){
             $scope.readyToReverse = false;
             $scope.images = [];
             $scope.maxDimension = 200;
-            $scope.activeImg = '/user/1/image/0';
             $scope.selectedImage = -1;
+            $scope.hovered = false;
+            $scope.dropdown = false;
 
             $scope.requestImages = function() {
                 $http.get('/user/' + $scope.id + '/image')
@@ -223,34 +224,70 @@ forkApp.directive('userImages', function(){
                 return '/user/'+$scope.id+'/image/'+$scope.images[$scope.selectedImage];
             }
 
-            $scope.isSelected = function(){
-                if( $scope.selectedImage != -1 ){
+            $scope.isSelected = function() {
+                if ($scope.selectedImage != -1) {
                     return true;
                 }
                 return false;
             }
+
+
+            $scope.toggleDropdown = function(){
+                $scope.dropdown = !$scope.dropdown;
+            }
+
+            $scope.showDropdown = function(){
+                return $scope.dropdown;
+            }
+
 
         }],
         scope: { id : '@'},
         link: function(scope, element){
             scope.requestImages();
         },
-        template: "<div class='row' style='padding-top:10px;'>" +
-        "               <div class='col-md-12' ng-show='isSelected()'>" +
-        "                   <img ng-src='{{getSelectedUrl()}}'/>" +
+        template: "<div class='row' style='padding-top:10px; margin-left: 15px; margin-right:25px;'>" +
+        "               <div class='col-md-12' style='padding:0px; margin:10px; margin-bottom:0px;overflow-x:auto;overflow-y:hidden;' ng-show='isSelected()'>" +
+        "                   <img full-image ng-src='{{getSelectedUrl()}}'/>" +
+        "               </div> " +
+        "               <div class='col-md-12' style='height:100px; border-bottom: 1px solid #DDD; box-shadow:0px -6px 3px -4px #DDD inset; z-index:5;' ng-show='isSelected()'>" +
+        "                   <div class='dropdown pull-right fork-cog'>" +
+        "                       <span toggle-dropdown class='glyphicon glyphicon-cog'></span>" +
+        "                       <div ng-show='showDropdown()'>" +
+        "                           <div><a ng-href='/image/{{images[selectedImage]}}/link'>Powiąż z miejscem</a></div>" +
+        "                           <div><a ng-href='/image/{{images[selectedImage]}}/edit'>Edytuj</a></div>" +
+        "                           <div><a ng-href='/image/{{images[selectedImage]}}/delete'>Usuń</a></div>" +
+        "                       </div>" +
+        "                   </div>" +
+        "                   <div style='float:left'>" +
+            "                   <h2> Image title </h2>" +
+            "                   <span>Image description</span>" +
+    "                       </div>" +
         "               </div>" +
         "               <div class='col-md-12'>" +
-            "               <div style='display:inline-block; margin: 5px;' ng-repeat='image in images'>" +
-            "                   <img style='border:1px black solid;' ng-src='/user/{{id}}/image/{{image}}' user-image/>"+
+            "               <div user-image-wrapper style='position:relative;display:inline-block; margin: 5px;' ng-repeat='image in images'>" +
+            "                   <img ng-style='imageStyle()' style='border:1px black solid;' ng-src='/user/{{id}}/image/{{image}}' user-image/>" +
+        "                       <div ng-style='overlayStyle()' style='position:absolute; background-color: white; top:0; left:0; width:100%; pointer-events: none; height:100%;'></div>"+
             "               </div>" +
         "               </div>"+
         "          </div>"
     }
 });
 
-forkApp.directive('userImage', function($timeout){
+forkApp.directive('userImage',  ['$timeout', function($timeout) {
     return {
-        link: function (scope, element) {
+        controller: ['$scope', function($scope) {
+
+            $scope.imageStyle = function(){
+                if( $scope.$index == $scope.selectedImage ) {
+                    return { cursor: 'default'};
+                }
+                return { cursor: 'pointer'};
+
+            }
+
+        }],
+        link: function (scope, element, attrs) {
 
             $timeout(function () { //Without specifying delay this method will fire after full render is complete
 
@@ -268,32 +305,35 @@ forkApp.directive('userImage', function($timeout){
 
                 var watcher = scope.$watch( function(){ return scope.$parent.readyToRead; } , function(newVal) {
                     if( newVal ) {
-                        var height = element[0].getBoundingClientRect().height;
-                        var width = element[0].getBoundingClientRect().width;
 
-                        var biggerDimension = height > width ? height : width;
+                        var newImg = new Image();
 
-                        console.log(height);
+                        newImg.onload = function() {
+                            var height = newImg.height;
+                            var width = newImg.width;
 
-                        if( biggerDimension > scope.$parent.maxDimension ) {
-                            var ratio = scope.$parent.maxDimension / biggerDimension;
-                            var newHeight = height*ratio + 'px';
-                            var newWidth = width*ratio + 'px';
-                            console.log('this is my new height ' + newHeight);
-                            element.css('height', newHeight );
-                            element.css('width', newWidth);
-                            element.parent().css('height', '200px');
-                            element.parent().css('line-height','200px');
-                            element.parent().css('width', newWidth);
+                            var biggerDimension = height > width ? height : width;
+
+                            if( biggerDimension > scope.$parent.maxDimension ) {
+                                var ratio = scope.$parent.maxDimension / biggerDimension;
+                                var newHeight = height*ratio + 'px';
+                                var newWidth = width*ratio + 'px';
+                                element.css('height', newHeight );
+                                element.css('width', newWidth);
+                                element.parent().css('height', '200px');
+                                element.parent().css('line-height','200px');
+                                element.parent().css('width', newWidth);
+                            }
+
+
+                            if( scope.$last ){
+                                scope.$parent.readyToReverse = true;
+                            }
+
+                            watcher();
                         }
 
-                        console.log("i did my calculus");
-
-                        if( scope.$last ){
-                            console.log("messanger of doom");
-                            scope.$parent.readyToReverse = true;
-                        }
-                        watcher();
+                        newImg.src = attrs.ngSrc;
                     }
                 });
 
@@ -312,13 +352,89 @@ forkApp.directive('userImage', function($timeout){
                     });
                 }
 
-            }, 500 ); //TODO: <--
+            } );
 
             element.bind('click', function(){
-               scope.$parent.$apply(function(){
-                   scope.$parent.selectedImage = scope.$index;
-               });
+                if( scope.$parent.selectedImage != scope.$index ) {
+                    scope.$parent.$apply(function () {
+                        scope.$parent.selectedImage = scope.$index;
+                        scope.$parent.dropdown = false;
+                    });
+                }
+            });
+
+            element.bind('mouseenter', function(){
+                scope.$apply( function(){
+                    scope.hovered = true;
+                });
+            });
+
+            element.bind('mouseleave', function(){
+                scope.$apply( function(){
+                    scope.hovered = false;
+                });
             });
         }
     }
+}]);
+
+forkApp.directive('fullImage', ['$animateCss', function($animateCss) {
+    return {
+        link: function (scope, element) {
+            scope.$watch( function(){
+                return scope.getSelectedUrl();
+            }, function(newval, oldval){
+
+                var oldheight = element[0].getBoundingClientRect().height;
+
+                var newImg = new Image();
+
+                newImg.onload = function() {
+                    var newheight = newImg.height;
+                    $animateCss(element, {
+                        from:{ height: oldheight+'px' },
+                        to: {height: newheight+'px'},
+                        duration: 1,
+                    }).start();
+
+                }
+
+                newImg.src = newval;
+            });
+        }
+    }
+}]);
+
+forkApp.directive('userImageWrapper', function() {
+    return {
+        controller: ['$scope', function ($scope) {
+            $scope.hovered = false;
+
+            $scope.overlayStyle = function () {
+                if ($scope.hovered && $scope.selectedImage != $scope.$index) {
+                    return { opacity : 0.3 };
+                }
+                return {opacity: 0};
+            }
+        }]
+    }
+});
+
+forkApp.directive('toggleDropdown', function(){
+   return {
+       link: function (scope, element) {
+           element.bind('click', function(){
+               scope.$apply( function(){
+                   scope.toggleDropdown();
+               });
+               element[0].classList.remove("spin-animation");
+
+               // -> triggering reflow /* The actual magic */
+               // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
+               element[0].offsetWidth = element[0].offsetWidth;
+
+               element[0].classList.add("spin-animation");
+           });
+       }
+   }
 });

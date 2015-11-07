@@ -74,6 +74,9 @@ class BootStrap {
 
         JSON.registerObjectMarshaller( Place ) { Place place ->
             return [
+                    adress : place.address,
+                    description : place.description,
+                    name : place.name,
                     id : place.id
             ]
         }

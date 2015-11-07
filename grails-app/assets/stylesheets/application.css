@@ -349,6 +349,7 @@ a.btn-orange:active{
 .page-section{
     padding-top: 30px;
     padding-bottom: 30px;
+    clear:both;
 }
 
 .page-section h2{
@@ -543,4 +544,117 @@ iframe{
 
 .profile-tabs > li > a > i + span{
     margin-left: 20px;
+}
+
+.fork-cog{
+    margin: 3px 5px;
+    padding-top: 10px;
+}
+
+.fork-cog > span{
+    font-size: 20px !important;
+    cursor: pointer;
+    color:#7b90b4;
+    z-index: 5;
+}
+
+.fork-cog > span:hover{
+    color: #54698c;
+}
+
+.fork-cog > div{
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    top: 8px;
+    left: -10px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border: 1px solid black;
+    background: white;
+}
+
+.fork-cog > div.ng-hide-remove{
+    transition: 0.7s linear all;
+    opacity: 1;
+}
+
+.fork-cog > div.ng-hide{
+    transition: 0.7s linear all;
+    opacity: 0;
+}
+
+.fork-cog > div > div{
+    height: 30px;
+    line-height: 30px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background: white;
+    width: 200px;
+    left: -151px;
+    position: relative;
+    top: -1px
+}
+
+.fork-cog > div > div:hover{
+    background-color:#DDD;
+}
+
+.fork-cog > div > div:first-child{
+    margin-top:29px;
+    border-top: 1px solid black;
+}
+.fork-cog > div > div:last-child{
+    border-bottom: 1px solid black;
+}
+.fork-cog > div > div > a, .fork-cog > div > div > a:hover {
+    text-decoration: none;
+}
+.spin-animation{
+    animation: rotate360 1s ease-in-out 0s 1;
+    -webkit-animation:rotate360 1s ease-in-out 0s 1;
+    -moz-animation:rotate360 1s ease-in-out 0s 1;
+    -ms-animation:rotate360 1s ease-in-out 0s 1;
+    -o-animation:rotate360 1s ease-in-out 0s 1;
+}
+
+@-webkit-keyframes rotate360{
+    from {
+        -webkit-transform:rotate(0deg);
+    }
+    to {
+        -webkit-transform:rotate(360deg);
+    }
+}
+@-moz-keyframes rotate360{
+    from {
+        -moz-transform:rotate(0deg);
+    }
+    to {
+        -moz-transform:rotate(360deg);
+    }
+}
+@-ms-keyframes rotate360{
+    from {
+        -ms-transform:rotate(0deg);
+    }
+    to {
+        -ms-transform:rotate(360deg);
+    }
+}
+@-o-keyframes rotate360{
+    from {
+        -o-transform:rotate(0deg);
+    }
+    to {
+        -o-transform:rotate(360deg);
+    }
+}
+@keyframes rotate360{
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
