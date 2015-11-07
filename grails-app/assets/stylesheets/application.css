@@ -480,3 +480,67 @@ iframe{
     height: 100px;
     resize: none;
 }
+
+.user-panel{
+    position:fixed;
+    width:300px;
+    height:40px;
+    top:300px;
+    z-index:5;
+    color:black;
+    background:#F1F1F1;
+    border: 1px solid black;
+    border-left: none;
+    left:-258px;
+}
+.user-panel .open-add{
+    -webkit-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    left:0px !important;
+}
+
+.user-panel.open{
+    -webkit-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    left:0px !important;
+}
+
+.user-panel.open-remove-active{
+    -webkit-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    left:-258px !important;
+}
+
+.user-panel > div > div:first-child{
+    display: inline-block;
+    height: 250px;
+    background: #F1F1F1;
+    width: 265px;
+    position: relative;
+    top: -105px;
+    left: -8px;
+    border: 1px solid black;
+    box-shadow: inset 0px 0px 2px 1px #000000;
+}
+
+.profile-tabs > li{
+    width:20%;
+}
+
+
+.profile-tabs > li > a > i {
+    position: absolute;
+    font-size: 23px;
+    top: 4px;
+}
+
+.profile-tabs > li > a > .icon-small {
+    position: absolute;
+    font-size: 18px;
+    top: 7px;
+}
+
+
+.profile-tabs > li > a > i + span{
+    margin-left: 20px;
+}

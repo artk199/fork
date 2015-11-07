@@ -32,8 +32,8 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="checkbox">
+            <div class="">
+                <div class="">
                     <label>
                         <input name='${rememberMeParameter}' type="checkbox" id="remember_me" <g:if test='${hasCookie}'>checked='checked'</g:if>/><g:message code="default.remember.me"/>
                     </label>

@@ -1,4 +1,4 @@
-<div class="row" ng-controller="ScoreController" ng-init="init('${place.id}')">
+<div class="row" ng-controller="ScoreController" ng-init="init('${place.id}')" style="margin-bottom:30px;">
     <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
         <h1 style="float:left;"><g:message code="place.scores.title"/>
     </div>
@@ -39,7 +39,9 @@
         </g:if>
     </sec:ifLoggedIn>
     <sec:ifNotLoggedIn>
-        <g:message code="place.scores.add.logged.in.required"/>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px;margin-bottom:20px;" >
+            <g:message code="place.scores.add.logged.in.required"/> <a href="${createLink(controller:'login',action:'auth')}"><span><g:message code="layout.header.link.login"/></span></a>
+        </div>
     </sec:ifNotLoggedIn>
     <div ng-repeat="score in scores">
         <div class="row">

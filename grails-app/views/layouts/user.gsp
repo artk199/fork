@@ -21,9 +21,6 @@
         <g:layoutHead/>
     </head>
     <body>
-        <sec:ifLoggedIn>
-            <g:render template="/layouts/userpanel"/>
-        </sec:ifLoggedIn>
         <g:render template="/layouts/header"/>
         <div class="container-fluid fork-content">
             <g:layoutBody/>

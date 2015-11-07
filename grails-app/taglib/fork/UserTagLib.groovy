@@ -10,4 +10,9 @@ class UserTagLib {
     def loggedInUser = { attrs, body ->
         out << springSecurityService.principal.username
     }
+
+    def currentUserID = { attrs, body ->
+        out << springSecurityService.principal.id
+    }
+
 }

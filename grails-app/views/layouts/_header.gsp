@@ -1,8 +1,8 @@
 <nav>
     <div class="container-fluid fork-layout-header">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-2 col-sm-1 hidden-xs"></div>
+                <div class="col-md-8 col-sm-10 col-xs-12">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-collapsable" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
@@ -28,7 +28,7 @@
                             </ul>
                         </div>
                     </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-2 col-sm-1 hidden-xs"></div>
                 </div>
             </div>
     </div>
