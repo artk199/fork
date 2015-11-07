@@ -4,6 +4,7 @@ import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
 import pl.fork.auth.User
 
+import javax.servlet.http.HttpServletRequest
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -117,6 +118,28 @@ class PlaceService {
             return null
         }
         score
+    }
+
+    ForkFile addPhotoToPlace(Place place, HttpServletRequest request) {
+        def f = request.getFile('image')
+        ForkFile file = new ForkFile();
+        file.source = f.bytes
+        file.fileType = f.contentType
+        file.title = request.getParameter('title');
+        file.description = request.getParameter('description');
+        file.place = place
+        file.owner = User.findByUsername(springSecurityService.currentUser)
+        file.validate()
+        if( file && !file.hasErrors() ) {
+            place.addToImages(file);
+            file.save flush: true;
+            place.save(flush: true)
+        }
+        else if (file) {
+            file.errors.each { println it }
+        }
+
+        file;
     }
 
     Score getUserScore(Place place) {

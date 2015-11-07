@@ -12,15 +12,15 @@ class Place {
         phone nullable:true
         website nullable:true
         owner nullable:true
-        types minSize: 1
-        file nullable:true
+        types minSize: 0
+        mainImage nullable:true
     }
 
     List scores
-    File file
+    ForkFile mainImage
 
     /*TODO: Uncomment services and sucessfully compile project */
-    static hasMany = [scores: Score, types:PlaceType, /*services:AdditionalService,*/ events: Event]
+    static hasMany = [scores: Score, types:PlaceType, /*services:AdditionalService,*/ events: Event, images: ForkFile]
     static transients = ['avgScore']
 
 

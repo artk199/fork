@@ -1,6 +1,7 @@
 package pl.fork.auth
 
 import grails.transaction.Transactional
+import pl.fork.place.ForkFile
 
 @Transactional
 class UserService {
@@ -40,6 +41,15 @@ class UserService {
         UserRole userRole = new UserRole(user,role)
         userRole.save( flush:true )
 
+    }
+
+    List<ForkFile> getUserImages(User user) {
+        List<ForkFile> images = ForkFile.createCriteria().list {
+            if (user) {
+                eq("owner", user)
+            }
+        }
+        return images;
     }
 
 }

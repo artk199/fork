@@ -1,7 +1,7 @@
 package pl.fork.place
 
 import grails.converters.JSON
-import org.springframework.validation.FieldError
+import pl.fork.auth.User
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -156,20 +156,8 @@ class PlaceController {
     }
 
     def uploadFile(Place place) {
-        // Get the avatar file from the multi-part request
-        def f = request.getFile('avatar')
-        // Save the image and mime type
-        place.file = new File();
-        place.file.source = f.bytes
-        place.file.fileType = f.contentType
-        log.info("File uploaded: $place.file.fileType")
-
-        // Validation works, will check if the image is too big
-        if (!place.save()) {
-            return
-        }
-        flash.message = "Avatar (${place.file.fileType}, ${place.file.source.size()} bytes) uploaded."
-        redirect(action:'show')
+        placeService.addPhotoToPlace(place, request);
+        redirect(action:'show', id: place.id)
     }
 
 }
