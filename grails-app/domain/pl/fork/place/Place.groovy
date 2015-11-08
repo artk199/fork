@@ -16,6 +16,7 @@ class Place {
         owner nullable:true
         types minSize: 0
         mainImage nullable:true
+        pricing nullable:true
     }
 
     List scores
