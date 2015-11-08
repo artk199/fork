@@ -616,7 +616,8 @@ iframe{
     width: 200px;
     left: -151px;
     position: relative;
-    top: -1px
+    top: -1px;
+    cursor: pointer;
 }
 
 .fork-cog > div > div:hover{

@@ -8,7 +8,17 @@ class UrlMappings {
         }
         "/image/$id"{
             controller = "image"
-            action = [GET:'getImage']
+            action = [GET:'getImage', DELETE:'deleteImage']
+        }
+
+        "/image/$id/edit"{
+            controller = "image"
+            action = [GET:'editImage']
+        }
+
+        "/image/$id/details"{
+            controller = "image"
+            action = [GET:'getImageDetails']
         }
 
         "/image/upload"{
