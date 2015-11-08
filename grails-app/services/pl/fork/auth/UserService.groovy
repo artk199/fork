@@ -1,7 +1,7 @@
 package pl.fork.auth
 
 import grails.transaction.Transactional
-import pl.fork.place.ForkFile
+import pl.fork.file.ForkFile
 
 @Transactional
 class UserService {

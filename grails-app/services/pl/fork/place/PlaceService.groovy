@@ -3,6 +3,7 @@ package pl.fork.place
 import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
 import pl.fork.auth.User
+import pl.fork.file.ForkFile
 
 import javax.servlet.http.HttpServletRequest
 import java.text.DateFormat
@@ -32,7 +33,7 @@ class PlaceService {
 
         List<Place> places = Place.createCriteria().list {
             if (name != null && !"".equals(name)) {
-                eq("name", name)
+                ilike("name", "%"+name+"%")
             }
 
             if(timeAfter != null) {
@@ -44,7 +45,7 @@ class PlaceService {
             }
 
             if(town != null && !"".equals(town)) {
-                eq("town", town)
+                ilike("town", "%"+town+"%")
             }
         }
         return places;

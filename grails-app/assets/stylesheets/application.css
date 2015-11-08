@@ -564,9 +564,32 @@ iframe{
     margin-left: 20px;
 }
 
+.fork-gallery-container{
+    padding-top:10px !important;
+    margin-left: 15px !important;
+    margin-right:25px !important;
+}
+
+.fork-image-container{
+    padding:0px;
+    margin:10px;
+    margin-bottom:0px;
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+
+.fork-image-info{
+    height:100%;
+    border-bottom: 1px solid #DDD;
+    box-shadow:0px -6px 3px -4px #DDD inset;
+    z-index:5;
+}
+
 .fork-cog{
     margin: 3px 5px;
     padding-top: 10px;
+    position:absolute;
+    right: 10px;
 }
 
 .fork-cog > span{
@@ -584,8 +607,8 @@ iframe{
     position: absolute;
     width: 50px;
     height: 30px;
-    top: 8px;
-    left: -10px;
+    top: 8px;left: -10px;
+
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     border: 1px solid black;
@@ -611,7 +634,8 @@ iframe{
     width: 200px;
     left: -151px;
     position: relative;
-    top: -1px
+    top: -1px;
+    cursor: pointer;
 }
 
 .fork-cog > div > div:hover{
@@ -634,6 +658,45 @@ iframe{
     -moz-animation:rotate360 1s ease-in-out 0s 1;
     -ms-animation:rotate360 1s ease-in-out 0s 1;
     -o-animation:rotate360 1s ease-in-out 0s 1;
+}
+
+.fork-add-image.active{
+    border-radius: 50px;
+    width:75px;
+    cursor:pointer;
+}
+
+.fork-add-image.active:active{
+    box-shadow: 0px 0px 2px 2px green;
+}
+
+.fork-accept-cancel{
+    position: absolute;
+    top: 24px;
+    min-width: 71px;
+}
+
+.fork-accept-cancel > span {
+    font-size:30px;
+    position:relative;
+    left: -80px;
+    cursor:pointer;
+}
+
+.fork-accept-cancel > span:first-child{
+    color: #D6E6C3;
+}
+
+.fork-accept-cancel > span:first-child:hover{
+    color: #879676;
+}
+
+.fork-accept-cancel > span:last-child{
+    color: #FFA500;
+}
+
+.fork-accept-cancel > span:last-child:hover{
+    color: #af6900;
 }
 
 @-webkit-keyframes rotate360{

@@ -6,6 +6,25 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+        "/image/$id"(parseRequest:false){
+            controller = "image"
+            action = [GET:'getImage', DELETE:'deleteImage', POST:'updateImage']
+        }
+
+        "/image/$id/edit"{
+            controller = "image"
+            action = [GET:'editImage']
+        }
+
+        "/image/$id/details"{
+            controller = "image"
+            action = [GET:'getImageDetails']
+        }
+
+        "/image/upload"{
+            controller = "image"
+            action = [POST:'uploadImage']
+        }
 
         "/place/search"(controller:"place", action:"search")
         "/place/search/all"(controller:"place", action:"searchAll")
@@ -25,4 +44,6 @@ class UrlMappings {
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
+
+
 }

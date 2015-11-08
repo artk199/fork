@@ -1,14 +1,17 @@
-<div class="row">
-    <div class="span12">
-        <div class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown trigger</a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                <li><a tabindex="-1" href="#">Action</a></li>
-                <li><a tabindex="-1" href="#">Another action</a></li>
-                <li><a tabindex="-1" href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="#">Separated link</a></li>
-            </ul>
+<div class="row" >
+    <div class="col-md-12" style="margin:20px; position: relative;padding-right: 50px;width:100%;">
+        <div class='hidden-xs' style="vertical-align:top; width:200px;float:left;">
+            <div style="width:200px; height:200px; background-color: #00dd1c">
+            </div>
+            <div style="width:200px; height:100%;background-color:sandybrown">
+                <div style="height:30px;width:100%;line-height: 30px;">Edytuj informacje </div>
+                <div style="height:30px;width:100%;line-height: 30px;">Edytuj konto </div>
+                <div style="height:30px;width:100%;line-height: 30px;">Edytuj prywatbisc </div>
+            </div>
         </div>
+        <div class="row" style="padding-right:20px;">
+            <div class='col-md-12' style="height:800px;background-color: #9acfea"></div> >
+        </div>
+
     </div>
 </div>

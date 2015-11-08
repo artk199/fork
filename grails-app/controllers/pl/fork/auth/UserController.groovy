@@ -130,7 +130,7 @@ class UserController {
 
     def getAllImages(int userID){
        // render user.images as JSON
-        def ids = [1,13,22,23, 77, 106, 450, 2001]
+        def ids = User.findById(userID).images.collect{ it.id }
         render ids as JSON
     }
 

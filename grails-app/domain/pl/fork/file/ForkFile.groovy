@@ -1,20 +1,23 @@
-package pl.fork.place
+package pl.fork.file
 
 import pl.fork.auth.User
+import pl.fork.place.Place
 
 class ForkFile {
 
     static constraints = {
-        source(nullable:true, maxSize: 2147483600 /* 2M */)
+        source(nullable:true, size:0..5242880 /* 5M */)
         fileType(nullable:true)
         description(nullable:true)
-        owner(nullable:false)
+        place(nullable:true)
+        title(nullable: true)
     }
 
     static belongsTo = [place:Place]
 
     static mappings = {
         source type: "blob"
+        title defaultValue: "'No title'"
     }
 
     byte[] source

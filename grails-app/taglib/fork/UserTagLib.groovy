@@ -5,6 +5,7 @@ class UserTagLib {
     def springSecurityService
 
     static defaultEncodeAs = [taglib:'html']
+    static returnObjectForTags = ['currentUserID']
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
 
     def loggedInUser = { attrs, body ->
@@ -12,7 +13,7 @@ class UserTagLib {
     }
 
     def currentUserID = { attrs, body ->
-        out << springSecurityService.principal.id
+        return springSecurityService.principal.id
     }
 
 }
