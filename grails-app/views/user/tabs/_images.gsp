@@ -1,7 +1,7 @@
 <div ng-controller='galleryController' user-images id="${user.id}">
     <div class='row fork-gallery-container'>
            <div class='col-md-12' style='padding:0px; margin:10px; margin-bottom:0px;overflow-x:auto;overflow-y:hidden;' ng-show='isSelected()'>
-               <img full-image ng-src='{{getSelectedUrl()}}'/>
+               <img full-image ng-if="isSelected()" ng-src="{{getSelectedUrl()}}"/>
            </div>
            <div class='col-md-12 fork-image-info' ng-show='isSelected()'>
                <div class='pull-right fork-cog'>
@@ -17,8 +17,10 @@
                        </g:else>
                    </div>
                </div>
-               <div style='text-align: left; margin-bottom:20px;'>
-                   <h2> {{title}} <small style='font-size:45%'>09.09.2009</small></h2>
+               <div style='text-align: left; margin-bottom:20px;margin-top:10px;'>
+                   <h2 style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 41px;font-weight: bold; font-style: italic;">
+                   &bdquo;{{title != null ? title : 'No title'}}&rdquo;
+                   <small style='font-size:45%'>09.09.2009</small></h2>
                    <span>{{description}}</span>
                </div>
            </div>

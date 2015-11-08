@@ -247,7 +247,9 @@ forkApp.directive('fileDialog', function(){
                 xhr.open('POST','/image/upload',true);
                 xhr.onload = function () {
                     if (xhr.status === 200) {
+                        console.log('xd');
                         scope.images.push(xhr.responseText);
+                        console.log('pls');
                     } else {
                         alert('An error occurred!');
                     }

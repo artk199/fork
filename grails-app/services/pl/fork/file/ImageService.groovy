@@ -3,6 +3,7 @@ package pl.fork.file
 import grails.transaction.Transactional
 import pl.fork.auth.User
 import grails.web.servlet.mvc.GrailsParameterMap
+import org.grails.web.json.JSONObject
 
 @Transactional
 class ImageService {
@@ -45,6 +46,11 @@ class ImageService {
             }
         }
         file
+    }
+
+    ForkFile update(ForkFile image, JSONObject parameters){
+        image[parameters.get('fieldName')] = parameters.get('value')
+        image.save flush: true
     }
 
 }
