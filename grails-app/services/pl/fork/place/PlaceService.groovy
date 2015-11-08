@@ -33,7 +33,7 @@ class PlaceService {
 
         List<Place> places = Place.createCriteria().list {
             if (name != null && !"".equals(name)) {
-                eq("name", name)
+                ilike("name", "%"+name+"%")
             }
 
             if(timeAfter != null) {
@@ -45,7 +45,7 @@ class PlaceService {
             }
 
             if(town != null && !"".equals(town)) {
-                eq("town", town)
+                ilike("town", "%"+town+"%")
             }
         }
         return places;
