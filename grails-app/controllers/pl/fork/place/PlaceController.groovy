@@ -1,7 +1,7 @@
 package pl.fork.place
 
 import grails.converters.JSON
-import org.springframework.validation.FieldError
+import pl.fork.auth.User
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -153,6 +153,11 @@ class PlaceController {
     def test(params){
         println params
         render "test";
+    }
+
+    def uploadFile(Place place) {
+        placeService.addPhotoToPlace(place, request);
+        redirect(action:'show', id: place.id)
     }
 
 }
