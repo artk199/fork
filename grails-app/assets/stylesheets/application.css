@@ -443,6 +443,24 @@ iframe{
     font-size: 11px;
 }
 
+#place-prices .panel{
+    color:#000;
+    border-color:#fff;
+    border-radius:0;
+}
+
+#place-prices .panel .panel-heading{
+    background: #498FFF;
+    border-radius: 0;
+}
+
+#place-prices .panel .well-sm{
+    border-radius: 0;
+    margin: 0;
+    padding-bottom: 0;
+    background:none;
+}
+
 .fork-filter-bar{
     background: #D6E6C3;
     border: 1px solid #fff;
