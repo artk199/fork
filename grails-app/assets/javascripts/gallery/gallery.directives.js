@@ -117,6 +117,8 @@ forkApp.directive('fullImage', ['$animateCss', function($animateCss) {
                 return scope.getSelectedUrl();
             }, function(newval, oldval){
 
+                scope.requestDetails();
+
                 var oldheight = element[0].getBoundingClientRect().height;
 
                 var newImg = new Image();
@@ -255,4 +257,25 @@ forkApp.directive('fileDialog', function(){
 
         }
     }
+});
+
+forkApp.directive('deleteImage', function(){
+    return {
+        link: function (scope, element) {
+            //ng - href = '/image/{{images[selectedImage]}}/delete'
+            element.bind('click', function(){
+                scope.deleteImage();
+            });
+        }
+    }
+});
+
+forkApp.directive('editImage', function(){
+   return {
+       link: function (scope, element) {
+           element.bind('click', function(){
+               window.location.href = '/image/'+scope.images[scope.selectedImage]+'/edit';
+           });
+       }
+   }
 });

@@ -7,15 +7,19 @@
                <div class='pull-right fork-cog'>
                    <span toggle-dropdown class='glyphicon glyphicon-cog'></span>
                    <div ng-show='showDropdown()'>
-                       <div><a ng-href='/image/{{images[selectedImage]}}/link'><g:message code="image.link"/></a></div>
-                       <div><a ng-href='/image/{{images[selectedImage]}}/edit'><g:message code="image.edit"/></a></div>
-                       <div><a ng-href='/image/{{images[selectedImage]}}/report'><g:message code="image.report"/></a></div>
-                       <div><a ng-href='/image/{{images[selectedImage]}}/delete'><g:message code="image.delete"/></a></div>
+                       <g:if test="${g.currentUserID().toLong() == user.id }">
+                            <div><a ng-href='/image/{{images[selectedImage]}}/link'><g:message code="image.link"/></a></div>
+                            <div edit-image><a><g:message code="image.edit"/></a></div>
+                            <div delete-image><a><g:message code="image.delete"/></a></div>
+                       </g:if>
+                       <g:else>
+                           <div><a ng-href='/image/{{images[selectedImage]}}/report'><g:message code="image.report"/></a></div>
+                       </g:else>
                    </div>
                </div>
                <div style='text-align: left; margin-bottom:20px;'>
-                   <h2> Image title <small style='font-size:45%'>09.09.2009</small></h2>
-                   <span>Image descripLorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui sed sapien hendrerit posuere. Duis luctus libero felis, ac convallis orci dignissim at. Nam imperdiet semper urna, ac dignissim risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus ut porttitor felis. Curabitur vel urna in est lobortis facilisis id sed urna. Sed aliquam urna neque, non ullamcorper mauris mollis fermentum. </span>
+                   <h2> {{title}} <small style='font-size:45%'>09.09.2009</small></h2>
+                   <span>{{description}}</span>
                </div>
            </div>
            <div class='col-md-12'>

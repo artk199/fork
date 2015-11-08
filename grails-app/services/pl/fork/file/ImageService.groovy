@@ -21,6 +21,10 @@ class ImageService {
         this.getImage(id.toLong())
     }
 
+    ForkFile delete(int id){
+        this.getImage(id).delete(flush: true)
+    }
+
     ForkFile create(GrailsParameterMap parameters) {
         def f = parameters.get('file')
         ForkFile file = new ForkFile();
