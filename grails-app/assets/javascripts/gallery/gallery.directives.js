@@ -204,6 +204,12 @@ forkApp.directive('addImage', function(){
                 });
             });
 
+            element.bind('click', function(){
+                scope.$apply( function(){
+                    scope.openDialog = true;
+                })
+            });
+
             scope.$watch( function(){
                 return scope.addHovered;
             }, function(newVal){
@@ -214,6 +220,39 @@ forkApp.directive('addImage', function(){
                     element.removeClass('ng-hide');
                 }
             } );
+        }
+    }
+});
+
+forkApp.directive('fileDialog', function(){
+    return {
+        link: function (scope, element, attrs) {
+            scope.$watch( function(){
+                return scope.openDialog;
+            }, function(openDialog){
+                if( openDialog ){
+                    scope.openDialog = false;
+                    element.trigger('click');
+                }
+            });
+
+            element.bind('change', function(){
+                var file = element[0].files[0];
+                var form = new FormData();
+                form.append('file', file, 'image.png');
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST','/image/upload',true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        scope.images.push(xhr.responseText);
+                    } else {
+                        alert('An error occurred!');
+                    }
+                };
+                xhr.send(form);
+            });
+
         }
     }
 });

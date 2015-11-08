@@ -2,6 +2,7 @@ package pl.fork.place
 
 import pl.fork.auth.User
 import pl.fork.event.Event
+import pl.fork.file.ForkFile
 
 class Place {
 

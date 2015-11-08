@@ -29,6 +29,14 @@ class BootStrap {
             y = 99
         }
 
+        User u = new User()
+        u.with{
+            username = "blabla"
+            password = "blabla"
+            password_confirm = "blabla"
+            email = "blabla@blabla.com"
+        }
+        u.save(flush: true)
 
         Place ratusz = new Place()
         ratusz.with{

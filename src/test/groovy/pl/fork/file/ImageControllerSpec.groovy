@@ -1,14 +1,13 @@
-package pl.fork.place
+package pl.fork.file
 
 import grails.test.mixin.TestFor
-import pl.fork.file.ForkFile
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(ForkFile)
-class ForkFileSpec extends Specification {
+@TestFor(ImageController)
+class ImageControllerSpec extends Specification {
 
     def setup() {
     }

@@ -1,10 +1,14 @@
 package pl.fork.auth
 
+import pl.fork.file.ForkFile
+
 class User implements Serializable {
 
 	private static final long serialVersionUID = 1
 
 	transient springSecurityService
+
+	static hasMany = [images: ForkFile]
 
 	String username
 	String password

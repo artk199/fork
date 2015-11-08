@@ -3,6 +3,7 @@ package pl.fork.place
 import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
 import pl.fork.auth.User
+import pl.fork.file.ForkFile
 
 import javax.servlet.http.HttpServletRequest
 import java.text.DateFormat

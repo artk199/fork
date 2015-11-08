@@ -9,6 +9,7 @@ forkApp.controller('galleryController', ['$scope', '$http', function($scope, $ht
     $scope.dropdown = false;
     $scope.overImage = false;
     $scope.addHovered = false;
+    $scope.openDialog = false;
 
     $scope.requestImages = function() {
         $http.get('/user/' + $scope.id + '/image')
@@ -18,7 +19,7 @@ forkApp.controller('galleryController', ['$scope', '$http', function($scope, $ht
     }
 
     $scope.getSelectedUrl = function(){
-        return '/user/'+$scope.id+'/image/'+$scope.images[$scope.selectedImage];
+        return '/image/'+$scope.images[$scope.selectedImage];
     }
 
     $scope.isSelected = function() {
