@@ -13,13 +13,18 @@
             <form ng-show="notSubmitted()" ng-submit="addScore()">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fork-place-score-add" >
                     <div class="row" style="margin-top: 20px;">
-                        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
-                            <input type="text" ng-model="data.title" placeholder="${g.message(code:'score.summary')}"/>
+                        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs pull-right"></div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 score-selector pull-right" style="font-size:20px; cursor:pointer; text-align:right;">
+                            <%--<input type="text" ng-model="data.score" placeholder="${g.message(code:'score.score')}"/>--%>
+                            <span star="1" class="glyphicon glyphicon-star"></span>
+                            <span star="2" class="glyphicon glyphicon-star"></span>
+                            <span star="3" class="glyphicon glyphicon-star"></span>
+                            <span star="4" class="glyphicon glyphicon-star"></span>
+                            <span star="5" class="glyphicon glyphicon-star"></span>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <input type="text" ng-model="data.score" placeholder="${g.message(code:'score.score')}"/>
+                        <div class="col-lg-1 col-md-1 hidden-md hidden-xs"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                            <input type="text" ng-model="data.title" placeholder="${g.message(code:'score.summary')}"/>
                         </div>
                     </div>
                     <div class="row">
@@ -65,8 +70,9 @@
                                 <div class="pull-left" style="margin: 5px 0px;;font-size: 16px;color: #4D8365;font-weight: bold;font-style: italic;">
                                     {{ score.title }}
                                 </div>
-                                <div class="pull-right">
-                                    {{ score.score }} / 5
+                                <div class="pull-right" style="font-size: 20px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+                                    <span ng-repeat="score in scoreCount(score.score) track by $index" class="glyphicon glyphicon-star" style="color: #F9FF00;"></span>
+                                    <span ng-repeat="score in scoreCount(5-score.score) track by $index" class="glyphicon glyphicon-star" style="left:-4px;"></span>
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 10px 0px;">

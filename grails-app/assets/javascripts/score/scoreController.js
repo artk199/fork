@@ -5,6 +5,7 @@ forkApp.controller('ScoreController', ['$scope', '$location', '$http', function(
     $scope.data = {};
     $scope.scores = [];
     $scope.submitted = false;
+    $scope.hovered = 0;
 
     $scope.init = function(id){
         var url = $location.absUrl().toString();
@@ -13,6 +14,8 @@ forkApp.controller('ScoreController', ['$scope', '$location', '$http', function(
 
         $scope.id = id;
         $scope.url = url + '/' + id + '/score';
+
+        $scope.data.score = 0;
 
         $http.get($scope.url). success(function(data, status, headers, config) {
             $scope.scores = data;
@@ -41,4 +44,60 @@ forkApp.controller('ScoreController', ['$scope', '$location', '$http', function(
         });
     }
 
+
+
+    $scope.scoreCount = function(score){
+        return new Array(score);
+    }
+
 }]);
+
+forkApp.directive('star', function(){
+    return {
+        link: function(scope, element, attrs) {
+
+            var score = attrs['star'];
+
+            element.bind('click', function () {
+                scope.$apply( function (){
+                   scope.data.score = score;
+                });
+            });
+            element.bind('mouseover', function(){
+                scope.$apply( function (){
+                    scope.hovered = score;
+                });
+            });
+
+            element.bind('mouseout', function(){
+                scope.$apply( function (){
+                    scope.hovered = 0;
+                });
+            });
+
+            scope.$watch( function(){
+                return scope.hovered;
+            }, function( hoverscore ) {
+                if( hoverscore >= score ){
+                    element.addClass('hover-score');
+                }
+                else{
+                    element.removeClass('hover-score');
+                }
+            });
+
+            scope.$watch( function(){
+                return scope.data.score;
+            }, function( newscore ) {
+                if( newscore >= score ){
+                    element.addClass('new-score');
+                }
+                else{
+                    element.removeClass('new-score');
+                }
+            });
+
+
+        }
+    }
+});

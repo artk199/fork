@@ -493,6 +493,22 @@ iframe{
     width: 100%;
 }
 
+.score-selector > span {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.hover-score{
+    color: yellow;
+}
+
+.hover-score:active{
+    color: #f1f100;
+}
+
+.new-score{
+    color: #f1f100;
+}
+
 .fork-place-score-add{
 
 }
