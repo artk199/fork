@@ -244,16 +244,28 @@ forkApp.directive('fileDialog', function(){
                 form.append('file', file, 'image.png');
 
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST','/image/upload',true);
+
+                xhr.upload.onprogress = function(e){
+                    var done = e.position || e.loaded, total = e.totalSize || e.total;
+                    var present = Math.floor(done/total*100);
+                    scope.$apply(function(){
+                        scope.progress = present+'%';
+                        console.log(scope.progress);
+                    });
+                };
+
                 xhr.onload = function () {
                     if (xhr.status === 200) {
-                        console.log('xd');
+                        scope.progress = '0%';
+                        scope.uploading = false;
                         scope.images.push(xhr.responseText);
-                        console.log('pls');
                     } else {
                         alert('An error occurred!');
                     }
                 };
+                xhr.open('POST','/image/upload',true);
+                scope.uploading = true;
+
                 xhr.send(form);
             });
 

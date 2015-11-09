@@ -25,10 +25,16 @@
                </div>
            </div>
            <div class='col-md-12'>
-               <div style='position:relative;display:inline-block; margin: 5px; width:100px; height:200px;line-height: 200px;' title="Dodaj zdjęcie">
+               <div ng-show="!uploading" style='position:relative;display:inline-block; margin: 5px; width:100px; height:200px;line-height: 200px;' title="Dodaj zdjęcie">
                    <img add-image="1" src="${g.assetPath(src: 'Plus.png')}" style="border-radius: 50px; width:75px;"/>
                    <img add-image="2" src="${g.assetPath(src: 'Plusp.png')}" class="fork-add-image active"/>
                    <input type='file' file-dialog style="display: none"/>
+               </div>
+               <div ng-show="uploading" style='position:relative;display:inline-block; margin: 5px; width:200px;'>
+                   <div style="border: 1px solid black; display:inline-block;width:200px; height:20px;">
+                       <div ng-style='{width:progress}' style="cursor:default;height:100%;background-attachment: fixed; background: repeating-linear-gradient( 45deg, #f0ad4e, #F5B964 10px, #d9534f 10px, #F77571 20px );">
+                       </div>
+                   </div>
                </div>
 
                <div user-image-wrapper style='position:relative;display:inline-block; margin: 5px;' ng-repeat='image in images'>

@@ -10,6 +10,8 @@ forkApp.controller('galleryController', ['$scope', '$http', function($scope, $ht
     $scope.overImage = false;
     $scope.addHovered = false;
     $scope.openDialog = false;
+    $scope.progress = '0%';
+    $scope.uploading = false;
 
     $scope.description = "";
     $scope.title = "";
