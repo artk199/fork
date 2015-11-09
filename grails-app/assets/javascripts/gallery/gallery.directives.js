@@ -256,9 +256,11 @@ forkApp.directive('fileDialog', function(){
 
                 xhr.onload = function () {
                     if (xhr.status === 200) {
-                        scope.progress = '0%';
-                        scope.uploading = false;
-                        scope.images.push(xhr.responseText);
+                        scope.$apply(function() {
+                            scope.progress = '0%';
+                            scope.uploading = false;
+                            scope.images.push(xhr.responseText);
+                        });
                     } else {
                         alert('An error occurred!');
                     }

@@ -18,7 +18,7 @@
                     21 new messages
                 </div>
                 <div class="col-md-12">
-                    <a href="user/show/${g.currentUserID()}">Odwiedź swój profil </a>
+                    <a href="/user/show/${g.currentUserID()}">Odwiedź swój profil </a>
                 </div>
             </div>
         </div>

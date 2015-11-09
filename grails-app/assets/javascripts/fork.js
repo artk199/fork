@@ -1,6 +1,8 @@
 //= require_self
 //= require gallery/gallery.controller.js
 //= require gallery/gallery.directives.js
+//= require edit/edit.controller.js
+//= require edit/edit.directives.js
 
 var forkApp = angular.module('forkApp', ['ngAnimate']);
 
@@ -214,127 +216,31 @@ forkApp.directive('userPanel', ['$animate', function($animate) {
     }
 }]);
 
-forkApp.directive('fieldEdit', function(){
-   return {
-       restrict: 'E',
-       controller: ['$scope', '$http', function($scope, $http) {
-           $scope.editing = false;
-           $scope.editFieldValue = '';
-           $scope.notSet = false;
 
-           $scope.getValue = function(){
-               if( $scope.notSet ){
-                   return 'No title';
-               }
-               return $scope.fieldValue;
-           }
+forkApp.controller('visibilityController', ['$scope', function($scope){
 
-           $scope.requestEdit = function() {
+    $scope.visibility = 'public';
 
-               var sendData = {
-                   value: $scope.editFieldValue,
-                   fieldName: $scope.fieldName
-               };
-
-               console.log(sendData);
-
-               $http.post('/image/' + $scope.id, sendData)
-                   .success(function (data) {
-                       $scope.description = data.description;
-                       $scope.title = data.title;
-                       $scope.fieldValue = $scope.editFieldValue;
-                       $scope.editing = false;
-                       $scope.notSet = false;
-                   });
-
-               }
-
-       }],
-       scope: {
-           fieldName: '@',
-           fieldValue: '@',
-           id: '@'
-       },
-       link: function(scope, element){
-           scope.editFieldValue = scope.fieldValue;
-           if( scope.fieldValue == "" ){
-               scope.notSet = true;
-           }
-
-       },
-       template:"<a field-pre-edit style='cursor:pointer;'>{{getValue()}}</a>" +
-       "<input field-during-edit ng-model='editFieldValue' type='text' style='padding-right:80px;max-width: 84%;'/>" +
-       "<span ng-show='editing' class='fork-accept-cancel'>" +
-       "    <span accept-edit class='glyphicon glyphicon-ok'></span>" +
-       "    <span cancel-edit class='glyphicon glyphicon-remove'></span>" +
-       "</span>"
-   }
-});
-
-forkApp.directive('fieldPreEdit', function(){
-    return {
-        link: function(scope, element){
-            scope.$watch( function(){
-                return scope.editing;
-            }, function(editing){
-                if( editing ){
-                    element.addClass('ng-hide');
-                }
-                else{
-                    element.removeClass('ng-hide');
-                }
-            } );
-
-            element.bind('click', function(){
-                scope.$apply( function(){
-                    scope.editing = true;
-                });
-            });
-
-        },
+    $scope.setVisibility = function(visibility){
+        $scope.visibility = visibility;
     }
-});
 
-forkApp.directive('fieldDuringEdit', function(){
-    return {
-        link: function(scope, element) {
-            console.log('init');
-            if (typeof scope.fieldValue !== 'undefined') {
-                element.val(scope.fieldValue);
-            }
-            scope.$watch( function(){
-                return scope.editing;
-            }, function(editing){
-                if( !editing ){
-                    element.addClass('ng-hide');
-                }
-                else{
-                    element.removeClass('ng-hide');
-                }
-            } );
+    $scope.isActive = function(visibility){
+        if( $scope.visibility == visibility ){
+            return { background: '#96a682'};
         }
+        return {};
     }
-});
 
-forkApp.directive('cancelEdit', function(){
-    return {
-        link: function (scope, element) {
-            element.bind('click', function(){
-                scope.$apply( function(){
-                    scope.editing = false;
-                    scope.editFieldValue = '';
-                });
+
+}]);
+
+forkApp.directive('changeUrl', [ '$window', function($window){
+    return{
+        link: function(scope, element, attrs) {
+            element.bind('click', function () {
+                $window.location.href = attrs['changeUrl'];
             });
         }
     }
-});
-
-forkApp.directive('acceptEdit', function(){
-    return {
-        link: function (scope, element) {
-            element.bind('click', function(){
-                scope.requestEdit();
-            });
-        }
-    }
-});
+}]);

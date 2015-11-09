@@ -21,7 +21,7 @@
                    <h2 style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 41px;font-weight: bold; font-style: italic;">
                    &bdquo;{{title != null ? title : 'No title'}}&rdquo;
                    <small style='font-size:45%'>09.09.2009</small></h2>
-                   <span>{{description}}</span>
+                   <span style="font-size:20px;">{{description}}</span>
                </div>
            </div>
            <div class='col-md-12'>
