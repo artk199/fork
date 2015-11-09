@@ -35,6 +35,8 @@ class PricingController {
             return
         }
 
+        // TODO: zapisywac polaczenie z Place w bardziej logiczny sposob
+        pricing.place.pricing.add(pricing)
         pricing.save flush:true
 
         request.withFormat {

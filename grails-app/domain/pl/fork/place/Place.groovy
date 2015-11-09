@@ -3,6 +3,7 @@ package pl.fork.place
 import pl.fork.auth.User
 import pl.fork.event.Event
 import pl.fork.file.ForkFile
+import pl.fork.place.other.Pricing
 
 class Place {
 
@@ -15,13 +16,14 @@ class Place {
         owner nullable:true
         types minSize: 0
         mainImage nullable:true
+        pricing nullable:true
     }
 
     List scores
     ForkFile mainImage
 
     /*TODO: Uncomment services and sucessfully compile project */
-    static hasMany = [scores: Score, types:PlaceType, /*services:AdditionalService,*/ events: Event, images: ForkFile]
+    static hasMany = [scores: Score, types:PlaceType, /*services:AdditionalService,*/ events: Event, images: ForkFile,  pricing: Pricing]
     static transients = ['avgScore']
 
 
