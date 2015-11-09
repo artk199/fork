@@ -173,5 +173,4 @@ class PlaceService {
         return result
     }
 
-
 }
