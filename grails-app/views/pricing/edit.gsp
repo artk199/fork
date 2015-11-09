@@ -29,8 +29,50 @@
             <g:form resource="${this.pricing}" method="PUT">
                 <g:hiddenField name="version" value="${this.pricing?.version}" />
                 <fieldset class="form">
-                    <f:all bean="pricing"/>
+                    <!-- FIELDS ON MENU !-->
+                    <div class="form-group">
+                        <label for="title" class="col-sm-4 control-label">
+                            <g:message code="pricing.title" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="title" id="title" value="${pricing.title}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="col-sm-4 control-label">
+                            <g:message code="pricing.description" />
+                        </label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="description"
+                                      id="description" value="${pricing.description}">
+                                ${pricing.description}
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="place" class="col-sm-4 control-label">
+                            <g:message code="pricing.place" />
+                        </label>
+                        <div class="col-sm-8">
+                            <g:select name="place" id="place" from="${pl.fork.place.Place.list()}"
+                                      optionValue="name" class="form-control" value="${pricing.place}"
+                                      optionKey="id"
+                            />
+                        </div>
+                    </div>
                 </fieldset>
+
+                <h2><g:message code="pricing.elements.header"/></h2>
+                <fieldset class="form-group" id="pricing-elements">
+                    <!-- FIELDS ON MENU ELEMENT!-->
+
+
+                    <div class="buttons">
+                        <a href="/pricedElement/create?pricing.id=${pricing.id}" class="save btn btn-default"><g:message code="pricing.element.add.new"/></a>
+                    </div>
+                </fieldset>
+
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>

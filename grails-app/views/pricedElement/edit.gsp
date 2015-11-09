@@ -29,10 +29,50 @@
             <g:form resource="${this.pricedElement}" method="PUT">
                 <g:hiddenField name="version" value="${this.pricedElement?.version}" />
                 <fieldset class="form">
-                    <f:all bean="pricedElement"/>
+                    <!-- FIELDS ON MENU !-->
+                    <div class="form-group">
+                        <label for="name" class="col-sm-4 control-label">
+                            <g:message code="pricing.element.name" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="name" id="name" value="${pricedElement.name}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="col-sm-4 control-label">
+                            <g:message code="pricing.element.description" />
+                        </label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="description" id="description" value="${pricedElement.description}">
+                                ${pricedElement.description}
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price" class="col-sm-4 control-label">
+                            <g:message code="pricing.element.price" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="price" id="price" value="${pricedElement.price}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pricing" class="col-sm-4 control-label">
+                            <g:message code="pricing.element.menu" />
+                        </label>
+                        <div class="col-sm-8">
+                            <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
+                                      optionValue="title" class="form-control" value="${pricedElement.pricing}"
+                                      optionKey="id"
+                            />
+                        </div>
+                    </div>
                 </fieldset>
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="save btn btn-default" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

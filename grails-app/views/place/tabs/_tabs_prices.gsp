@@ -7,7 +7,8 @@
         </h2>
 
         <g:if test="${this.place.pricing.size() == 0}">
-            <g:message code="place.show.pricing.noPricing"/>
+            <p><g:message code="place.show.pricing.noPricing"/></p>
+            <p><g:message code="place.show.pricing.addMenu" args="['/pricing/create']"/></p>
         </g:if>
         <g:else>
 
@@ -17,6 +18,12 @@
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         ${pricing.title}
+                        <div class="pull-right">
+                            <a href="/pricing/edit/${pricing.id}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Edytuj
+                            </a>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="well well-sm">
@@ -24,26 +31,28 @@
                         </div>
                     </div>
 
-                    <!-- SHOW ELEMENTS FOR THIS PRICING !-->
-                    <table class="table table-striped">
-                        <caption><g:message code="place.show.pricing.elements"/></caption>
-                        <thead>
-                            <tr>
-                                <th><g:message code="place.show.pricing.elements.name"/></th>
-                                <th><g:message code="place.show.pricing.elements.description"/></th>
-                                <th><g:message code="place.show.pricing.elements.price"/></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <g:each in="${pricing.elements}" var="element" >
+                    <g:if test="${pricing.elements.size() > 0}">
+                        <!-- SHOW ELEMENTS FOR THIS PRICING !-->
+                        <table class="table table-striped">
+                            <caption><g:message code="place.show.pricing.elements"/></caption>
+                            <thead>
                                 <tr>
-                                    <td>${element.name}</td>
-                                    <td>${element.description}</td>
-                                    <td>${element.price}</td>
+                                    <th class='col-md-4 col-sm-4 col-xs-4'><g:message code="place.show.pricing.elements.name"/></th>
+                                    <th class='col-md-6 col-sm-6 col-xs-6'><g:message code="place.show.pricing.elements.description"/></th>
+                                    <th class='col-md-2 col-sm-2 col-xs-2'><g:message code="place.show.pricing.elements.price"/></th>
                                 </tr>
-                            </g:each>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <g:each in="${pricing.elements}" var="element" >
+                                    <tr>
+                                        <td class='col-md-4 col-sm-4 col-xs-4'>${element.name}</td>
+                                        <td class='col-md-6 col-sm-6 col-xs-6'>${element.description}</td>
+                                        <td class='col-md-2 col-sm-2 col-xs-2'>${element.price}</td>
+                                    </tr>
+                                </g:each>
+                            </tbody>
+                        </table>
+                    </g:if>
                 </div>
             </g:each>
         </g:else>
