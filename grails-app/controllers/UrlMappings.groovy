@@ -6,9 +6,19 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-        "/image/$id"{
+        "/image/$id"(parseRequest:false){
             controller = "image"
-            action = [GET:'getImage']
+            action = [GET:'getImage', DELETE:'deleteImage', POST:'updateImage']
+        }
+
+        "/image/$id/edit"{
+            controller = "image"
+            action = [GET:'editImage']
+        }
+
+        "/image/$id/details"{
+            controller = "image"
+            action = [GET:'getImageDetails']
         }
 
         "/image/upload"{

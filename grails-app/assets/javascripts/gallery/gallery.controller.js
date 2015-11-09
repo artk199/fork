@@ -10,6 +10,11 @@ forkApp.controller('galleryController', ['$scope', '$http', function($scope, $ht
     $scope.overImage = false;
     $scope.addHovered = false;
     $scope.openDialog = false;
+    $scope.progress = '0%';
+    $scope.uploading = false;
+
+    $scope.description = "";
+    $scope.title = "";
 
     $scope.requestImages = function() {
         $http.get('/user/' + $scope.id + '/image')
@@ -20,6 +25,24 @@ forkApp.controller('galleryController', ['$scope', '$http', function($scope, $ht
 
     $scope.getSelectedUrl = function(){
         return '/image/'+$scope.images[$scope.selectedImage];
+    }
+
+    $scope.requestDetails = function(){
+        $http.get('/image/' + $scope.images[$scope.selectedImage] + '/details')
+            .success(function (data) {
+                $scope.description = data.description;
+                $scope.title = data.title;
+            });
+    }
+
+    $scope.deleteImage = function(){
+        $http.delete('/image/' + $scope.images[$scope.selectedImage])
+            .success( function (){
+                var removed = $scope.selectedImage;
+                $scope.selectedImage = -1;
+                $scope.images.splice(removed, 1);
+                $scope.toggleDropdown();
+            });
     }
 
     $scope.isSelected = function() {

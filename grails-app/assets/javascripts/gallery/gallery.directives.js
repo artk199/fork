@@ -117,6 +117,8 @@ forkApp.directive('fullImage', ['$animateCss', function($animateCss) {
                 return scope.getSelectedUrl();
             }, function(newval, oldval){
 
+                scope.requestDetails();
+
                 var oldheight = element[0].getBoundingClientRect().height;
 
                 var newImg = new Image();
@@ -242,17 +244,54 @@ forkApp.directive('fileDialog', function(){
                 form.append('file', file, 'image.png');
 
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST','/image/upload',true);
+
+                xhr.upload.onprogress = function(e){
+                    var done = e.position || e.loaded, total = e.totalSize || e.total;
+                    var present = Math.floor(done/total*100);
+                    scope.$apply(function(){
+                        scope.progress = present+'%';
+                        console.log(scope.progress);
+                    });
+                };
+
                 xhr.onload = function () {
                     if (xhr.status === 200) {
-                        scope.images.push(xhr.responseText);
+                        scope.$apply(function() {
+                            scope.progress = '0%';
+                            scope.uploading = false;
+                            scope.images.push(xhr.responseText);
+                        });
                     } else {
                         alert('An error occurred!');
                     }
                 };
+                xhr.open('POST','/image/upload',true);
+                scope.uploading = true;
+
                 xhr.send(form);
             });
 
         }
     }
+});
+
+forkApp.directive('deleteImage', function(){
+    return {
+        link: function (scope, element) {
+            //ng - href = '/image/{{images[selectedImage]}}/delete'
+            element.bind('click', function(){
+                scope.deleteImage();
+            });
+        }
+    }
+});
+
+forkApp.directive('editImage', function(){
+   return {
+       link: function (scope, element) {
+           element.bind('click', function(){
+               window.location.href = '/image/'+scope.images[scope.selectedImage]+'/edit';
+           });
+       }
+   }
 });

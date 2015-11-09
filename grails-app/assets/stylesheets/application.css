@@ -18,6 +18,13 @@ body{
     background: #22262d!important;
 }
 
+.icon-flipped {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+}
+
 .fork-layout-navbar{
     height:85px;
     margin-bottom:6px !important;
@@ -443,6 +450,24 @@ iframe{
     font-size: 11px;
 }
 
+#place-prices .panel{
+    color:#000;
+    border-color:#fff;
+    border-radius:0;
+}
+
+#place-prices .panel .panel-heading{
+    background: #498FFF;
+    border-radius: 0;
+}
+
+#place-prices .panel .well-sm{
+    border-radius: 0;
+    margin: 0;
+    padding-bottom: 0;
+    background:none;
+}
+
 .fork-filter-bar{
     background: #D6E6C3;
     border: 1px solid #fff;
@@ -616,7 +641,8 @@ iframe{
     width: 200px;
     left: -151px;
     position: relative;
-    top: -1px
+    top: -1px;
+    cursor: pointer;
 }
 
 .fork-cog > div > div:hover{
@@ -650,6 +676,72 @@ iframe{
 .fork-add-image.active:active{
     box-shadow: 0px 0px 2px 2px green;
 }
+
+.fork-accept-cancel{
+    position: absolute;
+    min-width: 71px;
+}
+
+.fork-accept-cancel > span {
+    font-size:30px;
+    position:relative;
+    left: -80px;
+    cursor:pointer;
+}
+
+.fork-accept-cancel > span:first-child{
+    color: #D6E6C3;
+}
+
+.fork-accept-cancel > span:first-child:hover{
+    color: #879676;
+}
+
+.fork-accept-cancel > span:last-child{
+    color: #FFA500;
+}
+
+.fork-accept-cancel > span:last-child:hover{
+    color: #af6900;
+}
+
+.fork-image-edit-buttons{
+    display:inline-block;
+    margin-top: 10px;
+}
+
+.fork-image-edit-buttons > div {
+    display:inline-block;
+    padding:10px;
+    background:#D6E6C3;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #eceae2;
+    margin-bottom: 5px;
+}
+
+.fork-image-edit-buttons > div:hover  {
+    cursor:pointer;
+    background: #96a682;
+}
+
+.fork-image-edit-buttons-group{
+    display:inline-block;
+    background:#D6E6C3;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #eceae2;
+    margin-bottom: 5px;
+}
+
+.fork-image-edit-buttons-group > div {
+    display:inline-block;
+    padding:10px;
+}
+
+.fork-image-edit-buttons-group > div:hover  {
+    cursor:pointer;
+    background: #96a682;
+}
+
 
 @-webkit-keyframes rotate360{
     from {

@@ -15,7 +15,6 @@
 
         <asset:javascript src="jquery.datetimepicker.full.min.js"/>
 
-
         <g:layoutHead/>
     </head>
     <body>

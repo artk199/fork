@@ -1,6 +1,8 @@
 //= require_self
 //= require gallery/gallery.controller.js
 //= require gallery/gallery.directives.js
+//= require edit/edit.controller.js
+//= require edit/edit.directives.js
 
 var forkApp = angular.module('forkApp', ['ngAnimate']);
 
@@ -215,4 +217,30 @@ forkApp.directive('userPanel', ['$animate', function($animate) {
 }]);
 
 
+forkApp.controller('visibilityController', ['$scope', function($scope){
 
+    $scope.visibility = 'public';
+
+    $scope.setVisibility = function(visibility){
+        $scope.visibility = visibility;
+    }
+
+    $scope.isActive = function(visibility){
+        if( $scope.visibility == visibility ){
+            return { background: '#96a682'};
+        }
+        return {};
+    }
+
+
+}]);
+
+forkApp.directive('changeUrl', [ '$window', function($window){
+    return{
+        link: function(scope, element, attrs) {
+            element.bind('click', function () {
+                $window.location.href = attrs['changeUrl'];
+            });
+        }
+    }
+}]);
