@@ -6,16 +6,14 @@
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#edit-pricing" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="edit-pricing" class="content scaffold-edit" role="main">
-            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+            <h2>
+                <a href="/place/show/${pricing.place.id}">
+                    ${pricing.place.name}
+                </a>
+                -
+                ${pricing.title}
+            </h2>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -66,15 +64,21 @@
                 <h2><g:message code="pricing.elements.header"/></h2>
                 <fieldset class="form-group" id="pricing-elements">
                     <!-- FIELDS ON MENU ELEMENT!-->
-
-
                     <div class="buttons">
-                        <a href="/pricedElement/create?pricing.id=${pricing.id}" class="save btn btn-default"><g:message code="pricing.element.add.new"/></a>
+
+                        <a href="/pricedElement/create?pricing.id=${pricing.id}" class="save btn btn-default">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <g:message code="pricing.element.add.new"/>
+                        </a>
                     </div>
                 </fieldset>
 
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="save btn btn-default" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <a href="/pricing/" class="save btn btn-default">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                        <g:message code="pricing.showAll"/>
+                    </a>
                 </fieldset>
             </g:form>
         </div>

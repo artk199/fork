@@ -6,13 +6,6 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-pricing" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="create-pricing" class="content scaffold-create" role="main">
             <h2><g:message code="pricing.header" args="[entityName]" /></h2>
             <g:if test="${flash.message}">
@@ -72,6 +65,10 @@
 
                     <div class="buttons">
                         <a href="/pricedElement/create" class="save btn btn-default"><g:message code="pricing.element.add.new"/></a>
+                        <a href="/pricing/" class="save btn btn-default">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                            <g:message code="pricing.showAll"/>
+                        </a>
                     </div>
                 </fieldset>
             </g:form>
