@@ -9,7 +9,6 @@ class PricedElement {
 
     String name
     String description
-    String type
     int price
 
 }

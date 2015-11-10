@@ -14,7 +14,7 @@
             </ul>
         </div>
         <div id="create-pricing" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h2><g:message code="pricing.header" args="[entityName]" /></h2>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -25,12 +25,54 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form action="save">
+            <g:form action="save" class="form-horizontal">
                 <fieldset class="form">
-                    <f:all bean="pricing"/>
+                    <!-- FIELDS ON MENU !-->
+                    <div class="form-group">
+                        <label for="title" class="col-sm-4 control-label">
+                            <g:message code="pricing.title" />
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="title" id="title" value="${pricing.title}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="col-sm-4 control-label">
+                            <g:message code="pricing.description" />
+                        </label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="description" id="description" value="${pricing.description}"> </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="place" class="col-sm-4 control-label">
+                            <g:message code="pricing.place" />
+                        </label>
+                        <div class="col-sm-8">
+                            <g:select name="place" id="place" from="${pl.fork.place.Place.list()}"
+                                optionValue="name" class="form-control" value="${pricing.place}"
+                                optionKey="id"
+                            />
+                        </div>
+                    </div>
                 </fieldset>
+
+
                 <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <g:submitButton name="create"  class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                </fieldset>
+
+                <h2><g:message code="pricing.elements.header"/></h2>
+                <p>To jeszcze nie działa. Tutaj będzie dodawanie elementów przy pomocy javascriptu - od
+                razu przy dodawaniu menu, dla wygody.</p>
+                <fieldset class="form-group" id="pricing-elements">
+                    <!-- FIELDS ON MENU ELEMENT!-->
+
+
+                    <div class="buttons">
+                        <a href="/pricedElement/create" class="save btn btn-default"><g:message code="pricing.element.add.new"/></a>
+                    </div>
                 </fieldset>
             </g:form>
         </div>
