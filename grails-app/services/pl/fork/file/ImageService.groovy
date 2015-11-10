@@ -9,6 +9,7 @@ import org.grails.web.json.JSONObject
 class ImageService {
 
     def springSecurityService
+    ImageScaleService imageScaleService
 
     ForkFile getImage(Long id){
         ForkFile.get(id)
@@ -33,7 +34,7 @@ class ImageService {
         file.source = f.bytes
         file.fileType = f.contentType
         file.owner = u
-
+        file.mini = imageScaleService.scale(file.source, 200)
         file.validate()
         if( file && !file.hasErrors() ) {
             u.addToImages(file)
@@ -52,5 +53,8 @@ class ImageService {
         image[parameters.get('fieldName')] = parameters.get('value')
         image.save flush: true
     }
+
+
+
 
 }

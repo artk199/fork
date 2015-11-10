@@ -7,6 +7,7 @@ class ForkFile {
 
     static constraints = {
         source(nullable:true, size:0..5242880 /* 5M */)
+        mini(nullable:true, size:0..5242880 /* 5M */)
         fileType(nullable:true)
         description(nullable:true)
         place(nullable:true)
@@ -21,6 +22,7 @@ class ForkFile {
     }
 
     byte[] source
+    byte[] mini
     String fileType
     String title
     String description

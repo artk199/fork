@@ -12,6 +12,11 @@ class ImageController {
         render(file: image.source, contentType:  image.fileType)
     }
 
+    def getMiniImage(int id){
+        ForkFile image = imageService.getImage(id)
+        render(file: image.mini, contentType:  image.fileType)
+    }
+
     def getImageDetails(int id){
         ForkFile image = imageService.getImage(id)
         render image as JSON

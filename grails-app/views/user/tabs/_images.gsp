@@ -38,7 +38,7 @@
                </div>
 
                <div user-image-wrapper style='position:relative;display:inline-block; margin: 5px;' ng-repeat='image in images'>
-                   <img ng-style='imageStyle()' style='border:1px #777 solid;' ng-src='/image/{{image}}' user-image/>
+                   <img ng-style='imageStyle()' style='border:1px #777 solid;' ng-src='/image/{{image}}/mini' user-image/>
                    <div ng-style='overlayStyle()' style='position:absolute; background-color: white; top:0; left:0; width:100%; pointer-events: none; height:100%;'></div>
                </div>
            </div>
