@@ -16,15 +16,11 @@ class ForkFile {
 
     static belongsTo = [place:Place]
 
-    static mappings = {
-        source type: "blob"
-        title defaultValue: "'No title'"
-    }
-
     byte[] source
     byte[] mini
     String fileType
     String title
     String description
     User owner
+    FileStatus status = FileStatus.PENDING;
 }

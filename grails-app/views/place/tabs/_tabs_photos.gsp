@@ -2,7 +2,7 @@
 <sec:ifLoggedIn>
     <g:uploadForm action="uploadFile" resource="${place}">
         <label for="file"><g:message code="custom.choosePhoto" default="Photo"/></label>
-        <input type="file" name="image" id="file" />
+        <input type="file" name="file" id="file" />
         <label for="title"><g:message code="custom.title" default="Title"/></label>
         <input type="text" name="title" id="title"/>
         <label for="description"><g:message code="custom.description" default="Description"/></label>
