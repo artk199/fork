@@ -26,24 +26,49 @@
                 </div>
 
 
+                <div ng-controller="imageMenuController" ng-init="image=${image.id}">
+                    <div ng-show="isPopupAvailable()" class="fork-popup-container ng-hide">
+                        <div style="position:fixed; width:100%; height:100%; left:0; top:0;background:black; opacity:0.5;"></div>
+                        <div ng-show="isPopupAvailable()" class="fork-popup">
+                            <div class="row" style="height:100%;">
+                                <div class="col-md-3 col-sm-2 col-xs-1" style="height:1px;"></div>
+                                <div class="col-md-6 col-sm-8 col-xs-10" style="background:white; height:60vh;box-shadow: 0px 3px 18px 8px #111;border: 1px solid black;border-radius: 10px;">
+                                    <div class="fork-close-popup" ng-click="closePopup()"><span class="glyphicon glyphicon-remove"></span></div>
+                                    <div style="overflow:auto;height:56vh;margin-right: 25px">
+                                        <input ng-model="searchValue" ng-change="search()" placeholder="${g.message(code:'image.link.place')}" type="text" style="margin-top:50px; width:80%; font-size:25px; padding: 5px 15px;"/>
+                                        <div style="margin:auto; width:80%;margin-top: 50px; height: auto;margin-bottom:10px;">
+                                            <div class="row fork-link-search-result" ng-repeat="place in places">
+                                                <div class="col-md-2 col-sm-1 hidden-xs"></div>
+                                                <div class="col-md-8 col-sm-10 col-xs-12">
+                                                    <div place-link>{{place.name}}</div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-1 hidden-xs"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-2 col-xs-1" style="height:1px;"></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="pull-right">
-                    <div class="fork-image-edit-buttons">
-                        <div><span class="glyphicon glyphicon-trash"></span> <g:message code="image.delete"/></div>
-                        <div><span class="glyphicon glyphicon-link"></span> <g:message code="image.link"/></div>
+                    <div class="pull-right">
+                        <div class="fork-image-edit-buttons">
+                            <div><span class="glyphicon glyphicon-trash"></span> <g:message code="image.delete"/></div>
+                            <div ng-click="showPopup()"><span class="glyphicon glyphicon-link"></span> <g:message code="image.link"/></div>
+                        </div>
+                        <div class="fork-image-edit-buttons-group" ng-controller="visibilityController">
+                            <div ng-style="isActive('public')" ng-click="setVisibility('public')"><span class="glyphicon glyphicon-eye-open"></span> <g:message code="image.set.public"/></div>
+                            <div ng-style="isActive('hidden')" ng-click="setVisibility('hidden')"><span class="glyphicon glyphicon-eye-close"></span> <g:message code="image.set.hidden"/></div>
+                            <div ng-style="isActive('private')"ng-click="setVisibility('private')"><span class="glyphicon glyphicon-lock"></span> <g:message code="image.set.private"/></div>
+                        </div>
+                        <div class="fork-image-edit-buttons">
+                            <div change-url="/user/show/${g.currentUserID()}" ><span class="glyphicon glyphicon-share-alt icon-flipped"></span> <g:message code="application.back"/></div>
+                        </div>
                     </div>
-                    <div class="fork-image-edit-buttons-group" ng-controller="visibilityController">
-                        <div ng-style="isActive('public')" ng-click="setVisibility('public')"><span class="glyphicon glyphicon-eye-open"></span> <g:message code="image.set.public"/></div>
-                        <div ng-style="isActive('hidden')" ng-click="setVisibility('hidden')"><span class="glyphicon glyphicon-eye-close"></span> <g:message code="image.set.hidden"/></div>
-                        <div ng-style="isActive('private')"ng-click="setVisibility('private')"><span class="glyphicon glyphicon-lock"></span> <g:message code="image.set.private"/></div>
-                    </div>
-                    <div class="fork-image-edit-buttons">
-                        <div change-url="/user/show/${g.currentUserID()}" ><span class="glyphicon glyphicon-share-alt icon-flipped"></span> <g:message code="application.back"/></div>
-                    </div>
+
                 </div>
-
             </div>
-
         </div>
         <div class="col-md-2 col-sm-1 hidden-xs"></div>
     </div>

@@ -16,8 +16,17 @@ class PlaceController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        println params
-        respond placeService.filter(params.name, params.town, params.timeAfter, params.timeBefore), model:[placeCount: Place.count()]
+        String accepts = request.getHeader('accept')
+        if( accepts.contains('html')){
+            def places = placeService.filter(params.name, params.town, params.timeAfter, params.timeBefore)
+            println "HTML"
+            render view:"index", model:[placeList: places, placeCount: Place.count()]
+            return
+        }
+        if( accepts.contains('json')){
+            render Place.list() as JSON
+        }
+
     }
 
     def show(Place place) {
@@ -145,19 +154,20 @@ class PlaceController {
     }
 
     /** Metoda do testowania logowania */
-    def getPlace(){
+    def getPlace() {
         render Place.get(1) as JSON;
-    }
-
-    /** G*/
-    def test(params){
-        println params
-        render "test";
     }
 
     def uploadFile(Place place) {
         placeService.addPhotoToPlace(place, request);
         redirect(action:'show', id: place.id)
+    }
+
+    def linkImage(Long id){
+        JSONObject parameters = new JSONObject(request.reader.text)
+        Place place = placeService.get(id)
+        placeService.addPhotoToPlace(place, parameters)
+        render "OK"
     }
 
 }

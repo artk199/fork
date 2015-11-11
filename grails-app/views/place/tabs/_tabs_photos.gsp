@@ -14,3 +14,7 @@
     <p>Zaloguj się aby dodawać zdjęcia</p>
 </sec:ifNotLoggedIn>
 </fieldset>
+
+<g:each in="${place.images}" var="image">
+    <img src="/image/${image.id}/mini"/>
+</g:each>

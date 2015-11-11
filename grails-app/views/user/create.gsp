@@ -49,7 +49,7 @@
                                         <g:message code="user.password_confirm" />
                                     </label>
                                     <div class="col-sm-8">
-                                        <g:textField class="form-control" name="password_confirm" value="${user.password_confirm}" />
+                                        <g:passwordField class="form-control" name="password_confirm" value="${user.password_confirm}" />
                                     </div>
                                 </div>
 
