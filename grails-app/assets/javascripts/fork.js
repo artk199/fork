@@ -185,8 +185,7 @@ forkApp.directive('filterDate', function(){
        link: function (scope, element){
            element.datetimepicker({
                timepicker:false,
-               format:'Y/m/d',
-               maxDate:'0'
+               format:'Y/m/d'
            });
        }
    }
