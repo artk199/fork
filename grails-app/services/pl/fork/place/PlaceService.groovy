@@ -108,28 +108,6 @@ class PlaceService {
         score
     }
 
-    ForkFile addPhotoToPlace(Place place, HttpServletRequest request) {
-        def f = request.getFile('image')
-        ForkFile file = new ForkFile();
-        file.source = f.bytes
-        file.fileType = f.contentType
-        file.title = request.getParameter('title');
-        file.description = request.getParameter('description');
-        file.place = place
-        file.owner = User.findByUsername(springSecurityService.currentUser)
-        file.validate()
-        if( file && !file.hasErrors() ) {
-            place.addToImages(file);
-            file.save flush: true;
-            place.save(flush: true)
-        }
-        else if (file) {
-            file.errors.each { println it }
-        }
-
-        file;
-    }
-
     ForkFile addPhotoToPlace(Place place, Map parameters){
         if( !parameters.containsKey('image')){
             return null

@@ -2,6 +2,8 @@ package pl.fork.place
 
 import grails.converters.JSON
 import pl.fork.auth.User
+import pl.fork.file.ForkFile
+import pl.fork.file.ImageService
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -11,6 +13,7 @@ import org.grails.web.json.JSONObject
 class PlaceController {
 
     PlaceService placeService
+    ImageService imageService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -158,9 +161,9 @@ class PlaceController {
         render Place.get(1) as JSON;
     }
 
-    def uploadFile(Place place) {
-        placeService.addPhotoToPlace(place, request);
-        redirect(action:'show', id: place.id)
+    def upload(Place place) {
+        ForkFile image = imageService.create(params, place);
+        render image.id
     }
 
     def linkImage(Long id){

@@ -12,7 +12,7 @@ class UrlMappings {
             action = [POST:'linkImage']
         }
 
-        "/place"{
+        "/place" {
             controller = "place"
             action = "index"
         }
