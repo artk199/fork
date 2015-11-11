@@ -13,7 +13,7 @@
             <div class="message" role="status">${flash.message}</div>
         </g:if>
 
-        <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
+        <form action='${postUrl}' method='POST' id='loginForm' class='form-horizontal' autocomplete='off'>
             <div class="form-group">
                 <label for="j_username" class="col-sm-4 control-label">
                     <g:message code="user.username" />

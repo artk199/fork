@@ -21,7 +21,7 @@
                         <div class="pull-right">
                             <a href="/pricing/edit/${pricing.id}">
                                 <span class="glyphicon glyphicon-edit"></span>
-                                Edytuj
+                                <g:message code="default.link.edit"/>
                             </a>
                         </div>
                     </div>
