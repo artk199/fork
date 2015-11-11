@@ -31,7 +31,7 @@
                         <g:each in="${pl.fork.place.other.Pricing.list()}" var="pricing" >
                             <tr>
                                 <td class='col-md-3 col-sm-3 col-xs-3'>
-                                    <a href="show/${pricing.id}">
+                                    <a href="/pricing/show/${pricing.id}">
                                         ${pricing.title}
                                     </a>
 
@@ -53,10 +53,13 @@
                         </g:each>
                         </tbody>
                     </table>
-                    <div class="buttons">
-                        <a href="/pricing/create" class="save btn btn-default"><g:message code="pricing.add.new"/></a>
-                    </div>
             </g:else>
+            <div class="buttons">
+                <a href="/pricing/create" class="save btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <g:message code="pricing.add.new"/>
+                </a>
+            </div>
             <div class="pagination">
                 <g:paginate total="${pricingCount ?: 0}" />
             </div>

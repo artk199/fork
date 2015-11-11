@@ -8,7 +8,7 @@
 
         <g:if test="${this.place.pricing.size() == 0}">
             <p><g:message code="place.show.pricing.noPricing"/></p>
-            <p><g:message code="place.show.pricing.addMenu" args="['/pricing/create']"/></p>
+            <p><g:message code="place.show.pricing.addMenu" args="['/pricing/create?place.id='+this.place.id]"/></p>
         </g:if>
         <g:else>
 
@@ -55,6 +55,12 @@
                     </g:if>
                 </div>
             </g:each>
+            <div class="buttons">
+                <a href="/pricing/create?place.id=${this.place.id}" class="save btn btn-orange">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <g:message code="pricing.add.new"/>
+                </a>
+            </div>
         </g:else>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>

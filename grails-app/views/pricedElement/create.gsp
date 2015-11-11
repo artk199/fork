@@ -6,13 +6,6 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-pricedElement" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="create-pricedElement" class="content scaffold-create" role="main">
             <h1><g:message code="pricing.elements.header" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
@@ -26,52 +19,59 @@
             </ul>
             </g:hasErrors>
             <g:form action="save" class="form-horizontal">
-                <fieldset class="form">
-                    <!-- FIELDS ON MENU !-->
-                    <div class="form-group">
-                        <label for="name" class="col-sm-4 control-label">
-                            <g:message code="pricing.element.name" />
-                        </label>
-                        <div class="col-sm-8">
-                            <input class="form-control" name="name" id="name" value="${pricedElement.name}"/>
-                        </div>
-                    </div>
+                <div class="text-left row">
+                    <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+                    <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                        <fieldset class="form">
+                            <!-- FIELDS ON MENU !-->
+                            <div class="form-group">
+                                <label for="name" class="col-sm-4 control-label">
+                                    <g:message code="pricing.element.name" />
+                                </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" name="name" id="name" value="${pricedElement.name}"/>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="description" class="col-sm-4 control-label">
-                            <g:message code="pricing.element.description" />
-                        </label>
-                        <div class="col-sm-8">
-                            <textarea class="form-control" name="description" id="description" value="${pricedElement.description}">
-                                ${pricedElement.description}
-                            </textarea>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="description" class="col-sm-4 control-label">
+                                    <g:message code="pricing.element.description" />
+                                </label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="description" id="description" value="${pricedElement.description}">${pricedElement.description}</textarea>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="price" class="col-sm-4 control-label">
-                            <g:message code="pricing.element.price" />
-                        </label>
-                        <div class="col-sm-8">
-                            <input class="form-control" name="price" id="price" value="${pricedElement.price}"/>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="price" class="col-sm-4 control-label">
+                                    <g:message code="pricing.element.price" />
+                                </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" name="price" id="price" value="${pricedElement.price}"/>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="pricing" class="col-sm-4 control-label">
-                            <g:message code="pricing.element.menu" />
-                        </label>
-                        <div class="col-sm-8">
-                            <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
-                                      optionValue="title" class="form-control" value="${pricedElement.pricing}"
-                                      optionKey="id"
-                            />
-                        </div>
+                            <div class="form-group">
+                                <label for="pricing" class="col-sm-4 control-label">
+                                    <g:message code="pricing.element.menu" />
+                                </label>
+                                <div class="col-sm-8">
+                                    <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
+                                              optionValue="title" class="form-control" value="${this.params?.pricing?.id?:1}"
+                                              optionKey="id"
+                                    />
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                </fieldset>
-
+                    <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+                </div>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <a href="/pricedElement/" class="save btn btn-default">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                        <g:message code="pricing.element.showAll"/>
+                    </a>
                 </fieldset>
             </g:form>
         </div>

@@ -18,7 +18,10 @@
             <div class="message" role="status">${flash.message}</div>
             </g:if>
 
-            <div class="panel panel-primary text-left">
+            <div class="text-left row">
+                <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+                <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                    <div class="panel panel-primary text-left">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-list-alt"></span>
                     ${pricing.title}
@@ -106,6 +109,9 @@
                         <g:message code="pricing.showAll"/>
                     </a>
                 </div>
+            </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
             </div>
         </div>
     </body>
