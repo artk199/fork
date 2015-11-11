@@ -47,7 +47,8 @@ class ImageService {
         file.mini = imageScaleService.scale(file.source, 200)
 
         //jeżeli rola użytkownika różna od zwykłego użytkownika to zdjęcie od razu akceptowane
-        if (!SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_USER.name())) {
+        if (!SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_USER.name()) ||
+                place && place.owner.equals(user)) {
             file.status=FileStatus.APPROVED;
         }
         if (place) {
