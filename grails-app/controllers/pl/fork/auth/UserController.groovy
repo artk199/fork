@@ -109,25 +109,6 @@ class UserController {
         }
     }
 
-    def getImage(int userID, int imageID){
-        //byte[] image = user.images(imageID).file
-        //response.outputStream << image
-        //TODO: move this togeter with resourceLocator to service
-        def template
-        if( imageID == 13 ){
-            template = g.resource(dir:"images",file:"stock_2.png", absolute:"true")
-        }
-        else if( imageID == 22 ){
-            template = g.resource(dir:"images",file:"background-new_york.png", absolute:"true")
-        }
-        else{
-            template = g.resource(dir:"images",file:"stock.png", absolute:"true")
-        }
-
-        Resource r = grailsResourceLocator.findResourceForURI(template)
-        render(file: r.inputStream,fileName: "stock.pdf")
-    }
-
     def getAllImages(int userID){
        // render user.images as JSON
         def ids = User.findById(userID).images.collect{ it.id }

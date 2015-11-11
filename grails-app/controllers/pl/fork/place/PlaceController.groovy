@@ -170,4 +170,11 @@ class PlaceController {
         render "OK"
     }
 
+
+    def getAllImages(int placeID){
+        // render user.images as JSON
+        def ids = Place.findById(placeID).images.collect{ it.id }
+        render ids as JSON
+    }
+
 }

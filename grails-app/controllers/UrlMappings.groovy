@@ -36,10 +36,12 @@ class UrlMappings {
             action = [GET:'getImageDetails']
         }
 
-        "/image/upload"{
+        "/user/upload"{
             controller = "image"
             action = [POST:'uploadImage']
         }
+
+        "/place/$placeID/image"(controller:"place",action:"getAllImages")
 
         "/place/search"(controller:"place", action:"search")
         "/place/search/all"(controller:"place", action:"searchAll")

@@ -12,12 +12,13 @@ forkApp.controller('galleryController', ['$scope', '$http', function($scope, $ht
     $scope.openDialog = false;
     $scope.progress = '0%';
     $scope.uploading = false;
+    $scope.controller = 'user'
 
     $scope.description = "";
     $scope.title = "";
 
     $scope.requestImages = function() {
-        $http.get('/user/' + $scope.id + '/image')
+        $http.get('/'+$scope.controller+'/' + $scope.id + '/image')
             .success(function (data) {
                 $scope.images = data;
             });

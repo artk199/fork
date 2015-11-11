@@ -2,6 +2,9 @@ forkApp.directive('userImages', function(){
     return {
         link: function(scope, element, attrs){
             scope.id = attrs.id;
+            if( attrs.controller ) {
+                scope.controller = attrs.controller;
+            }
             scope.requestImages();
         }
     }
@@ -179,6 +182,8 @@ forkApp.directive('fileDialog', function(){
                 var form = new FormData();
                 form.append('file', file, 'image.png');
 
+                form.append('id', scope.id);
+
                 var xhr = new XMLHttpRequest();
 
                 xhr.upload.onprogress = function(e){
@@ -201,7 +206,7 @@ forkApp.directive('fileDialog', function(){
                         alert('An error occurred!');
                     }
                 };
-                xhr.open('POST','/image/upload',true);
+                xhr.open('POST','/'+scope.controller+'/upload',true);
                 scope.uploading = true;
 
                 xhr.send(form);
