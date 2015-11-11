@@ -246,65 +246,136 @@ forkApp.directive('changeUrl', [ '$window', function($window){
 
 
 
-forkApp.controller('imageMenuController', [ '$timeout', '$scope', '$http', function($timeout, $scope, $http){
+forkApp.controller('imageController', [ '$timeout', '$scope', '$http', function($timeout, $scope, $http){
 
-    $scope.popup = false;
-    $scope.places = [];
-    $scope.searchValue = "";
-    $scope.image = -1;
+    $scope.show = false;
+    $scope.place= null;
 
-    $scope.isPopupAvailable = function(){
-        return $scope.popup;
-    }
-
-    $scope.showPopup = function(){
-        $scope.popup = true;
-        document.body.style.overflow = 'hidden';
-        $http.get("/place")
-            .success( function (data){
-                $scope.places = data;
-            });
-    }
-
-    $scope.closePopup = function(){
-        $scope.popup = false;
-        document.body.style.overflow = 'auto';
-    }
-
-    $scope.search = function(){
-        $http.get('/place/search', { params: { search : $scope.searchValue } } )
-            .success(function(data){
-                $scope.places = data;
-            });
-    }
-
-    $scope.link = function(index){
-
-        var sendData = { image: $scope.image };
-
-        $http.post("/place/"+$scope.places[index].id+'/link',sendData)
-            .success(function(data){
-               $scope.popup = false;
-                document.body.style.overflow = 'auto';
-            });
-
+    $scope.showPlace = function(){
+        if( $scope.place != null ){
+            return true;
+        }
+        return false;
     }
 
 
 }]);
 
+forkApp.directive('imagePlace', [ '$timeout', function($timeout){
+    return{
+        link: function(scope, element, attrs){
+            scope.place = {
+                id: attrs['placeId'],
+                name: attrs['placeName']
+            }
+        }
+    }
+}]);
+
+forkApp.directive('popup', function(){
+
+    return {
+        restrict: 'E',
+        controller: ['$scope', function($scope) {
+
+            $scope.popup = false;
+
+            /*
+             */
+
+            $scope.isPopupAvailable = function(){
+                if( $scope.show ){
+                    document.body.style.overflow = 'hidden';
+                }
+                else{
+                    document.body.style.overflow = 'auto';
+                }
+                return $scope.show;
+            }
+            $scope.closePopup = function(){
+                $scope.show = false;
+            }
+
+
+        }],
+        scope: {
+            returned: '=',
+            show: '='
+        },
+        transclude: true,
+        template: "<div ng-show='isPopupAvailable()' class='fork-popup-container ng-hide'>" +
+        "               <div class='fork-popup-shadow'></div>" +
+        "               <div ng-show='isPopupAvailable()' class='fork-popup'> " +
+        "                   <div class='row' style='height:100%;'>" +
+        "                       <div class='col-md-3 col-sm-2 col-xs-1' style='height:1px;'></div>" +
+        "                       <div class='col-md-6 col-sm-8 col-xs-10 fork-popup-content-wrapper'>" +
+        "                           <div class='fork-close-popup' ng-click='closePopup()'><span class='glyphicon glyphicon-remove'></span></div>" +
+        "                               <ng-transclude></ng-transclude>" +
+        "                           </div>" +
+        "                       <div class='col-md-3 col-sm-2 col-xs-1' style='height:1px;'></div>" +
+        "                   </div>" +
+        "               </div>"+
+        "           </div>"
+    }
+
+});
+
+
+forkApp.directive('linkController', function(){
+    return {
+        controller:['$scope', '$http', function($scope, $http){
+
+            $scope.places = [];
+            $scope.searchValue = "";
+            $scope.image = -1;
+
+            $scope.init = function(){
+                $http.get("/place")
+                    .success( function (data){
+                        $scope.places = data;
+                    });
+            }
+
+            $scope.search = function(){
+                $http.get('/place/search', { params: { search : $scope.searchValue } } )
+                    .success(function(data){
+                        $scope.places = data;
+                    });
+            }
+
+            $scope.link = function(index){
+
+                var sendData = { image: $scope.image };
+
+                $http.post("/place/"+$scope.places[index].id+'/link',sendData)
+                    .success(function(data){
+                        $scope.$parent.show = false;
+                        $scope.$parent.returned = { name: $scope.places[index].name, id: $scope.places[index].id } ;
+                        document.body.style.overflow = 'auto';
+                    });
+
+            }
+
+        }],
+        link: function(scope, element, attrs){
+            scope.image = attrs['image'];
+            scope.init();
+        }
+    }
+});
 
 forkApp.directive('placeLink', function(){
-   return{
-       link: function(scope, element){
-           if( ! scope.$last ){
-               element.css('border-bottom', 'none');
-           }
-           element.bind('click', function(){
+    return{
+        link: function(scope, element){
+            if( ! scope.$last ){
+                element.css('border-bottom', 'none');
+            }
+            element.bind('click', function(){
                 scope.$apply(function(){
                     scope.link(scope.$index);
                 });
-           });
-       }
-   }
+            });
+        }
+    }
 });
+
