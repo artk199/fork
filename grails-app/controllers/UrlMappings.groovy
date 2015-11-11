@@ -6,6 +6,17 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+
+        "/place/$id/link"(parseRequest:false){
+            controller = "place"
+            action = [POST:'linkImage']
+        }
+
+        "/place"{
+            controller = "place"
+            action = "index"
+        }
+
         "/image/$id/mini"{
             controller = "image"
             action = [GET:'getMiniImage']

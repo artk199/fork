@@ -7,3 +7,4 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 		'/place/getPlace':	  ['isAuthenticated()'],
 		'/**':                ['permitAll']
 ]
+grails.mime.use.accept.header = true

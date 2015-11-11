@@ -23,19 +23,22 @@ class ImageScaleService {
 
             int height = img.getHeight()
             int width = img.getWidth()
-
             if( height < maxLength && width < maxLength ){
                 return fileData
             }
 
             int biggerDimension = height > width ? height : width;
+
             double ratio = maxLength / biggerDimension;
+            ratio = ((double)maxLength / (double)biggerDimension);
 
             int newWidth = width*ratio
             int newHeight = height*ratio
 
             Image scaledImage = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH)
+
             BufferedImage imageBuff = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+
             imageBuff.getGraphics().drawImage(scaledImage, 0, 0, new Color(0, 0, 0), null);
 
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();

@@ -4,6 +4,7 @@ import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
+import pl.fork.file.ImageService
 
 import javax.servlet.http.HttpServletRequest
 import java.text.DateFormat
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat
 class PlaceService {
 
     def springSecurityService
+    ImageService imageService
 
     Place get(int id){
         return Place.get(id)
@@ -126,6 +128,27 @@ class PlaceService {
         }
 
         file;
+    }
+
+    ForkFile addPhotoToPlace(Place place, Map parameters){
+        if( !parameters.containsKey('image')){
+            return null
+        }
+        ForkFile image = imageService.getImage(parameters.get('image'))
+
+        if( !image ){
+            return null
+        }
+
+        if( image.place ){
+            image.place.images.remove(image)
+        }
+
+        image.place = place
+        place.addToImages(image);
+        image.save flish:true
+        place.save flush:true
+        image
     }
 
     Score getUserScore(Place place) {

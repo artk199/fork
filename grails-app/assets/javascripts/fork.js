@@ -103,8 +103,7 @@ forkApp.directive('tileImage', [ '$window', '$location', '$timeout', function($w
                 }
 
                 if( !scope.blockEvent ){
-                    var baseUrl = $location.absUrl().toString();
-                    $window.location.href = baseUrl.substring(0,baseUrl.indexOf('index')) + 'show/' + scope.id;
+                    $window.location.href = '/place/show/' + scope.id;
                 }
                 scope.blockEvent = false;
 
@@ -244,3 +243,68 @@ forkApp.directive('changeUrl', [ '$window', function($window){
         }
     }
 }]);
+
+
+
+forkApp.controller('imageMenuController', [ '$timeout', '$scope', '$http', function($timeout, $scope, $http){
+
+    $scope.popup = false;
+    $scope.places = [];
+    $scope.searchValue = "";
+    $scope.image = -1;
+
+    $scope.isPopupAvailable = function(){
+        return $scope.popup;
+    }
+
+    $scope.showPopup = function(){
+        $scope.popup = true;
+        document.body.style.overflow = 'hidden';
+        $http.get("/place")
+            .success( function (data){
+                $scope.places = data;
+            });
+    }
+
+    $scope.closePopup = function(){
+        $scope.popup = false;
+        document.body.style.overflow = 'auto';
+    }
+
+    $scope.search = function(){
+        $http.get('/place/search', { params: { search : $scope.searchValue } } )
+            .success(function(data){
+                $scope.places = data;
+            });
+    }
+
+    $scope.link = function(index){
+
+        var sendData = { image: $scope.image };
+
+        $http.post("/place/"+$scope.places[index].id+'/link',sendData)
+            .success(function(data){
+               $scope.popup = false;
+                document.body.style.overflow = 'auto';
+            });
+
+    }
+
+
+}]);
+
+
+forkApp.directive('placeLink', function(){
+   return{
+       link: function(scope, element){
+           if( ! scope.$last ){
+               element.css('border-bottom', 'none');
+           }
+           element.bind('click', function(){
+                scope.$apply(function(){
+                    scope.link(scope.$index);
+                });
+           });
+       }
+   }
+});
