@@ -21,14 +21,13 @@
                 </g:hasErrors>
                 <g:form action="save" class="form-horizontal">
                     <fieldset class="form">
-
                         <div class="form-group">
                             <label for="name" class="col-sm-4 control-label">
-                    <g:message code="place.name" />
-                    </label>
-                    <div class="col-sm-8">
-                        <input class="form-control" name="name" id="name" value="${place.name}"/>
-                    </div>
+                                <g:message code="place.name" />
+                            </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="name" id="name" value="${place.name}"/>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -40,7 +39,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <label for="town" class="col-sm-4 control-label">
                             <g:message code="place.town" />
@@ -49,6 +47,7 @@
                             <input class="form-control" name="town" id="town" value="${place.town}"/>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="address" class="col-sm-4 control-label">
                             <g:message code="place.address" />
@@ -57,6 +56,7 @@
                             <input class="form-control" name="address" id="address" value="${place.address}"/>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="email" class="col-sm-4 control-label">
                             <g:message code="place.email" />
