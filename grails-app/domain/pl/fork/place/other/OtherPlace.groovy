@@ -7,7 +7,7 @@ class OtherPlace extends Place{
     static constraints = {
     }
 
-    static hasMany = [pricings: Pricing, hours:OpenHours]
+    static hasMany = [hours:OpenHours]
 
     boolean entranceFee
 
