@@ -42,7 +42,10 @@
                 </div>
                 <div class="panel-body">
                     <p style="margin-left:10px;">
-                        <strong><g:message code="pricing.place"/></strong>
+                        <strong>
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            <g:message code="pricing.place"/>
+                        </strong>
                         <a href="/place/show/${pricing.place.id}">
                             ${pricing.place.name}
                         </a>
@@ -55,14 +58,26 @@
 
                 <g:if test="${pricing.elements.size() > 0}">
                     <!-- SHOW ELEMENTS FOR THIS PRICING !-->
-                    <table class="table table-striped">
+                    <table class="table table-striped sortable">
                         <caption><g:message code="place.show.pricing.elements"/></caption>
                         <thead>
                         <tr>
-                            <th class='col-md-4 col-sm-4 col-xs-4'><g:message code="pricing.element.name"/></th>
-                            <th class='col-md-5 col-sm-5 col-xs-5'><g:message code="pricing.element.description"/></th>
-                            <th class='col-md-1 col-sm-1 col-xs-1'><g:message code="pricing.element.price"/></th>
-                            <th class='col-md-2 col-sm-2 col-xs-21'><g:message code="pricing.options"/></th>
+                            <th class='col-md-4 col-sm-4 col-xs-4' data-defaultsort="asc" data-firstsort="desc">
+                                <span class="glyphicon glyphicon-th-large"></span>
+                                <g:message code="pricing.element.name"/>
+                            </th>
+                            <th class='col-md-4 col-sm-4 col-xs-4'>
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <g:message code="pricing.element.description"/>
+                            </th>
+                            <th class='col-md-1 col-sm-1 col-xs-1'>
+                                <span class="glyphicon glyphicon-euro pull-left"></span>
+                                <g:message code="pricing.element.price"/>
+                            </th>
+                            <th class='col-md-2 col-sm-2 col-xs-2' data-defaultsort='disabled'>
+                                <span class="glyphicon glyphicon-wrench"></span>
+                                <g:message code="pricing.options"/>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>

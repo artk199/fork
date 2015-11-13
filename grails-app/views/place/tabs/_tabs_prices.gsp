@@ -30,16 +30,24 @@
                             <p>${pricing.description}</p>
                         </div>
                     </div>
-
                     <g:if test="${pricing.elements.size() > 0}">
                         <!-- SHOW ELEMENTS FOR THIS PRICING !-->
-                        <table class="table table-striped">
+                        <table class="table table-striped sortable">
                             <caption><g:message code="place.show.pricing.elements"/></caption>
                             <thead>
                                 <tr>
-                                    <th class='col-md-4 col-sm-4 col-xs-4'><g:message code="place.show.pricing.elements.name"/></th>
-                                    <th class='col-md-6 col-sm-6 col-xs-6'><g:message code="place.show.pricing.elements.description"/></th>
-                                    <th class='col-md-2 col-sm-2 col-xs-2'><g:message code="place.show.pricing.elements.price"/></th>
+                                    <th class='col-md-4 col-sm-4 col-xs-4' data-defaultsort="asc" data-firstsort="desc">
+                                        <span class="glyphicon glyphicon-th-large"></span>
+                                        <g:message code="place.show.pricing.elements.name"/>
+                                    </th>
+                                    <th class='col-md-6 col-sm-6 col-xs-6'>
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                        <g:message code="place.show.pricing.elements.description"/>
+                                    </th>
+                                    <th class='col-md-2 col-sm-2 col-xs-2'>
+                                        <span class="glyphicon glyphicon-euro"></span>
+                                        <g:message code="place.show.pricing.elements.price"/>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -17,8 +17,10 @@ class PricedElementController {
         respond pricedElement
     }
 
-    def create() {
-        respond new PricedElement(params)
+    def create(Pricing pricing) {
+        PricedElement element = new PricedElement(params)
+        element.pricing = pricing
+        respond element
     }
 
     @Transactional

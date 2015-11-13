@@ -1,5 +1,7 @@
 package pl.fork.place.other
 
+import pl.fork.place.Place
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -17,8 +19,10 @@ class PricingController {
         respond pricing
     }
 
-    def create() {
-        respond new Pricing(params)
+    def create(Place place) {
+        Pricing pricing = new Pricing(params);
+        pricing.place = place;
+        respond pricing
     }
 
     @Transactional

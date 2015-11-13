@@ -18,13 +18,25 @@
                 </p>
             </g:if>
             <g:else>
-                <table class="table table-striped text-left">
+                <table class="table table-striped text-left sortable">
                     <thead>
                     <tr>
-                        <th class='col-md-3 col-sm-3 col-xs-3'><g:message code="pricing.element.name"/></th>
-                        <th class='col-md-5 col-sm-5 col-xs-5'><g:message code="pricing.element.description"/></th>
-                        <th class='col-md-2 col-sm-2 col-xs-2'><g:message code="pricing.element.price"/></th>
-                        <th class='col-md-2 col-sm-2 col-xs-2'><g:message code="pricing.element.menu"/></th>
+                        <th class='col-md-3 col-sm-3 col-xs-3' data-defaultsort="asc" data-firstsort="desc">
+                            <span class="glyphicon glyphicon-th-large"></span>
+                            <g:message code="pricing.element.name"/>
+                        </th>
+                        <th class='col-md-5 col-sm-5 col-xs-5'>
+                            <span class="glyphicon glyphicon-comment"></span>
+                            <g:message code="pricing.element.description"/>
+                        </th>
+                        <th class='col-md-2 col-sm-2 col-xs-2'>
+                            <span class="glyphicon glyphicon-euro"></span>
+                            <g:message code="pricing.element.price"/>
+                        </th>
+                        <th class='col-md-2 col-sm-2 col-xs-2'>
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            <g:message code="pricing.element.menu"/>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>

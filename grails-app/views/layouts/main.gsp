@@ -9,6 +9,7 @@
         <asset:stylesheet src="bootstrap.min.css"/>
         <asset:stylesheet src="foundation-icons.css"/>
         <asset:stylesheet src="bootstrap-theme.min.css"/>
+        <asset:stylesheet src="bootstrap-sortable.css"/>
         <asset:stylesheet src="jquery.datetimepicker.css"/>
 
         <asset:javascript src="application.js"/>
@@ -25,6 +26,9 @@
             <g:layoutBody/>
             <g:render template="/layouts/footer"/>
         </div>
+        <!-- Sorting bootstrap's tables mechanics !-->
+        <asset:javascript src="jquery-2.1.3.js"/>
+        <asset:javascript src="bootstrap-sortable.js"/>
 
         <asset:javascript src="bootstrap.min.js"/>
         <asset:javascript src="angular.js"/>
