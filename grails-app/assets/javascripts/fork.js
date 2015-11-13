@@ -103,7 +103,8 @@ forkApp.directive('tileImage', [ '$window', '$location', '$timeout', function($w
                 }
 
                 if( !scope.blockEvent ){
-                    $window.location.href = '/place/show/' + scope.id;
+                    var baseUrl = $location.absUrl().toString();
+                    $window.location.href = baseUrl.replace('/index','') + '/show/' + scope.id;
                 }
                 scope.blockEvent = false;
 
@@ -184,8 +185,7 @@ forkApp.directive('filterDate', function(){
        link: function (scope, element){
            element.datetimepicker({
                timepicker:false,
-               format:'Y/m/d',
-               maxDate:'0'
+               format:'Y/m/d'
            });
        }
    }
