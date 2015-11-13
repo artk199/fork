@@ -51,12 +51,10 @@
 
                 <div class="pull-right">
                     <div class="fork-image-edit-buttons">
-                        <div><span class="glyphicon glyphicon-trash"></span> <g:message code="image.delete"/></div>
+                        <div ng-click="deleteImage('/image/${image.id}')"><span class="glyphicon glyphicon-trash"></span> <g:message code="image.delete"/></div>
                         <div ng-click="show = true">
                             <span ng-hide="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link"/> </span>
                             <span ng-show="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link.change"/></span>
-
-
                         </div>
                     </div>
                     <div class="fork-image-edit-buttons-group" ng-controller="visibilityController">

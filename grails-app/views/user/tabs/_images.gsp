@@ -4,19 +4,20 @@
                <img full-image ng-if="isSelected()" ng-src="{{getSelectedUrl()}}"/>
            </div>
            <div class='col-md-12 fork-image-info' ng-show='isSelected()'>
+               <sec:ifLoggedIn>
                <div class='pull-right fork-cog'>
                    <span toggle-dropdown class='glyphicon glyphicon-cog'></span>
-                   <div ng-show='showDropdown()'>
-                       <g:if test="${g.currentUserID().toLong() == user.id }">
-                            <div><a ng-href='/image/{{images[selectedImage]}}/link'><g:message code="image.link"/></a></div>
-                            <div edit-image><a><g:message code="image.edit"/></a></div>
-                            <div delete-image><a><g:message code="image.delete"/></a></div>
-                       </g:if>
-                       <g:else>
-                           <div><a ng-href='/image/{{images[selectedImage]}}/report'><g:message code="image.report"/></a></div>
-                       </g:else>
-                   </div>
+                       <div ng-show='showDropdown()'>
+                           <g:if test="${g.currentUserID().toLong() == user.id }">
+                                <div edit-image><a><g:message code="image.edit"/></a></div>
+                                <div delete-image><a><g:message code="image.delete"/></a></div>
+                           </g:if>
+                           <g:else>
+                               <div><a ng-href='/image/{{images[selectedImage]}}/report'><g:message code="image.report"/></a></div>
+                           </g:else>
+                       </div>
                </div>
+               </sec:ifLoggedIn>
                <div style='text-align: left; margin-bottom:20px;margin-top:10px;'>
                    <h2 style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 41px;font-weight: bold; font-style: italic;">
                    &bdquo;{{title != null ? title : 'No title'}}&rdquo;

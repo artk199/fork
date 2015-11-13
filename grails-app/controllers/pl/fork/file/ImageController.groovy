@@ -28,8 +28,17 @@ class ImageController {
     }
 
     def deleteImage(int id){
+        String accepts = request.getHeader('accept')
+        ForkFile image = imageService.getImage(id)
+        int owner = image.owner.id
         imageService.delete(id)
-        render status:204
+        println accepts
+        if( accepts.contains('html')) {
+            render '/user/show/'+owner
+        }
+        else{
+            render status: 204
+        }
     }
 
     def editImage(int id){

@@ -246,7 +246,7 @@ forkApp.directive('changeUrl', [ '$window', function($window){
 
 
 
-forkApp.controller('imageController', [ '$timeout', '$scope', '$http', function($timeout, $scope, $http){
+forkApp.controller('imageController', [ '$timeout', '$scope', '$http', '$window', function($timeout, $scope, $http, $window){
 
     $scope.show = false;
     $scope.place= null;
@@ -259,6 +259,12 @@ forkApp.controller('imageController', [ '$timeout', '$scope', '$http', function(
     }
 
 
+    $scope.deleteImage = function(url){
+        $http.delete(url, { headers : { 'Accept':'text/html'}})
+            .success( function (data){
+               $window.location.href = data
+            });
+    }
 }]);
 
 forkApp.directive('imagePlace', [ '$timeout', function($timeout){
