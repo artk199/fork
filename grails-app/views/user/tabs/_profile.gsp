@@ -2,6 +2,9 @@
     <div class="col-md-12" style="margin:20px; position: relative;padding-right: 50px;width:100%;">
         <div class='hidden-xs' style="vertical-align:top; width:200px;float:left;">
             <div style="width:200px; height:200px; background-color: #00dd1c">
+                <g:if test="${this.user.profilePicture}">
+                    <img src="/image/${this.user.profilePicture.id}" width="200px" height="200px" />
+                </g:if>
             </div>
             <div style="width:200px; height:100%;background-color:sandybrown">
                 <div style="height:30px;width:100%;line-height: 30px;">Edytuj informacje </div>

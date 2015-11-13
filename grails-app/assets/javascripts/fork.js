@@ -250,6 +250,7 @@ forkApp.controller('imageController', [ '$timeout', '$scope', '$http', '$window'
 
     $scope.show = false;
     $scope.place= null;
+    $scope.isProfile = false;
 
     $scope.showPlace = function(){
         if( $scope.place != null ){
@@ -265,6 +266,14 @@ forkApp.controller('imageController', [ '$timeout', '$scope', '$http', '$window'
                $window.location.href = data
             });
     }
+    $scope.setProfile = function(url){
+        if( !$scope.isProfile )
+        $http.post(url)
+            .success( function (data){
+                $scope.isProfile = true;
+            });
+    }
+
 }]);
 
 forkApp.directive('imagePlace', [ '$timeout', function($timeout){

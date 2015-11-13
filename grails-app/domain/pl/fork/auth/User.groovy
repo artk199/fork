@@ -8,6 +8,7 @@ class User implements Serializable {
 
 	transient springSecurityService
 
+	List images
 	static hasMany = [images: ForkFile]
 
 	String username
@@ -19,6 +20,8 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+
+	ForkFile profilePicture
 
 	User(){
 
@@ -69,6 +72,7 @@ class User implements Serializable {
 		username blank: false, unique: true, size: 3..25
 		password size: 5..64, blank: false
 		email email: true, blank: false, unique: true
+		profilePicture nullable: true
 	}
 
 	static mapping = {

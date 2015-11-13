@@ -76,7 +76,8 @@ class BootStrap {
         JSON.registerObjectMarshaller( User ) { User user ->
             return [
                     username : user.username,
-                    id : user.id
+                    id : user.id,
+                    profilePicture : user.profilePicture ? user.profilePicture.id : null
             ]
         }
 

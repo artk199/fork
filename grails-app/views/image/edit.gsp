@@ -14,7 +14,7 @@
         </div>
         <div class="row">
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
-            <div ng-controller="imageController" ng-init="image=${image.id}" class='col-md-8 col-sm-10 col-xs-12 fork-image-info' style="min-height:250px;">
+            <div ng-controller="imageController" ng-init="image=${image.id}; isProfile=${image.owner.profilePicture == image}" class='col-md-8 col-sm-10 col-xs-12 fork-image-info' style="min-height:250px;">
 
                 <g:if test="${image.place != null }">
                     <image-place place-name="${image.place.name}" place-id="${image.place.id}"></image-place>
@@ -52,6 +52,7 @@
                 <div class="pull-right">
                     <div class="fork-image-edit-buttons">
                         <div ng-click="deleteImage('/image/${image.id}')"><span class="glyphicon glyphicon-trash"></span> <g:message code="image.delete"/></div>
+                        <div ng-class="{'active' : isProfile}" ng-click="setProfile('/user/${image.owner.id}/image/${image.id}')"><span class="glyphicon glyphicon glyphicon-pushpin"></span> <g:message code="image.set.profile"/></div>
                         <div ng-click="show = true">
                             <span ng-hide="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link"/> </span>
                             <span ng-show="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link.change"/></span>

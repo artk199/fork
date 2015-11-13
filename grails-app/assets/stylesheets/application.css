@@ -736,9 +736,17 @@ iframe{
     margin-bottom: 5px;
 }
 
+.fork-image-edit-buttons > div.active{
+    background: #96a682;
+}
+
 .fork-image-edit-buttons > div:hover  {
     cursor:pointer;
     background: #96a682;
+}
+
+.fork-image-edit-buttons > div.active:hover{
+    cursor:default;
 }
 
 .fork-image-edit-buttons-group{

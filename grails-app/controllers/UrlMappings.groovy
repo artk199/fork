@@ -51,7 +51,7 @@ class UrlMappings {
         }
         "/user/$userID/image/$imageID"{
             controller = "user"
-            action = [GET:'getImage']
+            action = [GET:'getImage',POST:'setProfile']
         }
         "/user/$userID/image"{
             controller = "user"

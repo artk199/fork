@@ -115,4 +115,18 @@ class UserController {
         render ids as JSON
     }
 
+    def setProfile(int userID, int imageID){
+        User user = User.findById(userID)
+        if( !user ){
+            response.status = 404
+        }
+        user.profilePicture = user.images.find{ it.id == imageID }
+        user.save flush:true
+        user.validate()
+        if( user.hasErrors() ){
+            response.status = 404
+        }
+        render "OK"
+    }
+
 }
