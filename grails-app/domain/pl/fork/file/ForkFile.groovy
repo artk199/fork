@@ -15,6 +15,7 @@ class ForkFile {
     }
 
     static belongsTo = [place:Place]
+    static transients = ['isProfile']
 
     byte[] source
     byte[] mini
@@ -23,4 +24,12 @@ class ForkFile {
     String description
     User owner
     FileStatus status = FileStatus.PENDING;
+
+    boolean isProfile(){
+        if( owner.profilePicture.id == this.id ){
+            return true
+        }
+        return false
+    }
+
 }

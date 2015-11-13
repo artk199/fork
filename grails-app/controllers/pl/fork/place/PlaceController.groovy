@@ -140,7 +140,7 @@ class PlaceController {
 
         List foundPlaces = placeService.search(params['search'])
 
-        render view:'/place/index_2', model:[places:foundPlaces]
+        render view:'/place/index', model:[places:foundPlaces, placeCount: Place.count()]
     }
 
     def getScores(Long id){

@@ -50,6 +50,13 @@ forkApp.controller('ScoreController', ['$scope', '$location', '$http', function(
         return new Array(score);
     }
 
+    $scope.getPicture = function(score){
+        if ( score.owner.profilePicture != null ){
+            return "/image/" + score.owner.profilePicture;
+        }
+        return "http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg";
+    }
+
 }]);
 
 forkApp.directive('star', function(){

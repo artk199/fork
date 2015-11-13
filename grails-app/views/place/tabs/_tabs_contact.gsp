@@ -39,7 +39,7 @@
 
         </g:if>
         <g:else>
-            <p><g:message code="place.show.contact.noOwner" args="['/']"/></p>
+            <p>${g.message(code:"place.show.contact.noOwner", args:["/place/registerOwner/"+this.place.id])}</p>
         </g:else>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
