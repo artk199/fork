@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 
 import pl.fork.activity.LoginActivity;
 import pl.fork.activity.PlaceDetailsActivity;
 import pl.fork.adapters.PlaceListAdapter;
-import pl.fork.place.entity.Place;
+import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-11-01.

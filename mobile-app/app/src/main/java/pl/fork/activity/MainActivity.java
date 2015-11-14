@@ -11,21 +11,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import and.fork.pl.fork.R;
+import pl.fork.LocationService;
+import pl.fork.fork.R;
 import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.listeners.PlaceListClickListener;
-import pl.fork.activity.LoginActivity;
-import pl.fork.place.entity.Place;
+import pl.fork.entity.Place;
 import pl.fork.web.LoadPlacesTask;
 
 public class MainActivity extends AppCompatActivity {
@@ -88,31 +86,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void refreshPlaces(){
-        locationListener = new ForkLocationListener();
-        try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
-            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Location locationNet = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-            if(locationGPS != null)
-                Log.d("CURRENT GPS LOCATION",locationGPS.toString());
-            else
-                Log.d("CURRENT GPS LOCATION","null");
-            if(locationNet != null)
-                Log.d("CURRENT NET LOCATION",locationNet.toString());
-            else
-                Log.d("CURRENT NET LOCATION","null");
+        LocationService locationService = new LocationService(getApplicationContext());
+        Location location = locationService.getLocation();
 
-            if(locationNet!=null) {
-                TextView latitudeValue = (TextView) findViewById(R.id.lat_value);
-                latitudeValue.setText(Double.toString(locationNet.getLatitude()));
+        if(location != null) {
+            TextView latitudeValue = (TextView) findViewById(R.id.lat_value);
+            latitudeValue.setText(Double.toString(location.getLatitude()));
 
-                TextView longitudeValue = (TextView) findViewById(R.id.lon_value);
-                longitudeValue.setText(Double.toString(locationNet.getLongitude()));
-            }
-        } catch (SecurityException e) {
-            Log.e("PERMISSION_EXCEPTION","PERMISSION_NOT_GRANTED");
-        } catch (Exception e){}
+            TextView longitudeValue = (TextView) findViewById(R.id.lon_value);
+            longitudeValue.setText(Double.toString(location.getLongitude()));
+        }
 
         System.out.println("Hello world2");
 
@@ -128,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             placesListView.setOnItemClickListener(new PlaceListClickListener(this,adapter));
         }
 
-        new LoadPlacesTask().execute(adapter);
+        new LoadPlacesTask(adapter).execute();
     }
 
     private class ForkLocationListener implements LocationListener {
