@@ -27,9 +27,9 @@ class PlaceService {
 
     List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore) {
 
-        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
-        String minDate = "1000/01/01 00:00";
-        String maxDate = "3000/12/31 23:59"
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+        String minDate = "1000/01/01";
+        String maxDate = "3000/12/31"
 
         Date dateAfter = timeAfter != null && !"".equals(timeAfter) ? format.parse(timeAfter) : format.parse(minDate);
         Date dateBefore = timeBefore != null && !"".equals(timeBefore) ? format.parse(timeBefore) : format.parse(maxDate);
