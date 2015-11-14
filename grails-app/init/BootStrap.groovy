@@ -4,6 +4,9 @@ import pl.fork.auth.UserService
 import pl.fork.place.Place
 import grails.converters.JSON
 import pl.fork.place.Score
+import pl.fork.place.other.PricedElement
+import pl.fork.place.other.Pricing
+import pl.fork.place.PlaceType
 
 class BootStrap {
 
@@ -90,6 +93,93 @@ class BootStrap {
             ]
         }
 
+        //dagrasso.addToPricing(pricing);
+        //dagrasso.save();
+        /*
+              // Dodanie kilku menu do atrakcji
+
+        Place dagrasso = new Place()
+        dagrasso.with{
+            name = "Da Grasso"
+            description = "Opis da Grasso"
+        }
+
+        dagrasso.pricing = new HashSet<Pricing>();
+        dagrasso.types = new HashSet<PlaceType>();
+
+        Pricing pricing = new Pricing();
+        pricing.elements = new HashSet<PricedElement>();
+
+        pricing.with{
+            title = "Pizze tradycyjne"
+            description = "Do każdej pizzy dorzucane są dwa sosy (czosnkowy i pomidorowy) GRATIS."
+        }
+
+        PricedElement element = new PricedElement();
+        element.with {
+            name = "MARGHERITA"
+            description = "ser, sos pomidorowy, oregano"
+            price = 19
+        }
+        pricing.elements.add(element);
+
+        element = new PricedElement();
+        element.with {
+            name = "CAPRICIOSA"
+            description = "ser, sos pomidorowy, szynka, pieczarki, oregano"
+            price = 21
+        }
+        pricing.elements.add(element);
+
+        element = new PricedElement();
+        element.with {
+            name = "CALIFFO"
+            description = "ser, sos pomidorowy, szynka, kabanosy, papryka konserwowa, oliwki zielone, oregano"
+            price = 31
+        }
+        pricing.elements.add(element);
+
+        dagrasso.pricing.add(pricing);
+
+        pricing = new Pricing();
+        pricing.elements = new HashSet<PricedElement>();
+
+        pricing.with{
+            title = "Pizze dla juniora"
+            description = "Tutaj są pozycje dla najmłodszych."
+        }
+
+        element = new PricedElement();
+        element.with {
+            name = "HAVAI JUNIOR + CAPPY 0,33L"
+            description = "ser, sos pomidorowy, szynka, ananasy, oregano"
+            price = 15
+        }
+        pricing.elements.add(element);
+
+        dagrasso.pricing.add(pricing);
+
+        // Dodanie kilku typów dla atrakcji
+        PlaceType type = new PlaceType();
+
+        type.with{
+            tag = "Restauracje"
+            description = "Opis"
+        }
+
+        dagrasso.types.add(type);
+
+        type = new PlaceType();
+
+        type.with{
+            tag = "Hotele"
+            description = "Opis"
+        }
+
+        dagrasso.types.add(type);
+
+        dagrasso.save(flush:true)
+         */
         println "Deployed."
     }
     def destroy = {
