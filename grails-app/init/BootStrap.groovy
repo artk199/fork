@@ -64,6 +64,89 @@ class BootStrap {
         fontanna.save(flush:true)
         artus.save(flush:true)
 
+        // Dodanie kilku menu do atrakcji
+        Place dagrasso = new Place()
+        dagrasso.with{
+            name = "Da Grasso"
+            description = "Opis da Grasso"
+        }
+        dagrasso.save(flush:true)
+
+        // MENU 1
+        Pricing pricing = new Pricing();
+        pricing.with{
+            title = "Pizze tradycyjne"
+            description = "Do każdej pizzy dorzucane są dwa sosy (czosnkowy i pomidorowy) GRATIS."
+        }
+        pricing.save(flush:true)
+
+        PricedElement element = new PricedElement();
+        element.with {
+            name = "MARGHERITA"
+            description = "ser, sos pomidorowy, oregano"
+            price = 19
+        }
+        element.save(flush:true)
+        pricing.addToElements(element);
+
+        element = new PricedElement();
+        element.with {
+            name = "CAPRICIOSA"
+            description = "ser, sos pomidorowy, szynka, pieczarki, oregano"
+            price = 21
+        }
+        element.save(flush:true)
+        pricing.addToElements(element);
+
+        element = new PricedElement();
+        element.with {
+            name = "CALIFFO"
+            description = "ser, sos pomidorowy, szynka, kabanosy, papryka konserwowa, oliwki zielone, oregano"
+            price = 31
+        }
+        element.save(flush:true)
+        pricing.addToElements(element);
+
+        dagrasso.addToPricing(pricing)
+
+        // MENU 2
+        pricing = new Pricing();
+        pricing.with{
+            title = "Pizze dla juniora"
+            description = "Tutaj są pozycje dla najmłodszych."
+        }
+        pricing.save(flush:true)
+
+        element = new PricedElement();
+        element.with {
+            name = "HAVAI JUNIOR + CAPPY 0,33L"
+            description = "ser, sos pomidorowy, szynka, ananasy, oregano"
+            price = 15
+        }
+        element.save(flush:true)
+        pricing.addToElements(element);
+
+        dagrasso.addToPricing(pricing);
+
+        // Dodanie kilku typów dla atrakcji
+        PlaceType type = new PlaceType();
+        type.with{
+            tag = "Restauracje"
+            description = "Opis"
+        }
+        type.save(flush:true)
+
+        dagrasso.addToTypes(type);
+
+        type = new PlaceType();
+        type.with{
+            tag = "Hotele"
+            description = "Opis"
+        }
+        type.save(flush:true)
+
+        dagrasso.addToTypes(type);
+
         JSON.registerObjectMarshaller( Score ) { Score score ->
             return [
                     owner : score.owner,
@@ -93,93 +176,6 @@ class BootStrap {
             ]
         }
 
-        //dagrasso.addToPricing(pricing);
-        //dagrasso.save();
-        /*
-              // Dodanie kilku menu do atrakcji
-
-        Place dagrasso = new Place()
-        dagrasso.with{
-            name = "Da Grasso"
-            description = "Opis da Grasso"
-        }
-
-        dagrasso.pricing = new HashSet<Pricing>();
-        dagrasso.types = new HashSet<PlaceType>();
-
-        Pricing pricing = new Pricing();
-        pricing.elements = new HashSet<PricedElement>();
-
-        pricing.with{
-            title = "Pizze tradycyjne"
-            description = "Do każdej pizzy dorzucane są dwa sosy (czosnkowy i pomidorowy) GRATIS."
-        }
-
-        PricedElement element = new PricedElement();
-        element.with {
-            name = "MARGHERITA"
-            description = "ser, sos pomidorowy, oregano"
-            price = 19
-        }
-        pricing.elements.add(element);
-
-        element = new PricedElement();
-        element.with {
-            name = "CAPRICIOSA"
-            description = "ser, sos pomidorowy, szynka, pieczarki, oregano"
-            price = 21
-        }
-        pricing.elements.add(element);
-
-        element = new PricedElement();
-        element.with {
-            name = "CALIFFO"
-            description = "ser, sos pomidorowy, szynka, kabanosy, papryka konserwowa, oliwki zielone, oregano"
-            price = 31
-        }
-        pricing.elements.add(element);
-
-        dagrasso.pricing.add(pricing);
-
-        pricing = new Pricing();
-        pricing.elements = new HashSet<PricedElement>();
-
-        pricing.with{
-            title = "Pizze dla juniora"
-            description = "Tutaj są pozycje dla najmłodszych."
-        }
-
-        element = new PricedElement();
-        element.with {
-            name = "HAVAI JUNIOR + CAPPY 0,33L"
-            description = "ser, sos pomidorowy, szynka, ananasy, oregano"
-            price = 15
-        }
-        pricing.elements.add(element);
-
-        dagrasso.pricing.add(pricing);
-
-        // Dodanie kilku typów dla atrakcji
-        PlaceType type = new PlaceType();
-
-        type.with{
-            tag = "Restauracje"
-            description = "Opis"
-        }
-
-        dagrasso.types.add(type);
-
-        type = new PlaceType();
-
-        type.with{
-            tag = "Hotele"
-            description = "Opis"
-        }
-
-        dagrasso.types.add(type);
-
-        dagrasso.save(flush:true)
-         */
         println "Deployed."
     }
     def destroy = {
