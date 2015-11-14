@@ -11,6 +11,7 @@
 *= require mobile
 *= require_self
 *= require popup.css
+*= require profile.css
 */
 
 body{
@@ -305,11 +306,6 @@ a.btn-orange:active{
 
 .fork-tile-image-container:hover{
     opacity: 0.8;
-}
-
-.fork-tile-image-container > img{
-    width:100%;
-    height:100%;
 }
 
 .fork-tile-image-container > div:nth-child(2){
