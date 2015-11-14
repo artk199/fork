@@ -1,4 +1,6 @@
 //= require_self
+//= require profile/profile.controller.js
+//= require profile/profile.directives.js
 //= require gallery/gallery.controller.js
 //= require gallery/gallery.directives.js
 //= require edit/edit.controller.js
@@ -6,7 +8,7 @@
 
 var forkApp = angular.module('forkApp', ['ngAnimate']);
 
-forkApp.directive('tileImage', [ '$window', '$location', '$timeout', function($window, $location, $timeout){
+forkApp.directive('tileImage', [ '$window', '$location', '$timeout', '$http', function($window, $location, $timeout, $http){
     return {
         restrict: 'E',
         scope: {
@@ -18,6 +20,8 @@ forkApp.directive('tileImage', [ '$window', '$location', '$timeout', function($w
             $scope.top = 0;
             $scope.left = 0;
             $scope.blockEvent = false;
+            $scope.images = [];
+            $scope.loaded = false;
 
             $scope.getTop = function(){
                 return $scope.top + 'px';
@@ -50,6 +54,19 @@ forkApp.directive('tileImage', [ '$window', '$location', '$timeout', function($w
                 }
             }
 
+            $scope.requestImages = function(){
+                $http.get('/place/' + $scope.id + '/image')
+                    .success(function (data) {
+                        if( data.length == 0 ){
+                            $scope.images.push("http://www.parentcenterhub.org/wp-content/uploads/2014/03/No-Image-.jpg");
+                        }
+                        angular.forEach( data, function( image){
+                            $scope.images.push('/image/'+image+'/mini');
+                        });
+                        $scope.loaded = true;
+                    });
+            }
+
             $scope.showOverlay = function(){
                 if($scope.overlay && $scope.images.length > 1 ) {
                     return true;
@@ -57,18 +74,11 @@ forkApp.directive('tileImage', [ '$window', '$location', '$timeout', function($w
                 return false;
             }
 
-            $scope.images = ['http://www.demilked.com/magazine/wp-content/uploads/2014/03/zoomed-out-landmarks-2-1.jpg', 'http://theclassytraveler.com/wp-content/uploads/2013/01/Paris-France-Landmarks-Arc-De-Triomphe-1.jpg' , 'http://designlike.com/wp-content/uploads/2011/12/Giza-Pyramids1-600x450.jpg']
-
         }],
         link: function (scope, element) {
             /*var top = element[0].getBoundingClientRect().top; var left = element[0].getBoundingClientRect().left; var doc = element[0].ownerDocument; var offY = $window.pageYOffset; var offX = $window.pageXOffset; var cTop = doc.documentElement.clientTop; var cLeft = doc.documentElement.clientLeft;*/
 
-            $timeout( function(){
-                scope.$apply(function(){
-                    scope.top = element.offset().top - $(window).scrollTop();
-                    scope.left = element.offset().left;
-                });
-            });
+            scope.requestImages();
 
             $(window).bind("scroll", function(){
                 scope.$apply(function(){
@@ -110,9 +120,20 @@ forkApp.directive('tileImage', [ '$window', '$location', '$timeout', function($w
 
             });
 
+            scope.$watch( function(){ return scope.loaded; }, function(isLoaded){
+                if( isLoaded ) {
+                    $timeout(function () {
+                        scope.$apply(function () {
+                            scope.top = element.offset().top - $(window).scrollTop();
+                            scope.left = element.offset().left;
+                        });
+                    });
+                }
+            });
+
         },
         template:"<div class='fork-tile-image-container'>" +
-        "           <img class='fork-tile-image' data-ng-src='{{images[currentPicture]}}'>" +
+        "           <img class='fork-tile-image' data-ng-src='{{images[currentPicture]}}' width='175px' height='175px'>" +
         "           <div ng-show='showOverlay()' ng-style='{top: getTop(), left: getLeft(1)}' tile-image-left></div> " +
         "           <div ng-show='showOverlay()' ng-style='{top: getTop(), left: getLeft(2) }' tile-image-right></div>" +
         "         </div>"

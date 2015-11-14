@@ -1,24 +1,24 @@
 <div class="row">
     <ul class="nav nav-tabs profile-tabs">
        <li class="active"><a data-toggle="tab" href="#profile">
-           <i class="fi-home"></i>
-           <span class="title"><g:message code="user.show.profile"/></span>
+           <span class="glyphicon glyphicon-home"></span>
+           <span class="hidden-xs title"><g:message code="user.show.profile"/></span>
        </a></li>
        <li><a data-toggle="tab" href="#images">
            <span class="glyphicon glyphicon-picture"></span>
-           <span class="title"><g:message code="user.show.images"/></span>
+           <span class=" hidden-xs title"><g:message code="user.show.images"/></span>
        </a></li>
        <li><a data-toggle="tab" href="#friends">
            <i class="fi-address-book"></i>
-           <span class="title"><g:message code="user.show.friends"/></span>
+           <span class="hidden-xs title"><g:message code="user.show.friends"/></span>
        </a></li>
        <li><a data-toggle="tab" href="#visited">
            <i class="fi-map icon-small"></i>
-           <span class="title"><g:message code="user.show.visited"/></span>
+           <span class="hidden-xs title"><g:message code="user.show.visited"/></span>
        </a></li>
        <li><a data-toggle="tab" href="#events">
            <i class="fi-web"></i>
-           <span class="title"><g:message code="user.show.events"/></span>
+           <span class="hidden-xs title"><g:message code="user.show.events"/></span>
        </a></li>
     </ul>
 

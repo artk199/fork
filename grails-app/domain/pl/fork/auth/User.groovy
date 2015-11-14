@@ -1,6 +1,7 @@
 package pl.fork.auth
 
 import pl.fork.file.ForkFile
+import pl.fork.place.Score
 
 class User implements Serializable {
 
@@ -9,7 +10,7 @@ class User implements Serializable {
 	transient springSecurityService
 
 	List images
-	static hasMany = [images: ForkFile]
+	static hasMany = [images: ForkFile, scores: Score]
 
 	String username
 	String password

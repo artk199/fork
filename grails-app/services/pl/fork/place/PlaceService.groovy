@@ -9,6 +9,7 @@ import pl.fork.file.ImageService
 import javax.servlet.http.HttpServletRequest
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import pl.fork.place.PlaceType
 
 @Transactional
 class PlaceService {
@@ -24,7 +25,7 @@ class PlaceService {
         return Place.get(id)
     }
 
-    List<Place> filter(String name, String town, String timeAfter, String timeBefore) {
+    List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore) {
 
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
         String minDate = "1000/01/01 00:00";
@@ -49,8 +50,18 @@ class PlaceService {
             if(town != null && !"".equals(town)) {
                 ilike("town", "%"+town+"%")
             }
+
+            if(placeTypes != null && placeTypes.size() > 0){
+                or {
+                    placeTypes.each { str ->
+                        types{
+                            idEq(str.toLong())
+                        }
+                    }
+                }
+            }
         }
-        return places;
+        return places.unique();
     }
 
     Place save(Place place) {

@@ -56,7 +56,6 @@
                     <div class="col-md-2 col-sm-3 col-xs-3" style="height: 125px;">
                         <div class="pull-left">
                                 <a ng-href="/user/show/{{score.owner.id}}">
-                                    <%--<img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" style="width:75px;height:75px"/>--%>
                                     <img ng-src="{{ getPicture(score) }}" width="75px" height="75px"/>
                                     <div style="text-aling:left" ng-app>
                                         {{ score.owner.username }}

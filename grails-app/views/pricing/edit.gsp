@@ -24,7 +24,7 @@
                 </g:eachError>
             </ul>
         </g:hasErrors>
-        <g:form resource="${this.pricing}" method="PUT">
+        <g:form resource="${this.pricing}" method="PUT" class="form-horizontal">
             <g:hiddenField name="version" value="${this.pricing?.version}" />
             <div class="text-left row">
                 <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>

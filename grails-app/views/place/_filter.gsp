@@ -6,7 +6,11 @@
                 <input id="name" type="text" name="name"  placeholder="${g.message(code:'placeList.name', default:'Name')}">
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <input id="type" type="text" name="type" placeholder="${g.message(code:'placeList.type', default:'Type')}">
+                <g:select name="types" id="types" from="${pl.fork.place.PlaceType.list()}"
+                          optionValue="tag" class="form-control" multiple="multiple"
+                          optionKey="id"
+                />
+                <%--<input id="type" type="text" name="type" placeholder="${g.message(code:'placeList.type', default:'Type')}">--%>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <input id="town" type="text" name="town" placeholder="${g.message(code:'placeList.town', default:'Town')}">
@@ -21,12 +25,6 @@
                 <input id="distance" type="text" name="distance" placeholder="${g.message(code:'placeList.distance', default:'Distance')}">
             </div>
         </div>
-
-
-
-
-
-
 
         <g:submitButton name="index" class="save" value="${message(code: 'custom.filter', default: 'Filter')}" />
 

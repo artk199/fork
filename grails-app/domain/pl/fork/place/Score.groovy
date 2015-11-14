@@ -11,13 +11,12 @@ class Score {
         review type: 'text'
     }
 
-    static belongsTo = [place:Place]
+    static belongsTo = [place:Place, owner: User]
 
     String title
     String review
     String language
     int score
 
-    User owner
     Date dateCreated
 }
