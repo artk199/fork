@@ -6,14 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
 
-import and.fork.pl.fork.R;
-import pl.fork.place.entity.Opinion;
-import pl.fork.place.entity.Place;
+import pl.fork.fork.R;
+import pl.fork.entity.Opinion;
 
 /**
  * Created by Artur on 2015-11-07.
@@ -34,17 +33,20 @@ public class OpinionsListAdapter extends ArrayAdapter<Opinion> {
             convertView = inflater.inflate(R.layout.opinion_row, null);
         }
 
-        /*
-        Opinion placeToRender = this.getItem(position);
 
-        Log.d(LOG_TAG,"ładuje widok " + placeToRender.getName() + " position " + position);
-        ImageView placeImageView = (ImageView) convertView.findViewById(R.id.placeImageView);
-        TextView placeNameTextView = (TextView) convertView.findViewById(R.id.placeNameTextView);
-        TextView placeDescriptionTextView = (TextView) convertView.findViewById(R.id.placeDescriptionTextView);
+        Opinion opinion = this.getItem(position);
 
-        placeNameTextView.setText(placeToRender.getName());
-        placeDescriptionTextView.setText(placeToRender.getDescription());
-        */
+        Log.d(LOG_TAG, "ładuje widok " + opinion.getReview() + " position " + position);
+
+        TextView userNameTextView = (TextView) convertView.findViewById(R.id.userNameTextView);
+        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
+        TextView reviewTextView = (TextView) convertView.findViewById(R.id.reviewTextView);
+        TextView summaryTextView = (TextView) convertView.findViewById(R.id.summaryTextView);
+
+        userNameTextView.setText(opinion.getOwner().getUsername());
+        ratingBar.setRating(opinion.getScore());
+        reviewTextView.setText(opinion.getReview());
+        summaryTextView.setText(opinion.getTitle());
 
         return convertView;
     }

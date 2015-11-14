@@ -24,8 +24,11 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Map;
 
-import and.fork.pl.fork.R;
+import pl.fork.Config;
+import pl.fork.SessionHandler;
+import pl.fork.fork.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -131,23 +134,19 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
 
-                //RestTemplate restTemplate = new RestTemplate();
+               // RestTemplate restTemplate = new RestTemplate();
 
                 MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
                 map.add("j_username", username);
                 map.add("j_password", password);
                 map.add("rest", "true");
 
-                /*
-                String response = restTemplate.postForObject(, map,
-                        String.class);
-
-*/              String baseUrl = "http://45.55.215.21:8080/fork/";
+                String baseUrl = Config.baseURL;
                 String url = baseUrl + "j_spring_security_check";
                 RestTemplate restTemplate = new RestTemplate();
                 HttpHeaders headers = new HttpHeaders();
                 headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-                headers.set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                headers.set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp/*;q=0.8");
                 headers.set("Accept-Language","pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4,pt;q=0.2");
                 headers.set("Connection", "keep-alive");
 
@@ -156,8 +155,15 @@ public class LoginActivity extends AppCompatActivity {
                 HttpEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
                 //TODO: Zmienic na dobre sprawdzanie
-                Log.d(TAG,response.getHeaders().get("Location").get(0));
+                String cookie = response.getHeaders().get("Set-Cookie").get(0);
+
+                Log.d(TAG, cookie);
+                Log.d(TAG,response.getHeaders().toString());
                 if(baseUrl.equals(response.getHeaders().get("Location").get(0))){
+                    cookie = cookie.split("(JSESSIONID=)|;")[1];
+                    Log.d(TAG, cookie);
+                    SessionHandler.getInstance().setCookie(cookie);
+                    SessionHandler.getInstance().setActive(true);
                     Log.d(TAG,"ZALOGOWANO");
                     return true;
                 }else{

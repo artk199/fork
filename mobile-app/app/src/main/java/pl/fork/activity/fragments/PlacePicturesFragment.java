@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import and.fork.pl.fork.R;
-import pl.fork.place.entity.Place;
+import pl.fork.fork.R;
+import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-11-07.
