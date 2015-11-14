@@ -6,15 +6,8 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-placeType" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="create-placeType" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h2><g:message code="placeType.add.new"/></h2>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -25,10 +18,50 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form action="save">
-                <fieldset class="form">
-                    <f:all bean="placeType"/>
-                </fieldset>
+            <g:form action="save" class="form-horizontal">
+
+                <div class="text-left row">
+                    <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+                    <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                        <fieldset class="form">
+                            <div class="form-group">
+                                <label for="title" class="col-sm-4 control-label">
+                                    <g:message code="placeType.tag" />
+                                </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" name="tag" id="tag" value="${placeType.tag}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="col-sm-4 control-label">
+                                    <g:message code="placeType.description" />
+                                </label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="description"
+                                              id="description" value="${placeType.description}">${placeType.description}</textarea>
+                                </div>
+                            </div>
+
+                            <%--
+                            <div class="form-group">
+                                <label for="places" class="col-sm-4 control-label">
+                                    <g:message code="placeType.show.places" />
+                                </label>
+                                <div class="col-sm-8">
+                                    <g:select name="places" id="places" from="${pl.fork.place.Place.list()}"
+                                              optionValue="name" class="form-control" value="${placeType.places}"
+                                              optionKey="id" multiple="mutliple"
+                                    />
+                                </div>
+                            </div>
+                            --%>
+
+                        </fieldset>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+                </div>
+
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>

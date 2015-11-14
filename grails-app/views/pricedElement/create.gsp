@@ -7,7 +7,7 @@
     </head>
     <body>
         <div id="create-pricedElement" class="content scaffold-create" role="main">
-            <h1><g:message code="pricing.elements.header" args="[entityName]" /></h1>
+            <h1><g:message code="pricing.elements.header"/> ${pricedElement.pricing?.id ? pricedElement.pricing.title : ""}</h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -51,17 +51,22 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="pricing" class="col-sm-4 control-label">
-                                    <g:message code="pricing.element.menu" />
-                                </label>
-                                <div class="col-sm-8">
-                                    <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
-                                              optionValue="title" class="form-control" value="${this.params?.pricing?.id?:1}"
-                                              optionKey="id"
-                                    />
+                            <g:if test="${!pricedElement.pricing?.id}">
+                                <div class="form-group">
+                                    <label for="pricing" class="col-sm-4 control-label">
+                                        <g:message code="pricing.element.menu" />
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
+                                                  optionValue="title" class="form-control" value="${this.params?.pricing?.id?:1}"
+                                                  optionKey="id"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            </g:if>
+                            <g:else>
+                                <g:hiddenField name = "pricing" value="${pricedElement.pricing?.id}"/>
+                            </g:else>
                         </fieldset>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>

@@ -84,6 +84,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="types" class="col-sm-4 control-label">
+                            <g:message code="pricing.place" />
+                        </label>
+                        <div class="col-sm-8">
+                            <g:select name="types" id="types" from="${pl.fork.place.PlaceType.list()}"
+                                      optionValue="tag" class="form-control"
+                                      optionKey="id" multiple="multiple"
+                            />
+                        </div>
+                    </div>
+
                     <fieldset>
                         <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Dodaj!')}" />
                     </fieldset>
