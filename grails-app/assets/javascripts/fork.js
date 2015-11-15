@@ -415,3 +415,77 @@ forkApp.directive('placeLink', function(){
     }
 });
 
+
+
+
+
+forkApp.controller('friendsController', [ '$scope', '$http', function($scope, $http){
+
+    $scope.users = [];
+    $scope.friends = [];
+    $scope.requests = [];
+    $scope.tab = 1;
+    $scope.notAddedClass = 'glyphicon-plus-sign';
+    $scope.requestedClass = 'glyphicon-question-sign';
+
+    $scope.getFriends = function(){
+        $http.get('/user/friend')
+            .success ( function( data ){
+                $scope.friends = data['friends'];
+                $scope.requests = data['requests'];
+            });
+    }
+
+    $scope.findUsers = function(){
+        $http.get('/user/search/')
+            .success( function( data ){
+                $scope.users = data;
+            });
+    }
+
+    $scope.addFriend = function(receiver){
+        $http.post('/user/friend/'+$scope.users[receiver].id);
+    }
+
+    $scope.modifyFriend = function(receiver, status){
+        $http.put('/user/friend/'+$scope.requests[receiver].id, { status: status} );
+    }
+
+    $scope.move = function(index){
+        $scope.friends.push($scope.requests[index]);
+        $scope.requests.splice(index,1);
+    }
+
+}]);
+
+forkApp.directive('addFriend', function(){
+   return {
+       link: function( scope, element ){
+
+           var blocker = false;
+
+           element.bind( 'click', function(){
+               if( !blocker ){
+                   blocker = true;
+                   element.removeClass(scope.notAddedClass);
+                   element.addClass(scope.requestedClass);
+                   element.addClass('active');
+                   scope.addFriend(scope.$index);
+               }
+           });
+       }
+   }
+});
+
+forkApp.directive('acceptFriend', function() {
+    return {
+        link: function (scope, element) {
+            element.bind( 'click', function(){
+                scope.modifyFriend(scope.$index, 'accept');
+                scope.$apply( function(){
+                   scope.move(scope.$index);
+                });
+            });
+        }
+    }
+});

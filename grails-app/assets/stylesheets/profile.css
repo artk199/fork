@@ -20,3 +20,82 @@
 .fork-profile-button:hover{
     background: #EFEFEF;
 }
+
+
+.fork-friends-header{
+    width:100%;
+    height:40px;
+    background:mediumseagreen;
+    position:relative;
+    line-height:38px;
+}
+
+.fork-friends-header > div {
+    margin-left: 30px;
+}
+
+.fork-friends-search{
+    margin-top: 10px;
+}
+
+.fork-friends-search > input{
+    float: left;
+    width: 300px;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.fork-friends-search > div{
+    width: 100%;
+    float:left;
+
+}
+
+.fork-friend{
+    float:left;
+    width: 300px;
+    border: 1px solid #DDD;
+    margin: 20px;
+    height: 75px
+}
+.fork-friend > div{
+    display:inline-block;
+    height: 75px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.fork-friend > div:first-child {
+    width: 75px;
+    float:left;
+}
+
+.fork-friend > div:last-child {
+    width: 220px;
+    line-height: 75px;
+}
+
+.fork-friend-icon-add {
+    font-size: 2em !important;
+    line-height: 67px !important;
+    color:#D6E6C3;
+    cursor:pointer;
+    text-shadow:
+            1px 1px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+}
+.fork-friend-icon-add:hover{
+    color:rgb(150, 166, 130);
+}
+
+.fork-friend-icon-add.active {
+    color: #ffbe00;
+    cursor:default;
+}
+
+.fork-friend-icon-add.active:hover {
+    color: #ffbe00;
+}

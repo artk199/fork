@@ -10,7 +10,8 @@ class User implements Serializable {
 	transient springSecurityService
 
 	List images
-	static hasMany = [images: ForkFile, scores: Score]
+	static mappedBy = [requestedFriends: 'requester', receivedFriends: 'receiver']
+	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend]
 
 	String username
 	String password
@@ -67,7 +68,7 @@ class User implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
     }
 
-	static transients = ['springSecurityService','password_confirm']
+	static transients = ['springSecurityService','password_confirm','friends','friendInvitations','allFriends']
 
 	static constraints = {
 		username blank: false, unique: true, size: 3..25
@@ -76,7 +77,24 @@ class User implements Serializable {
 		profilePicture nullable: true
 	}
 
+	List<User> getFriends(){
+		List<User> friends = receivedFriends.findAll{ it.status == FriendshipStatus.ACCEPTED }.collect{ it.requester }
+		friends += requestedFriends.findAll{ it.status == FriendshipStatus.ACCEPTED }.collect{ it.receiver }
+		friends
+	}
+
+	List<User> getFriendInvitations(){
+		List<User> friends = receivedFriends.findAll{ it.status == FriendshipStatus.PENDING }.collect{ it.requester }
+		friends
+	}
+
+	List<User> getAllFriends(){
+		List<User> friends = requestedFriends.collect{ it.receiver } + receivedFriends.collect{ it.requester }
+		friends
+	}
+
 	static mapping = {
 		password column: '`password`'
+
 	}
 }

@@ -167,6 +167,7 @@ class PlaceController {
 
     def upload(Place place) {
         ForkFile image = imageService.create(params, place);
+        println place
         render image.id
     }
 
@@ -180,6 +181,8 @@ class PlaceController {
 
     def getAllImages(int placeID){
         // render user.images as JSON
+        println Place.findById(placeID).name
+        println "WTF"
         def ids = Place.findById(placeID).images.collect{ it.id }
         render ids as JSON
     }
