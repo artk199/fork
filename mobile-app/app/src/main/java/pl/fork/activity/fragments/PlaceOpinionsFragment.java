@@ -76,9 +76,11 @@ public class PlaceOpinionsFragment extends Fragment {
             adapter = new OpinionsListAdapter(rootView.getContext(), opinions);
             placesListView.setAdapter(adapter);
         }
-        new LoadOpinionsTask(adapter).execute(place.getId());
-        TextView placeNameTextView = (TextView) rootView.findViewById(R.id.placeNameTextView);
-        placeNameTextView.setText(place.getName());
+        if(place != null) {
+            new LoadOpinionsTask(adapter).execute(place.getId());
+            TextView placeNameTextView = (TextView) rootView.findViewById(R.id.placeNameTextView);
+            placeNameTextView.setText(place.getName());
+        }
         return rootView;
     }
 }

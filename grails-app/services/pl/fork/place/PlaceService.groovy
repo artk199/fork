@@ -13,6 +13,10 @@ import pl.fork.place.PlaceType
 
 @Transactional
 class PlaceService {
+    private static final int START_RADIUS = 200;
+    private static final int MAX_RADIUS = 1000;
+    private static final int RADIUS_DIFF = 100;
+    private static final int MAX_PLACES_IN_NEAR = 20;
 
     def springSecurityService
     ImageService imageService
@@ -92,10 +96,24 @@ class PlaceService {
     }
 
     List<Place> getNear(def latitude, def longitude){
-        //TODO: Implement method
-        return getAll()
-    }
+        List<Place> list = new ArrayList<Place>();
+        List<Place> allPlaces = getAll();
+        int radius = START_RADIUS;
+        int max_places = allPlaces.size() > MAX_PLACES_IN_NEAR ? MAX_PLACES_IN_NEAR : allPlaces.size();
 
+        while(list.size() < max_places && radius < MAX_RADIUS){
+            for(Place p : allPlaces ){
+                if(Math.pow((p.getX() - x), 2) + Marth.pow((p.getY() - y), 2) < radius*2 &&
+                        !list.contains(p)
+                ){
+                    list.add(p);
+                }
+            }
+
+            radius += RADIUS_DIFF;
+        }
+        return list;
+    }
 
     List<Score> getScores(Place place){
         place.scores.isEmpty() ? [] : place.scores

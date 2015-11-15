@@ -17,8 +17,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/placeImageView"
-            android:paddingTop="2dp"
-            android:src="@mipmap/ic_launcher" />
+            android:paddingTop="2dp" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

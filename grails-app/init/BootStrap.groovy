@@ -28,35 +28,68 @@ class BootStrap {
             email = "emajl@polska.pl"
             phone = "661-891-571"
             website = "fork.pl"
-            x = 11
-            y = 99
+            x = 54.370532
+            y = 18.610021
         }
 
         User u = new User()
         u.with{
-            username = "blabla"
-            password = "blabla"
-            password_confirm = "blabla"
+            username = "Testowy Rysiek"
+            password = "test1"
+            password_confirm = "test1"
             email = "blabla@blabla.com"
         }
         u.save(flush: true)
+
+        User u2 = new User()
+        u2.with{
+            username = "Testowy Tomek"
+            password = "test1"
+            password_confirm = "test1"
+            email = "blabla1@blabla.com"
+        }
+        u2.save(flush: true)
+
+        User u3 = new User()
+        u3.with{
+            username = "Testowy Przemo"
+            password = "test1"
+            password_confirm = "test1"
+            email = "blabla3@blabla.com"
+        }
+        u3.save(flush: true)
+
+        User u4 = new User()
+        u4.with{
+            username = "Testowy tester"
+            password = "test1"
+            password_confirm = "test1"
+            email = "blabla4@blabla.com"
+        }
+        u4.save(flush: true)
 
         Place ratusz = new Place()
         ratusz.with{
             name = "Ratusz Nowego Miasta"
             description = "Ten ładniejszy ratusz często pokazywany na pocztówkach."
+            x = 54.373132
+            y = 18.614021
         }
 
         Place fontanna = new Place()
         fontanna.with{
             name = "Fontanna Neptuna"
             description = "Fontanna Neptuna przy Dworze Artusa."
+            x = 54.370542
+            y = 18.620021
         }
 
         Place artus = new Place()
         artus.with{
             name = "Dwór artusa"
             description = "Kamienica przy Fontannie Neptuna."
+            x = 54.360932
+            y = 18.608821
         }
 
         grzybowo.save(flush:true)
@@ -69,6 +102,10 @@ class BootStrap {
         dagrasso.with{
             name = "Da Grasso"
             description = "Opis da Grasso"
+            town = "Gdańsk"
+            address = "Grunwaldzka"
+            x = 54.370232
+            y = 18.610321
         }
         dagrasso.save(flush:true)
 

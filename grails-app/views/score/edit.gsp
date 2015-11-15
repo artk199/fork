@@ -6,16 +6,8 @@
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#edit-score" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="edit-score" class="content scaffold-edit" role="main">
-            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+            <h1><g:message code="score.header.edit" args="[score.title]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -26,13 +18,43 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.score}" method="PUT">
+            <g:form resource="${this.score}" method="PUT" class="form-horizontal">
                 <g:hiddenField name="version" value="${this.score?.version}" />
-                <fieldset class="form">
-                    <f:all bean="score"/>
-                </fieldset>
+                <div class="text-left row">
+                    <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+                    <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                        <div class="form-group">
+                            <label for="title" class="col-sm-4 control-label">
+                                <g:message code="score.title" />
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="title" id="title" value="${score.title}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="col-sm-4 control-label">
+                                <g:message code="score.review" />
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="description"
+                                          id="description" value="${score.review}">${score.review}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title" class="col-sm-4 control-label">
+                                <g:message code="score.score" />
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="score" id="score" value="${score.score}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+                </div>
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="save btn btn-default" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

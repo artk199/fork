@@ -37,7 +37,7 @@
 
         <!-- PRICES (MENU) OF THE ATTRACTIONS  !-->
         <div id="friends" class="tab-pane fade">
-
+            <g:render template="tabs/friends"/>
         </div>
 
         <!-- EVENTS BOUNDED WITH THE OBJECT !-->
