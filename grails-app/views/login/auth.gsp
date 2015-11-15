@@ -41,7 +41,7 @@
             </div>
             </fieldset>
             <fieldset>
-                <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Zaloguj się!')}" />
+                <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.log.in.label', default: 'Zaloguj się!')}" />
             </fieldset>
         </form>
     </div>
