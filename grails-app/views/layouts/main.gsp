@@ -11,8 +11,10 @@
         <asset:stylesheet src="bootstrap-theme.min.css"/>
         <asset:stylesheet src="bootstrap-sortable.css"/>
         <asset:stylesheet src="jquery.datetimepicker.css"/>
+        <asset:stylesheet src="select2.css"/>
 
         <asset:javascript src="application.js"/>
+        <asset:javascript src="select2.js"/>
 
         <asset:javascript src="jquery.datetimepicker.full.min.js"/>
         <g:layoutHead/>

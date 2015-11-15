@@ -15,7 +15,7 @@
                 <g:hasErrors bean="${this.event}">
                 <ul class="errors" role="alert">
                     <g:eachError bean="${this.event}" var="error">
-                    <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                     </g:eachError>
                 </ul>
                 </g:hasErrors>
@@ -40,13 +40,25 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="description" class="col-sm-4 control-label">
+                            <g:message code="place.description" />
+                        </label>
+                        <div class="col-sm-8">
+                            <select search-select id="place" name="place">
+                                <g:each var="place" in="${places}">
+                                    <option value="${place.id}"> ${place.name} </option>
+                                </g:each>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">
                             <g:message code="startDate" />
                         </label>
                         <div class="col-sm-8">
-                            <input filter-date type="text" name="startDate" value="${event.startDate}">
+                            <input filter-date-and-time type="date" name="startDate" value="${event.startDate}">
                         </div>
                     </div>
 
@@ -55,9 +67,10 @@
                             <g:message code="endDate" />
                         </label>
                         <div class="col-sm-8">
-                            <input filter-date type="text" name="endDate" value="${event.endDate}">
+                            <input filter-date-and-time type="date" name="endDate" value="${event.endDate}">
                         </div>
                     </div>
+
 
                     <fieldset>
                         <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Dodaj!')}" />

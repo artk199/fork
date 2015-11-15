@@ -212,6 +212,21 @@ forkApp.directive('filterDate', function(){
    }
 });
 
+forkApp.directive('filterDateAndTime', function(){
+    return {
+        restrict: 'A',
+        scope: {
+            placeholder: '@'
+        },
+        link: function (scope, element){
+            element.datetimepicker({
+                timepicker:true,
+                format:'Y/m/d H:i'
+            });
+        }
+    }
+});
+
 
 
 
@@ -415,3 +430,14 @@ forkApp.directive('placeLink', function(){
     }
 });
 
+forkApp.directive('searchSelect', function(){
+    return {
+        restrict: 'A',
+        scope: {
+            placeholder: '@'
+        },
+        link: function (scope, element){
+                element.select2();
+        }
+    }
+});

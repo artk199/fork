@@ -1,9 +1,10 @@
 forkApp.directive('searchInput', ['$http', '$window' , '$location', function($http, $window, $location) {
     return {
         restrict: 'E',
+        scope: { controller: '@', value: '@' },
         controller: ['$scope', function($scope) {
 
-            $scope.searchValue = "Wprowadź nazwę atrakcji...";
+            $scope.searchValue = $scope.value;
             $scope.isDefault = true;
             $scope.focused = false;
             $scope.resultsFocused = false;
@@ -21,12 +22,12 @@ forkApp.directive('searchInput', ['$http', '$window' , '$location', function($ht
 
             $scope.showAllResults = function(){
                 var baseUrl = $location.absUrl().toString();
-                $window.location.href = baseUrl+'place/search/all?search='+$scope.searchValue;
+                $window.location.href = baseUrl+$scope.controller+'/search/all?search='+$scope.searchValue;
             }
 
             $scope.showDetails= function(id){
                 var baseUrl = $location.absUrl().toString();
-                $window.location.href = baseUrl+'place/'+id;
+                $window.location.href = baseUrl+$scope.controller+'/show/'+id;
             }
 
             $scope.topPosition = function(){
@@ -82,7 +83,7 @@ forkApp.directive('searchInput', ['$http', '$window' , '$location', function($ht
                     }
                 });
                 element.bind('input', function(e){
-                    $http.get('/place/search', { params: { search : scope.searchValue } } )
+                    $http.get('/'+scope.controller+'/search', { params: { search : scope.searchValue } } )
                         .success(function(data){
                             scope.searchResults = data;
                         });
