@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 import org.grails.core.io.ResourceLocator
 import org.springframework.core.io.Resource
 import grails.converters.JSON
+import org.grails.web.json.JSONObject
 
 class UserController {
 
@@ -13,9 +14,38 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userCount: User.count()]
+    def index() {
+        /*params.max = Math.min(max ?: 10, 100)
+        respond User.list(params), model:[userCount: User.count()]*/
+        render User.list() as JSON
+
+    }
+
+    def search(){
+        render userService.search() as JSON
+    }
+
+    def addFriend(int id){
+        UserFriend u = userService.addFriend(id)
+        if( !u ){
+            response.status = 500
+            render "FAIL"
+            return
+        }
+        render "OK"
+    }
+
+    def modifyFriend(int id){
+        JSONObject parameters = request.JSON
+        userService.resolveFriendship(id,parameters)
+        render "OK"
+    }
+
+    def getFriends(){
+        List<User> friends = userService.getFriends()
+        List<User> requests = userService.getFriendRequests()
+        Map data = ['friends': friends, 'requests':requests]
+        render data as JSON
     }
 
     def show(User user) {

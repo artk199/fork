@@ -41,6 +41,16 @@ class UrlMappings {
             action = [POST:'uploadImage']
         }
 
+        "/user/friend"{
+            controller = "user"
+            action = [GET:'getFriends']
+        }
+
+        "/user/friend/$id"{
+            controller = "user"
+            action = [POST:'addFriend',PUT:'modifyFriend']
+        }
+
         "/place/$placeID/image"(controller:"place",action:"getAllImages")
 
         "/place/search"(controller:"place", action:"search")
