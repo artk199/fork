@@ -368,13 +368,13 @@ a.btn-orange:active{
     margin: 5px 10px 0 5px;
 }
 
+.page-section .table-striped>tbody>tr:nth-of-type(odd){
+    background-color: #f9f9f9!important;
+}
+
 .blue-section{
     background: #498fff;
     color: #fff;
-}
-
-.blue-section table.table-striped>tbody>tr:nth-of-type(odd){
-    background-color: #3A86FF;
 }
 
 .blue-section table caption{
@@ -877,4 +877,8 @@ iframe{
     margin-top: 50px;
     height: auto;
     margin-bottom:10px;
+}
+
+#place-type button{
+    text-align:left;
 }

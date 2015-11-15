@@ -34,12 +34,39 @@ class BootStrap {
 
         User u = new User()
         u.with{
-            username = "blabla"
-            password = "blabla"
-            password_confirm = "blabla"
+            username = "Testowy Rysiek"
+            password = "test1"
+            password_confirm = "test1"
             email = "blabla@blabla.com"
         }
         u.save(flush: true)
+
+        User u2 = new User()
+        u2.with{
+            username = "Testowy Tomek"
+            password = "test1"
+            password_confirm = "test1"
+            email = "blabla1@blabla.com"
+        }
+        u2.save(flush: true)
+
+        User u3 = new User()
+        u3.with{
+            username = "Testowy Przemo"
+            password = "test1"
+            password_confirm = "test1"
+            email = "blabla3@blabla.com"
+        }
+        u3.save(flush: true)
+
+        User u4 = new User()
+        u4.with{
+            username = "Testowy tester"
+            password = "test1"
+            password_confirm = "test1"
+            email = "blabla4@blabla.com"
+        }
+        u4.save(flush: true)
 
         Place ratusz = new Place()
         ratusz.with{

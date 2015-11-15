@@ -6,6 +6,8 @@ import pl.fork.file.ForkFile
 @Transactional
 class UserService {
 
+    def springSecurityService
+
     def register(String username, String password,String password_confirm, String email ) {
         User u = new User()
 
@@ -50,6 +52,64 @@ class UserService {
             }
         }
         return images;
+    }
+
+    List<User> search(){
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        List<User> users = User.list()
+        users = users - currentUser - currentUser.allFriends
+        println currentUser.friends
+        users
+    }
+
+    UserFriend addFriend(int id){
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        User receiver = User.findById(id)
+
+        UserFriend friendship = new UserFriend()
+        friendship.requester = currentUser
+        friendship.receiver = receiver
+
+        friendship.validate()
+        if( !friendship.hasErrors() ){
+            currentUser.addToRequestedFriends(friendship)
+            receiver.addToReceivedFriends(friendship)
+            friendship.save flush:true
+        }
+        friendship
+    }
+
+    UserFriend resolveFriendship(int id, parameters){
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        User requester = User.findById(id)
+
+        UserFriend friendship = UserFriend.findByRequesterAndReceiver(requester, currentUser)
+        if( !friendship ){
+            return friendship
+        }
+
+        if( parameters['status'] ){
+            if( parameters['status'] == 'accept' ){
+                friendship.status = FriendshipStatus.ACCEPTED
+            }
+            else if( parameters['status'] == 'reject' ){
+                friendship.status = FriendshipStatus.REJECTED
+            }
+        }
+        println "RESOLVING YOUR LIFE"
+        friendship.save flush:true
+    }
+
+    List<User> getFriends(){
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        println "Friends: " + currentUser.friends
+        currentUser.friends
+    }
+
+    List<User> getFriendRequests(){
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        println "Requests: " + currentUser.friendInvitations
+        currentUser.friendInvitations
     }
 
 }
