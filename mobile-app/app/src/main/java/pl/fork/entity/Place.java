@@ -11,14 +11,14 @@ import java.io.Serializable;
 public class Place implements Serializable {
 
 
-    private Integer id;
-    private String name;
-    private String description;
-    private String address;
-    private String town;
-    private String email;
-    private String phone;
-    private String website;
+    private Integer id = 0;
+    private String name = "";
+    private String description = "";
+    private String address = "";
+    private String town = "";
+    private String email = "";
+    private String phone = "";
+    private String website = "";
     private Double longitude = 54.3610873;
     private Double latitude = 18.6900271;
 

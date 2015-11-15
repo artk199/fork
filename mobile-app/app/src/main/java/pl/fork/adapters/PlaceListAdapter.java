@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.List;
 
 import pl.fork.fork.R;
@@ -39,6 +41,9 @@ public class PlaceListAdapter extends ArrayAdapter<Place> {
         ImageView placeImageView = (ImageView) convertView.findViewById(R.id.placeImageView);
         TextView placeNameTextView = (TextView) convertView.findViewById(R.id.placeNameTextView);
         TextView placeDescriptionTextView = (TextView) convertView.findViewById(R.id.placeDescriptionTextView);
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.displayImage("http://45.55.215.21:8080/image/1/mini", placeImageView);
 
         placeNameTextView.setText(placeToRender.getName());
         placeDescriptionTextView.setText(placeToRender.getDescription());
