@@ -41,8 +41,8 @@ class Place {
 
     boolean verified
 
-    int x
-    int y
+    double x
+    double y
 
     double getAvgScore(){
         double scoresAmount, scoresTotal

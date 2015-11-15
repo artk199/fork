@@ -11,7 +11,6 @@ import org.grails.web.json.JSONObject
 
 @Transactional(readOnly = true)
 class PlaceController {
-
     PlaceService placeService
     ImageService imageService
 
@@ -45,7 +44,7 @@ class PlaceController {
         render placeService.get(id) as JSON
     }
 
-    def getAll(float latitude,float longitude){
+    def getAll(double latitude,double longitude){
         render placeService.getNear(latitude,longitude) as JSON
     }
 
@@ -154,7 +153,8 @@ class PlaceController {
     }
 
     def addScore(Long id){
-        JSONObject parameters = new JSONObject(request.reader.text)
+    	JSONObject parameters = request.JSON
+        println "json" + parameters
         Place place = placeService.get(id)
         Score score = placeService.addScoreToPlace(place,parameters)
         render score as JSON

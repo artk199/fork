@@ -28,8 +28,8 @@ class BootStrap {
             email = "emajl@polska.pl"
             phone = "661-891-571"
             website = "fork.pl"
-            x = 11
-            y = 99
+            x = 54.370532
+            y = 18.610021
         }
 
         User u = new User()
@@ -72,18 +72,24 @@ class BootStrap {
         ratusz.with{
             name = "Ratusz Nowego Miasta"
             description = "Ten ładniejszy ratusz często pokazywany na pocztówkach."
+            x = 54.373132
+            y = 18.614021
         }
 
         Place fontanna = new Place()
         fontanna.with{
             name = "Fontanna Neptuna"
             description = "Fontanna Neptuna przy Dworze Artusa."
+            x = 54.370542
+            y = 18.620021
         }
 
         Place artus = new Place()
         artus.with{
             name = "Dwór artusa"
             description = "Kamienica przy Fontannie Neptuna."
+            x = 54.360932
+            y = 18.608821
         }
 
         grzybowo.save(flush:true)
@@ -96,6 +102,10 @@ class BootStrap {
         dagrasso.with{
             name = "Da Grasso"
             description = "Opis da Grasso"
+            town = "Gdańsk"
+            address = "Grunwaldzka"
+            x = 54.370232
+            y = 18.610321
         }
         dagrasso.save(flush:true)
 

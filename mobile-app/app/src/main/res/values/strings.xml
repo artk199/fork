@@ -12,4 +12,6 @@
     <string name="title_section_description">Informacje</string>
     <string name="title_section_photos">Zdjęcia</string>
     <string name="title_section_map">Mapa</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_add_opinion">AddOpinionActivity</string>
 </resources>

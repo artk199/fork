@@ -8,19 +8,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import and.fork.pl.fork.R;
+import pl.fork.fork.R;
 import pl.fork.activity.fragments.PlaceDetailsFragment;
 import pl.fork.activity.fragments.PlaceMapFragment;
 import pl.fork.activity.fragments.PlaceOpinionsFragment;
 import pl.fork.activity.fragments.PlacePicturesFragment;
-import pl.fork.place.entity.Place;
+import pl.fork.entity.Place;
 
 public class PlaceDetailsActivity extends AppCompatActivity {
 

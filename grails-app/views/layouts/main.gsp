@@ -30,7 +30,7 @@
         <asset:javascript src="jquery-2.1.3.js"/>
         <asset:javascript src="bootstrap-sortable.js"/>
 
-        <asset:javascript src="bootstrap.min.js"/>
+        <asset:javascript src="bootstrap.js"/>
         <asset:javascript src="angular.js"/>
         <asset:javascript src="angular-animate.js"/>
         <asset:javascript src="fork.js"/>

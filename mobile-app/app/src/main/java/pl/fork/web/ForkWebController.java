@@ -4,7 +4,7 @@ import android.location.Location;
 
 import java.util.List;
 
-import pl.fork.place.entity.Place;
+import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-10-31.

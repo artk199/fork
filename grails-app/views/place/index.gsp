@@ -12,7 +12,7 @@
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
             <div class="col-md-8 col-sm-10 col-xs-12">
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 fork-filter-bar">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
                         <g:render template="filter"/>
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
@@ -28,11 +28,6 @@
         </div>
 
         <div style="height:50px"></div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 ">
-                <g:link action="create" class="btn btn-default btn-block" ><g:message code="place.add" /></g:link>
-            </div>
-        </div>
         <div style="height:50px"></div>
 
 

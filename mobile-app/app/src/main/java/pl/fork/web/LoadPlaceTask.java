@@ -3,10 +3,11 @@ package pl.fork.web;
 import android.os.AsyncTask;
 import android.view.View;
 
+
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import pl.fork.place.entity.Place;
+import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-11-01.
@@ -17,6 +18,7 @@ public class LoadPlaceTask extends AsyncTask<Object,Void,Place> {
 
     @Override
     protected Place doInBackground(Object... params) {
+
         View view = (View) params[0];
         int id = (int) params[1];
         try {
