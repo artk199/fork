@@ -11,7 +11,6 @@ import org.grails.web.json.JSONObject
 
 @Transactional(readOnly = true)
 class PlaceController {
-
     PlaceService placeService
     ImageService imageService
 
@@ -45,7 +44,7 @@ class PlaceController {
         render placeService.get(id) as JSON
     }
 
-    def getAll(float latitude,float longitude){
+    def getAll(double latitude,double longitude){
         render placeService.getNear(latitude,longitude) as JSON
     }
 
