@@ -503,6 +503,7 @@ forkApp.directive('acceptFriend', function() {
     return {
         link: function (scope, element, attrs) {
             element.bind( 'click', function(){
+                scope.friends.push(scope[attrs['array'][scope.$index]]);
                 scope.modifyFriend(scope.$index, 'accept', attrs['array']);
             });
         }

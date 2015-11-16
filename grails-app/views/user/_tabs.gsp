@@ -37,7 +37,17 @@
 
         <!-- PRICES (MENU) OF THE ATTRACTIONS  !-->
         <div id="friends" class="tab-pane fade">
-            <g:render template="tabs/friends"/>
+            <sec:ifLoggedIn>
+                <g:if test="${g.currentUserID().toInteger() == this.user.id}">
+                    <g:render template="tabs/own/friends"/>
+                </g:if>
+                <g:else>
+                    <g:render template="tabs/public/friends"/>
+                </g:else>
+            </sec:ifLoggedIn>
+            <sec:ifNotLoggedIn>
+                <g:render template="tabs/public/friends"/>
+            </sec:ifNotLoggedIn>
         </div>
 
         <!-- EVENTS BOUNDED WITH THE OBJECT !-->

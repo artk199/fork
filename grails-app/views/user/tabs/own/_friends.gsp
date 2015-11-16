@@ -12,13 +12,15 @@
             <div ng-repeat="friend in friends">
                 <div class="fork-friend">
                     <div>
-                        <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
+                        <img width="75px" height="73px" ng-show="{{friend.profilePicture}}" ng-src="/image/{{friend.profilePicture}}/mini">
+                        <img width="75px" height="73px" ng-hide="{{friend.profilePicture}}" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
                     </div>
                     <div>
                         <a ng-href="/user/show/{{friend.id}}">
                             {{friend.username}}
                         </a>
                         <span reject-friend array="friends" class="glyphicon glyphicon-minus-sign fork-friend-icon-add pull-right"></span>
+                        <span send-message class="glyphicon glyphicon-send fork-friend-icon-add pull-right"></span>
                     </div>
 
                 </div>
@@ -31,7 +33,8 @@
                     <div ng-repeat="request in requests">
                         <div class="fork-friend">
                             <div>
-                                <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
+                                <img width="75px" height="73px" ng-show="{{request.profilePicture}}" ng-src="/image/{{request.profilePicture}}/mini">
+                                <img width="75px" height="73px" ng-hide="{{request.profilePicture}}" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
                             </div>
                             <div>
                                 <a ng-href="/user/show/{{request.id}}">
@@ -49,7 +52,8 @@
                     <div ng-repeat="invitation in invitations">
                         <div class="fork-friend">
                             <div>
-                                <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
+                                <img width="75px" height="73px" ng-show="{{invitation.profilePicture}}" ng-src="/image/{{invitation.profilePicture}}/mini">
+                                <img width="75px" height="73px" ng-hide="{{invitation.profilePicture}}" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
                             </div>
                             <div>
                                 <a ng-href="/user/show/{{invitation.id}}">
@@ -70,7 +74,8 @@
                     <div ng-repeat="user in users">
                         <div class="fork-friend">
                             <div>
-                                <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
+                                <img width="75px" height="73px" ng-show="{{user.profilePicture}}" ng-src="/image/{{user.profilePicture}}/mini">
+                                <img width="75px" height="73px" ng-hide="{{user.profilePicture}}" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
                             </div>
                             <div>
                                 <a ng-href="/user/show/{{user.id}}">
