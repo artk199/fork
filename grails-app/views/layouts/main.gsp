@@ -10,9 +10,12 @@
         <asset:stylesheet src="foundation-icons.css"/>
         <asset:stylesheet src="bootstrap-theme.min.css"/>
         <asset:stylesheet src="bootstrap-sortable.css"/>
+        <asset:stylesheet src="bootstrap-multiselect.css"/>
         <asset:stylesheet src="jquery.datetimepicker.css"/>
+        <asset:stylesheet src="select2.css"/>
 
         <asset:javascript src="application.js"/>
+        <asset:javascript src="select2.js"/>
 
         <asset:javascript src="jquery.datetimepicker.full.min.js"/>
         <g:layoutHead/>
@@ -29,6 +32,8 @@
         <!-- Sorting bootstrap's tables mechanics !-->
         <asset:javascript src="jquery-2.1.3.js"/>
         <asset:javascript src="bootstrap-sortable.js"/>
+
+        <asset:javascript src="bootstrap-multiselect.js"/>
 
         <asset:javascript src="bootstrap.js"/>
         <asset:javascript src="angular.js"/>

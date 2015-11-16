@@ -212,6 +212,21 @@ forkApp.directive('filterDate', function(){
    }
 });
 
+forkApp.directive('filterDateAndTime', function(){
+    return {
+        restrict: 'A',
+        scope: {
+            placeholder: '@'
+        },
+        link: function (scope, element){
+            element.datetimepicker({
+                timepicker:true,
+                format:'Y/m/d H:i'
+            });
+        }
+    }
+});
+
 
 
 
@@ -500,6 +515,16 @@ forkApp.directive('rejectFriend', function() {
             element.bind( 'click', function(){
                 scope.modifyFriend(scope.$index, 'reject', attrs['array']);
             });
+        }
+    }
+});forkApp.directive('searchSelect', function(){
+    return {
+        restrict: 'A',
+        scope: {
+            placeholder: '@'
+        },
+        link: function (scope, element){
+                element.select2();
         }
     }
 });

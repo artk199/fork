@@ -8,7 +8,7 @@
                             <h2 class='fork-content-main-title'><g:message code="home.main.title"/></h2>
                             <h3 class='fork-content-main-subtitle'><g:message code="home.main.subtitle"/></h3>
                             <div class='fork-content-main-search'>
-                                <search-input/>
+                                <search-input controller="place" value="Wprowadź nazwę..."/>
                             </div>
                         </div>
                         <g:img class="img-responsive pull-right" file="telephone.png"/>

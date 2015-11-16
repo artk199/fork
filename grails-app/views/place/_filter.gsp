@@ -1,3 +1,21 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#types').multiselect({
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '100%',
+            buttonClass: 'text-left btn btn-default',
+            includeSelectAllOption: true,
+            maxHeight: 400,
+            nonSelectedText: '${g.message(code:'placeList.type', default:'Type')}',
+            nSelectedText: '${g.message(code:'default.input.multiselect.tooMany')}',
+            allSelectedText: '${g.message(code:'default.input.multiselect.all')}',
+            selectAllText: '${g.message(code:'default.input.multiselect.selectAll')}',
+            filterPlaceholder: '${g.message(code:'default.input.multiselect.search')}'
+         });
+    });
+</script>
+
 <div class="fork-filter-input-container panel text-left" style="background: none">
     <div class="panel-heading">
         <span class="glyphicon glyphicon-search"></span>
@@ -9,7 +27,7 @@
                 <input id="name" type="text" name="name" class="form-control" placeholder="${g.message(code:'placeList.name', default:'Name')}">
                 <%--<input id="type" type="text" name="type" placeholder="${g.message(code:'placeList.type', default:'Type')}">--%>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="place-type">
                 <g:select name="types" id="types" from="${pl.fork.place.PlaceType.list()}"
                           optionValue="tag" class="form-control" multiple="multiple"
                           optionKey="id"
@@ -49,6 +67,10 @@
             <span class="glyphicon glyphicon-plus"></span>
             <g:message code="place.add" />
         </g:link>
+        <a href="placeType/create" class="btn btn-default btn-block" >
+            <span class="glyphicon glyphicon-plus"></span>
+            <g:message code="placeType.add.new" />
+        </a>
     </div>
 </div>
 

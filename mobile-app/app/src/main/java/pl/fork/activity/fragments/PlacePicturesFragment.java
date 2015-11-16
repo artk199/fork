@@ -43,8 +43,8 @@ public class PlacePicturesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_place_details, container, false);
-        TextView placeNameTextView = (TextView) rootView.findViewById(R.id.placeNameTextView);
-        placeNameTextView.setText(place.getName());
+        //TextView placeNameTextView = (TextView) rootView.findViewById(R.id.placeNameTextView);
+        //placeNameTextView.setText(place.getName());
         return rootView;
     }
 }

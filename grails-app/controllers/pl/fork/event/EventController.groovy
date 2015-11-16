@@ -1,5 +1,7 @@
 package pl.fork.event
 
+import pl.fork.place.Place
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,6 +9,7 @@ import grails.transaction.Transactional
 class EventController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    EventService eventService;
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -18,7 +21,7 @@ class EventController {
     }
 
     def create() {
-        respond new Event(params)
+        respond new Event(params), model:[places: Place.list()]
     }
 
     @Transactional
@@ -103,5 +106,11 @@ class EventController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    @Transactional
+    def join(Event event) {
+        Event respEvent = eventService.join(event);
+        redirect action:"show", id: respEvent.id
     }
 }

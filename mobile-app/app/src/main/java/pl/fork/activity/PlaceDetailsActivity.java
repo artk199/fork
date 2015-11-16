@@ -2,14 +2,22 @@ package pl.fork.activity;
 
 import java.util.Locale;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.github.florent37.materialviewpager.MaterialViewPager;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import pl.fork.fork.R;
 import pl.fork.activity.fragments.PlaceDetailsFragment;
 import pl.fork.activity.fragments.PlaceMapFragment;
@@ -19,21 +27,10 @@ import pl.fork.entity.Place;
 
 public class PlaceDetailsActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+
     SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    ViewPager mViewPager;
-
+    MaterialViewPager mViewPager;
 
     /**
      * Obiekt ktorego szczegóły wyswietlamy.
@@ -50,10 +47,24 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),place);
-
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
+
+        ViewPager viewPager = mViewPager.getViewPager();
+        viewPager.setAdapter(mSectionsPagerAdapter);
+
+        //After set an adapter to the ViewPager
+        mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
+
+        ImageView placeImageView = (ImageView) findViewById(R.id.logo_place);
+
+        /** Pobranie obrazka oraz wstawienie go */
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.displayImage("http://45.55.215.21:8080/image/1", placeImageView);
+
+        /** Ustawienie nazwy miejsca */
+        TextView textView = (TextView) findViewById(R.id.place_name);
+        textView.setText(place.getName());
 
     }
 
