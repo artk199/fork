@@ -18,27 +18,47 @@
                         <a ng-href="/user/show/{{friend.id}}">
                             {{friend.username}}
                         </a>
-                        <span reject-friend class="glyphicon glyphicon-minus-sign fork-friend-icon-add pull-right"></span>
+                        <span reject-friend array="friends" class="glyphicon glyphicon-minus-sign fork-friend-icon-add pull-right"></span>
                     </div>
 
                 </div>
             </div>
         </div>
         <div ng-show="tab==2">
-            <div>
-                <div ng-repeat="request in requests">
-                    <div class="fork-friend">
-                        <div>
-                            <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
-                        </div>
-                        <div>
-                            <a ng-href="/user/show/{{request.id}}">
-                                {{request.username}}
-                            </a>
-                            <span reject-friend class="glyphicon glyphicon-minus-sign fork-friend-icon-add pull-right"></span>
-                            <span accept-friend class="glyphicon glyphicon-plus-sign fork-friend-icon-add pull-right"></span>
-                        </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left;">
+                    <h2><span class="label label-primary" style="margin-left: 15px;">Zaprosili Ciebie <span class="badge" style="background:#d9534f"> {{requests.length}}</span></span></h2>
+                    <div ng-repeat="request in requests">
+                        <div class="fork-friend">
+                            <div>
+                                <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
+                            </div>
+                            <div>
+                                <a ng-href="/user/show/{{request.id}}">
+                                    {{request.username}}
+                                </a>
+                                <span reject-friend array="requests" class="glyphicon glyphicon-minus-sign fork-friend-icon-add pull-right"></span>
+                                <span accept-friend array="requests" class="glyphicon glyphicon-plus-sign fork-friend-icon-add pull-right"></span>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="text-align:left;">
+                    <h2><span class="label label-primary active" style="margin-left: 15px;">Twoje zaproszenia <span class="badge" style="background:#d9534f"> {{invitations.length}}</span></span></h2>
+                    <div ng-repeat="invitation in invitations">
+                        <div class="fork-friend">
+                            <div>
+                                <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
+                            </div>
+                            <div>
+                                <a ng-href="/user/show/{{invitation.id}}">
+                                    {{invitation.username}}
+                                </a>
+                                <span reject-friend array="invitations" class="glyphicon glyphicon-minus-sign fork-friend-icon-add pull-right"></span>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

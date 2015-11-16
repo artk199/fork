@@ -83,11 +83,19 @@ class UserService {
         User currentUser = User.findByUsername(springSecurityService.currentUser)
         User requester = User.findById(id)
 
+        println currentUser
+        println requester
+
         UserFriend friendship = UserFriend.findByRequesterAndReceiver(requester, currentUser)
+
         if( !friendship ){
-            return friendship
+            friendship = UserFriend.findByRequesterAndReceiver(currentUser, requester)
+            if( !friendship ) {
+                return friendship
+            }
         }
 
+        println parameters['status']
         if( parameters['status'] ){
             if( parameters['status'] == 'accept' ){
                 friendship.status = FriendshipStatus.ACCEPTED
@@ -96,20 +104,22 @@ class UserService {
                 friendship.status = FriendshipStatus.REJECTED
             }
         }
-        println "RESOLVING YOUR LIFE"
         friendship.save flush:true
     }
 
     List<User> getFriends(){
         User currentUser = User.findByUsername(springSecurityService.currentUser)
-        println "Friends: " + currentUser.friends
         currentUser.friends
     }
 
     List<User> getFriendRequests(){
         User currentUser = User.findByUsername(springSecurityService.currentUser)
-        println "Requests: " + currentUser.friendInvitations
         currentUser.friendInvitations
+    }
+
+    List<User> getInvitations(){
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        currentUser.yourInvitations
     }
 
 }

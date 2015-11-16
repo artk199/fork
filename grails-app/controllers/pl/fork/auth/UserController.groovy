@@ -44,7 +44,8 @@ class UserController {
     def getFriends(){
         List<User> friends = userService.getFriends()
         List<User> requests = userService.getFriendRequests()
-        Map data = ['friends': friends, 'requests':requests]
+        List<User> invitations = userService.getInvitations()
+        Map data = ['friends': friends, 'requests':requests, 'invitations': invitations]
         render data as JSON
     }
 
