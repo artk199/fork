@@ -8,8 +8,6 @@
 //= require jquery-2.1.3.js
 //= require_tree .
 //= require_self
-//= require /plugins/sockjs.min.js
-//= require /plugins/stomp.min.js
 
 if (typeof jQuery !== 'undefined') {
     (function($) {
