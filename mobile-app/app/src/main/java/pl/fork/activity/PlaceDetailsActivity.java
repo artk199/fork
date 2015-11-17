@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import pl.fork.Config;
 import pl.fork.fork.R;
 import pl.fork.activity.fragments.PlaceDetailsFragment;
 import pl.fork.activity.fragments.PlaceMapFragment;
@@ -59,8 +60,10 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         ImageView placeImageView = (ImageView) findViewById(R.id.logo_place);
 
         /** Pobranie obrazka oraz wstawienie go */
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage("http://45.55.215.21:8080/image/1", placeImageView);
+        if(place.getImageID() != -1) {
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.displayImage(Config.baseURL + "image/" + place.getImageID(), placeImageView);
+        }
 
         /** Ustawienie nazwy miejsca */
         TextView textView = (TextView) findViewById(R.id.place_name);
@@ -113,7 +116,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 case 1:
                     return PlacePicturesFragment.newInstance(position + 1, place);
                 case 2:
-                    return PlaceOpinionsFragment.newInstance(position + 1,place);
+                    return PlaceMapFragment.newInstance(position + 1,place);
             }
             return null;
         }

@@ -39,7 +39,7 @@ public class AddOpinionActivity extends AppCompatActivity {
                 opinion.setScore(Math.round(ratingBar.getRating()));
                 opinion.setTitle(titleText.getText().toString());
                 opinion.setReview(editText.getText().toString());
-                new AddOpinionTask().execute(opinion,place.getId());
+                new AddOpinionTask(getApplicationContext()).execute(opinion,place.getId());
             }
         });
     }

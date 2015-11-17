@@ -16,7 +16,19 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Refresh"
+            android:text="Zaloguj się!"
+            android:id="@+id/loginButton" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pokaż na mapie"
+            android:id="@+id/allMapButton" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wyszukaj miejsca"
             android:id="@+id/refresh"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"

@@ -1,6 +1,7 @@
 package pl.fork.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +30,7 @@ import java.util.Map;
 
 import pl.fork.Config;
 import pl.fork.SessionHandler;
+import pl.fork.fork.AddOpinionActivity;
 import pl.fork.fork.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean destroyed = false;
     private ProgressDialog progressDialog;
+    final LoginActivity loginActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,7 +188,15 @@ public class LoginActivity extends AppCompatActivity {
             dismissProgressDialog();
             TextView error = (TextView) findViewById(R.id.errorTextView);
             if(aBoolean){
-                error.setText("Zalogowano!");
+                Intent intent = new Intent(loginActivity,MainActivity.class);
+                startActivity(intent);
+                Context context = getApplicationContext();
+                CharSequence text = "Zalogowano!";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
             }else{
                 error.setText("Niezalogowano!");
             }

@@ -203,16 +203,20 @@ class BootStrap {
                     profilePicture : user.profilePicture ? user.profilePicture.id : null
             ]
         }
-
+/*
+//
         JSON.registerObjectMarshaller( Place ) { Place place ->
             return [
-                    adress : place.address,
+                    address : place.address,
                     description : place.description,
                     name : place.name,
-                    id : place.id
+                    id : place.id,
+                    town : place.town,
+                    email : place.email,
+                    picture : place.images.first ?: -1
             ]
         }
-
+*/
         println "Deployed."
     }
     def destroy = {

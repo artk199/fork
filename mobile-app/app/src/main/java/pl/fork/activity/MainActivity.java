@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.fork.LocationService;
+import pl.fork.SessionHandler;
 import pl.fork.fork.R;
 import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.listeners.PlaceListClickListener;
@@ -40,7 +42,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+        final MainActivity mainActivity = this;
+
         setContentView(R.layout.activity_main);
+
+        ListView placesListView = (ListView) findViewById(R.id.listView);
+
+
+        PlaceListAdapter adapter = (PlaceListAdapter)placesListView.getAdapter();
+
+        if(adapter == null) {
+            List<Place> places = new ArrayList<Place>();
+            adapter = new PlaceListAdapter(this, places);
+            placesListView.setAdapter(adapter);
+            placesListView.setOnItemClickListener(new PlaceListClickListener(this,adapter));
+        }
 
         /** Inicjalizacja ImageLoadera */
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
@@ -56,6 +73,43 @@ public class MainActivity extends AppCompatActivity {
                 refreshPlaces();
             }
         });
+
+        Button allMapButton = (Button) findViewById(R.id.allMapButton);
+        allMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mainActivity,AllPlacesMapsActivity.class);
+
+                ListView placesListView = (ListView) findViewById(R.id.listView);
+                PlaceListAdapter adapter = (PlaceListAdapter)placesListView.getAdapter();
+                ArrayList<Place> placeList = adapter.getAllPlaces();
+                intent.putExtra("places",placeList);
+                startActivity(intent);
+            }
+        });
+
+        final Button loginbutton = (Button) findViewById(R.id.loginButton);
+
+        if(SessionHandler.getInstance().isActive()){
+            loginbutton.setText("Wyloguj.");
+            loginbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SessionHandler.getInstance().setActive(false);
+                    finish();
+                    startActivity(getIntent());
+                }
+            });
+        }else{
+            loginbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent loginIntent = new Intent(mainActivity,LoginActivity.class);
+                    startActivity(loginIntent);
+                }
+            });
+        }
+
     }
 
 
@@ -119,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             placesListView.setOnItemClickListener(new PlaceListClickListener(this,adapter));
         }
 
-        new LoadPlacesTask(adapter).execute();
+        new LoadPlacesTask(adapter,getApplicationContext()).execute(location.getLatitude(),location.getLongitude());
     }
 
     private class ForkLocationListener implements LocationListener {

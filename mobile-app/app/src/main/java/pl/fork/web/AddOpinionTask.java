@@ -1,8 +1,11 @@
 package pl.fork.web;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,19 +16,26 @@ import org.springframework.web.client.RestTemplate;
 
 import pl.fork.Config;
 import pl.fork.SessionHandler;
+import pl.fork.activity.MainActivity;
 import pl.fork.entity.Opinion;
 import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-11-01.
  */
-public class AddOpinionTask extends AsyncTask<Object,Void,Place> {
+public class AddOpinionTask extends AsyncTask<Object,Void,Opinion> {
 
+
+    Context context;
+
+    public AddOpinionTask(Context context) {
+        this.context = context;
+    }
 
     static final String LOG_TAG = "AddOpinionTask";
 
     @Override
-    protected Place doInBackground(Object... params) {
+    protected Opinion doInBackground(Object... params) {
 
         Opinion opinion = (Opinion) params[0];
         int id = (int) params[1];
@@ -44,8 +54,8 @@ public class AddOpinionTask extends AsyncTask<Object,Void,Place> {
             HttpEntity<String> entity = new HttpEntity<String>(opinionJson,headers);
             restTemplate.put(url, entity);
 
-            Place place = restTemplate.getForObject(url, Place.class);
-            return place;
+            Opinion opinion1 = restTemplate.getForObject(url, Opinion.class);
+            return opinion1;
         }catch (Exception e){
 
         }
@@ -53,8 +63,22 @@ public class AddOpinionTask extends AsyncTask<Object,Void,Place> {
     }
 
     @Override
-    protected void onPostExecute(Place place) {
-        super.onPostExecute(place);
+    protected void onPostExecute(Opinion place) {
+        if(place == null){
+            CharSequence text = "Błąd! Spróbuj jeszcze raz!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }else{
+            CharSequence text = "Dodano opinię!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            Intent intent = new Intent(context,MainActivity.class);
+            context.startActivity(intent);
+        }
     }
 
 }

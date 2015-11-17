@@ -39,4 +39,5 @@ dependencies {
     compile ('com.github.florent37:materialviewpager:1.1.2@aar'){
         transitive = true
     }
+    compile 'com.github.lawloretienne:imagegallery:0.0.9'
 }
