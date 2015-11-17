@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.fork.Config;
+import pl.fork.SessionHandler;
 import pl.fork.activity.MapsActivity;
 import pl.fork.adapters.OpinionsListAdapter;
 import pl.fork.entity.Opinion;
@@ -103,17 +104,12 @@ public class PlaceDetailsFragment extends Fragment {
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
         ratingBar.setRating((float) 3.4);
 
+        if(!SessionHandler.getInstance().isActive()){
+            Button addOpinionButton = (Button) rootView.findViewById(R.id.addOpinionButton);
+            addOpinionButton.getLayoutParams().height = 0;
+            addOpinionButton.setVisibility(View.INVISIBLE);
+        }
 
-       /* Button btn = (Button) rootView.findViewById(R.id.mapButton);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                intent.putExtra("place", place);
-                startActivity(intent);
-            }
-        });
-       */
         return rootView;
     }
 
