@@ -3,10 +3,8 @@ package pl.fork.auth
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.grails.core.io.ResourceLocator
-import org.springframework.core.io.Resource
 import grails.converters.JSON
 import org.grails.web.json.JSONObject
-
 class UserController {
 
     UserService userService

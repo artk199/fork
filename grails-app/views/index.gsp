@@ -9,7 +9,6 @@
     <link rel='shortcut icon' href='img/icon.png' type='image/x-icon' />
 </head>
 <body>
-
     <g:render template="/home/main"/>
     <g:render template="/home/content"/>
 

@@ -232,13 +232,32 @@ forkApp.directive('filterDateAndTime', function(){
 
 forkApp.directive('userPanel', ['$animate', function($animate) {
     return {
+        controller: ['$scope', function($scope) {
+            $scope.notifications = [];
+            $scope.state = false;
+        }],
         link: function(scope, element){
-            scope.state = false;
             var className = 'open';
+
+            var socket = new SockJS('/stomp');
+            var client = Stomp.over(socket);
+            client.debug = null;
+
+            client.connect({}, function() {
+                client.subscribe("/user/queue/notification", function(message) {
+                    console.log(message.body);
+                    scope.$apply(function() {
+                        scope.notifications.push(message.body);
+                    });
+                });
+            });
+
+
             element.bind('click', function(){
                 scope.$apply(function(){
                     if( scope.state ){
                         $animate.removeClass(element, className);
+                        scope.notifications = [];
                     }
                     else{
                         $animate.addClass(element,className);

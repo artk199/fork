@@ -31,11 +31,11 @@
         </div>
         <!-- Sorting bootstrap's tables mechanics !-->
         <asset:javascript src="jquery-2.1.3.js"/>
+        <asset:javascript src="spring-websocket" />
+        <asset:javascript src="bootstrap.js"/>
         <asset:javascript src="bootstrap-sortable.js"/>
-
         <asset:javascript src="bootstrap-multiselect.js"/>
 
-        <asset:javascript src="bootstrap.js"/>
         <asset:javascript src="angular.js"/>
         <asset:javascript src="angular-animate.js"/>
         <asset:javascript src="fork.js"/>

@@ -2,7 +2,6 @@ package pl.fork.auth
 
 import grails.transaction.Transactional
 import pl.fork.file.ForkFile
-
 @Transactional
 class UserService {
 
@@ -10,7 +9,6 @@ class UserService {
 
     def register(String username, String password,String password_confirm, String email ) {
         User u = new User()
-
         u.username = username
         u.password = password
         u.password_confirm = password_confirm
@@ -75,6 +73,7 @@ class UserService {
             currentUser.addToRequestedFriends(friendship)
             receiver.addToReceivedFriends(friendship)
             friendship.save flush:true
+            notify "userNotification", "{receiver: ${receiver}, notification: friendInvite }"
         }
         friendship
     }
