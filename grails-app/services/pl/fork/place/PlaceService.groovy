@@ -29,7 +29,11 @@ class PlaceService {
         return Place.get(id)
     }
 
-    List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore) {
+    def toList(value) {
+        [value].flatten().findAll { it != null }
+    }
+
+    List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore, String address) {
 
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
         String minDate = "1000/01/01";
@@ -53,6 +57,10 @@ class PlaceService {
 
             if(town != null && !"".equals(town)) {
                 ilike("town", "%"+town+"%")
+            }
+
+            if (address != null && !"".equals(address)) {
+                ilike("address", "%"+address+"%")
             }
 
             if(placeTypes != null && placeTypes.size() > 0){
