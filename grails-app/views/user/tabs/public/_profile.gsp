@@ -16,24 +16,17 @@
             </div>
         </div>
         <div profile-details style="padding-right:20px;">
-
-            <g:if test="${this.user.friends.size() == 0 }">
-                Dodaj znajomych
-            </g:if>
-            <g:else>
-                <g:if test="${this.activities.size() == 0}">
-                    Brak aktywności twoich znajomych
+            <g:each in="${this.user.activities}" var="activity">
+                <g:if test="${activity.activityType == pl.fork.activity.ActivityType.REVIEW}">
+                    <g:render template="/user/tabs/activity/review" model="[activity:activity]"/>
                 </g:if>
-
-                <g:each in="${this.activities}" var="activity">
-                    <g:if test="${activity.activityType == pl.fork.activity.ActivityType.REVIEW}">
-                        <g:render template="/user/tabs/activity/review" model="[activity:activity]"/>
-                    </g:if>
-                    <g:if test="${activity.activityType == pl.fork.activity.ActivityType.IMAGE}">
-                        <g:render template="/user/tabs/activity/image" model="[activity:activity]"/>
-                    </g:if>
-                </g:each>
-            </g:else>
+                <g:if test="${activity.activityType == pl.fork.activity.ActivityType.IMAGE}">
+                    <g:render template="/user/tabs/activity/image" model="[activity:activity]"/>
+                </g:if>
+                <g:if test="${activity.activityType == pl.fork.activity.ActivityType.FRIEND}">
+                    <g:render template="/user/tabs/activity/friend" model="[activity:activity]"/>
+                </g:if>
+            </g:each>
 
         </div>
 

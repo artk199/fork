@@ -2,6 +2,7 @@ package pl.fork.file
 
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.transaction.Transactional
+import pl.fork.activity.ActivityService
 import pl.fork.auth.Role
 import pl.fork.auth.RoleType
 import pl.fork.auth.User
@@ -14,6 +15,7 @@ class ImageService {
 
     def springSecurityService
     ImageScaleService imageScaleService
+    ActivityService activityService
 
     ForkFile getImage(Long id){
         ForkFile.get(id)
@@ -59,6 +61,7 @@ class ImageService {
             user.addToImages(file)
             file.save flush: true
             user.save flush: true
+            activityService.createImageActivity(file)
         }
         else{
             file.errors.each{

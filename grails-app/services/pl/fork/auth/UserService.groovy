@@ -1,11 +1,14 @@
 package pl.fork.auth
 
 import grails.transaction.Transactional
+import pl.fork.activity.Activity
+import pl.fork.activity.ActivityService
 import pl.fork.file.ForkFile
 @Transactional
 class UserService {
 
     def springSecurityService
+    ActivityService activityService
 
     def register(String username, String password,String password_confirm, String email ) {
         User u = new User()
@@ -82,9 +85,6 @@ class UserService {
         User currentUser = User.findByUsername(springSecurityService.currentUser)
         User requester = User.findById(id)
 
-        println currentUser
-        println requester
-
         UserFriend friendship = UserFriend.findByRequesterAndReceiver(requester, currentUser)
 
         if( !friendship ){
@@ -97,7 +97,9 @@ class UserService {
         println parameters['status']
         if( parameters['status'] ){
             if( parameters['status'] == 'accept' ){
+                activityService.createFriendshipActivity(friendship)
                 friendship.status = FriendshipStatus.ACCEPTED
+
             }
             else if( parameters['status'] == 'reject' ){
                 friendship.status = FriendshipStatus.REJECTED
@@ -119,6 +121,19 @@ class UserService {
     List<User> getInvitations(){
         User currentUser = User.findByUsername(springSecurityService.currentUser)
         currentUser.yourInvitations
+    }
+
+    SortedSet<Activity> getFriendsActivities(){
+        SortedSet<Activity> activities = new TreeSet()
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        if( currentUser ) {
+            currentUser.friends.each { User friend ->
+                friend.activities.each { Activity activity ->
+                    activities.add(activity)
+                }
+            }
+        }
+        activities
     }
 
 }

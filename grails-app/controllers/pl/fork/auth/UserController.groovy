@@ -48,7 +48,8 @@ class UserController {
     }
 
     def show(User user) {
-        respond user
+        SortedSet activities = userService.getFriendsActivities()
+        respond user, model:[activities: activities]
     }
 
     def register() {

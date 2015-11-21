@@ -2,6 +2,7 @@ package pl.fork.place
 
 import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
+import pl.fork.activity.ActivityService
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
@@ -20,6 +21,7 @@ class PlaceService {
 
     def springSecurityService
     ImageService imageService
+    ActivityService activityService
 
     Place get(int id){
         return Place.get(id)
@@ -130,6 +132,7 @@ class PlaceService {
             place.addToScores(score)
             score.save(flush:true)
             place.save(flush:true)
+            activityService.createReviewActivity(score)
         }
         else{
             return null

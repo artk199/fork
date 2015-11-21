@@ -23,6 +23,7 @@ class ForkFile {
     String title
     String description
     User owner
+    Date dateCreated
     FileStatus status = FileStatus.PENDING;
 
     boolean isProfile(){
