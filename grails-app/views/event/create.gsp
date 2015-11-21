@@ -58,7 +58,7 @@
                             <g:message code="startDate" />
                         </label>
                         <div class="col-sm-8">
-                            <input filter-date-and-time type="date" name="startDate" value="${event.startDate}">
+                            <input filter-date-and-time type="text" name="startDate" value="${event.startDate}">
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
                             <g:message code="endDate" />
                         </label>
                         <div class="col-sm-8">
-                            <input filter-date-and-time type="date" name="endDate" value="${event.endDate}">
+                            <input filter-date-and-time type="text" name="endDate" value="${event.endDate}">
                         </div>
                     </div>
 
