@@ -136,4 +136,16 @@ class UserService {
         activities
     }
 
+    List<User> filterUsers(String username, String email){
+        List<User> users = User.createCriteria().list {
+            if (username != null && !"".equals(username)) {
+                ilike("username", "%"+username+"%")
+            }
+
+            if (email != null && !"".equals(email)) {
+                ilike("email", "%"+email+"%")
+            }
+        }
+        return users.unique();
+    }
 }
