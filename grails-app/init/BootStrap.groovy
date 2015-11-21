@@ -200,7 +200,9 @@ class BootStrap {
             return [
                     username : user.username,
                     id : user.id,
-                    profilePicture : user.profilePicture ? user.profilePicture.id : null
+                    profilePicture : user.profilePicture ? user.profilePicture.id : null,
+                    email : user.email,
+                    role : user.authorities
             ]
         }
 /*
