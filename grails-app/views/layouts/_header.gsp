@@ -4,7 +4,7 @@
                 <div class="col-md-2 col-sm-1 hidden-xs"></div>
                 <div class="col-md-8 col-sm-10 col-xs-12">
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-collapsable" aria-expanded="false">
+                            <button onclick="$('#header-collapsable').collapse('toggle');" type="button" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="header-collapsable">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -22,7 +22,7 @@
                                 <sec:ifLoggedIn>
                                     <form class="hidden"  id="logoutform" name="logout" method="POST" action="${createLink(controller:'logout') }">
                                     </form>
-                                    <li><a href="javascript:void(0);" onclick="$('#logoutform').submit()"><span><g:message code="auth.logout"/></span></a></li>   
+                                    <li><a href="javascript:void(0);" onclick="$('#logoutform').submit()"><span><g:message code="auth.logout"/></span></a></li>
                                 </sec:ifLoggedIn>
                                 <sec:ifNotLoggedIn>
                                     <li><a href="${createLink(controller:'login',action:'auth')}"><span><g:message code="layout.header.link.login"/></span></a></li>

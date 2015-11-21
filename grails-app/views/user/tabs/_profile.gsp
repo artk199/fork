@@ -16,28 +16,25 @@
             </div>
         </div>
         <div profile-details style="padding-right:20px;">
-            <div class='col-md-12' style="height:800px; border: 1px #DDD solid;">
-                <div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2 style="text-align:left;">Twoje ostatnie recenzje</h2>
-                        </div>
-                        <g:each in="${this.user.scores}" var="score">
-                            <div class="col-md-12" style="border-bottom: 1px #DDD solid">
-                                <div style="text-align:left; margin-left:30px;">
-                                    <sppan style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 25px;font-weight: bold; font-style: italic;">
-                                    &bdquo;${score.title}&rdquo;
-                                    </sppan> z oceną
-                                     ${score.score} gwiazdek dla
-                                    <a href="/place/show/${score.place.id}">${score.place.name}</a>
-                                </div>
 
-                            </div>
-                        </g:each>
-                    </div>
-                </div>
+            <g:if test="${this.user.friends.size() == 0 }">
+                Dodaj znajomych
+            </g:if>
+            <g:else>
+                <g:if test="${this.activities.size() == 0}">
+                    Brak aktywności twoich znajomych
+                </g:if>
 
-            </div>
+                <g:each in="${this.activities}" var="activity">
+                    <g:if test="${activity.activityType == pl.fork.activity.ActivityType.REVIEW}">
+                        <g:render template="/user/tabs/activity/review" model="[activity:activity]"/>
+                    </g:if>
+                    <g:if test="${activity.activityType == pl.fork.activity.ActivityType.IMAGE}">
+                        <g:render template="/user/tabs/activity/image" model="[activity:activity]"/>
+                    </g:if>
+                </g:each>
+            </g:else>
+
         </div>
 
     </div>

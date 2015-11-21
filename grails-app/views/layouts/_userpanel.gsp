@@ -25,6 +25,8 @@
         <div style="color:#A2A2A2; display:inline-block; font-size:52px;position:relative; top:-16px; float:right;cursor:default;left:-4px;">
             <i class="fi-torso"></i>
         </div>
-
+        <div style="color:black; display:inline-block; font-size:20px;position:relative; top:-247px; float:right;cursor:default;left:-14px;">
+            <span ng-show="notifications.length > 0">{{notifications.length}}</span>
+        </div>
     </div>
 </div>

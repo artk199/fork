@@ -16,15 +16,12 @@ class PlaceController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    private def toList(value) {
-        [value].flatten().findAll { it != null }
-    }
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         String accepts = request.getHeader('accept')
         if( accepts.contains('html')){
-            def places = placeService.filter(params.name, toList(params.types), params.town, params.timeAfter, params.timeBefore)
+            def places = placeService.filter(params.name, placeService.toList(params.types),
+                    params.town, params.timeAfter, params.timeBefore, null)
             println "HTML"
             render view:"index", model:[placeList: places, placeCount: Place.count()]
             return

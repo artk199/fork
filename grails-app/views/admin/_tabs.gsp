@@ -35,7 +35,7 @@
 </div>
 
 <div class='row'>
-     <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
+     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="tab-content">
             <!-- PLACES ADMINISTRATION TAB !-->
             <div id="places" class="tab-pane fade in active">

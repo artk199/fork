@@ -1,16 +1,17 @@
 package pl.fork.auth
 
 import grails.transaction.Transactional
+import pl.fork.activity.Activity
+import pl.fork.activity.ActivityService
 import pl.fork.file.ForkFile
-
 @Transactional
 class UserService {
 
     def springSecurityService
+    ActivityService activityService
 
     def register(String username, String password,String password_confirm, String email ) {
         User u = new User()
-
         u.username = username
         u.password = password
         u.password_confirm = password_confirm
@@ -75,6 +76,7 @@ class UserService {
             currentUser.addToRequestedFriends(friendship)
             receiver.addToReceivedFriends(friendship)
             friendship.save flush:true
+            notify "userNotification", "{receiver: ${receiver}, notification: friendInvite }"
         }
         friendship
     }
@@ -84,32 +86,66 @@ class UserService {
         User requester = User.findById(id)
 
         UserFriend friendship = UserFriend.findByRequesterAndReceiver(requester, currentUser)
+
         if( !friendship ){
-            return friendship
+            friendship = UserFriend.findByRequesterAndReceiver(currentUser, requester)
+            if( !friendship ) {
+                return friendship
+            }
         }
 
+        println parameters['status']
         if( parameters['status'] ){
             if( parameters['status'] == 'accept' ){
+                activityService.createFriendshipActivity(friendship)
                 friendship.status = FriendshipStatus.ACCEPTED
+
             }
             else if( parameters['status'] == 'reject' ){
                 friendship.status = FriendshipStatus.REJECTED
             }
         }
-        println "RESOLVING YOUR LIFE"
         friendship.save flush:true
     }
 
     List<User> getFriends(){
         User currentUser = User.findByUsername(springSecurityService.currentUser)
-        println "Friends: " + currentUser.friends
         currentUser.friends
     }
 
     List<User> getFriendRequests(){
         User currentUser = User.findByUsername(springSecurityService.currentUser)
-        println "Requests: " + currentUser.friendInvitations
         currentUser.friendInvitations
     }
 
+    List<User> getInvitations(){
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        currentUser.yourInvitations
+    }
+
+    SortedSet<Activity> getFriendsActivities(){
+        SortedSet<Activity> activities = new TreeSet()
+        User currentUser = User.findByUsername(springSecurityService.currentUser)
+        if( currentUser ) {
+            currentUser.friends.each { User friend ->
+                friend.activities.each { Activity activity ->
+                    activities.add(activity)
+                }
+            }
+        }
+        activities
+    }
+
+    List<User> filterUsers(String username, String email){
+        List<User> users = User.createCriteria().list {
+            if (username != null && !"".equals(username)) {
+                ilike("username", "%"+username+"%")
+            }
+
+            if (email != null && !"".equals(email)) {
+                ilike("email", "%"+email+"%")
+            }
+        }
+        return users.unique();
+    }
 }

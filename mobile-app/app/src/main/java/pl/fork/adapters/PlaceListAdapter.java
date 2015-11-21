@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import pl.fork.Config;
 import pl.fork.fork.R;
 import pl.fork.entity.Place;
 
@@ -42,12 +44,22 @@ public class PlaceListAdapter extends ArrayAdapter<Place> {
         TextView placeNameTextView = (TextView) convertView.findViewById(R.id.placeNameTextView);
         TextView placeDescriptionTextView = (TextView) convertView.findViewById(R.id.placeDescriptionTextView);
 
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage("http://45.55.215.21:8080/image/1/mini", placeImageView);
+        if(placeToRender.getImageID() != -1) {
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.displayImage(Config.baseURL + "image/" + placeToRender.getImageID() + "/mini", placeImageView);
+        }
 
         placeNameTextView.setText(placeToRender.getName());
         placeDescriptionTextView.setText(placeToRender.getDescription());
 
         return convertView;
+    }
+
+    public ArrayList<Place> getAllPlaces() {
+        ArrayList<Place> places = new ArrayList<Place>();
+        for (int i = 0; i < getCount(); i++) {
+            places.add(getItem(i));
+        }
+        return places;
     }
 }

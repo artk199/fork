@@ -3,10 +3,8 @@ package pl.fork.auth
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.grails.core.io.ResourceLocator
-import org.springframework.core.io.Resource
 import grails.converters.JSON
 import org.grails.web.json.JSONObject
-
 class UserController {
 
     UserService userService
@@ -44,12 +42,14 @@ class UserController {
     def getFriends(){
         List<User> friends = userService.getFriends()
         List<User> requests = userService.getFriendRequests()
-        Map data = ['friends': friends, 'requests':requests]
+        List<User> invitations = userService.getInvitations()
+        Map data = ['friends': friends, 'requests':requests, 'invitations': invitations]
         render data as JSON
     }
 
     def show(User user) {
-        respond user
+        SortedSet activities = userService.getFriendsActivities()
+        respond user, model:[activities: activities]
     }
 
     def register() {

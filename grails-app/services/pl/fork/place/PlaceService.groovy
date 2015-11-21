@@ -2,6 +2,7 @@ package pl.fork.place
 
 import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
+import pl.fork.activity.ActivityService
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
@@ -20,6 +21,7 @@ class PlaceService {
 
     def springSecurityService
     ImageService imageService
+    ActivityService activityService
 
     Place get(int id){
         return Place.get(id)
@@ -29,7 +31,11 @@ class PlaceService {
         return Place.get(id)
     }
 
-    List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore) {
+    def toList(value) {
+        [value].flatten().findAll { it != null }
+    }
+
+    List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore, String address) {
 
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
         String minDate = "1000/01/01";
@@ -53,6 +59,10 @@ class PlaceService {
 
             if(town != null && !"".equals(town)) {
                 ilike("town", "%"+town+"%")
+            }
+
+            if (address != null && !"".equals(address)) {
+                ilike("address", "%"+address+"%")
             }
 
             if(placeTypes != null && placeTypes.size() > 0){
@@ -130,6 +140,7 @@ class PlaceService {
             place.addToScores(score)
             score.save(flush:true)
             place.save(flush:true)
+            activityService.createReviewActivity(score)
         }
         else{
             return null

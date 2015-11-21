@@ -19,8 +19,18 @@ public class Place implements Serializable {
     private String email = "";
     private String phone = "";
     private String website = "";
+    private Integer imageID = -1;
     private Double longitude = 54.3610873;
     private Double latitude = 18.6900271;
+
+
+    public Integer getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(Integer imageID) {
+        this.imageID = imageID;
+    }
 
     public Double getLongitude() {
         return longitude;

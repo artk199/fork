@@ -232,13 +232,32 @@ forkApp.directive('filterDateAndTime', function(){
 
 forkApp.directive('userPanel', ['$animate', function($animate) {
     return {
+        controller: ['$scope', function($scope) {
+            $scope.notifications = [];
+            $scope.state = false;
+        }],
         link: function(scope, element){
-            scope.state = false;
             var className = 'open';
+
+            var socket = new SockJS('/stomp');
+            var client = Stomp.over(socket);
+            client.debug = null;
+
+            client.connect({}, function() {
+                client.subscribe("/user/queue/notification", function(message) {
+                    console.log(message.body);
+                    scope.$apply(function() {
+                        scope.notifications.push(message.body);
+                    });
+                });
+            });
+
+
             element.bind('click', function(){
                 scope.$apply(function(){
                     if( scope.state ){
                         $animate.removeClass(element, className);
+                        scope.notifications = [];
                     }
                     else{
                         $animate.addClass(element,className);
@@ -267,6 +286,12 @@ forkApp.controller('visibilityController', ['$scope', function($scope){
         return {};
     }
 
+    $scope.isVisible = function(visibility){
+        if( $scope.visibility == visibility ){
+            return true;
+        }
+        return false;
+    }
 
 }]);
 
@@ -434,7 +459,7 @@ forkApp.directive('placeLink', function(){
 
 
 
-forkApp.controller('friendsController', [ '$scope', '$http', function($scope, $http){
+forkApp.controller('friendsController', [ '$scope', '$http', function($scope, $http ){
 
     $scope.users = [];
     $scope.friends = [];
@@ -448,6 +473,7 @@ forkApp.controller('friendsController', [ '$scope', '$http', function($scope, $h
             .success ( function( data ){
                 $scope.friends = data['friends'];
                 $scope.requests = data['requests'];
+                $scope.invitations = data['invitations'];
             });
     }
 
@@ -459,16 +485,16 @@ forkApp.controller('friendsController', [ '$scope', '$http', function($scope, $h
     }
 
     $scope.addFriend = function(receiver){
-        $http.post('/user/friend/'+$scope.users[receiver].id);
+        $http.post('/user/friend/'+$scope.users[receiver].id)
+            .success( function(data){
+                $scope.invitations.push( $scope.users[receiver] );
+            });
     }
 
-    $scope.modifyFriend = function(receiver, status){
-        $http.put('/user/friend/'+$scope.requests[receiver].id, { status: status} );
-    }
-
-    $scope.move = function(index){
-        $scope.friends.push($scope.requests[index]);
-        $scope.requests.splice(index,1);
+    $scope.modifyFriend = function(receiver, status, array){
+        $http.put('/user/friend/'+$scope[array][receiver].id, { status: status}).success( function( data ){
+            $scope[array].splice(receiver,1)
+        });
     }
 
 }]);
@@ -494,12 +520,20 @@ forkApp.directive('addFriend', function(){
 
 forkApp.directive('acceptFriend', function() {
     return {
-        link: function (scope, element) {
+        link: function (scope, element, attrs) {
             element.bind( 'click', function(){
-                scope.modifyFriend(scope.$index, 'accept');
-                scope.$apply( function(){
-                   scope.move(scope.$index);
-                });
+                scope.friends.push(scope[attrs['array'][scope.$index]]);
+                scope.modifyFriend(scope.$index, 'accept', attrs['array']);
+            });
+        }
+    }
+});
+
+forkApp.directive('rejectFriend', function() {
+    return {
+        link: function (scope, element, attrs) {
+            element.bind( 'click', function(){
+                scope.modifyFriend(scope.$index, 'reject', attrs['array']);
             });
         }
     }
