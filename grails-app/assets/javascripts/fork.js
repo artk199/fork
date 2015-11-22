@@ -234,6 +234,11 @@ forkApp.directive('userPanel', ['$animate', function($animate) {
     return {
         controller: ['$scope', function($scope) {
             $scope.notifications = [];
+
+            $scope.invites = 0;
+            $scope.friends = 0;
+            $scope.activities = 0;
+
             $scope.state = false;
         }],
         link: function(scope, element){
@@ -245,9 +250,20 @@ forkApp.directive('userPanel', ['$animate', function($animate) {
 
             client.connect({}, function() {
                 client.subscribe("/user/queue/notification", function(message) {
-                    console.log(message.body);
                     scope.$apply(function() {
                         scope.notifications.push(message.body);
+                        var jsonObj = JSON.parse(message.body);
+                        switch(jsonObj.values[0]){
+                            case 'friendInvite':
+                                scope.invites++;
+                                break;
+                            case 'friend':
+                                scope.friends++;
+                                break;
+                            case 'activity':
+                                scope.activities++;
+                                break;
+                        }
                     });
                 });
             });
@@ -258,6 +274,9 @@ forkApp.directive('userPanel', ['$animate', function($animate) {
                     if( scope.state ){
                         $animate.removeClass(element, className);
                         scope.notifications = [];
+                        scope.invites = 0;
+                        scope.friends = 0;
+                        scope.events = 0;
                     }
                     else{
                         $animate.addClass(element,className);

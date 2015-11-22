@@ -17,23 +17,17 @@
                             <div class="col-md-4">
                                 image
                             </div>
-
-                            <div class="col-md-8">
-                                <p class="text-left">
-                                    ${event.description}
-                                </p>
-                            </div>
                         </div>
-                        Lista zapisanych uczestników wydarzenia
-                        <br>
-                        <g:each var="participant" in="${event.participants}">
-                            ${participant.username} <br>
-                        </g:each>
-                        <g:link action="join" resource="${event}" class="btn btn-default btn-block" ><g:message code="event.join" /></g:link>
+
                     </div>
                 </div>
             </div>
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
+        </div>
+        <div class="row page-section blue-section">
+            <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
+                <g:render template="tabs" model="[event:event]"/>
+            </div>
         </div>
     </div>
     </body>

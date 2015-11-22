@@ -3,6 +3,7 @@ package pl.fork.auth
 import grails.transaction.Transactional
 import pl.fork.activity.Activity
 import pl.fork.activity.ActivityService
+import pl.fork.activity.ActivityType
 import pl.fork.file.ForkFile
 @Transactional
 class UserService {
@@ -76,7 +77,7 @@ class UserService {
             currentUser.addToRequestedFriends(friendship)
             receiver.addToReceivedFriends(friendship)
             friendship.save flush:true
-            notify "userNotification", "{receiver: ${receiver}, notification: friendInvite }"
+            activityService.createInviteActivity(currentUser,receiver)
         }
         friendship
     }

@@ -37,8 +37,8 @@ class ActivityService {
     }
 
     Activity createFriendshipActivity(UserFriend friendship){
-        Activity a = this.createFriendActivity(friendship.receiver, friendship.requester)
-        Activity a2 = this.createFriendActivity(friendship.requester, friendship.receiver)
+        this.createFriendActivity(friendship.receiver, friendship.requester)
+        this.createFriendActivity(friendship.requester, friendship.receiver)
     }
 
     Activity createFriendActivity(User user, User friend){
@@ -52,4 +52,35 @@ class ActivityService {
         activity
     }
 
+    Activity createInviteActivity(User user, User friend){
+        Activity activity = new Activity()
+        activity.activityType = ActivityType.INVITE
+        activity.friend = friend.id
+        activity.user = user
+        user.addToActivities(activity)
+        user.save flush:true
+        activity.save flush:true
+        activity
+    }
+
+    void notifyUsers(Activity activity){
+        switch ( activity.activityType ){
+            case ActivityType.IMAGE :
+            case ActivityType.REVIEW :
+                println activity.user.friends
+                activity.user.friends.each{ User friend ->
+                    notify "userNotification", "{receiver: ${friend.username}, notification: activity }"
+                }
+                break
+            case ActivityType.INVITE :
+                User u = User.findById(activity.friend)
+                notify "userNotification", "{receiver: ${u.username}, notification: friendInvite }"
+                break
+            case ActivityType.FRIEND:
+                activity.user.friends.each{ User friend ->
+                    notify "userNotification", "{receiver: ${friend.username}, notification: friend }"
+                }
+                break
+        }
+    }
 }

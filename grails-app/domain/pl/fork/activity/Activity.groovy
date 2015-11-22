@@ -3,6 +3,7 @@ package pl.fork.activity
 import pl.fork.auth.User
 import pl.fork.place.Score
 import pl.fork.file.ForkFile
+import org.grails.datastore.mapping.engine.event.*
 
 class Activity implements Comparable {
 
@@ -25,5 +26,10 @@ class Activity implements Comparable {
 	int compareTo(Object o) {
 		Activity a = (Activity) o
 		return -this.dateCreated.compareTo(a.dateCreated)
+	}
+
+	def activityService
+	def afterInsert(){
+		activityService.notifyUsers(this)
 	}
 }
