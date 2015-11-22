@@ -891,3 +891,39 @@ iframe{
 #place-type button{
     text-align:left;
 }
+
+.admin-image-tile{
+    width: 250px;
+    margin: 15px;
+    padding: 5px;
+    border: 1px solid #CECECE;
+    text-align: center;
+    height: 290px;
+    overflow:hidden;
+}
+
+.admin-image-tile .image-container{
+    height:150px;
+    width: 100%;
+    background: #E0E0E0;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.admin-image-tile .image-container .helper{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.admin-image-tile .image-container img{
+    max-height: 150px;
+    max-width: 93%;
+    clear:both;
+}
+
+.admin-image-tile .pos{
+    clear:both;
+    margin: 2px 0;
+    text-align: left;
+}

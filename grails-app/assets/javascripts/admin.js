@@ -1,14 +1,12 @@
 // Getting places list
-var editLabel;
-var emptyLabel;
+var editLabel, emptyLabel, rejectLabel, acceptLabel, noPendingLabel;
 
-function setEditLabel(label){
-    editLabel = label;
-}
 
-function setEmptyLabel(label){
-    emptyLabel = label;
-}
+function setEditLabel(label){editLabel = label;}
+function setEmptyLabel(label){emptyLabel = label;}
+function setRejectLabel(label){rejectLabel = label;}
+function setAcceptLabel(label){acceptLabel = label;}
+function setNoPendingLabel(label){noPendingLabel = label;}
 
 function getPlacesFromController(controller, tableID){
     $.ajax({
@@ -115,4 +113,84 @@ function updateTable(data, tableID){
     var tableBody = $("#" + tableID + " tbody");
     tableBody.html(data);
     $.bootstrapSortable(true);
+}
+
+var updateImagesCount = 0;
+
+// Updates photo list
+function updateImages(controller, containerID, imageID){
+    $.ajax({
+        url: controller,
+        dataType: 'json',
+        data: {
+            id : imageID
+        },
+        success: function(data) {
+            var html = createImagesContainer(data, containerID);
+            updateImagesContainer(html, containerID)
+        },
+        error: function(request, status, error) {
+            alert(error)
+        },
+        complete: function() {
+        }
+    });
+}
+
+// Create div container
+function createImagesContainer(data, containerID){
+    var rejectController = "/admin/rejectImage";
+    var acceptController = "/admin/acceptImage";
+    var containerHTML = "";
+    var i = 0;
+    data.forEach(function(element, index, array){
+        containerHTML = containerHTML +
+            "<div class='admin-image-tile pull-left'>" +
+            (element["title"] == null ? "" :
+                "<div class='pos'><span class='glyphicon glyphicon-picture'></span>" +
+                "<span>" + element["title"] + "</span></div>"
+            ) +
+            "<div class='image-container'><span class='helper'></span>" +
+            "<img src='/image/" + element["id"] + "'/></div>" +
+            "<div class='pos'><span class='glyphicon glyphicon-calendar'></span>" +
+            "<span>" + element["dateCreated"] + "</span></div>" +
+            "<div class='pos'><span class='glyphicon glyphicon-user'></span>" +
+            "<span><a href='/user/show/'>" + element["user_name"] + "</a></span></div>" +
+            (element["place_id"] == null ? "" :
+                "<div class='pos'><span class='glyphicon glyphicon-map-marker'></span>" +
+                "<span><a href='/place/show/'>" + element["place_name"] + "</a></span></div>"
+            ) +
+            "<div class='buttons'><a class='btn btn-default'" +
+            "onclick=\"updateImages('" + rejectController + "','" + containerID + "','" + element["id"] + "')\">" +
+            "<span class='glyphicon glyphicon-remove-sign'></span>" +
+            "<span>" + rejectLabel + "</span></a><a class='btn btn-default'" +
+            "onclick=\"updateImages('" + acceptController + "','" + containerID + "','" + element["id"] + "')\">" +
+            "<span class='glyphicon glyphicon-ok-sign'></span>" +
+            "<span>" + acceptLabel + "</span></a></div></div>";
+            i = i + 1;
+    })
+
+    updateImagesCount = i;
+
+    // Display info about no pending requests
+    if(i == 0){
+        containerHTML = "<p>"+ noPendingLabel + "</p>";
+    }
+    return containerHTML;
+}
+
+// Update div with images
+function updateImagesContainer(data, containerID){
+    var container = $("#" + containerID);
+    container.html(data);
+
+    // Update count label on tab
+    $countLabel = $("#admin-photos-label");
+    if(updateImagesCount == 0){
+        $countLabel.remove();
+    }
+    else{
+        $countLabel.html(updateImagesCount);
+    }
+
 }

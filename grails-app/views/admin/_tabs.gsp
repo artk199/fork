@@ -18,7 +18,9 @@
             <li><a data-toggle="tab" href="#photos">
                 <span class="glyphicon glyphicon-picture"></span>
                 <span class="title"><g:message code="admin.tabs.photos"/></span>
-                <span class="label label-primary">1</span>
+                <g:if test = "${waitingImages.size() > 0}">
+                    <span class="label label-primary" id="admin-photos-label">${waitingImages.size()}</span>
+                </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#events">
                 <span class="glyphicon glyphicon-plane"></span>
