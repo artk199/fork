@@ -149,4 +149,10 @@ class UserService {
         }
         return users.unique();
     }
+
+    List<User> getNewestUsers(int maxSize){
+        return User.createCriteria().list{
+            order("username", "desc")
+        };
+    }
 }

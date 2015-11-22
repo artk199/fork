@@ -15,7 +15,6 @@ class AdminController {
 
     def index() {
         def images = adminService.getImagesWaitingForDecision();
-        println ("TEST:" + images.size())
         render view: "index", model: [waitingImages: images];
     }
 

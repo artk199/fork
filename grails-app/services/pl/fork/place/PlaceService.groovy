@@ -199,4 +199,11 @@ class PlaceService {
         return result
     }
 
+    // Sort places list by descending score
+    public List<Place> getTopScoredPlaces(int maxSize){
+        def allPlaces = Place.findAll();
+        allPlaces.sort{-it.getProperty("avgScore")};
+        int size = maxSize >= allPlaces.size() ? allPlaces.size() -1 : maxSize;
+        return allPlaces[0..size];
+    }
 }
