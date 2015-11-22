@@ -21,6 +21,39 @@
     </div>
 </div>
 
+<!-- SEARCH FOR AN USER !-->
+<div class="page-section blue-section" id="users-search-user">
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+        <div class="col-md-8 col-sm-8 col-xs-11 text-right">
+            <h3 class="text-center"><g:message code="admin.tabs.users.find"/></h3>
+
+            <g:form action="findUser" controller="admin" class="form-horizontal admin-findUser-form" >
+                <g:set var="ajaxFunction" value="getUsersFromController('${g.createLink(controller:'admin',action:'findUser')}', 'all-users-table')" />
+                <div class="form-group row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="username" type="text" name="username" class="form-control" placeholder="${g.message(code:'admin.tabs.users.find.username')}"
+                               oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="email" type="text" name="email" class="form-control" placeholder="${g.message(code:'admin.tabs.users.find.email')}"
+                               oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="buttons">
+                            <a class="btn btn-primary" onclick="${ajaxFunction}">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <g:message code="admin.search"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </g:form>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+    </div>
+</div>
+
 <!-- LIST OF ALL USERS !-->
 <div class="page-section" id="users-all">
     <div class="row">
@@ -34,7 +67,7 @@
                 </p>
             </g:if>
             <g:else>
-                <table class="table table-striped text-left sortable">
+                <table class="table table-striped text-left sortable" id = "all-users-table">
                     <caption>
                         <span class="pull-right">
                             <span class="glyphicon glyphicon-th"></span>
@@ -43,23 +76,15 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th class='col-md-3 col-sm-3 col-xs-3' data-defaultsort="asc" data-firstsort="desc">
+                        <th class='col-md-4 col-sm-4 col-xs-4' data-defaultsort="asc" data-firstsort="desc">
                             <span class="glyphicon glyphicon-user"></span>
                             <g:message code="admin.tabs.users.username"/>
                         </th>
-                        <th class='col-md-3 col-sm-3 col-xs-3'>
+                        <th class='col-md-4 col-sm-4 col-xs-4'>
                             <span class="glyphicon glyphicon-envelope"></span>
                             <g:message code="admin.tabs.users.email"/>
                         </th>
-                        <th class='col-md-2 col-sm-2 col-xs-2'>
-                            <span class="glyphicon glyphicon-calendar"></span>
-                            <g:message code="admin.tabs.users.registerDate"/>
-                        </th>
-                        <th class='col-md-2 col-sm-2 col-xs-2'>
-                            <span class="glyphicon glyphicon-dashboard"></span>
-                            <g:message code="admin.tabs.users.lastLogged"/>
-                        </th>
-                        <th class='col-md-2 col-sm-2 col-xs-2'>
+                        <th class='col-md-4 col-sm-4 col-xs-4'>
                             <span class="glyphicon glyphicon-star-empty"></span>
                             <g:message code="admin.tabs.users.role"/>
                         </th>
@@ -68,7 +93,7 @@
                     <tbody>
                     <g:each in="${pl.fork.auth.User.list()}" var="user" >
                         <tr>
-                            <td class='col-md-3 col-sm-3 col-xs-3'>
+                            <td class='col-md-4 col-sm-4 col-xs-4'>
                                 <a href="/user/show/${user.id}">
                                     ${user.username}
                                 </a>
@@ -80,18 +105,12 @@
                                     </a>
                                 </div>
                             </td>
-                            <td class='col-md-3 col-sm-3 col-xs-3'>
+                            <td class='col-md-4 col-sm-4 col-xs-4'>
                                 <a href="mailto:${user.email}">
                                     ${user.email}
                                 </a>
                             </td>
-                            <td class='col-md-2 col-sm-2 col-xs-2'>
-                                Do zrobienia!
-                            </td>
-                            <td class='col-md-2 col-sm-2 col-xs-2'>
-                                Do zrobienia!
-                            </td>
-                            <td class='col-md-2 col-sm-2 col-xs-2'>
+                            <td class='col-md-4 col-sm-4 col-xs-4'>
                                 <g:each in="${user.authorities}" var="role" >
                                     ${role.authority}
                                 </g:each>
@@ -101,37 +120,6 @@
                     </tbody>
                 </table>
             </g:else>
-        </div>
-        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
-    </div>
-</div>
-
-<!-- SEARCH FOR AN USER !-->
-<div class="page-section blue-section" id="users-search-user">
-    <div class="row">
-        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
-        <div class="col-md-8 col-sm-8 col-xs-11 text-right">
-            <h3 class="text-center"><g:message code="admin.tabs.users.find"/></h3>
-
-            <g:form action="findUser" controller="admin" class="form-horizontal" >
-                <div class="form-group row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="username" type="text" name="username" class="form-control" placeholder="${g.message(code:'admin.tabs.users.find.username')}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="email" type="text" name="email" class="form-control" placeholder="${g.message(code:'admin.tabs.users.find.email')}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <div class="buttons">
-                            <label for="findUser" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-search"></span>
-                                <g:message code="admin.search"/>
-                            </label>
-                            <g:submitButton id="findUser" name="findUser" class="save" class="hidden"/>
-                        </div>
-                    </div>
-                </div>
-            </g:form>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
     </div>

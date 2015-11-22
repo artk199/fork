@@ -14,8 +14,8 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-place">
                         <li><a href="#places-added-by-users"><g:message code="admin.tabs.places.addedByUser"/></a></li>
+                        <li><a href="#places-search-place"><g:message code="admin.tabs.places.find"/></a></li>
                         <li><a href="#places-all-places"><g:message code="admin.tabs.places.allPlaces"/></a></li>
-                        <li><a href="#places-search-place"><g:message code="find"/></a></li>
                     </ul>
                 </div>
 
@@ -38,7 +38,7 @@
 </div>
 
 <!-- LIST OF ADDED PLACES BY USERS !-->
-<div class="page-section dark-section" id="places-added-by-users">
+<div class="page-section" id="places-added-by-users">
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
         <div class="col-md-8 col-sm-8 col-xs-11">
@@ -87,20 +87,79 @@
     </div>
 </div>
 
+<!-- SEARCH FOR A PLACE !-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#types').multiselect({
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '100%',
+            buttonClass: 'text-left btn btn-default',
+            includeSelectAllOption: true,
+            maxHeight: 400,
+            nonSelectedText: '${g.message(code:'placeList.type', default:'Type')}',
+            nSelectedText: '${g.message(code:'default.input.multiselect.tooMany')}',
+            allSelectedText: '${g.message(code:'default.input.multiselect.all')}',
+            selectAllText: '${g.message(code:'default.input.multiselect.selectAll')}',
+            filterPlaceholder: '${g.message(code:'default.input.multiselect.search')}'
+        });
+    });
+</script>
+
+<div class="page-section blue-section" id="places-search-place">
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+        <div class="col-md-8 col-sm-8 col-xs-11 text-right">
+            <h3 class="text-center"><g:message code="admin.tabs.places.find"/></h3>
+
+            <g:form id="findPlace" action="findPlace" controller="admin" class="form-horizontal admin-findPlace-form" enctype="multipart/form-data" >
+                <g:set var="ajaxFunction" value="getPlacesFromController('${g.createLink(controller:'admin',action:'findPlace')}', 'all-places-table')" />
+                <div class="form-group row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="name" type="text" name="name" class="form-control" placeholder="${g.message(code:'placeList.name', default:'Name')}"
+                          oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="town" type="text" name="town" class="form-control" placeholder="${g.message(code:'placeList.town', default:'Town')}"
+                        oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="address" type="text" name="address" class="form-control" placeholder="${g.message(code:'placeList.address', default:'Address')}"
+                         oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <g:select name="types" id="types" from="${pl.fork.place.PlaceType.list()}"
+                                  optionValue="tag" class="form-control" multiple="multiple"
+                                  optionKey="id"
+                        />
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <a class="btn btn-primary" onclick="${ajaxFunction}">
+                        <span class="glyphicon glyphicon-search"></span>
+                        <g:message code="admin.search"/>
+                    </a>
+                </div>
+            </g:form>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+    </div>
+</div>
+
 <!-- LIST OF ALL ADDED PLACES !-->
 <div class="page-section" id="places-all-places">
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
         <div class="col-md-8 col-sm-8 col-xs-11">
             <h3><g:message code="admin.tabs.places.allPlaces"/></h3>
-
             <g:if test="${pl.fork.place.Place.list().size == 0}">
                 <p>
                     <g:message code="admin.tabs.places.noPlaces"/>
                 </p>
             </g:if>
             <g:else>
-                <table class="table table-striped text-left sortable">
+                <table class="table table-striped text-left sortable" id="all-places-table">
                     <caption>
                         <span class="pull-right">
                             <span class="glyphicon glyphicon-th"></span>
@@ -163,68 +222,7 @@
                     </g:each>
                     </tbody>
                 </table>
-            <%--
-            <div class="pagination">
-                <g:paginate total="${pl.fork.place.Place.list().size() ?: 0}" />
-            </div>--%>
             </g:else>
-        </div>
-        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#types').multiselect({
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true,
-            buttonWidth: '100%',
-            buttonClass: 'text-left btn btn-default',
-            includeSelectAllOption: true,
-            maxHeight: 400,
-            nonSelectedText: '${g.message(code:'placeList.type', default:'Type')}',
-            nSelectedText: '${g.message(code:'default.input.multiselect.tooMany')}',
-            allSelectedText: '${g.message(code:'default.input.multiselect.all')}',
-            selectAllText: '${g.message(code:'default.input.multiselect.selectAll')}',
-            filterPlaceholder: '${g.message(code:'default.input.multiselect.search')}'
-        });
-    });
-</script>
-
-<!-- SEARCH FOR A PLACE !-->
-<div class="page-section blue-section" id="places-search-place">
-    <div class="row">
-        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
-        <div class="col-md-8 col-sm-8 col-xs-11 text-right">
-            <h3 class="text-center"><g:message code="admin.tabs.places.find"/></h3>
-
-            <g:form action="findPlace" controller="admin" class="form-horizontal" >
-                <div class="form-group row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="name" type="text" name="name" class="form-control" placeholder="${g.message(code:'placeList.name', default:'Name')}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="town" type="text" name="town" class="form-control" placeholder="${g.message(code:'placeList.town', default:'Town')}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="address" type="text" name="address" class="form-control" placeholder="${g.message(code:'placeList.address', default:'Address')}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <g:select name="types" id="types" from="${pl.fork.place.PlaceType.list()}"
-                                  optionValue="tag" class="form-control" multiple="multiple"
-                                  optionKey="id"
-                        />
-                    </div>
-                </div>
-
-                <div class="buttons">
-                    <label for="findPlace" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search"></span>
-                        <g:message code="admin.search"/>
-                    </label>
-                    <g:submitButton id="findPlace" name="findPlace" class="save" class="hidden"/>
-                </div>
-            </g:form>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
     </div>
