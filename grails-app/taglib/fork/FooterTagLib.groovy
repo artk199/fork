@@ -18,10 +18,8 @@ class FooterTagLib {
 
     def getTopScoredPlaces = { attrs ->
         int size = Integer.parseInt(attrs.maxSize)
-
         size = (size == 0 ? 0 : size - 1);
 
-        println "TEST2: "+size
         def places = placeService.getTopScoredPlaces(size);
 
         out << "<ul>";
@@ -38,7 +36,7 @@ class FooterTagLib {
         out << "</ul>";
     }
 
-    def getNewestUsers = { attrs, body ->
+    def getNewestUsers = { attrs ->
         int maxSize = Integer.parseInt(attrs.maxSize)
         maxSize = (maxSize == 0 ? 0 : maxSize - 1);
         def users = userService.getNewestUsers(maxSize);

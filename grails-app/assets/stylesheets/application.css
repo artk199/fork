@@ -352,7 +352,7 @@ a.btn-orange:active{
     height:100%;
 }
 
-#show-place h1{
+.blue-section h1{
     text-align: left;
     border-bottom: 1px solid #000;
     width:100%;
@@ -432,7 +432,7 @@ iframe{
     margin: 15px;
 }
 
-#show-place .bar-section{
+.blue-section .bar-section{
     float: left;
     height: 50px;
     margin-right: 20px;
@@ -440,45 +440,49 @@ iframe{
     position: relative;
 }
 
-#show-place .nav-tabs{
+.blue-section .nav-tabs{
     border-bottom:none!important;
 }
 
-#show-place .nav-tabs .glyphicon{
+.blue-section .nav-tabs .glyphicon{
     margin-right: 10px;
     font-size: 20px;
     float: left;
     margin-top: -2px;
 }
-#show-place .nav-tabs span{
+.blue-section .nav-tabs span{
     text-decoration: none;
     color: #fff;
 }
 
-#show-place .nav-tabs .title{
+.blue-section .nav-tabs .title{
     padding:0;
     margin-top:-5px;
 }
 
-#show-place .nav-tabs>li.active>a, #show-place .nav-tabs>li.active>a:focus,
-#show-place .nav-tabs>li.active>a:hover, #show-place .nav-tabs>li.active>a:link {
+.blue-section .nav-tabs>li.active>a, .blue-section .nav-tabs>li.active>a:focus,
+.blue-section .nav-tabs>li.active>a:hover, .blue-section .nav-tabs>li.active>a:link {
     background: #2C5588!important;
     border:none!important;
     border-radius:0!important;
 }
 
-#show-place .nav-tabs>li a:active, #show-place .nav-tabs>li a:hover{
+.blue-section .nav-tabs>li a:active, .blue-section .nav-tabs>li a:hover{
     background:none!important;
     border-radius:0!important;
 }
 
-#show-place .bar-section a:link, #show-place .bar-section a:visited{
+.blue-section .bar-section a:link, .blue-section .bar-section a:visited{
     position: absolute;
     width:100%;
     height:100%;
     left:0;
     top:0;
     text-decoration: none;
+}
+
+.blue-section .btn-default{
+    color: #7b90b4!important;
 }
 
 .tab-content .glyphicon{
