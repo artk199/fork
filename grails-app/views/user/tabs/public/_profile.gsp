@@ -9,11 +9,6 @@
                     <img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" width="100%" height="100%" />
                 </g:else>
             </div>
-            <div style="min-width:200px;float:left;height: 100%;">
-                <div class="fork-profile-button">Edytuj informacje </div>
-                <div class="fork-profile-button">Edytuj konto </div>
-                <div class="fork-profile-button">Edytuj prywatbisc </div>
-            </div>
         </div>
         <div profile-details style="padding-right:20px;">
             <g:each in="${this.user.activities}" var="activity">

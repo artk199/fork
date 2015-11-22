@@ -5,6 +5,7 @@ package pl.fork.activity;
  */
 public enum ActivityType {
 
+    INVITE("enum.activity.invite"),
     FRIEND("enum.activity.friend"),
     REVIEW("enum.activity.review"),
     IMAGE("enum.activity.image");

@@ -12,13 +12,9 @@
            <i class="fi-address-book"></i>
            <span class="hidden-xs title"><g:message code="user.show.friends"/></span>
        </a></li>
-       <li><a data-toggle="tab" href="#visited">
-           <i class="fi-map icon-small"></i>
-           <span class="hidden-xs title"><g:message code="user.show.visited"/></span>
-       </a></li>
        <li><a data-toggle="tab" href="#events">
-           <i class="fi-web"></i>
-           <span class="hidden-xs title"><g:message code="user.show.events"/></span>
+           <i class="fi-map"></i>
+           <span class="hidden-xs title" style="margin-left:25px;"> <g:message code="user.show.events"/></span>
        </a></li>
     </ul>
 
@@ -55,10 +51,6 @@
             <sec:ifNotLoggedIn>
                 <g:render template="tabs/public/friends"/>
             </sec:ifNotLoggedIn>
-        </div>
-
-        <div id="visited" class="tab-pane fade">
-
         </div>
 
         <div id="events" class="tab-pane fade">
