@@ -1,6 +1,10 @@
 package pl.fork.place
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.SpringSecurityUtils
+import pl.fork.auth.RoleType
+import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
@@ -13,6 +17,7 @@ import org.grails.web.json.JSONObject
 class PlaceController {
     PlaceService placeService
     ImageService imageService
+    SpringSecurityService springSecurityService;
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -54,6 +59,12 @@ class PlaceController {
         if (place == null) {
             notFound()
             return
+        }
+
+        User user = User.findByUsername(springSecurityService.currentUser)
+        //jeżeli rola użytkownika różna od zwykłego użytkownika to miejsce od razu akceptowane
+        if (SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_ADMIN.name())) {
+            place.status=Status.APPROVED;
         }
 
         placeService.save(place);

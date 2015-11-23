@@ -3,6 +3,7 @@ package pl.fork.place
 import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
 import pl.fork.activity.ActivityService
+import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
@@ -36,6 +37,14 @@ class PlaceService {
     }
 
     List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore, String address) {
+        filter(name, placeTypes, town, timeAfter, timeBefore, address, Status.APPROVED);
+    }
+
+    List<Place> findAllPending() {
+        filter(null, null, null, null, null, null, Status.PENDING);
+    }
+
+    List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore, String address, Status status) {
 
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
         String minDate = "1000/01/01";
@@ -63,6 +72,10 @@ class PlaceService {
 
             if (address != null && !"".equals(address)) {
                 ilike("address", "%"+address+"%")
+            }
+
+            if (status) {
+                eq("status", status)
             }
 
             if(placeTypes != null && placeTypes.size() > 0){

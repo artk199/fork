@@ -1,13 +1,17 @@
 package pl.fork.admin
 
 import grails.transaction.Transactional
+import pl.fork.auth.Status
 import pl.fork.file.FileStatus
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
+import pl.fork.place.Place
+import pl.fork.place.PlaceService
 
 @Transactional
 class AdminService {
     ImageService imageService;
+    PlaceService placeService;
 
     def rejectImage(id){
         ForkFile image = imageService.getImage(id);
@@ -17,8 +21,20 @@ class AdminService {
 
     def acceptImage(id){
         ForkFile image = imageService.getImage(id);
-        image.status = FileStatus.APPROVED;
+        image.status = Status.APPROVED;
         image.save();
+    }
+
+    def rejectPlace(id){
+        Place place= placeService.get(new Long(id));
+        place.status = Status.REJECTED;
+        place.save();
+    }
+
+    def acceptPlace(id){
+        Place place= placeService.get(new Long(id));
+        place.status = Status.APPROVED;
+        place.save();
     }
 
     List<ForkFile> getImagesWaitingForDecision(){

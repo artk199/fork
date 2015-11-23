@@ -78,7 +78,52 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <g:each in="${pendingPlaces}" var="place" >
+                            <tr>
+                                <td class='col-md-3 col-sm-3 col-xs-3'>
+                                    <a href="/place/show/${place.id}">
+                                        ${place.name}
+                                    </a>
 
+                                    <div class="pull-right">
+                                        <a href="/place/edit/${place.id}">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                            <g:message code="default.link.edit"/>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class='col-md-5 col-sm-5 col-xs-5'>${place.description}</td>
+                                <td class='col-md-2 col-sm-2 col-xs-2'>
+                                    <g:if test="${place.town}">
+                                        ${place.town}
+                                    </g:if>
+                                    <g:else>
+                                        <g:message code="default.input.empty"/>
+                                    </g:else>
+                                </td>
+                                <td class='col-md-2 col-sm-2 col-xs-2'>
+                                    <g:if test="${place.address}">
+                                        ${place.address}
+                                    </g:if>
+                                    <g:else>
+                                        <g:message code="default.input.empty"/>
+                                    </g:else>
+                                </td>
+                                <td>
+                                    <g:set var="sendPlace" value="[placeId: place.id]" />
+                                    <a class="btn btn-default"
+                                       href="${g.createLink(controller:'admin',action:'rejectPlace', params:sendPlace)}">
+                                        <span class='glyphicon glyphicon-remove-sign'></span>
+                                        <span><g:message code="admin.tabs.photos.reject"/></span>
+                                    </a>
+                                    <a class="btn btn-default"
+                                       href="${g.createLink(controller:'admin',action:'acceptPlace', params:sendPlace)}">
+                                        <span class='glyphicon glyphicon-ok-sign'></span>
+                                        <span><g:message code="admin.tabs.photos.accept"/></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </g:each>
                     </tbody>
                 </table>
             </g:else>

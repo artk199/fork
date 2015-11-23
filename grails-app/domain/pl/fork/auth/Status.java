@@ -1,16 +1,16 @@
-package pl.fork.file;
+package pl.fork.auth;
 
 /**
  * Created by Patryk on 11.11.2015.
  */
-public enum FileStatus {
+public enum Status {
     APPROVED("enum.approved"),
     PENDING ("enum.pending"),
     REJECTED ("enum.rejected");
 
     String label;
 
-    FileStatus(String label) {
+    Status(String label) {
         this.label = label;
     }
 

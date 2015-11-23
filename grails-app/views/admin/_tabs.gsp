@@ -18,7 +18,7 @@
             <li><a data-toggle="tab" href="#photos">
                 <span class="glyphicon glyphicon-picture"></span>
                 <span class="title"><g:message code="admin.tabs.photos"/></span>
-                <g:if test = "${waitingImages.size() > 0}">
+                <g:if test = "${waitingImages}">
                     <span class="label label-primary" id="admin-photos-label">${waitingImages.size()}</span>
                 </g:if>
             </a></li>

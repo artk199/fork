@@ -3,7 +3,7 @@
     <div class="col-md-8 col-sm-8 col-xs-11">
         <h3><g:message code="admin.tabs.photos.header"/></h3>
 
-        <g:if test="${waitingImages.size == 0}">
+        <g:if test="${!waitingImages}">
             <p><g:message code="admin.tabs.photos.noPending"/></p>
         </g:if>
         <g:else>

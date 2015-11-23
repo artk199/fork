@@ -1,5 +1,6 @@
 package pl.fork.place
 
+import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.event.Event
 import pl.fork.file.ForkFile
@@ -35,6 +36,7 @@ class Place {
     String phone
     String website
     User owner
+    Status status = Status.PENDING;
 
     //date is automatically filled with current timestamp
     Date dateCreated;

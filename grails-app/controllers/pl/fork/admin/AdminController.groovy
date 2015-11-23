@@ -15,7 +15,8 @@ class AdminController {
 
     def index() {
         def images = adminService.getImagesWaitingForDecision();
-        render view: "index", model: [waitingImages: images];
+        def pendingPlaces = placeService.findAllPending();
+        render view: "index", model: [waitingImages: images, pendingPlaces: pendingPlaces];
     }
 
     def findPlace(){
@@ -33,7 +34,6 @@ class AdminController {
         def images = adminService.getImagesWaitingForDecision();
         render images as JSON;
     }
-
     def rejectImage(){
         if(params.id){
             adminService.rejectImage(params.id);
@@ -42,6 +42,13 @@ class AdminController {
         def imagesList = images.collect{["title": it.title, "id": it.id, "place_id": it.place?.id,
         "place_name": it.place?.name, "dateCreated": it.dateCreated, "user_id": it.owner.id, "user_name": it.owner.username]};
         render imagesList as JSON
+    }
+
+    def rejectPlace(){
+        if(params.placeId){
+            adminService.rejectPlace(params.placeId);
+        }
+        redirect(controller: "admin", action: "index")
     }
 
     def acceptImage(){
@@ -53,6 +60,14 @@ class AdminController {
                 "place_name": it.place?.name, "dateCreated": it.dateCreated, "user_id": it.owner.id, "user_name": it.owner.username]};
 
         render imagesList as JSON
+    }
+
+
+    def acceptPlace(){
+        if(params.placeId){
+            adminService.acceptPlace(params.placeId);
+        }
+        redirect(controller: "admin", action: "index")
     }
 
     def getImagesWaitingForDecision(){

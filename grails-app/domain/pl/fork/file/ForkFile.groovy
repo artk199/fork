@@ -1,5 +1,6 @@
 package pl.fork.file
 
+import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.place.Place
 
@@ -24,7 +25,7 @@ class ForkFile {
     String description
     User owner
     Date dateCreated
-    FileStatus status = FileStatus.PENDING;
+    Status status = Status.PENDING;
 
     boolean isProfile(){
         if( owner.profilePicture.id == this.id ){
