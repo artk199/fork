@@ -23,8 +23,8 @@
                 <g:message code="home.register.header"/>
             </h2>
             <p><g:message code="home.register.description.first"/></p>
-            <p><g:message code="home.register.description.second" args="['/user/register']"/></p>
-            <a href="/user/register" class="btn btn-orange btn-default pull-right" role="button">
+            <p><g:message code="home.register.description.second" args="['/register']"/></p>
+            <a href="/register" class="btn btn-orange btn-default pull-right" role="button">
                 <span class="glyphicon glyphicon glyphicon-user"></span>
                 <g:message code="default.registration"/>
             </a>

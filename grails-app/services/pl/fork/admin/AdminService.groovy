@@ -2,7 +2,6 @@ package pl.fork.admin
 
 import grails.transaction.Transactional
 import pl.fork.auth.Status
-import pl.fork.file.FileStatus
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
 import pl.fork.place.Place

@@ -19,6 +19,11 @@ class User implements Serializable {
 	String password
 	String password_confirm
 	String email
+	String firstName
+	String lastName
+	String about
+	String town
+	String address
 
 	boolean enabled = true
 	boolean accountExpired
@@ -77,6 +82,11 @@ class User implements Serializable {
 		password size: 5..64, blank: false
 		email email: true, blank: false, unique: true
 		profilePicture nullable: true
+		firstName nullable: true
+		lastName nullable: true
+		town nullable: true
+		address nullable: true
+		about type: 'text', nullable: true
 	}
 
 	/**
@@ -118,6 +128,6 @@ class User implements Serializable {
 
 	static mapping = {
 		password column: '`password`'
-
+		about type: 'text'
 	}
 }

@@ -22,6 +22,15 @@ class UserService {
     }
 
     @Transactional
+    def validateFields(User user){
+        if(user.password_confirm != user.password) {
+            user.errors.rejectValue("password", "matching.passwords");
+        }
+
+        return user;
+    }
+
+    @Transactional
     def register(User user){
 
 
@@ -151,8 +160,12 @@ class UserService {
     }
 
     List<User> getNewestUsers(int maxSize){
-        return User.createCriteria().list{
-            order("username", "desc")
+       def users = User.createCriteria().list{
+            order("id", "desc")
         };
+
+        int size = maxSize >= users.size() ? users.size() -1 : maxSize;
+
+        return users[0..size];
     }
 }

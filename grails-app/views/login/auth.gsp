@@ -44,6 +44,8 @@
                 <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.log.in.label', default: 'Zaloguj się!')}" />
             </fieldset>
         </form>
+
+        <p><g:message code="login.noAccount" args="['/register']"/></p>
     </div>
 </body>
 </html>
