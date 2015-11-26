@@ -184,6 +184,7 @@ class BootStrap {
 
         dagrasso.addToTypes(type);
 
+
         JSON.registerObjectMarshaller( Score ) { Score score ->
             return [
                     owner : score.owner,
@@ -196,6 +197,7 @@ class BootStrap {
             ]
         }
 
+
         JSON.registerObjectMarshaller( User ) { User user ->
             return [
                     username : user.username,
@@ -205,20 +207,13 @@ class BootStrap {
                     role : user.authorities
             ]
         }
-/*
-//
+
+
         JSON.registerObjectMarshaller( Place ) { Place place ->
-            return [
-                    address : place.address,
-                    description : place.description,
-                    name : place.name,
-                    id : place.id,
-                    town : place.town,
-                    email : place.email,
-                    picture : place.images.first ?: -1
-            ]
+            return place.properties + [avgScore: place.avgScore]
         }
-*/
+
+
         println "Deployed."
     }
     def destroy = {
