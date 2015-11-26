@@ -1,6 +1,6 @@
 package pl.fork.auth
 
-import pl.fork.event.Report
+import pl.fork.place.other.Report
 import pl.fork.file.ForkFile
 import pl.fork.place.Score
 import pl.fork.activity.Activity

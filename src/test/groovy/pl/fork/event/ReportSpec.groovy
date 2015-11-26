@@ -1,6 +1,7 @@
 package pl.fork.event
 
 import grails.test.mixin.TestFor
+import pl.fork.place.other.Report
 import spock.lang.Specification
 
 /**
