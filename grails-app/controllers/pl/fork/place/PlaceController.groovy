@@ -195,4 +195,17 @@ class PlaceController {
         render ids as JSON
     }
 
+    def getNear(){
+        List <Place> places;
+
+        if(params.x && params.y){
+            double x = params.x as Double;
+            double y = params.y as Double;
+            places = placeService.getNear(x, y);
+        }
+        else{
+            places = new ArrayList<Place>();
+        }
+        render places as JSON
+    }
 }

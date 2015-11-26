@@ -58,7 +58,7 @@
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 hidden-xs"></div>
 </div>
 
-<%-- CHECK WHY GRAILS CANT PARSE THOSE DOUBLES
+<%--
 <div class="form-group">
     <label for="latidude" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">
         <g:message code="place.latitude" />

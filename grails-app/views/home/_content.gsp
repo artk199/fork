@@ -50,3 +50,5 @@
     </div>
 
 </div>
+
+<g:link controller="place" action="getNear" longitude="10" latitude="50">aaaaa</g:link>

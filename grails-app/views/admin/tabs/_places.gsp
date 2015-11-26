@@ -54,7 +54,7 @@
                     <caption>
                         <span class="pull-right">
                             <span class="glyphicon glyphicon-th"></span>
-                            <g:message code="default.count" args="[0]" />
+                            <g:message code="default.count" args="[pendingPlaces.size()]" />
                         </span>
                     </caption>
                     <thead>

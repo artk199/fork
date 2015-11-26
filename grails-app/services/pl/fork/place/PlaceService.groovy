@@ -8,16 +8,14 @@ import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
 
-import javax.servlet.http.HttpServletRequest
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import pl.fork.place.PlaceType
 
 @Transactional
 class PlaceService {
-    private static final int START_RADIUS = 200;
-    private static final int MAX_RADIUS = 1000;
-    private static final int RADIUS_DIFF = 100;
+    private static final double START_DISTANCE = 0;
+    private static final double MAX_DISTANCE = 1000;
+    private static final double DISTANCE_DIFF = 200;
     private static final int MAX_PLACES_IN_NEAR = 20;
 
     def springSecurityService
@@ -118,24 +116,48 @@ class PlaceService {
         return Place.getAll();
     }
 
-    List<Place> getNear(def latitude, def longitude){
+    List<Place> getNear(double latitude, double longitude){
         List<Place> list = new ArrayList<Place>();
         List<Place> allPlaces = getAll();
-        int radius = START_RADIUS;
-        int max_places = allPlaces.size() > MAX_PLACES_IN_NEAR ? MAX_PLACES_IN_NEAR : allPlaces.size();
 
-        while(list.size() < max_places && radius < MAX_RADIUS){
+        // make sure max_places won't go out of index
+        int max_places = allPlaces.size() > MAX_PLACES_IN_NEAR ? MAX_PLACES_IN_NEAR : allPlaces.size();
+        double radius = START_DISTANCE;
+
+        // iterate searching until it reached max_places or radius is too big
+        while(list.size() < max_places && radius <= MAX_DISTANCE){
             for(Place p : allPlaces ){
-                if(Math.pow((p.getX() - x), 2) + Marth.pow((p.getY() - y), 2) < radius*2 &&
-                        !list.contains(p)
-                ){
-                    list.add(p);
+                // Check this place only if it has set X and Y position
+                if(p.getX() && p.getY()){
+                    double distance = getDistance(p.getX(),p.getY(), latitude, longitude);
+
+                    if(distance <= radius && !list.contains(p)){
+                        list.add(p);
+                    }
                 }
             }
-
-            radius += RADIUS_DIFF;
+            radius += DISTANCE_DIFF;
         }
+
         return list;
+    }
+
+    private static double getDistance(double x1, double y1, double x2, double y2) {
+        double longDifference = y1 - y2;
+        double part1 = Math.sin(degreeToRadians(x1)) * Math.sin(degreeToRadians(x2));
+        double part2 = Math.cos(degreeToRadians(x1)) * Math.cos(degreeToRadians(x2)) * Math.cos(degreeToRadians(longDifference));
+        double distanceInKm = radiansToDegree(Math.acos(part1 + part2));
+        distanceInKm = distanceInKm * 60 * 1.1515 * 1609.344;
+
+        return (distanceInKm);
+    }
+
+    private static double degreeToRadians(double degree) {
+        return (degree * Math.PI / 180.0);
+    }
+
+    private static double radiansToDegree(double radian) {
+        return (radian * 180 / Math.PI);
     }
 
     List<Score> getScores(Place place){
@@ -212,9 +234,16 @@ class PlaceService {
         return result
     }
 
+    // Find all
+
     // Sort places list by descending score
     public List<Place> getTopScoredPlaces(int maxSize){
-        def allPlaces = Place.findAll();
+        def allPlaces = filter(null, null, null, null, null, null, Status.APPROVED);
+
+        if(allPlaces.size() == 0){
+            return null
+        }
+
         allPlaces.sort{-it.getProperty("avgScore")};
         int size = maxSize >= allPlaces.size() ? allPlaces.size() -1 : maxSize;
         return allPlaces[0..size];
