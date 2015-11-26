@@ -36,7 +36,28 @@
             <g:message code="place.show.contact.contactToOwner"/>
         </h2>
         <g:if test="${this.place.owner}">
-
+            <p><g:message code="place.show.contact.owner"/></p>
+            <g:set var="place_owner" value="${this.place.owner}"/>
+            <p>
+                <span class="glyphicon glyphicon-user"></span>
+                <g:link controller="user" action="show" id="${place_owner.id}">
+                    ${place_owner.username}
+                </g:link>
+            </p>
+            <g:if test="${place_owner.firstName && place_owner.lastName}">
+                <p>
+                    <span class="glyphicon glyphicon-object-align-left"></span>
+                    <span><g:message code="place.show.contact.owner.firstAndLastName"/></span>
+                    ${place_owner.firstName} ${place_owner.lastName}
+                </p>
+            </g:if>
+            <g:if test="${place_owner.town && place_owner.address}">
+                <p>
+                    <span class="glyphicon glyphicon-map-marker"></span>
+                    <span><g:message code="place.show.contact.owner.address"/></span>
+                    ${place_owner.town}, ${place_owner.address}
+                </p>
+            </g:if>
         </g:if>
         <g:else>
             <p>${g.message(code:"place.show.contact.noOwner", args:["/place/registerOwner/"+this.place.id])}</p>

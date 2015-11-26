@@ -94,7 +94,7 @@ class PlaceController {
             notFound()
             return
         }
-
+        place.validate()
         if (place.hasErrors()) {
             transactionStatus.setRollbackOnly()
             respond place.errors, view:'edit'

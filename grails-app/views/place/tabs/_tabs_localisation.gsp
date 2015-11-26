@@ -22,4 +22,7 @@
     </div>
     <div class="col-md-2 col-sm-2 hidden-xs"></div>
 </div>
-<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCQcP1mIycA9POYLolLblZeqc3dLG9iVjQ&q={${this.place.town},${this.place.address}"></iframe>
+
+<g:if test="${this.place.town && this.place.address}">
+    <iframe src='https://www.google.com/maps/embed/v1/place?key=AIzaSyCQcP1mIycA9POYLolLblZeqc3dLG9iVjQ&q=${this.place.town},${this.place.address}'></iframe>
+</g:if>

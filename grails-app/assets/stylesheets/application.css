@@ -930,3 +930,16 @@ iframe{
     margin: 2px 0;
     text-align: left;
 }
+
+/* HIDING "SELECT ALL" OPTION ON MULTISELECT ELEMENTS */
+.multiselect-container .multiselect-all{
+    display:none!important;
+}
+
+hr {
+    height: 2px;
+    border-color:#CCCCE0!important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 75%;
+}

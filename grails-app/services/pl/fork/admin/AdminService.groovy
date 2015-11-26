@@ -14,7 +14,7 @@ class AdminService {
 
     def rejectImage(id){
         ForkFile image = imageService.getImage(id);
-        image.status = FileStatus.REJECTED;
+        image.status = Status.REJECTED;
         image.save();
     }
 
@@ -38,7 +38,7 @@ class AdminService {
 
     List<ForkFile> getImagesWaitingForDecision(){
         List<ForkFile> images = ForkFile.createCriteria().list {
-            eq("status", FileStatus.PENDING);
+            eq("status", Status.PENDING);
         }
         return images;
     }

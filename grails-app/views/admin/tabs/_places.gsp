@@ -44,7 +44,7 @@
         <div class="col-md-8 col-sm-8 col-xs-11">
             <h3><g:message code="admin.tabs.places.addedByUser"/></h3>
 
-            <g:if test="${false}">
+            <g:if test="${pendingPlaces.size() == 0}">
                 <p>
                     <g:message code="admin.tabs.places.noAddedByUser"/>
                 </p>

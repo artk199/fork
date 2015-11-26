@@ -8,6 +8,11 @@ import pl.fork.place.other.Pricing
 
 class Place {
 
+    static mapping = {
+        images lazy:false
+        pricing lazy:false
+    }
+
     static constraints = {
         address nullable:true
         town nullable:true
