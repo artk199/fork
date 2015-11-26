@@ -48,7 +48,4 @@
         </div>
         <div class="col-md-2 col-sm-2 col-lg-2 col-xs-1 hidden-xs"></div>
     </div>
-
 </div>
-
-<g:link controller="place" action="getNear" longitude="10" latitude="50">aaaaa</g:link>

@@ -118,7 +118,7 @@ class PlaceService {
 
     List<Place> getNear(double latitude, double longitude){
         List<Place> list = new ArrayList<Place>();
-        List<Place> allPlaces = getAll();
+        List<Place> allPlaces = filter(null, null, null, null, null, null, Status.APPROVED);
 
         // make sure max_places won't go out of index
         int max_places = allPlaces.size() > MAX_PLACES_IN_NEAR ? MAX_PLACES_IN_NEAR : allPlaces.size();

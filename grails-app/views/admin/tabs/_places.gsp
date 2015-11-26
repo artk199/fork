@@ -59,7 +59,7 @@
                     </caption>
                     <thead>
                     <tr>
-                        <th class='col-md-3 col-sm-3 col-xs-3' data-defaultsort="asc" data-firstsort="desc">
+                        <th class='col-md-2 col-sm-2 col-xs-2' data-defaultsort="asc" data-firstsort="desc">
                             <span class="glyphicon glyphicon-list-alt"></span>
                             <g:message code="admin.tabs.places.name"/>
                         </th>
@@ -75,12 +75,16 @@
                             <span class="glyphicon glyphicon-user"></span>
                             <g:message code="admin.tabs.places.user"/>
                         </th>
+                        <th class='col-md-1 col-sm-1 col-xs-1' data-defaultsort='disabled'>
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <g:message code="admin.tabs.comments.options"/>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                         <g:each in="${pendingPlaces}" var="place" >
                             <tr>
-                                <td class='col-md-3 col-sm-3 col-xs-3'>
+                                <td class='col-md-2 col-sm-2 col-xs-2'>
                                     <a href="/place/show/${place.id}">
                                         ${place.name}
                                     </a>
@@ -109,7 +113,7 @@
                                         <g:message code="default.input.empty"/>
                                     </g:else>
                                 </td>
-                                <td>
+                                <td class='col-md-1 col-sm-1 col-xs-1'>
                                     <g:set var="sendPlace" value="[placeId: place.id]" />
                                     <a class="btn btn-default"
                                        href="${g.createLink(controller:'admin',action:'rejectPlace', params:sendPlace)}">

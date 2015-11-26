@@ -5,7 +5,7 @@
                 <span class="glyphicon glyphicon-map-marker"></span>
                 <span class="title"><g:message code="admin.tabs.places"/></span>
                 <g:if test = "${pendingPlaces}">
-                    <span class="label label-primary" id="admin-photos-label">${pendingPlaces.size()}</span>
+                    <span class="label label-primary" id="admin-places-label">${pendingPlaces.size()}</span>
                 </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#comments">
@@ -27,7 +27,6 @@
             <li><a data-toggle="tab" href="#events">
                 <span class="glyphicon glyphicon-plane"></span>
                 <span class="title"><g:message code="admin.tabs.events"/></span>
-                <span class="label label-primary">1</span>
             </a></li>
             <li><a data-toggle="tab" href="#errors">
                 <span class="glyphicon glyphicon-fire"></span>
