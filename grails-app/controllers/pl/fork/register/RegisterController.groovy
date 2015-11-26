@@ -6,7 +6,7 @@ import pl.fork.auth.UserService
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
-@Transactional(readOnly = true)
+@Transactional
 class RegisterController {
     UserService userService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

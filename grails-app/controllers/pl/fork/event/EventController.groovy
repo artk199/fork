@@ -5,7 +5,7 @@ import pl.fork.place.Place
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional
 class EventController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

@@ -13,7 +13,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.grails.web.json.JSONObject
 
-@Transactional(readOnly = true)
+@Transactional
 class PlaceController {
     PlaceService placeService
     ImageService imageService
