@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.fork.Config;
+import pl.fork.activity.MainActivity;
+import pl.fork.entity.PlaceType;
 import pl.fork.fork.R;
 import pl.fork.entity.Place;
 
@@ -25,7 +27,7 @@ public class PlaceListAdapter extends ArrayAdapter<Place> {
 
     private static final String LOG_TAG = "PlaceListAdapter";
 
-    public PlaceListAdapter(Context context,List<Place> objects) {
+    public PlaceListAdapter(Context context, List<Place> objects) {
         super(context, 0, objects);
     }
 

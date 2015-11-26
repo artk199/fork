@@ -81,9 +81,6 @@ public class PlaceDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -114,8 +111,10 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 case 0:
                     return PlaceDetailsFragment.newInstance(position + 1, place);
                 case 1:
-                    return PlacePicturesFragment.newInstance(position + 1, place);
+                    return PlaceOpinionsFragment.newInstance(position + 1,place);
                 case 2:
+                    return PlacePicturesFragment.newInstance(position + 1, place);
+                case 3:
                     return PlaceMapFragment.newInstance(position + 1,place);
             }
             return null;
@@ -123,8 +122,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
@@ -134,8 +132,10 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 case 0:
                     return getString(R.string.title_section_description).toUpperCase(l);
                 case 1:
-                    return getString(R.string.title_section_photos).toUpperCase(l);
+                    return getString(R.string.title_section_opinion).toUpperCase(l);
                 case 2:
+                    return getString(R.string.title_section_photos).toUpperCase(l);
+                case 3:
                     return getString(R.string.title_section_map).toUpperCase(l);
             }
             return null;

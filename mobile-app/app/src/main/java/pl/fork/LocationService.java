@@ -95,7 +95,9 @@ public class LocationService extends Service implements LocationListener {
             }
         } catch (SecurityException e) {
             Log.e(LOG_TAG, "PERMISSION_NOT_GRANTED " + locationProvider);
-        }
+        } catch (Exception e){
+             e.printStackTrace();
+         }
         return location;
     }
 

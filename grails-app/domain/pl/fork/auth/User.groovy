@@ -1,5 +1,6 @@
 package pl.fork.auth
 
+import pl.fork.event.Report
 import pl.fork.file.ForkFile
 import pl.fork.place.Score
 import pl.fork.activity.Activity
@@ -13,7 +14,7 @@ class User implements Serializable {
 	List images
 	List activities
 	static mappedBy = [requestedFriends: 'requester', receivedFriends: 'receiver']
-	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend, activities:Activity]
+	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend, activities:Activity, reports:Report]
 
 	String username
 	String password

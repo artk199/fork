@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -25,6 +26,7 @@ import java.util.List;
 
 import pl.fork.LocationService;
 import pl.fork.SessionHandler;
+import pl.fork.entity.PlaceType;
 import pl.fork.fork.R;
 import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.listeners.PlaceListClickListener;
@@ -33,8 +35,7 @@ import pl.fork.web.LoadPlacesTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LocationManager locationManager = null;
-    private LocationListener locationListener = null;
+    private final MainActivity mainActivity = this;
 
     /** Menus */
     private static final int MENU_LOGIN = 1;
@@ -62,19 +63,17 @@ public class MainActivity extends AppCompatActivity {
         /** Inicjalizacja ImageLoadera */
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
+        Fresco.initialize(getApplicationContext());
 
-        locationManager = (LocationManager)
-                getSystemService(Context.LOCATION_SERVICE);
+        setUpMapButton();
+        setUpFilterButtons();
+        setUpLoginButton();
 
-        Button refreshButton = (Button) findViewById(R.id.refresh);
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                refreshPlaces();
-            }
-        });
+    }
 
+    private void setUpMapButton() {
         Button allMapButton = (Button) findViewById(R.id.allMapButton);
+
         allMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,12 +86,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        final Button loginbutton = (Button) findViewById(R.id.loginButton);
+    private void setUpFilterButtons() {
+        Button restaurantsButton = (Button) findViewById(R.id.restaurants);
+        setUpFilterButton(restaurantsButton,PlaceType.RESTAURANT);
+        Button attractionsButton = (Button) findViewById(R.id.attractions);
+        setUpFilterButton(attractionsButton,PlaceType.ATTRACTION);
+        Button hotelsButton = (Button) findViewById(R.id.hotels);
+        setUpFilterButton(hotelsButton,PlaceType.HOTEL);
+        Button allButton = (Button) findViewById(R.id.allPlaces);
+        setUpFilterButton(allButton,null);
+    }
 
+    private void setUpFilterButton(Button btn,final PlaceType placeType){
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refreshPlaces(placeType);
+            }
+        });
+    }
+
+    private void setUpLoginButton() {
+        final Button loginButton = (Button) findViewById(R.id.loginButton);
         if(SessionHandler.getInstance().isActive()){
-            loginbutton.setText("Wyloguj.");
-            loginbutton.setOnClickListener(new View.OnClickListener() {
+            loginButton.setText("Wyloguj");
+            loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SessionHandler.getInstance().setActive(false);
@@ -101,21 +121,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }else{
-            loginbutton.setOnClickListener(new View.OnClickListener() {
+            loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent loginIntent = new Intent(mainActivity,LoginActivity.class);
+                    Intent loginIntent = new Intent(mainActivity, LoginActivity.class);
                     startActivity(loginIntent);
                 }
             });
         }
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         if(true)
@@ -126,27 +144,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if(id == MENU_LOGIN){
             Intent loginIntent = new Intent(this,LoginActivity.class);
             startActivity(loginIntent);
         }
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
-
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-
-    private void refreshPlaces(){
+    private void refreshPlaces(PlaceType placeType){
 
         LocationService locationService = new LocationService(getApplicationContext());
         Location location = locationService.getLocation();
@@ -163,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
 
         ListView placesListView = (ListView) findViewById(R.id.listView);
 
-
         PlaceListAdapter adapter = (PlaceListAdapter)placesListView.getAdapter();
 
         if(adapter == null) {
@@ -173,29 +183,10 @@ public class MainActivity extends AppCompatActivity {
             placesListView.setOnItemClickListener(new PlaceListClickListener(this,adapter));
         }
 
-        new LoadPlacesTask(adapter,getApplicationContext()).execute(location.getLatitude(),location.getLongitude());
-    }
-
-    private class ForkLocationListener implements LocationListener {
-        @Override
-        public void onLocationChanged(Location loc) {
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
+        if(location != null) {
+            new LoadPlacesTask(adapter, getApplicationContext(),placeType).execute(location.getLatitude(), location.getLongitude());
+        }else{
+            new LoadPlacesTask(adapter, getApplicationContext(),placeType).execute(0.0, 0.0);
         }
     }
 

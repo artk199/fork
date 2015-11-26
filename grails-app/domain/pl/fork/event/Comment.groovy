@@ -7,6 +7,8 @@ class Comment {
 
     static belongsTo = [event:Event]
 
+    static hasMany = [reports: Report]
+
     String content
 
 }

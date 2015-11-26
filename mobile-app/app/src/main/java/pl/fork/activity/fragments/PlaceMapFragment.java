@@ -15,9 +15,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 
 import pl.fork.activity.MapsActivity;
 import pl.fork.fork.R;
-import pl.fork.activity.PlaceDetailsActivity;
 import pl.fork.entity.Place;
-import pl.fork.web.LoadAllImagesIDTask;
 
 /**
  * Created by Artur on 2015-11-07.

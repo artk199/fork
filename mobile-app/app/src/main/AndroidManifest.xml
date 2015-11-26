@@ -49,6 +49,10 @@
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
+            android:name="pl.fork.activity.FullScreenImageActivity"
+            android:label="@string/title_activity_place_details" >
+        </activity>
+        <activity
             android:name=".AddOpinionActivity"
             android:label="@string/title_activity_add_opinion" >
         </activity>
