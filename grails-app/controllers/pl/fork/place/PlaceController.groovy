@@ -1,6 +1,10 @@
 package pl.fork.place
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.SpringSecurityUtils
+import pl.fork.auth.RoleType
+import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
@@ -9,10 +13,11 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.grails.web.json.JSONObject
 
-@Transactional(readOnly = true)
+@Transactional
 class PlaceController {
     PlaceService placeService
     ImageService imageService
+    SpringSecurityService springSecurityService;
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -45,6 +50,10 @@ class PlaceController {
         render placeService.getNear(latitude,longitude) as JSON
     }
 
+    def all(){
+        render Place.list(max:params.max, offset:params.offset) as JSON
+    }
+
     def create() {
         respond new Place(params)
     }
@@ -54,6 +63,12 @@ class PlaceController {
         if (place == null) {
             notFound()
             return
+        }
+
+        User user = User.findByUsername(springSecurityService.currentUser)
+        //jeżeli rola użytkownika różna od zwykłego użytkownika to miejsce od razu akceptowane
+        if (SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_ADMIN.name())) {
+            place.status=Status.APPROVED;
         }
 
         placeService.save(place);
@@ -83,7 +98,7 @@ class PlaceController {
             notFound()
             return
         }
-
+        place.validate()
         if (place.hasErrors()) {
             transactionStatus.setRollbackOnly()
             respond place.errors, view:'edit'
@@ -145,8 +160,14 @@ class PlaceController {
 
     def getScores(Long id){
         Place place = placeService.get(id)
-        List scores = placeService.getScores(place)
-        render scores as JSON
+        if( params.offset && params.max ){
+            List scores = placeService.getScores(place, params.offset.toLong(), params.max.toLong())
+            render scores as JSON
+        }
+        else{
+            List scores = placeService.getScores(place)
+            render scores as JSON
+        }
     }
 
     def addScore(Long id){
@@ -177,11 +198,25 @@ class PlaceController {
 
 
     def getAllImages(int placeID){
-        // render user.images as JSON
-        println Place.findById(placeID).name
-        println "WTF"
-        def ids = Place.findById(placeID).images.collect{ it.id }
-        render ids as JSON
+        Place place = placeService.get(placeID)
+        render place.images.collect{ it.id } as JSON
     }
 
+    def getNear(){
+        List <Place> places;
+
+        if(params.x && params.y){
+            double x = params.x as Double;
+            double y = params.y as Double;
+            places = placeService.getNear(x, y);
+        }
+        else{
+            places = new ArrayList<Place>();
+        }
+        render places as JSON
+    }
+
+    def getMetascore(int id){
+        render placeService.getMetascore(id) as JSON
+    }
 }

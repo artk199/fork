@@ -79,8 +79,6 @@ public class MapsActivity extends FragmentActivity {
             mMap.animateCamera(update);
         }
 
-
-
     }
 
 

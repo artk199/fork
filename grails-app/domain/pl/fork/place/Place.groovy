@@ -1,11 +1,17 @@
 package pl.fork.place
 
+import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.event.Event
 import pl.fork.file.ForkFile
 import pl.fork.place.other.Pricing
 
 class Place {
+
+    static mapping = {
+        images lazy:false
+        pricing lazy:false
+    }
 
     static constraints = {
         address nullable:true
@@ -35,6 +41,7 @@ class Place {
     String phone
     String website
     User owner
+    Status status = Status.APPROVED;
 
     //date is automatically filled with current timestamp
     Date dateCreated;

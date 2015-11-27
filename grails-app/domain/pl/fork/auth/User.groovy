@@ -1,5 +1,6 @@
 package pl.fork.auth
 
+import pl.fork.place.other.Report
 import pl.fork.file.ForkFile
 import pl.fork.place.Score
 import pl.fork.activity.Activity
@@ -10,15 +11,18 @@ class User implements Serializable {
 
 	transient springSecurityService
 
-	List images
-	List activities
 	static mappedBy = [requestedFriends: 'requester', receivedFriends: 'receiver']
-	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend, activities:Activity]
+	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend, activities:Activity, reports:Report]
 
 	String username
 	String password
 	String password_confirm
 	String email
+	String firstName
+	String lastName
+	String about
+	String town
+	String address
 
 	boolean enabled = true
 	boolean accountExpired
@@ -77,6 +81,11 @@ class User implements Serializable {
 		password size: 5..64, blank: false
 		email email: true, blank: false, unique: true
 		profilePicture nullable: true
+		firstName nullable: true
+		lastName nullable: true
+		town nullable: true
+		address nullable: true
+		about type: 'text', nullable: true
 	}
 
 	/**
@@ -118,6 +127,8 @@ class User implements Serializable {
 
 	static mapping = {
 		password column: '`password`'
-
+		about type: 'text'
+		images sort: 'dateCreated', order: 'desc'
+		activities sort: 'dateCreated', order: 'desc'
 	}
 }

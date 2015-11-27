@@ -1,9 +1,11 @@
 package pl.fork.place
 
+import pl.fork.activity.Activity
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional
 class ScoreController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -84,6 +86,11 @@ class ScoreController {
             return
         }
 
+        /* Quick fix, don't kill me for that*/
+        def activities = Activity.findAllByScore(score);
+        activities?.each{ Activity a ->
+            a.delete(flush:true);
+        }
         score.delete flush:true
 
         request.withFormat {

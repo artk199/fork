@@ -22,6 +22,15 @@ class UserService {
     }
 
     @Transactional
+    def validateFields(User user){
+        if(user.password_confirm != user.password) {
+            user.errors.rejectValue("password", "matching.passwords");
+        }
+
+        return user;
+    }
+
+    @Transactional
     def register(User user){
 
 
@@ -149,4 +158,27 @@ class UserService {
         }
         return users.unique();
     }
+
+    List<User> getNewestUsers(int maxSize){
+       def users = User.createCriteria().list{
+            order("id", "desc")
+        };
+
+        int size = maxSize >= users.size() ? users.size() -1 : maxSize;
+
+        return users[0..size];
+    }
+
+    List<Activity> getActivities(int id, int offset, int max){
+        User u = User.findById(id)
+        List<Activity> activities = Activity.findAll("from Activity as a where a.user.id=:user and a.activityType<>:type order by a.dateCreated desc",[user:u.id, type: ActivityType.INVITE], [max:max, offset: offset])
+        activities
+    }
+
+    List<Activity> getFriendsActivities(int id, int offset, int max){
+        User u = User.findById(id)
+        List<Activity> activities = Activity.findAll("from Activity as a where a.user in (:friends) and a.activityType<>:type  order by a.dateCreated desc", [friends: u.friends, type: ActivityType.INVITE], [max:max, offset: offset])
+        activities
+    }
+
 }

@@ -3,7 +3,7 @@ package pl.fork.file
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.transaction.Transactional
 import pl.fork.activity.ActivityService
-import pl.fork.auth.Role
+import pl.fork.auth.Status
 import pl.fork.auth.RoleType
 import pl.fork.auth.User
 import grails.web.servlet.mvc.GrailsParameterMap
@@ -49,9 +49,9 @@ class ImageService {
         file.mini = imageScaleService.scale(file.source, 200)
 
         //jeżeli rola użytkownika różna od zwykłego użytkownika to zdjęcie od razu akceptowane
-        if (!SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_USER.name()) ||
+        if (SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_ADMIN.name()) ||
                 place && place.owner.equals(user)) {
-            file.status=FileStatus.APPROVED;
+            file.status=Status.APPROVED;
         }
         if (place) {
             file.place = place;

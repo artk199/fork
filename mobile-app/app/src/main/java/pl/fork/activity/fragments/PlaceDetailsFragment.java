@@ -35,20 +35,13 @@ import pl.fork.web.LoadOpinionsTask;
  * Created by Artur on 2015-11-07.
  */
 public class PlaceDetailsFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
+
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     Place place;
 
     private ObservableScrollView mScrollView;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static PlaceDetailsFragment newInstance(int sectionNumber,Place place) {
         PlaceDetailsFragment fragment = new PlaceDetailsFragment();
 
@@ -68,9 +61,6 @@ public class PlaceDetailsFragment extends Fragment {
 
        View rootView = inflater.inflate(R.layout.fragment_place_details, container, false);
 
-
-        ListView placesListView = (ListView) rootView.findViewById(R.id.listView);
-
         Button btn = (Button) rootView.findViewById(R.id.addOpinionButton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,16 +71,7 @@ public class PlaceDetailsFragment extends Fragment {
             }
         });
 
-        OpinionsListAdapter adapter = (OpinionsListAdapter)placesListView.getAdapter();
 
-        if(adapter == null) {
-            List<Opinion> opinions = new ArrayList<Opinion>();
-            adapter = new OpinionsListAdapter(rootView.getContext(), opinions);
-            placesListView.setAdapter(adapter);
-        }
-        if(place != null) {
-            new LoadOpinionsTask(adapter).execute(place.getId());
-        }
 
         TextView descriptionTextView = (TextView) rootView.findViewById(R.id.descriptionTextView);
         descriptionTextView.setText(place.getDescription());
@@ -102,7 +83,7 @@ public class PlaceDetailsFragment extends Fragment {
         addressTextView.setText(place.getAddress());
 
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
-        ratingBar.setRating((float) 3.4);
+        ratingBar.setRating(place.getRating().floatValue());
 
         if(!SessionHandler.getInstance().isActive()){
             Button addOpinionButton = (Button) rootView.findViewById(R.id.addOpinionButton);

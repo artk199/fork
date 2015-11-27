@@ -1,6 +1,7 @@
 package pl.fork.place
 
 import pl.fork.auth.User
+import pl.fork.place.other.Report
 
 class Score {
 
@@ -12,6 +13,8 @@ class Score {
     }
 
     static belongsTo = [place:Place, owner: User]
+
+    static hasMany = [reports: Report]
 
     String title
     String review

@@ -1,46 +1,32 @@
 forkApp.controller('ScoreController', ['$scope', '$location', '$http', function( $scope, $location, $http ){
 
     $scope.placeId = -1;
-    $scope.url = "";
     $scope.data = {};
-    $scope.scores = [];
+    $scope.empty = false;
     $scope.submitted = false;
     $scope.hovered = 0;
+    $scope.instance = {};
 
     $scope.init = function(id){
-        var url = $location.absUrl().toString();
-        var ind = url.indexOf('place');
-        url = url.substring(0, ind + 'place'.length);
-
         $scope.id = id;
-        $scope.url = url + '/' + id + '/score';
 
         $scope.data.score = 0;
 
-        $http.get($scope.url). success(function(data, status, headers, config) {
-            $scope.scores = data;
+        $http.get("/place/"+$scope.id+"/metascore"). success(function(data) {
+            $scope.empty = data['empty'];
+            $scope.submitted = data['submitted'];
+            $scope.instance = data['score'];
             console.log(data);
         });
     }
 
-    $scope.noScores = function(){
-        if( $scope.scores.length == 0 ){
-            return true;
-        }
-        return false;
-    }
-
-    $scope.notSubmitted = function(){
-        if( $scope.submitted ){
-            return false;
-        }
-        return true;
-    }
-
     $scope.addScore = function(){
-        $http.post($scope.url, $scope.data). success(function(data, status, headers, config) {
-            $scope.scores.push(data);
+        $http.post("/place/"+$scope.id+"/score", $scope.data). success(function(data) {
+            $scope.empty = false;
             $scope.submitted = true;
+            $scope.instance = data;
+            console.log(data);
+            console.log($scope.instance);
         });
     }
 
@@ -48,13 +34,6 @@ forkApp.controller('ScoreController', ['$scope', '$location', '$http', function(
 
     $scope.scoreCount = function(score){
         return new Array(score);
-    }
-
-    $scope.getPicture = function(score){
-        if ( score.owner.profilePicture != null ){
-            return "/image/" + score.owner.profilePicture;
-        }
-        return "http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg";
     }
 
 }]);
@@ -106,5 +85,36 @@ forkApp.directive('star', function(){
 
 
         }
+    }
+});
+
+forkApp.directive( 'stars', function() {
+    return{
+        restrict: 'E',
+        scope: {
+            active: '@',
+            amount: '@'
+        },
+        controller: ['$scope', function($scope) {
+
+            $scope.newArray = function(){
+                var number = parseInt($scope.amount);
+                if(isNaN(number)){
+                    return 0;
+                }
+                return new Array(parseInt(number));
+            }
+
+            $scope.isActive = function(){
+                if( $scope.active == "true" ){
+                    return true;
+                }
+                return false;
+            }
+
+        }],
+        template: `
+            <span ng-repeat="score in newArray() track by $index" class="glyphicon glyphicon-star fork-star" ng-class="{'active': isActive()}"></span>
+        `
     }
 });

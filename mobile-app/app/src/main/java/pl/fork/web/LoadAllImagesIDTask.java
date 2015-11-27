@@ -45,7 +45,8 @@ public class LoadAllImagesIDTask extends AsyncTask<Integer,Void,Integer[]> {
             Integer[] images = restTemplate.getForObject(url, Integer[].class);
             return images;
         }catch (Exception e){
-
+            Log.e("Blad","Blad podczas ladowania wszystkich zdjec.");
+            e.printStackTrace();
         }
         return null;
     }
@@ -59,7 +60,7 @@ public class LoadAllImagesIDTask extends AsyncTask<Integer,Void,Integer[]> {
             ArrayList<String> images = new ArrayList<>();
 
             for(Integer image : imagesID){
-                images.add(Config.baseURL + "image/"+image);
+                images.add("http://45.55.215.21:8080/image/1");
             }
 
             intent.putStringArrayListExtra("images", images);

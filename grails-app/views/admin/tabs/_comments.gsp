@@ -111,9 +111,13 @@
                             <span class="glyphicon glyphicon-map-marker"></span>
                             <g:message code="admin.tabs.comments.place"/>
                         </th>
-                        <th class='col-md-2 col-sm-2 col-xs-2' data-defaultsort="desc" data-firstsort="asc">
+                        <th class='col-md-1 col-sm-1 col-xs-1' data-defaultsort="desc" data-firstsort="asc">
                             <span class="glyphicon glyphicon-calendar"></span>
                             <g:message code="admin.tabs.comments.date"/>
+                        </th>
+                        <th class='col-md-1 col-sm-1 col-xs-1' data-defaultsort='disabled'>
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <g:message code="admin.tabs.comments.options"/>
                         </th>
                     </tr>
                     </thead>
@@ -141,8 +145,25 @@
                                     ${score.place.name}
                                 </a>
                             </td>
-                            <td class='col-md-2 col-sm-2 col-xs-2'>
+                            <td class='col-md-1 col-sm-1 col-xs-1'>
                                 ${score.dateCreated}
+                            </td>
+                            <td class='col-md-1 col-sm-1 col-xs-1'>
+                                <g:form resource="${score}" method="DELETE">
+                                    <g:hiddenField name="version" value="${score?.version}" />
+                                    <g:hiddenField name="id" value="${score?.id}" />
+                                    <fieldset class="buttons">
+                                        <a href="/score/edit/${score.id}" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                            <g:message code="default.link.edit"/>
+                                        </a>
+                                        <label for="delete-score-${score.id}" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <g:message code="default.link.delete"/>
+                                        </label>
+                                        <input id="delete-score-${score.id}" class="hidden" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                                    </fieldset>
+                                </g:form>
                             </td>
                         </tr>
                     </g:each>

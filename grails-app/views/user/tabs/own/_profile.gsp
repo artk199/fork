@@ -11,17 +11,28 @@
             </div>
             <div style="min-width:200px;float:left;height: 100%;border: 1px #DDD solid;border-top:none;">
                 <a href="/user/edit/${this.user.id}"><div class="fork-profile-button">Edytuj informacje </div></a>
-                <a href="/user/edit/${this.user.id}"><div class="fork-profile-button">Edytuj konto </div></a>
-                <a href="/user/edit/${this.user.id}"><div class="fork-profile-button">Edytuj prywatność </div></a>
+                <a href="/user/edit_password/${this.user.id}"><div class="fork-profile-button">Edytuj konto</div></a>
             </div>
 
             <div style="min-width:200px;float:left;height: 100%;margin-top:50px;border: 1px #DDD solid;padding-bottom:20px;padding-top:20px;">
-                <span style="width:100%;text-align:left;display:block;font-size:20px; margin-bottom:10px;margin-left:20px;">Informacje</span>
-                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">${this.user.username}</span>
-                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Mieszka w Warszawa</span>
-                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Urodzony 20 maja 1992 roku</span>
-                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Ma 12 znajomych</span>
-                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Napisał 4 recenzje</span>
+                <a href="/user/edit/${this.user.id}"><span style="width:100%;text-align:left;display:block;font-size:20px; margin-bottom:10px;margin-left:20px;">Informacje</span></a>
+                <g:if test="${this.user.firstName && this.user.lastName}">
+                    <span class="fork-profile-info">
+                        ${this.user.firstName} ${this.user.lastName.substring(0,1)}
+                    </span>
+                </g:if>
+                <g:else>
+                    <span class="fork-profile-info">${this.user.username}</span>
+                </g:else>
+                <g:if test="${this.user.town}">
+                    <span class="fork-profile-info">Mieszkasz w ${this.user.town}</span>
+                </g:if>
+                <span class="fork-profile-info">Masz ${this.user.friends.size()} znajomych</span>
+                <span class="fork-profile-info">Napisałeś ${this.user.scores.size()} recenzji</span>
+                <g:if test="${this.user.about}">
+                    <hr class="divider" style="margin-top:10px; margin-bottom:10px;">
+                    <span class="fork-profile-info">${this.user.about}</span>
+                </g:if>
             </div>
         </div>
         <div profile-details style="padding-right:20px;">
@@ -38,19 +49,22 @@
                     </div>
                 </g:if>
 
-                <g:each in="${this.activities}" var="activity">
-                    <g:if test="${activity.activityType == pl.fork.activity.ActivityType.REVIEW}">
-                        <g:render template="/user/tabs/activity/review" model="[activity:activity]"/>
-                    </g:if>
-                    <g:if test="${activity.activityType == pl.fork.activity.ActivityType.IMAGE}">
-                        <g:render template="/user/tabs/activity/image" model="[activity:activity]"/>
-                    </g:if>
-                    <g:if test="${activity.activityType == pl.fork.activity.ActivityType.FRIEND}">
-                        <g:render template="/user/tabs/activity/friend" model="[activity:activity]"/>
-                    </g:if>
-                </g:each>
-            </g:else>
 
+            </g:else>
+            <infinite-list link="${'/user/'+this.user.id+'/friends/activities'}" amount="1">
+                <div class='col-md-12 fork-profile-activity'>
+                    <g:render template="/user/tabs/activity/common"/>
+                    <div ng-if="instance.type == 'IMAGE'">
+                        <g:render template="/user/tabs/activity/image"/>
+                    </div>
+                    <div ng-if="instance.type == 'REVIEW'">
+                        <g:render template="/user/tabs/activity/review"/>
+                    </div>
+                    <div ng-if="instance.type == 'FRIEND'">
+                        <g:render template="/user/tabs/activity/friend"/>
+                    </div>
+                </div>
+            </infinite-list>
         </div>
 
     </div>

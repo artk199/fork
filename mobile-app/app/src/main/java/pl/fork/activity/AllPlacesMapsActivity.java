@@ -40,9 +40,9 @@ public class AllPlacesMapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        this.places = (ArrayList<Place>) getIntent().getSerializableExtra("places");
         setUpMapIfNeeded();
 
-        this.places = (ArrayList<Place>) getIntent().getSerializableExtra("places");
 
     }
 
@@ -86,8 +86,8 @@ public class AllPlacesMapsActivity extends FragmentActivity {
 
         for (Place place : places) {
 
-            double rndX = rand.nextFloat() * (0.05 - 0.0) + 0.0;
-            double rndY = rand.nextFloat() * (0.05 - 0.0) + 0.0;
+            double rndX = rand.nextFloat() * (0.2 - 0.0) + 0.0;
+            double rndY = rand.nextFloat() * (0.2 - 0.0) + 0.0;
 
             LatLng position = new LatLng(place.getLatitude()+rndX, place.getLongitude()+rndY);
             MarkerOptions markerOptions = new MarkerOptions();

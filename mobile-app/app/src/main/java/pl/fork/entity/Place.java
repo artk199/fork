@@ -1,8 +1,11 @@
 package pl.fork.entity;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 
 /**
  * Created by Artur on 2015-10-29.
@@ -19,12 +22,39 @@ public class Place implements Serializable {
     private String email = "";
     private String phone = "";
     private String website = "";
+    private Double rating = 2.0;
     private Integer imageID = -1;
-    private Double longitude = 54.3610873;
-    private Double latitude = 18.6900271;
+    private Double longitude = 18.6900271;
+    private Double latitude = 54.3610873;
+    private LinkedList<ForkImage> images = new LinkedList<>();
+    private LinkedList<ForkScore> scores = new LinkedList<>();
+    private LinkedList<PlaceType> types = new LinkedList<>();
+
+    public LinkedList<PlaceType> getTypes() {
+        return types;
+    }
+
+    public void setTypes(LinkedList<PlaceType> types) {
+        this.types = types;
+    }
+
+
+    public LinkedList<ForkImage> getImages() {
+        return images;
+    }
+
+    public void setImages(LinkedList<ForkImage> images) {
+        this.images = images;
+    }
 
 
     public Integer getImageID() {
+
+        if(images != null && images.size() > 0){
+            return images.getFirst().getId();
+        }else{
+            Log.e("Place","IMAGES JEST NULLEEEEM");
+        }
         return imageID;
     }
 
@@ -112,4 +142,20 @@ public class Place implements Serializable {
         this.website = website;
     }
 
+
+    public LinkedList<ForkScore> getScores() {
+        return scores;
+    }
+
+    public void setScores(LinkedList<ForkScore> scores) {
+        this.scores = scores;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 }

@@ -8,6 +8,9 @@
     <script>
         setEditLabel('${g.message(code:'default.link.edit')}');
         setEmptyLabel('${g.message(code:'default.input.empty')}');
+        setRejectLabel('${g.message(code:'admin.tabs.photos.reject')}');
+        setAcceptLabel('${g.message(code:'admin.tabs.photos.accept')}');
+        setNoPendingLabel('${g.message(code:'admin.tabs.photos.noPending')}');
     </script>
 </head>
 <body>

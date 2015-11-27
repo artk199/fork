@@ -14,4 +14,5 @@
     <string name="title_section_map">Mapa</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_add_opinion">AddOpinionActivity</string>
+    <string name="title_section_opinion">Opinie</string>
 </resources>

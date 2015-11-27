@@ -1,52 +1,28 @@
-<g:set var="score" value="${new int[activity.score.score]}"/>
+<%--g:set var="score" value="${new int[activity.score.score]}"/>
 <g:set var="noscore" value="${new int[5-activity.score.score]}"/>
+<img ngsrc="${g.createLink(absolute:true,uri:'/image/'+activity.score.place.images[0].id+'/mini')}" width="140px" height="140px" style="border: 1px solid #DDD;">
 
-<div class='col-md-12' style="height:220px; border: 1px #DDD solid; margin-bottom: 25px;">
-    <div style="height:60px">
-        <div style="float:left; margin: 10px 0px; line-height:20px; height:40px;">
-            <g:if test="${activity.user.profilePicture}">
-                <img src="${g.createLink(absolute:true,uri:'/image/'+activity.user.profilePicture.id+'/mini')}" width="40px" height="40px" style="border: 1px solid #DDD;">
-            </g:if>
-            <g:else>
-                <img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" width="40px" height="40px" style="border: 1px solid #DDD;">
-            </g:else>
-        </div>
-        <div style="float:left; height:40px; margin-top: 10px; margin-left:10px; text-align:left;">
-            <g:link action="show" controller="user" id="${activity.user.id}"><span style="font-weight:bold">${activity.user}</span></g:link>
-            <br/>
-            <small><g:timeSince date="${activity.dateCreated}"/></small>
+--%>
+
+<div style="height:100px;">
+    <div style="float:left; width:140px;height:140px;">
+        <div style="float:left">
+           <img src="http://www.parentcenterhub.org/wp-content/uploads/2014/03/No-Image-.jpg" width="140px" height="140px" style="border: 1px solid #DDD;">
         </div>
     </div>
-    <div style="height:100px;">
-        <div style="float:left; width:140px;height:140px;">
-             <div style="float:left">
-                 <g:if test="${activity.score.place.images.size() > 0 }">
-                     <img src="${g.createLink(absolute:true,uri:'/image/'+activity.score.place.images[0].id+'/mini')}" width="140px" height="140px" style="border: 1px solid #DDD;">
-                 </g:if>
-                 <g:else>
-                     <img src="http://www.parentcenterhub.org/wp-content/uploads/2014/03/No-Image-.jpg" width="140px" height="140px" style="border: 1px solid #DDD;">
-                 </g:else>
-
-             </div>
+    <div style="float:left;text-align:left; margin-left: 10px;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);height:35px; overflow:hidden;white-space: nowrap;text-overflow:ellipsis;">
+        <h2 style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 30px;font-weight: bold; font-style: italic;">
+            Napisał &bdquo;{{instance.title}}&rdquo;
+        </h2>
+    </div>
+    <div style="float:left;text-align:left; margin-left: 10px;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);height:60px;overflow:hidden;">
+        {{instance.review}}
+    </div>
+    <div style="float:right;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);text-align:right;margin-top:10px;">
+        <div style="float:left;">
+            <a ng-href="/place/show/{{instance.place_id}}">{{instance.place_name}}</a>
         </div>
-        <div style="float:left;text-align:left; margin-left: 10px;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);height:35px; overflow:hidden;white-space: nowrap;text-overflow:ellipsis;">
-            <h2 style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 30px;font-weight: bold; font-style: italic;">
-            Napisał &bdquo;${activity.score.title}&rdquo;
-            </h2>
-        </div>
-        <div style="float:left;text-align:left; margin-left: 10px;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);height:60px;overflow:hidden;">
-            ${activity.score.review}
-        </div>
-        <div style="float:right;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);text-align:right;margin-top:10px;">
-            <div style="float:left;">
-                <g:link action="show" controller="place" id="${activity.score.place.id}"> ${activity.score.place.name} </g:link>
-            </div>
-            <g:each var="star" in="${score}">
-                <span class="glyphicon glyphicon-star" style="color: #F9FF00;font-size: 20px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;margin:-1px;"></span>
-            </g:each>
-            <g:each var="star" in="${noscore}">
-                <span class="glyphicon glyphicon-star" style="font-size: 20px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;margin:-1px;"></span>
-            </g:each>
-        </div>
+        <stars active="{{true}}" amount="{{instance.score}}"></stars>
+        <stars active="{{false}}" amount="{{5-instance.score}}"></stars>
     </div>
 </div>

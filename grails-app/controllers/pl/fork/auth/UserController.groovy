@@ -162,4 +162,14 @@ class UserController {
         render "OK"
     }
 
+    def getActivities(int id){
+        List activities = userService.getActivities(id,params.offset.toInteger(), params.max.toInteger())
+        render activities as JSON
+    }
+
+    def getFriendsActivities(int id){
+        List activities = userService.getFriendsActivities(id,params.offset.toInteger(), params.max.toInteger())
+        render activities as JSON
+    }
+
 }

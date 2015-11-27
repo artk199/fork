@@ -20,23 +20,26 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import pl.fork.Config;
+import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.entity.Place;
+import pl.fork.entity.PlaceType;
 
 /**
  * Created by Artur on 2015-10-31.
  */
 public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
 
+    private PlaceType placeType;
     ArrayAdapter list;
     Context context;
 
     private static final String LOG_TAG = "LoadPlacesTask";
 
-    public LoadPlacesTask(ArrayAdapter list,Context ctx){
+    public LoadPlacesTask(ArrayAdapter list,Context ctx, PlaceType placeType) {
         this.context = ctx;
         this.list = list;
+        this.placeType = placeType;
     }
-
 
 
     @Override
@@ -48,30 +51,21 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
             final String url = Config.baseURL + "place/index";
             Log.d(LOG_TAG,url);
 
-            // Set the Accept header
             HttpHeaders requestHeaders = new HttpHeaders();
             requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
             HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
 
-            // Create a new RestTemplate instance
             RestTemplate restTemplate = new RestTemplate();
 
-            // Add the Gson message converter
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-            // Make the HTTP GET request, marshaling the response from JSON to an array of Events
             ResponseEntity<Place[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, Place[].class);
             Place[] placeArray = responseEntity.getBody();
 
-
-            /*
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            Place[] placeArray = restTemplate.getForObject(url, Place[].class);
-            */
             for (Place place: placeArray) {
                 Log.d(LOG_TAG,"Loaded place from server: " + place.getName());
             }
+
             List<Place> places = Arrays.asList(placeArray);
             if(places == null) {
                 Log.e(LOG_TAG, "places are null");
@@ -93,9 +87,17 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
             return;
         }
 
-        for(Place place: places){
+        for(Place place: places) {
             Log.d(LOG_TAG, "Wrzucam do listy wyswietlania: " + place.getName() + "");
-            list.add(place);
+            if (placeType != null) {
+                if(place.getTypes().contains(placeType)){
+                    Log.d(LOG_TAG,"Dodaję z sprawdzaniem typu.");
+                    list.add(place);
+                }
+            } else {
+                Log.d(LOG_TAG,"Dodaję bez sprawdzania typu.");
+                list.add(place);
+            }
         }
 
 

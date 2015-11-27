@@ -29,5 +29,7 @@
         <asset:javascript src="fork.js"/>
         <asset:javascript src="quicksearch/directives.js"/>
         <asset:javascript src="score/scoreController.js"/>
+        <asset:javascript src="infiniteScroll/infinite.controller.js"/>
+        <asset:javascript src="infiniteScroll/infinite.directives.js"/>
     </body>
 </html>

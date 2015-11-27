@@ -4,7 +4,9 @@
             <li class="active"><a data-toggle="tab" href="#places">
                 <span class="glyphicon glyphicon-map-marker"></span>
                 <span class="title"><g:message code="admin.tabs.places"/></span>
-                <span class="label label-primary">1</span>
+                <g:if test = "${pendingPlaces}">
+                    <span class="label label-primary" id="admin-places-label">${pendingPlaces.size()}</span>
+                </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#comments">
                 <span class="glyphicon glyphicon-comment"></span>
@@ -18,12 +20,13 @@
             <li><a data-toggle="tab" href="#photos">
                 <span class="glyphicon glyphicon-picture"></span>
                 <span class="title"><g:message code="admin.tabs.photos"/></span>
-                <span class="label label-primary">1</span>
+                <g:if test = "${waitingImages}">
+                    <span class="label label-primary" id="admin-photos-label">${waitingImages.size()}</span>
+                </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#events">
                 <span class="glyphicon glyphicon-plane"></span>
                 <span class="title"><g:message code="admin.tabs.events"/></span>
-                <span class="label label-primary">1</span>
             </a></li>
             <li><a data-toggle="tab" href="#errors">
                 <span class="glyphicon glyphicon-fire"></span>
