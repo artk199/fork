@@ -17,7 +17,9 @@ class EventController {
     }
 
     def show(Event event) {
-        respond event
+        Comment comment = eventService.getUserComment(event);
+        List<Comment> comments = eventService.getComments(event);
+        respond event, model:[comment:comment, comments:comments]
     }
 
     def create() {
@@ -47,6 +49,11 @@ class EventController {
             }
             '*' { respond event, [status: CREATED] }
         }
+    }
+
+    def addComment(Event event) {
+        eventService.addCommentToEvent(event, params);
+        redirect action:"show",id:event.id;
     }
 
     def edit(Event event) {
