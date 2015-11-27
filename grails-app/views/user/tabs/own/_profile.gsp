@@ -1,28 +1,41 @@
 <div class="row" >
     <div ng-controller="profileController" class="col-md-12 profile-container">
-        <div profile-image style="border: 1px #DDD solid">
-            <div style="width:198.4px;float:left;height:200px;padding:0px;border-bottom: 1px #DDD solid;">
+        <div profile-image>
+            <div style="width:200px;float:left;height:200px;padding:0px;border: 1px #DDD solid;">
                 <g:if test="${this.user.profilePicture}">
-                    <img src="/image/${this.user.profilePicture.id}" width="100%" height="100%" />
+                    <img src="/image/${this.user.profilePicture.id}" width="100%" height="100%"/>
                 </g:if>
                 <g:else>
                     <img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" width="100%" height="100%" />
                 </g:else>
             </div>
-            <%--<div style="min-width:200px;float:left;height: 100%;">
-                <div class="fork-profile-button">Edytuj informacje </div>
-                <div class="fork-profile-button">Edytuj konto </div>
-                <div class="fork-profile-button">Edytuj prywatbisc </div>
-            </div>--%>
+            <div style="min-width:200px;float:left;height: 100%;border: 1px #DDD solid;border-top:none;">
+                <a href="/user/edit/${this.user.id}"><div class="fork-profile-button">Edytuj informacje </div></a>
+                <a href="/user/edit/${this.user.id}"><div class="fork-profile-button">Edytuj konto </div></a>
+                <a href="/user/edit/${this.user.id}"><div class="fork-profile-button">Edytuj prywatność </div></a>
+            </div>
+
+            <div style="min-width:200px;float:left;height: 100%;margin-top:50px;border: 1px #DDD solid;padding-bottom:20px;padding-top:20px;">
+                <span style="width:100%;text-align:left;display:block;font-size:20px; margin-bottom:10px;margin-left:20px;">Informacje</span>
+                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">${this.user.username}</span>
+                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Mieszka w Warszawa</span>
+                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Urodzony 20 maja 1992 roku</span>
+                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Ma 12 znajomych</span>
+                <span style="display:block;width:100%;font-size:12px; text-align:left; margin-left:30px;">Napisał 4 recenzje</span>
+            </div>
         </div>
         <div profile-details style="padding-right:20px;">
 
             <g:if test="${this.user.friends.size() == 0 }">
-                Dodaj znajomych
+                <div class='col-md-12' style="height:100%; border: 1px #DDD solid; padding-bottom: 15px; line-height: 40px;color:#AAA;cursor:default;font-size:20px;padding-top:20px;">
+                    Nie masz żadnych znajomych. Dodaj nowych znajomych, aby móc zobaczyć ich aktywność.
+                </div>
             </g:if>
             <g:else>
                 <g:if test="${this.activities.size() == 0}">
-                    Brak aktywności twoich znajomych
+                    <div class='col-md-12' style="height:100%; border: 1px #DDD solid; padding-bottom: 15px; line-height: 40px;color:#AAA;cursor:default;font-size:20px;padding-top:20px;">
+                        Twoi znajomi nie są aktywni.
+                    </div>
                 </g:if>
 
                 <g:each in="${this.activities}" var="activity">

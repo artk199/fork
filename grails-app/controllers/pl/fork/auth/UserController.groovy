@@ -86,6 +86,9 @@ class UserController {
 
     @Transactional
     def update(User user) {
+        println user
+        println user.password
+        println user.password_confirm
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
