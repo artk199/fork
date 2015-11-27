@@ -3,14 +3,10 @@ package pl.fork.activity;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.View;
 
-import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

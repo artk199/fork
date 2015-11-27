@@ -1,16 +1,12 @@
 package pl.fork.activity;
 
-import java.util.Locale;
-
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,13 +15,15 @@ import android.widget.TextView;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.Locale;
+
 import pl.fork.Config;
-import pl.fork.fork.R;
 import pl.fork.activity.fragments.PlaceDetailsFragment;
 import pl.fork.activity.fragments.PlaceMapFragment;
 import pl.fork.activity.fragments.PlaceOpinionsFragment;
 import pl.fork.activity.fragments.PlacePicturesFragment;
 import pl.fork.entity.Place;
+import pl.fork.fork.R;
 
 public class PlaceDetailsActivity extends AppCompatActivity {
 

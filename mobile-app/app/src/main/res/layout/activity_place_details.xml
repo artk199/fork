@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     app:viewpager_logo="@layout/header_logo"
     app:viewpager_logoMarginTop="100dp"
-    app:viewpager_color="@color/accent_color"
+    app:viewpager_color="#2196f3"
     app:viewpager_header="@layout/place_header"
     app:viewpager_headerHeight="200dp"
     app:viewpager_headerAlpha="1.0"

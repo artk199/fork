@@ -4,21 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import pl.fork.Config;
 import pl.fork.SessionHandler;
 import pl.fork.activity.MainActivity;
 import pl.fork.entity.Opinion;
-import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-11-01.

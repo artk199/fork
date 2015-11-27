@@ -4,19 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.etiennelawlor.imagegallery.library.enums.PaletteColorType;
-import com.etiennelawlor.imagegallery.library.view.PaletteTransformation;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

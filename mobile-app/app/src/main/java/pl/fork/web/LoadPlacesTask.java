@@ -6,22 +6,20 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import pl.fork.Config;
 import pl.fork.activity.MainActivity;
-import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.entity.Place;
 import pl.fork.entity.PlaceType;
 

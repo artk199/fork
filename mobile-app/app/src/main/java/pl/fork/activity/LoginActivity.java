@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -27,11 +27,9 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import pl.fork.Config;
 import pl.fork.SessionHandler;
-import pl.fork.fork.AddOpinionActivity;
 import pl.fork.fork.R;
 
 public class LoginActivity extends AppCompatActivity {
