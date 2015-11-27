@@ -48,7 +48,7 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
         double longitude = params[1];
 
         try {
-            final String url = Config.baseURL + "place/index";
+            final String url = Config.baseURL + "place/getNear?x="+latitude+"&y="+longitude;
             Log.d(LOG_TAG,url);
 
             HttpHeaders requestHeaders = new HttpHeaders();

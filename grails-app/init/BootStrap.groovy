@@ -211,7 +211,7 @@ class BootStrap {
 
 
         JSON.registerObjectMarshaller( Place ) { Place place ->
-            return place.properties + [avgScore: place.avgScore]
+            return place.properties + [avgScore: place.avgScore, id:place.id]
         }
 
 
