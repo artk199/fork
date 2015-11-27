@@ -229,7 +229,9 @@ class BootStrap {
                     x : place.x,
                     y : place.y,
                     avgScore : place.avgScore,
-                    types : place.types
+                    types : place.types,
+                    images : place.images
+
             ]
         }
 
