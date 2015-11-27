@@ -1,5 +1,7 @@
 <div class="pull-left btn">
-    <a ng-href="/place/show/{{instance.id}}" style="font-weight: bold;font-size: 16px;">{{instance.name}}</a>
+    <span style="overflow:hidden;width:175px;display: block;">
+        <a moving-text ng-href="/place/show/{{instance.id}}" style="font-weight: bold;font-size: 16px;">{{instance.name}}</a>
+    </span>
     <div class="img-responsive">
         <tile-image id="{{instance.id}}"/>
     </div>

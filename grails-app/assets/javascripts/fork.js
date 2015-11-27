@@ -687,3 +687,40 @@ forkApp.directive('timeDifference', function(timeService){
         }
     }
 });
+
+forkApp.directive('movingText', function($interval, $timeout){
+    return {
+        link: function(scope, element){
+            var left = 0;
+            var goLeft = true;
+            var intervalFunc;
+
+            var move = function(){
+                if( goLeft ){
+                    left--;
+                }
+                else{
+                    left++;
+                }
+                if( left+$(element).width()-$(element).parent().width() + 10 == 0){
+                    goLeft = false;
+                }
+                else if ( left == 10 ){
+                    goLeft = true;
+                }
+                element.css('left', left + 'px');
+            }
+            $timeout( function() {
+                if ($(element).width() > $(element).parent().width()) {
+                    element.css('position', 'relative');
+                    element.bind('mouseover', function () {
+                        intervalFunc = $interval(move, 15);
+                    });
+                    element.bind('mouseleave', function () {
+                        $interval.cancel(intervalFunc);
+                    });
+                }
+            });
+        }
+    }
+});
