@@ -17,9 +17,9 @@
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
                         <div class="pull-left">
-                            <g:each var="place" in="${placeList}">
-                                <g:render template="tile" model="[place:place]"/>
-                            </g:each>
+                            <infinite-list link="/place/all" amount="1">
+                                <g:render template="tile"/>
+                            </infinite-list>
                         </div>
                     </div>
                 </div>

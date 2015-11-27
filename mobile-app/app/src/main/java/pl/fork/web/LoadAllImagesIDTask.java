@@ -11,13 +11,9 @@ import com.etiennelawlor.imagegallery.library.enums.PaletteColorType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import pl.fork.Config;
-import pl.fork.entity.Opinion;
 
 /**
  * Created by Artur on 2015-11-17.

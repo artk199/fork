@@ -1,31 +1,18 @@
 package pl.fork.activity.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pl.fork.activity.MapsActivity;
-import pl.fork.fork.AddOpinionActivity;
-import pl.fork.fork.R;
-import pl.fork.adapters.OpinionsListAdapter;
-import pl.fork.adapters.PlaceListAdapter;
-import pl.fork.listeners.PlaceListClickListener;
-import pl.fork.entity.Opinion;
 import pl.fork.entity.Place;
+import pl.fork.fork.R;
 import pl.fork.web.LoadOpinionsTask;
 
 /**

@@ -3,7 +3,6 @@ package pl.fork.web;
 import android.os.AsyncTask;
 import android.view.View;
 
-
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 

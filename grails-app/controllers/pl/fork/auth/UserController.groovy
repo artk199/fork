@@ -20,7 +20,12 @@ class UserController {
     }
 
     def search(){
-        render userService.search() as JSON
+        if( params.query ){
+            render userService.search(params.query) as JSON
+        }
+        else{
+            render ''
+        }
     }
 
     def addFriend(int id){
@@ -80,12 +85,19 @@ class UserController {
 
     }
 
+    def editPassword(User user){
+        respond user
+    }
+
     def edit(User user) {
         respond user
     }
 
     @Transactional
     def update(User user) {
+        println user
+        println user.password
+        println user.password_confirm
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -157,6 +169,16 @@ class UserController {
             response.status = 404
         }
         render "OK"
+    }
+
+    def getActivities(int id){
+        List activities = userService.getActivities(id,params.offset.toInteger(), params.max.toInteger())
+        render activities as JSON
+    }
+
+    def getFriendsActivities(int id){
+        List activities = userService.getFriendsActivities(id,params.offset.toInteger(), params.max.toInteger())
+        render activities as JSON
     }
 
 }

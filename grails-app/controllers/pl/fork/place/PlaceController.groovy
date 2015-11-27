@@ -50,6 +50,10 @@ class PlaceController {
         render placeService.getNear(latitude,longitude) as JSON
     }
 
+    def all(){
+        render Place.list(max:params.max, offset:params.offset) as JSON
+    }
+
     def create() {
         respond new Place(params)
     }
@@ -162,8 +166,14 @@ class PlaceController {
 
     def getScores(Long id){
         Place place = placeService.get(id)
-        List scores = placeService.getScores(place)
-        render scores as JSON
+        if( params.offset && params.max ){
+            List scores = placeService.getScores(place, params.offset.toLong(), params.max.toLong())
+            render scores as JSON
+        }
+        else{
+            List scores = placeService.getScores(place)
+            render scores as JSON
+        }
     }
 
     def addScore(Long id){
@@ -194,11 +204,8 @@ class PlaceController {
 
 
     def getAllImages(int placeID){
-        // render user.images as JSON
-        println Place.findById(placeID).name
-        println "WTF"
-        def ids = Place.findById(placeID).images.collect{ it.id }
-        render ids as JSON
+        Place place = placeService.get(placeID)
+        render place.images.collect{ it.id } as JSON
     }
 
     def getNear(){
@@ -213,5 +220,9 @@ class PlaceController {
             places = new ArrayList<Place>();
         }
         render places as JSON
+    }
+
+    def getMetascore(int id){
+        render placeService.getMetascore(id) as JSON
     }
 }

@@ -12,8 +12,6 @@ class User implements Serializable {
 
 	transient springSecurityService
 
-	List images
-	List activities
 	static mappedBy = [requestedFriends: 'requester', receivedFriends: 'receiver']
 	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend, activities:Activity, reports:Report, comments:Comment]
 
@@ -131,5 +129,7 @@ class User implements Serializable {
 	static mapping = {
 		password column: '`password`'
 		about type: 'text'
+		images sort: 'dateCreated', order: 'desc'
+		activities sort: 'dateCreated', order: 'desc'
 	}
 }

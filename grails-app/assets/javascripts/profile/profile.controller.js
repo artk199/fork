@@ -14,7 +14,6 @@ forkApp.controller('profileController', ['$scope', '$window', function($scope, $
     }
 
     $scope.switchLayout = function(){
-        console.log( $window.innerWidth );
         if(  $window.innerWidth < $scope.minimumWidth ){
             $scope.verticalLayout = true;
         }

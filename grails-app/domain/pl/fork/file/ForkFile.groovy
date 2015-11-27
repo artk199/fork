@@ -4,7 +4,7 @@ import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.place.Place
 
-class ForkFile {
+class ForkFile implements Comparable {
 
     static constraints = {
         source(nullable:true, size:0..5242880 /* 5M */)
@@ -32,6 +32,12 @@ class ForkFile {
             return true
         }
         return false
+    }
+
+    @Override
+    int compareTo(Object o) {
+        ForkFile f = (ForkFile) o
+        return -this.dateCreated.compareTo(f.dateCreated)
     }
 
 }

@@ -36,6 +36,17 @@ class UrlMappings {
             action = [GET:'getImageDetails']
         }
 
+
+        "/user/$id/activities"{
+            controller = "user"
+            action = [GET:'getActivities']
+        }
+
+        "/user/$id/friends/activities"{
+            controller = "user"
+            action = [GET:'getFriendsActivities']
+        }
+
         "/user/upload"{
             controller = "image"
             action = [POST:'uploadImage']
@@ -55,6 +66,8 @@ class UrlMappings {
 
         "/place/search"(controller:"place", action:"search")
         "/place/search/all"(controller:"place", action:"searchAll")
+
+        "/place/$id/metascore"(controller:"place",action:"getMetascore")
         "/place/$id/score"{
             controller = "place"
             action = [GET:'getScores', POST:'addScore']
