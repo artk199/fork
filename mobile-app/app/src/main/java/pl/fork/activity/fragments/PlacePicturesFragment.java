@@ -61,6 +61,7 @@ public class PlacePicturesFragment extends Fragment implements ImageAdapter.OnIm
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_place_pics, container, false);
+        pictures.clear();
         for (ForkImage forkImage : place.getImages()) {
             pictures.add(UtilFunctions.getImageURI(forkImage.getId()));
         }

@@ -6,6 +6,7 @@ import grails.converters.JSON
 import pl.fork.place.Score
 import pl.fork.place.other.PricedElement
 import pl.fork.place.other.Pricing
+import pl.fork.file.ForkFile
 import pl.fork.place.PlaceType
 import grails.util.Environment
 
@@ -211,9 +212,38 @@ class BootStrap {
 
 
         JSON.registerObjectMarshaller( Place ) { Place place ->
-            return place.properties + [avgScore: place.avgScore, id:place.id]
+            return [
+                    id : place.id,
+                    name : place.name,
+                    description : place.description,
+                    address : place.address,
+                    town : place.town,
+                    email : place.email,
+                    phone : place.phone,
+                    website : place.website,
+                    owner : place.owner,
+                    status : place.status,
+                    scores : place.scores,
+                    dateCreated : place.dateCreated,
+                    verified : place.verified,
+                    x : place.x,
+                    y : place.y,
+                    avgScore : place.avgScore,
+                    types : place.types
+            ]
         }
 
+        JSON.registerObjectMarshaller( ForkFile ) { ForkFile forkFile ->
+            return [
+                    id : forkFile.id,
+                    fileType : forkFile.fileType,
+                    description : forkFile.description,
+                    title : forkFile.title,
+                    owner : forkFile.owner,
+                    dateCreated : forkFile.dateCreated,
+                    status : forkFile.status
+            ]
+        }
 
         println "Deployed."
     }
