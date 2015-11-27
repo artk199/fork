@@ -1,9 +1,12 @@
 package pl.fork.admin
 
 import grails.transaction.Transactional
+import pl.fork.activity.Activity
 import pl.fork.auth.UserService
 import pl.fork.place.PlaceService
 import grails.converters.JSON
+
+import static org.springframework.http.HttpStatus.NO_CONTENT
 
 @Transactional
 class AdminController {
@@ -16,7 +19,8 @@ class AdminController {
     def index() {
         def images = adminService.getImagesWaitingForDecision();
         def pendingPlaces = placeService.findAllPending();
-        render view: "index", model: [waitingImages: images, pendingPlaces: pendingPlaces];
+        def flaggedScores = placeService.getFlaggedScores();
+        render view: "index", model: [waitingImages: images, pendingPlaces: pendingPlaces, flaggedScores: flaggedScores];
     }
 
     def findPlace(){
@@ -34,6 +38,7 @@ class AdminController {
         def images = adminService.getImagesWaitingForDecision();
         render images as JSON;
     }
+
     def rejectImage(){
         if(params.id){
             adminService.rejectImage(params.id);
@@ -62,7 +67,6 @@ class AdminController {
         render imagesList as JSON
     }
 
-
     def acceptPlace(){
         if(params.placeId){
             adminService.acceptPlace(params.placeId);
@@ -72,5 +76,32 @@ class AdminController {
 
     def getImagesWaitingForDecision(){
         return adminService.getImagesWaitingForDecision();
+    }
+
+    def closeReports(){
+        if(params.id){
+            adminService.removeReports(params.long("id"));
+        }
+
+        def scores = placeService.getFlaggedScores();
+        def scoreList = scores.collect{[ "id": it.id, "owner_id": it.owner.id, "owner_name": it.owner.username,
+            "title": it.title, "review": it.review, "reports_size": it.reports.size(), "version":it.version]};
+
+        render scoreList as JSON;
+
+    }
+
+    def removeScore(){
+        if(params.id){
+            def score = placeService.getScore(params.long("id"));
+
+            adminService.removeScore(score);
+        }
+
+        def scores = placeService.getFlaggedScores();
+        def scoreList = scores.collect{[ "id": it.id, "owner_id": it.owner.id, "owner_name": it.owner.username,
+            "title": it.title, "review": it.review, "reports_size": it.reports.size(), "version":it.version]};
+
+        render scoreList as JSON;
     }
 }

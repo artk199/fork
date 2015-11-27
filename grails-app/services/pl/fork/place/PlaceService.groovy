@@ -7,6 +7,7 @@ import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
+import pl.fork.place.other.Report
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -248,4 +249,47 @@ class PlaceService {
         int size = maxSize >= allPlaces.size() ? allPlaces.size() -1 : maxSize;
         return allPlaces[0..size];
     }
+
+    Score getScore(long id){
+        return Score.get(id);
+    }
+
+    def checkIfUserCanReportScore(Score score, User user){
+        // user cant report his own score
+        if(user.id.equals(score.owner.id)){
+            return false;
+        }
+
+        // user cant report twice the same score
+        for(Report r : user.reports){
+            if(r.score.id.equals(score.id)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    def createReport(Score score){
+        if(score){
+            User currentUser = User.findByUsername(springSecurityService.currentUser);
+
+            if(checkIfUserCanReportScore(score, currentUser)){
+                Report report = new Report();
+                report.owner = currentUser;
+                report.score = score;
+                report.save(flush:true);
+                currentUser.reports.add(report);
+                score.reports.add(report);
+            }
+        }
+    }
+
+    List<Score> getFlaggedScores(){
+        List<Score> scores = Score.createCriteria().list {
+            isNotEmpty("reports")
+        }
+        return scores;
+    }
+
 }

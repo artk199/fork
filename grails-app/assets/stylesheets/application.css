@@ -378,7 +378,11 @@ a.btn-orange:active{
 }
 
 .page-section .table-striped>tbody>tr:nth-of-type(odd){
-    background-color: #f9f9f9!important;
+    background-color: #f9f9f9;
+}
+
+.page-section .td{
+    word-wrap:break-word;
 }
 
 .blue-section{
@@ -423,6 +427,10 @@ a.btn-orange:active{
 
 .dark-section table.sortable thead th:hover:not([data-defaultsort=disabled]){
     background:#40526D;
+}
+
+.dark-section.table-striped>tbody>tr:nth-of-type(odd){
+    background-color: #4f4f4f !important;
 }
 
 iframe{

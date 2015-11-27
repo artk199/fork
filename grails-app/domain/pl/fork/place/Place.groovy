@@ -11,6 +11,7 @@ class Place {
     static mapping = {
         images lazy:false
         pricing lazy:false
+        description type: 'text'
     }
 
     static constraints = {

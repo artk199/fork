@@ -30,22 +30,22 @@
         <div class="col-md-8 col-sm-8 col-xs-11">
             <h3><g:message code="admin.tabs.comments.flagged"/></h3>
 
-            <g:if test="${true}">
+            <g:if test="${flaggedScores?.size() == 0}">
                 <p>
                     <g:message code="admin.tabs.comments.noFlagged"/>
                 </p>
             </g:if>
             <g:else>
-                <table class="table table-striped text-left sortable">
+                <table class="table table-striped text-left sortable" id = "admin-flagged-comments-table">
                     <caption>
                         <span class="pull-right">
                             <span class="glyphicon glyphicon-th"></span>
-                            <g:message code="default.count" args="[0]" />
+                            <g:message code="default.count" args="[flaggedScores?.size()]" />
                         </span>
                     </caption>
                     <thead>
                     <tr>
-                        <th class='col-md-2 col-sm-2 col-xs-2' data-defaultsort="asc" data-firstsort="desc">
+                        <th class='col-md-2 col-sm-2 col-xs-2'>
                             <span class="glyphicon glyphicon-user"></span>
                             <g:message code="admin.tabs.comments.author"/>
                         </th>
@@ -53,18 +53,59 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                             <g:message code="admin.tabs.comments.title"/>
                         </th>
-                        <th class='col-md-6 col-sm-6 col-xs-6'>
+                        <th class='col-md-4 col-sm-4 col-xs-4'>
                             <span class="glyphicon glyphicon-comment"></span>
                             <g:message code="admin.tabs.comments.content"/>
                         </th>
-                        <th class='col-md-2 col-sm-2 col-xs-2'>
+                        <th class='col-md-2 col-sm-2 col-xs-2' data-defaultsort="desc" data-firstsort="asc">
                             <span class="glyphicon glyphicon-flag"></span>
                             <g:message code="admin.tabs.comments.flags"/>
+                        </th>
+                        <th class='col-md-1 col-sm-1 col-xs-1' data-defaultsort='disabled'>
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <g:message code="admin.tabs.comments.options"/>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-
+                    <g:each in="${flaggedScores}" var="score">
+                        <tr>
+                            <td class='col-md-2 col-sm-2 col-xs-2'>
+                                <g:link controller="user" action="show" id="${score.owner.id}">
+                                    ${score.owner.username}
+                                </g:link>
+                            </td>
+                            <td class='col-md-2 col-sm-2 col-xs-2'>
+                               <g:link controller="score" action="edit" id="${score.id}">
+                                   ${score.title}
+                               </g:link>
+                            </td>
+                            <td class='col-md-4 col-sm-4 col-xs-4'>
+                               ${score.review}
+                            </td>
+                            <td class='col-md-2 col-sm-2 col-xs-2'>
+                                ${score.reports.size()}
+                            </td>
+                            <td class='col-md-2 col-sm-2 col-xs-2'>
+                                <a class="btn btn-default btn-block"
+                                   onclick="updateComments('${g.createLink(controller:'admin',action:'closeReports')}',
+                                           'admin-flagged-comments-table', '${score.id}')">
+                                    <span class='glyphicon glyphicon-remove-sign'></span>
+                                    <span><g:message code="admin.tabs.comments.closeReport"/></span>
+                                </a>
+                                <a href="/score/edit/${score.id}" class="btn btn-default btn-block">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    <g:message code="default.link.edit"/>
+                                </a>
+                                <a class="btn btn-default btn-block"
+                                   onclick="updateComments('${g.createLink(controller:'admin',action:'removeScore')}',
+                                           'admin-flagged-comments-table', '${score.id}')">
+                                    <span class='glyphicon glyphicon-remove-sign'></span>
+                                    <span><g:message code="default.link.delete"/></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </g:each>
                     </tbody>
                 </table>
             </g:else>
@@ -139,7 +180,9 @@
                                     </g:else>
                                 </a>
                             </td>
-                            <td class='col-md-6 col-sm-6 col-xs-6'>${score.review}</td>
+                            <td class='col-md-6 col-sm-6 col-xs-6'>
+                                ${score.review}
+                            </td>
                             <td class='col-md-2 col-sm-2 col-xs-2'>
                                 <a href="/place/show/${score.place.id}">
                                     ${score.place.name}
@@ -153,15 +196,18 @@
                                     <g:hiddenField name="version" value="${score?.version}" />
                                     <g:hiddenField name="id" value="${score?.id}" />
                                     <fieldset class="buttons">
-                                        <a href="/score/edit/${score.id}" class="btn btn-default">
+                                        <a href="/score/edit/${score.id}" class="btn btn-default btn-block">
                                             <span class="glyphicon glyphicon-edit"></span>
                                             <g:message code="default.link.edit"/>
                                         </a>
-                                        <label for="delete-score-${score.id}" class="btn btn-default">
+                                        <label for="delete-score-${score.id}" class="btn btn-default btn-block">
                                             <span class="glyphicon glyphicon-remove"></span>
                                             <g:message code="default.link.delete"/>
                                         </label>
-                                        <input id="delete-score-${score.id}" class="hidden" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                                        <input id="delete-score-${score.id}" class="hidden" type="submit"
+                                               value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                               onclick="return confirm('${message(code: 'default.button.delete.confirm.message',
+                                               default: 'Are you sure?')}');" />
                                     </fieldset>
                                 </g:form>
                             </td>

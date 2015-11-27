@@ -4,14 +4,16 @@
             <li class="active"><a data-toggle="tab" href="#places">
                 <span class="glyphicon glyphicon-map-marker"></span>
                 <span class="title"><g:message code="admin.tabs.places"/></span>
-                <g:if test = "${pendingPlaces}">
+                <g:if test = "${pendingPlaces?.size()>0}">
                     <span class="label label-primary" id="admin-places-label">${pendingPlaces.size()}</span>
                 </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#comments">
                 <span class="glyphicon glyphicon-comment"></span>
                 <span class="title"><g:message code="admin.tabs.comments"/></span>
-                <span class="label label-warning">1</span>
+                <g:if test = "${flaggedScores?.size()>0}">
+                    <span class="label label-warning" id="admin-comments-label">${flaggedScores.size()}</span>
+                </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#users">
                 <span class="glyphicon glyphicon-user"></span>
@@ -20,18 +22,13 @@
             <li><a data-toggle="tab" href="#photos">
                 <span class="glyphicon glyphicon-picture"></span>
                 <span class="title"><g:message code="admin.tabs.photos"/></span>
-                <g:if test = "${waitingImages}">
+                <g:if test = "${waitingImages?.size()>0}">
                     <span class="label label-primary" id="admin-photos-label">${waitingImages.size()}</span>
                 </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#events">
                 <span class="glyphicon glyphicon-plane"></span>
                 <span class="title"><g:message code="admin.tabs.events"/></span>
-            </a></li>
-            <li><a data-toggle="tab" href="#errors">
-                <span class="glyphicon glyphicon-fire"></span>
-                <span class="title"><g:message code="admin.tabs.errors"/></span>
-                <span class="label label-warning">2</span>
             </a></li>
         </ul>
     </div>
@@ -63,11 +60,6 @@
             <!-- EVENTS ADMINISTRATION TAB !-->
             <div id="events" class="tab-pane fade">
                 <g:render template="tabs/events"/>
-            </div>
-
-            <!-- ERRORS ADMINISTRATION TAB !-->
-            <div id="errors" class="tab-pane fade">
-                <g:render template="tabs/errors"/>
             </div>
         </div>
      </div>

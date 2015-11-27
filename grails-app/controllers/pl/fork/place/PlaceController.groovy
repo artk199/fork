@@ -214,4 +214,13 @@ class PlaceController {
         }
         render places as JSON
     }
+
+    def reportScore(long id){
+        def score = placeService.getScore(id);
+        placeService.createReport(score);
+
+        def place = score.place
+        Score userScore = placeService.getUserScore(place);
+        redirect action: "show", id: place.id
+    }
 }
