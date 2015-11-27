@@ -58,13 +58,13 @@
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 hidden-xs"></div>
 </div>
 
-<%--
+
 <div class="form-group">
     <label for="latidude" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">
         <g:message code="place.latitude" />
     </label>
     <div class="col-xs-7 col-sm-6 col-md-6 col-lg-6">
-        <input type="number" class="form-control" name="x" id="latidude" value="${place.x}"/>
+        <input type="number"  step="any"  class="form-control" name="x" id="latidude" value="${place.x}"/>
     </div>
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 hidden-xs"></div>
 </div>
@@ -74,11 +74,11 @@
         <g:message code="place.longitude" />
     </label>
     <div class="col-xs-7 col-sm-6 col-md-6 col-lg-6">
-        <input type="number" class="form-control" name="y" id="longitude" value="${place.y}"/>
+        <input type="number" step="any" class="form-control" name="y" id="longitude" value="${place.y}"/>
     </div>
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 hidden-xs"></div>
 </div>
---%>
+
 
 <div class="form-group">
     <label for="description" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">

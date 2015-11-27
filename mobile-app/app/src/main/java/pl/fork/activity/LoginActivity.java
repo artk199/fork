@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +56,12 @@ public class LoginActivity extends AppCompatActivity {
                 new LoginTask().execute();
             }
         });
+
+        TextView textRegister = (TextView) findViewById(R.id.textRegister);
+        if (textRegister != null) {
+            textRegister.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
     }
 
     @Override
@@ -91,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
      * Public methods
      * */
     public void showLoadingProgressDialog() {
-        this.showProgressDialog("Loading. Please wait...");
+        this.showProgressDialog("Proszę czekać...");
     }
 
     public void showProgressDialog(CharSequence message) {
@@ -119,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPreExecute() {
             showLoadingProgressDialog();
 
-            // build the message object
             EditText editText = (EditText) findViewById(R.id.username);
             this.username = editText.getText().toString();
 
@@ -132,13 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         protected Boolean doInBackground(String... params) {
             String TAG = "LOGIN TAG";
 
-           // final String url = "http://45.55.215.21:8080/fork/place/getPlace";
-
-
-
             try {
-
-               // RestTemplate restTemplate = new RestTemplate();
 
                 MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
                 map.add("j_username", username);
@@ -158,7 +158,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 HttpEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
-                //TODO: Zmienic na dobre sprawdzanie
                 String cookie = response.getHeaders().get("Set-Cookie").get(0);
 
                 Log.d(TAG, cookie);

@@ -1,5 +1,6 @@
 package pl.fork.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     /** Menus */
     private static final int MENU_LOGIN = 1;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,12 +187,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(location != null) {
-            new LoadPlacesTask(adapter, getApplicationContext(),placeType).execute(location.getLatitude(), location.getLongitude());
+            showLoadingProgressDialog();
+            new LoadPlacesTask(adapter, getApplicationContext(),placeType,this).execute(location.getLatitude(), location.getLongitude());
         }else{
-            new LoadPlacesTask(adapter, getApplicationContext(),placeType).execute(0.0, 0.0);
+            showLoadingProgressDialog();
+            new LoadPlacesTask(adapter, getApplicationContext(),placeType,this).execute(0.0, 0.0);
         }
     }
 
+
+    public void showLoadingProgressDialog() {
+        this.showProgressDialog("Proszę czekać...");
+    }
+
+    public void showProgressDialog(CharSequence message) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setIndeterminate(true);
+        }
+
+        progressDialog.setMessage(message);
+        progressDialog.show();
+    }
+
+    public void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
 }
 
 

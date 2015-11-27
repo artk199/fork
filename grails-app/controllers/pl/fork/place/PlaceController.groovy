@@ -98,8 +98,14 @@ class PlaceController {
             notFound()
             return
         }
+        /* Fix for #190 */
+        place.clearErrors()
+        place.x = params.double("x")
+        place.y = params.double("y")
+
         place.validate()
         if (place.hasErrors()) {
+            println place.errors
             transactionStatus.setRollbackOnly()
             respond place.errors, view:'edit'
             return

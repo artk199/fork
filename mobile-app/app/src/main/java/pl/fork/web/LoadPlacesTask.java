@@ -20,6 +20,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import pl.fork.Config;
+import pl.fork.activity.MainActivity;
 import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.entity.Place;
 import pl.fork.entity.PlaceType;
@@ -29,16 +30,18 @@ import pl.fork.entity.PlaceType;
  */
 public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
 
+    private final MainActivity activity;
     private PlaceType placeType;
     ArrayAdapter list;
     Context context;
 
     private static final String LOG_TAG = "LoadPlacesTask";
 
-    public LoadPlacesTask(ArrayAdapter list,Context ctx, PlaceType placeType) {
+    public LoadPlacesTask(ArrayAdapter list,Context ctx, PlaceType placeType, MainActivity activity) {
         this.context = ctx;
         this.list = list;
         this.placeType = placeType;
+        this.activity = activity;
     }
 
 
@@ -48,7 +51,7 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
         double longitude = params[1];
 
         try {
-            final String url = Config.baseURL + "place/index";
+            final String url = Config.baseURL + "place/getNear?x="+latitude+"&y="+longitude;
             Log.d(LOG_TAG,url);
 
             HttpHeaders requestHeaders = new HttpHeaders();
@@ -80,6 +83,8 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
     @Override
     protected void onPostExecute(List<Place> places) {
 
+        activity.dismissProgressDialog();
+
         if(places == null) {
             CharSequence text = "Błąd podczas ładowania atrakcji!";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
@@ -87,6 +92,7 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
             return;
         }
 
+        list.clear();
         for(Place place: places) {
             Log.d(LOG_TAG, "Wrzucam do listy wyswietlania: " + place.getName() + "");
             if (placeType != null) {
@@ -99,7 +105,6 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
                 list.add(place);
             }
         }
-
 
     }
 }

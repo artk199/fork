@@ -3,6 +3,7 @@ package pl.fork.activity;
 import java.util.Locale;
 
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,7 +31,6 @@ public class PlaceDetailsActivity extends AppCompatActivity {
 
 
     SectionsPagerAdapter mSectionsPagerAdapter;
-
     MaterialViewPager mViewPager;
 
     /**
@@ -45,16 +45,12 @@ public class PlaceDetailsActivity extends AppCompatActivity {
 
         this.place = (Place) getIntent().getSerializableExtra("place");
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),place);
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
 
         ViewPager viewPager = mViewPager.getViewPager();
         viewPager.setAdapter(mSectionsPagerAdapter);
 
-        //After set an adapter to the ViewPager
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
 
         ImageView placeImageView = (ImageView) findViewById(R.id.logo_place);
@@ -69,33 +65,21 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.place_name);
         textView.setText(place.getName());
 
+        //setup toolbar
+        setSupportActionBar(mViewPager.getToolbar());
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_place_details, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         Place place;
@@ -140,6 +124,12 @@ public class PlaceDetailsActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 
 }
