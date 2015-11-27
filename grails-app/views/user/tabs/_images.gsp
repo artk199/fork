@@ -21,7 +21,7 @@
                <div style='text-align: left; margin-bottom:20px;margin-top:10px;'>
                    <h2 style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 41px;font-weight: bold; font-style: italic;">
                    &bdquo;{{title != null ? title : 'No title'}}&rdquo;
-                   <small style='font-size:45%'>09.09.2009</small></h2>
+                   <small style='font-size:45%'>{{created}}</small></h2>
                    <span style="font-size:20px;">{{description}}</span>
                </div>
            </div>
@@ -45,6 +45,25 @@
                    <img ng-style='imageStyle()' style='border:1px #777 solid;' ng-src='/image/{{image}}/mini' user-image/>
                    <div ng-style='overlayStyle()' style='position:absolute; background-color: white; top:0; left:0; width:100%; pointer-events: none; height:100%;'></div>
                </div>
+
+               <div ng-if="images.length == 0 "/>
+                   <div class='col-md-2'></div>
+                   <div class='col-md-8' style="height:100%; border: 1px #DDD solid; padding-bottom: 15px; line-height: 40px;color:#AAA;cursor:default;font-size:20px;padding-top:20px; margin-top:10px;">
+                        <sec:ifLoggedIn>
+                            <g:if test="${g.currentUserID().toLong() == user.id }">
+                                Nie masz jeszcze żadnych zdjęć.
+                            </g:if>
+                            <g:else>
+                                Użytkownik nie ma jeszcze żadnych zdjęć.
+                            </g:else>
+                        </sec:ifLoggedIn>
+                       <sec:ifNotLoggedIn>
+                           Użytkownik nie ma jeszcze żadnych zdjęć.
+                       </sec:ifNotLoggedIn>
+                   </div>
+                   <div class='col-md-2'></div>
+               </div>
+
            </div>
       </div>
 </div>

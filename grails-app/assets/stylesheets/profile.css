@@ -99,3 +99,36 @@
 .fork-friend-icon-add.active:hover {
     color: #ffbe00;
 }
+
+.fork-profile-info{
+    display:block;
+    width:calc(100% - 55px);
+    font-size:12px;
+    text-align:left;
+    margin-left:30px;
+}
+
+.fork-profile-activity{
+    height:220px;
+    border: 1px #DDD solid;
+    margin-bottom: 25px;
+}
+
+.fork-profile-activity > .header {
+    height:60px;
+}
+
+.fork-profile-activity > .header > div:first-child {
+    float: left;
+    margin: 10px 0px;
+    line-height: 20px;
+    height: 40px;
+}
+
+.fork-profile-activity > .header > div:nth-child(2) {
+    float: left;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: left;
+}

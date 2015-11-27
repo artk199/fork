@@ -168,4 +168,17 @@ class UserService {
 
         return users[0..size];
     }
+
+    List<Activity> getActivities(int id, int offset, int max){
+        User u = User.findById(id)
+        List<Activity> activities = Activity.findAll("from Activity as a where a.user.id=:user and a.activityType<>:type order by a.dateCreated desc",[user:u.id, type: ActivityType.INVITE], [max:max, offset: offset])
+        activities
+    }
+
+    List<Activity> getFriendsActivities(int id, int offset, int max){
+        User u = User.findById(id)
+        List<Activity> activities = Activity.findAll("from Activity as a where a.user in (:friends) and a.activityType<>:type  order by a.dateCreated desc", [friends: u.friends, type: ActivityType.INVITE], [max:max, offset: offset])
+        activities
+    }
+
 }

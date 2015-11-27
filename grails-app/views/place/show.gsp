@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
             <div class="col-md-8 col-sm-10 col-xs-12">
-                <g:render template="scores" model="[place:place, score:score]"/>
+                <g:render template="show/scores" model="[place:place, score:score]"/>
             </div>
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
         </div>

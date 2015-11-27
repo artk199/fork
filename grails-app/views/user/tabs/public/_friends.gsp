@@ -1,4 +1,11 @@
 <div>
+    <g:if test="${this.user.friends.size() == 0 }">
+        <div class='col-md-2'></div>
+        <div class='col-md-8' style="height:100%; border: 1px #DDD solid; padding-bottom: 15px; line-height: 40px;color:#AAA;cursor:default;font-size:20px;padding-top:20px; margin-top:20px;">
+           Użytkownik nie ma jeszcze żadnych znajomych.
+        </div>
+        <div class='col-md-2'></div>
+    </g:if>
     <g:each in="${this.user.friends}" var="friend">
         <div class="fork-friend">
             <div>
