@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +56,12 @@ public class LoginActivity extends AppCompatActivity {
                 new LoginTask().execute();
             }
         });
+
+        TextView textRegister = (TextView) findViewById(R.id.textRegister);
+        if (textRegister != null) {
+            textRegister.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
     }
 
     @Override
