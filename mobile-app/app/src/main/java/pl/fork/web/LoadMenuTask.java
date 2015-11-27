@@ -2,7 +2,6 @@ package pl.fork.web;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -12,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import pl.fork.entity.Opinion;
-import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-11-01.

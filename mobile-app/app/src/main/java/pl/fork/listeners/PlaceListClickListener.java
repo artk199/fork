@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
-import pl.fork.activity.LoginActivity;
 import pl.fork.activity.PlaceDetailsActivity;
 import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.entity.Place;

@@ -1,22 +1,16 @@
 package pl.fork.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -27,11 +21,11 @@ import java.util.List;
 
 import pl.fork.LocationService;
 import pl.fork.SessionHandler;
+import pl.fork.adapters.PlaceListAdapter;
+import pl.fork.entity.Place;
 import pl.fork.entity.PlaceType;
 import pl.fork.fork.R;
-import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.listeners.PlaceListClickListener;
-import pl.fork.entity.Place;
 import pl.fork.web.LoadPlacesTask;
 
 public class MainActivity extends AppCompatActivity {

@@ -18,7 +18,6 @@ import java.util.List;
 
 import pl.fork.Config;
 import pl.fork.entity.Opinion;
-import pl.fork.entity.Place;
 import pl.fork.fork.R;
 
 /**

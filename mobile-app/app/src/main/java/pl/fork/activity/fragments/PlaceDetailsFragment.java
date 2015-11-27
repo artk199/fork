@@ -15,9 +15,9 @@ import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 
 import pl.fork.SessionHandler;
+import pl.fork.entity.Place;
 import pl.fork.fork.AddOpinionActivity;
 import pl.fork.fork.R;
-import pl.fork.entity.Place;
 
 /**
  * Created by Artur on 2015-11-07.

@@ -1,7 +1,5 @@
 package pl.fork;
 
-import pl.fork.Config;
-
 /**
  * Created by Artur on 2015-11-26.
  */
