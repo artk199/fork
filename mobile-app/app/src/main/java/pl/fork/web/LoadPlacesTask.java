@@ -87,6 +87,7 @@ public class LoadPlacesTask extends AsyncTask<Double, Void, List<Place>> {
             return;
         }
 
+        list.clear();
         for(Place place: places) {
             Log.d(LOG_TAG, "Wrzucam do listy wyswietlania: " + place.getName() + "");
             if (placeType != null) {

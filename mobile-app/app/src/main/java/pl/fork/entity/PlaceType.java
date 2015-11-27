@@ -10,7 +10,19 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceType implements Serializable {
 
+    public static PlaceType RESTAURANT = new PlaceType(1);
+    public static PlaceType ATTRACTION = new PlaceType(2);
+    public static PlaceType HOTEL = new PlaceType(3);
+
     private int id;
+
+    public PlaceType() {
+    }
+
+    public PlaceType(int id) {
+
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -21,5 +33,19 @@ public class PlaceType implements Serializable {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        PlaceType placeType = (PlaceType) o;
+
+        return id == placeType.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

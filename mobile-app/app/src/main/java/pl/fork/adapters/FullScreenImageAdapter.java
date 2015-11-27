@@ -27,17 +27,14 @@ import pl.fork.fork.R;
  */
 public class FullScreenImageAdapter extends PagerAdapter {
 
-    // region Member Variables
     private List<String> mImages;
     private PaletteColorType mPaletteColorType;
     // endregion
 
-    // region Constructors
     public FullScreenImageAdapter(List<String> images, PaletteColorType paletteColorType) {
         mImages = images;
         mPaletteColorType = paletteColorType;
     }
-    // endregion
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {

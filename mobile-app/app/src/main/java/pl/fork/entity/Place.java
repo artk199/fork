@@ -22,7 +22,7 @@ public class Place implements Serializable {
     private String email = "";
     private String phone = "";
     private String website = "";
-    private Double rating = 2.0;
+    private Double avgScore = 2.0;
     private Integer imageID = -1;
     private Double longitude = 18.6900271;
     private Double latitude = 54.3610873;
@@ -151,11 +151,11 @@ public class Place implements Serializable {
         this.scores = scores;
     }
 
-    public Double getRating() {
-        return rating;
+    public Double getAvgScore() {
+        return avgScore;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setAvgScore(Double avgScore) {
+        this.avgScore = avgScore;
     }
 }
