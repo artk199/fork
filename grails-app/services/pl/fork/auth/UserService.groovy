@@ -65,9 +65,9 @@ class UserService {
         return images;
     }
 
-    List<User> search(){
+    List<User> search(String query){
         User currentUser = User.findByUsername(springSecurityService.currentUser)
-        List<User> users = User.list()
+        List<User> users = User.findAllByUsernameIlike("%"+query+"%")
         users = users - currentUser - currentUser.allFriends
         println currentUser.friends
         users

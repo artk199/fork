@@ -51,10 +51,10 @@ forkApp.directive( 'triggerRequest', function($timeout) {
             var top, scroll, height;
 
             var requestNew = function(){
-                top = $(element).position().top;
+                top = $(element).offset().top;
                 var isVisible = top - 50 < scroll + height;
-                var isVisible2 = top + height - 210> scroll + height;
-                console.log(isVisible, isVisible2 )
+                var isVisible2 = top + height > scroll + height;
+                //console.log("Top: " +  top + " | Other: " + (scroll + height));
                 if( isVisible && isVisible2 && !scope.blockLoading && !scope.noMoreData){
                     scope.$apply( function (){
                         scope.blockLoading = true;

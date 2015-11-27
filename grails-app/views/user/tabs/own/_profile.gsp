@@ -11,7 +11,7 @@
             </div>
             <div style="min-width:200px;float:left;height: 100%;border: 1px #DDD solid;border-top:none;">
                 <a href="/user/edit/${this.user.id}"><div class="fork-profile-button">Edytuj informacje </div></a>
-                <a href="/user/edit_password/${this.user.id}"><div class="fork-profile-button">Edytuj konto</div></a>
+                <a href="/user/editPassword/${this.user.id}"><div class="fork-profile-button">Edytuj konto</div></a>
             </div>
 
             <div style="min-width:200px;float:left;height: 100%;margin-top:50px;border: 1px #DDD solid;padding-bottom:20px;padding-top:20px;">

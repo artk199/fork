@@ -6,6 +6,6 @@
     <div>
         <a ng-href="/user/show/{{instance.user}}"><span style="font-weight:bold">{{instance.user_name}}</span></a>
         <br/>
-        <small>{{instance.date}}</small>
+        <small><time-difference date="{{instance.date}}"></time-difference></small>
     </div>
 </div>

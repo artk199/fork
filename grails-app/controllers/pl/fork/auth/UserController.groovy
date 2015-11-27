@@ -20,7 +20,12 @@ class UserController {
     }
 
     def search(){
-        render userService.search() as JSON
+        if( params.query ){
+            render userService.search(params.query) as JSON
+        }
+        else{
+            render ''
+        }
     }
 
     def addFriend(int id){
@@ -78,6 +83,10 @@ class UserController {
 
         redirect(uri:'/')
 
+    }
+
+    def editPassword(User user){
+        respond user
     }
 
     def edit(User user) {
