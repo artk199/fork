@@ -1,7 +1,7 @@
 /**
  * Created by sirke on 13.11.2015.
  */
-forkApp.directive('infiniteList', function($compile) {
+forkApp.directive('infiniteList', function() {
     return {
         restrict: 'E',
         controller: 'infiniteController',
@@ -15,16 +15,15 @@ forkApp.directive('infiniteList', function($compile) {
 
         },
         transclude: true,
-        template: `
-            <div>
-                <div>
-                    <div ng-repeat='instance in list track by $index' inject>
-                   </div>
-                </div>
-                <div class="fork-list-loading-more ng-hide" ng-show="blockLoading && list.length > 0"> Loading more elements <span class="glyphicon glyphicon-cog"></span></div>
-                <div trigger-request style="width:650px;height:0px; background:black; float:right;"></div>
-            </div>
-        `
+        template: ""+
+            "<div>"+
+                "<div>"+
+                    "<div ng-repeat='instance in list track by $index' inject> </div>"+
+                "</div>"+
+                "<div class='fork-list-loading-more ng-hide' ng-show='blockLoading && list.length > 0'> Loading more elements <span class='glyphicon glyphicon-cog'></span></div>"+
+                "<div trigger-request style='width:650px;height:0px; background:black; float:right;'></div>"+
+        "</div>"+
+        ""
     }
 });
 
@@ -44,7 +43,7 @@ forkApp.directive('inject', function(){
         }
     };
 });
-forkApp.directive( 'triggerRequest', function($timeout) {
+forkApp.directive( 'triggerRequest', ['$timeout', function($timeout) {
     return {
         link: function( scope, element ) {
 
@@ -83,4 +82,4 @@ forkApp.directive( 'triggerRequest', function($timeout) {
             });
         }
     };
-});
+}]);

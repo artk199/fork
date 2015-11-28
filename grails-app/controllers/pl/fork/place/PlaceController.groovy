@@ -166,19 +166,24 @@ class PlaceController {
 
     def getScores(Long id){
         Place place = placeService.get(id)
-        if( params.offset && params.max ){
-            List scores = placeService.getScores(place, params.offset.toLong(), params.max.toLong())
-            render scores as JSON
+        def result
+        if( place && params.offset && params.max ){
+            long offset = params.offset.toLong()
+            long max = params.max.toLong()
+            result = placeService.getScores(place, offset, max)
         }
         else{
-            List scores = placeService.getScores(place)
-            render scores as JSON
+            result = placeService.getScores(place)
         }
+        if( !result ){
+            result = []
+        }
+        render result as JSON
+
     }
 
     def addScore(Long id){
-    	JSONObject parameters = request.JSON
-        println "json" + parameters
+        JSONObject parameters = new JSONObject(request.reader.text)
         Place place = placeService.get(id)
         Score score = placeService.addScoreToPlace(place,parameters)
         render score as JSON

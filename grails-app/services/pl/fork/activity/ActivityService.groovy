@@ -3,6 +3,7 @@ package pl.fork.activity
 import grails.transaction.Transactional
 import pl.fork.auth.User
 import pl.fork.auth.UserFriend
+import pl.fork.event.Event
 import pl.fork.file.ForkFile
 import pl.fork.place.Place
 import pl.fork.place.Score
@@ -63,11 +64,23 @@ class ActivityService {
         activity
     }
 
+    Activity createEventActivity(Event event){
+        Activity activity = new Activity()
+        activity.activityType = ActivityType.EVENT
+        activity.event = event
+        User user = User.findByUsername(springSecurityService.currentUser)
+        activity.user = user
+        user.addToActivities(activity)
+        user.save flush:true
+        activity.save flush:true
+        activity
+    }
+
     void notifyUsers(Activity activity){
         switch ( activity.activityType ){
             case ActivityType.IMAGE :
             case ActivityType.REVIEW :
-                println activity.user.friends
+            case ActivityType.EVENT :
                 activity.user.friends.each{ User friend ->
                     notify "userNotification", "{receiver: ${friend.username}, notification: activity }"
                 }

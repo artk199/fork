@@ -3,6 +3,7 @@ package pl.fork.event;
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.transaction.Transactional
 import org.apache.commons.collections.CollectionUtils
+import pl.fork.activity.ActivityService
 import pl.fork.auth.User
 import pl.fork.event.Event
 
@@ -11,17 +12,19 @@ import pl.fork.event.Event
  */
 @Transactional
 public class EventService {
+
     def springSecurityService;
+    ActivityService activityService
 
     Event join(Event event) {
         User user = springSecurityService.currentUser;
         event.addToParticipants(user)
         user.addToEvents(event)
         event.validate();
-
         if (!event.hasErrors()) {
             user.save flush:true;
             event.save flush:true;
+            activityService.createEventActivity(event)
         }
         event
     }

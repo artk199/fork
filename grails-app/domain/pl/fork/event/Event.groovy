@@ -32,4 +32,10 @@ class Event {
 
     Visibility visibility
 
+    static transients = ['participantsAmount']
+
+    def getParticipantsAmount(){
+        return participants.size()
+    }
+
 }

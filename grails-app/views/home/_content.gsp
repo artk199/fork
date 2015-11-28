@@ -34,18 +34,24 @@
         </div>
         <div class="col-md-2 col-sm-2 col-lg-2 col-xs-1 hidden-xs"></div>
     </div>
-
-    <div class="row page-section">
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-1 hidden-xs"></div>
-        <div class="col-md-3 col-sm-3 col-lg-3 hidden-xs">
-            <g:img class="img-responsive pull-right" file="home_attractions.png"/>
+    <g:if test="${randomPlace}">
+        <div class="row page-section">
+            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-1 hidden-xs"></div>
+            <div class="col-md-3 col-sm-3 col-lg-3 hidden-xs">
+                <g:if test="${randomPlace.images.size() > 0 }">
+                    <img style="max-width: 270px;border-radius: 50%;" class="img-responsive pull-right" src="/image/${randomPlace.images[0].id}"/>
+                </g:if>
+                <g:else>
+                    <img style="max-width: 270px;border-radius: 50%;" src="/assets/no-image.jpg" class="img-responsive pull-right"/>
+                </g:else>
+            </div>
+            <div class="col-md-5 col-sm-5 col-lg-5 col-xs-10 text-left">
+                <h2>
+                    <a href="/place/show/${randomPlace.id}">${randomPlace.name}</a>
+                </h2>
+                <p>${randomPlace.description}</p>
+            </div>
+            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-1 hidden-xs"></div>
         </div>
-        <div class="col-md-5 col-sm-5 col-lg-5 col-xs-10 text-left">
-            <h2>
-                Popularne w tej chwili
-            </h2>
-            <p>Można dać tutaj jakieś coś jeszcze i będzie ok</p>
-        </div>
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-1 hidden-xs"></div>
-    </div>
+    </g:if>
 </div>

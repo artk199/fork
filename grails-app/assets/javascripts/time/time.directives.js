@@ -2,9 +2,7 @@ forkApp.directive('timeDifference', [ 'timeService', function(timeService){
     return {
         restrict: 'E',
         replace: 'true',
-        template: `
-            <span>{{difference}}</span>
-        `,
+        template: "<span>{{difference}}</span>",
         scope: { date: '@'},
         link: function(scope){
 

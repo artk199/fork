@@ -6,7 +6,7 @@
                     <img src="/image/${this.user.profilePicture.id}" width="100%" height="100%"/>
                 </g:if>
                 <g:else>
-                    <img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" width="100%" height="100%" />
+                    <img src="/assets/no-profile.jpg" width="100%" height="100%" />
                 </g:else>
             </div>
 
@@ -48,6 +48,9 @@
                     </div>
                     <div ng-if="instance.type == 'FRIEND'">
                         <g:render template="/user/tabs/activity/friend"/>
+                    </div>
+                    <div ng-if="instance.type == 'EVENT'">
+                        <g:render template="/user/tabs/activity/event"/>
                     </div>
                 </div>
             </infinite-list>

@@ -13,7 +13,7 @@
                     <img width="75px" height="73px" src="/image/${friend.profilePicture.id}/mini"/>
                 </g:if>
                 <g:else>
-                    <img width="75px" height="73px" src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg"/>
+                    <img width="75px" height="73px" src="/assets/no-profile.jpg"/>
                 </g:else>
             </div>
             <div>

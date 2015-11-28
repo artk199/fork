@@ -174,7 +174,11 @@ class UserService {
 
     List<Activity> getActivities(int id, int offset, int max){
         User u = User.findById(id)
+        println u
         List<Activity> activities = Activity.findAll("from Activity as a where a.user.id=:user and a.activityType<>:type order by a.dateCreated desc",[user:u.id, type: ActivityType.INVITE], [max:max, offset: offset])
+        Activity.list().each{
+            println it
+        }
         activities
     }
 
@@ -182,6 +186,39 @@ class UserService {
         User u = User.findById(id)
         List<Activity> activities = Activity.findAll("from Activity as a where a.user in (:friends) and a.activityType<>:type  order by a.dateCreated desc", [friends: u.friends, type: ActivityType.INVITE], [max:max, offset: offset])
         activities
+    }
+
+    def changePassword(User user, params){
+        User activeUser = springSecurityService.currentUser
+        if( activeUser != user ){
+            return "password.change.wrong.user"
+        }
+        if( user && params.old_password && params.new_password && params.password_confirm ){
+            boolean isPasswordValid = springSecurityService.passwordEncoder.isPasswordValid(activeUser.getPassword(),params.old_password , null )
+            if( !isPasswordValid ){
+                return "password.change.wrong.old"
+            }
+            if( params.new_password !=  params.password_confirm){
+                return "password.change.wrong.new"
+            }
+            user.password = params.new_password
+            user.validate()
+            if( user.hasErrors()){
+                return "password.change.wrong.password"
+            }
+            user.save()
+            return "OK"
+        }
+        else{
+            return "password.change.wrong.parameters"
+        }
+    }
+
+    def isValid(User user){
+        User activeUser = springSecurityService.currentUser
+        if( user != activeUser )
+            return false
+        return true
     }
 
 }
