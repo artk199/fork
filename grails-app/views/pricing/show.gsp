@@ -2,15 +2,14 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'pricing.label', default: 'Pricing')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <title>${pricing.place.name} - ${pricing.title}</title>
     </head>
     <body>
         <div id="show-pricing" class="content scaffold-show" role="main">
             <h2>
-                <a href="/place/show/${pricing.place.id}">
+                <g:link controller="place" action="show" id="${pricing.place.id}">
                     ${pricing.place.name}
-                </a>
+                </g:link>
                 -
                 ${pricing.title}
             </h2>
@@ -119,10 +118,10 @@
                                <span class="glyphicon glyphicon-plus"></span>
                                <g:message code="pricing.element.add.new"/>
                            </a>
-                            <a href="/pricing/" class="save btn btn-default">
+                            <g:link controller="place" action="show" id="${pricing.place?.id}" class="save btn btn-default">
                                 <span class="glyphicon glyphicon-step-backward"></span>
-                                <g:message code="pricing.showAll"/>
-                            </a>
+                                <g:message code="pricing.backToPlace"/>
+                            </g:link>
                         </div>
                     </div>
                 </div>

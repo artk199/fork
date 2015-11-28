@@ -39,13 +39,15 @@ class PricedElementController {
 
         pricedElement.save flush:true
 
+        /*
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'pricedElement.label', default: 'PricedElement'), pricedElement.id])
                 redirect pricedElement
             }
             '*' { respond pricedElement, [status: CREATED] }
-        }
+        }*/
+        redirect controller: "pricing", action: "show", id: pricedElement.pricing.id
     }
 
     def edit(PricedElement pricedElement) {
@@ -68,13 +70,15 @@ class PricedElementController {
 
         pricedElement.save flush:true
 
+        /*
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'pricedElement.label', default: 'PricedElement'), pricedElement.id])
                 redirect pricedElement
             }
             '*'{ respond pricedElement, [status: OK] }
-        }
+        }*/
+        redirect controller: "pricing", action: "show", id: pricedElement.pricing.id
     }
 
     @Transactional

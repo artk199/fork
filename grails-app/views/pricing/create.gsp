@@ -2,8 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'pricing.label', default: 'Pricing')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <title><g:message code="pricing.header"/> ${pricing.place?.id ? pricing.place.name : ""}</title>
     </head>
     <body>
         <div id="create-pricing" class="content scaffold-create" role="main">
@@ -63,22 +62,18 @@
                 </div>
                 <fieldset class="buttons">
                     <g:submitButton name="create"  class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
-
-                <h2><g:message code="pricing.elements.header"/></h2>
-                <p>To jeszcze nie działa. Tutaj będzie dodawanie elementów przy pomocy javascriptu - od
-                razu przy dodawaniu menu, dla wygody.</p>
-                <fieldset class="form-group" id="pricing-elements">
-                    <!-- FIELDS ON MENU ELEMENT!-->
-
-
-                    <div class="buttons">
-                        <a href="/pricedElement/create" class="save btn btn-default"><g:message code="pricing.element.add.new"/></a>
-                        <a href="/pricing/" class="save btn btn-default">
+                    <g:if test="${pricing.place?.id}">
+                        <g:link controller="place" action="show" id="${pricing.place?.id}" class="save btn btn-default">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                            <g:message code="pricing.backToPlace"/>
+                        </g:link>
+                    </g:if>
+                    <g:else>
+                        <g:link controller="pricing" action="index" class="save btn btn-default">
                             <span class="glyphicon glyphicon-step-backward"></span>
                             <g:message code="pricing.showAll"/>
-                        </a>
-                    </div>
+                        </g:link>
+                    </g:else>
                 </fieldset>
             </g:form>
         </div>
