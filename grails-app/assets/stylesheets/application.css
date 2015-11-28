@@ -71,6 +71,48 @@ h5.small-application-name{
     color:#fff;
 }
 
+h1.place-title{
+    border-bottom: 1px solid #899FB5;
+    padding-bottom: 5px;
+    padding-left: 15px;
+}
+
+#show-place .place-rating{
+    clear:both;
+    text-align:left;
+    font-size:25px;
+}
+
+#show-place .place-rating .glyphicon{
+    color: #ffb300;
+    float: left;
+    margin: 0px 0px;
+    font-size:30px;
+}
+
+#show-place .place-rating .summary-count{
+    font-size:11px;
+    color: #9CA6B9;
+}
+
+h1.place-title .edit-options{
+    float:right;
+    margin-top:20px;
+    font-size:12px;
+}
+
+h1.place-title .edit-options .glyphicon{
+    font-size: 12px;
+    float:left;
+    margin: -2px 3px;
+}
+
+h1.place-title .glyphicon{
+    float:left;
+    font-size:20px;
+    margin:10px 10px 0 0 ;
+}
+
 .fork-layout-header-links > li > a {
     font-size: 17px;
     color: white !important;

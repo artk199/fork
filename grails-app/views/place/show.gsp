@@ -2,42 +2,14 @@
 <html>
 <head>
     <meta name="layout" content="main" />
-    <title>${this.place.town} - ${this.place.name}</title>
+    <title>${this.place.town ? this.place.town + " - " : ""}${this.place.name}</title>
 </head>
 <body>
     <div id="show-place">
         <div class="row">
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
             <div class="col-md-8 col-sm-10 col-xs-12">
-                <div class="row">
-                    <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
-                        <h1>
-                            <g:if test="${this.place.town}">${this.place.town} - </g:if> ${this.place.name}
-                            <div class="pull-right" style="font-size:12px;">
-                                <a href="/place/edit/${place.id}">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    <g:message code="default.link.edit"/>
-                                </a>
-                            </div>
-                        </h1>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
-                                <g:if test="${this.place.images.size() > 0 }">
-                                    <img src="${g.createLink(absolute:true,uri:'/image/'+this.place.images[0].id)}" class="img-responsive">
-                                </g:if>
-                                <g:else>
-                                    <img src="http://www.parentcenterhub.org/wp-content/uploads/2014/03/No-Image-.jpg">
-                                </g:else>
-                            </div>
-
-                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                <p class="text-left">
-                                    ${this.place.description}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <g:render template="show/place_info" model="[place:place]"/>
             </div>
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
         </div>
