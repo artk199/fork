@@ -41,7 +41,6 @@
         ${user.authorities}
         <g:select name="authorities" id="authorities" from="${pl.fork.auth.Role.list()}"
                   class="form-control"  multiple="multiple"
-
         />
     </div>
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 hidden-xs"></div>

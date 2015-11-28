@@ -13,7 +13,7 @@
                         </a>
                     </div>
                 </sec:ifAllGranted>
-                <sec:ifAllGranted roles='ROLE_USER'>
+                <sec:ifNotGranted roles='ROLE_ADMIN'>
                     <g:if test="${(g.currentUserID().toInteger() == this.place.owner?.id)}">
                         <div class="edit-options">
                             <a href="/place/edit/${place.id}">
@@ -22,7 +22,7 @@
                             </a>
                         </div>
                     </g:if>
-                </sec:ifAllGranted>
+                </sec:ifNotGranted>
             </sec:ifLoggedIn>
         </h1>
         <div class="row">
