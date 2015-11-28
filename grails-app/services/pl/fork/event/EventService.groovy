@@ -16,9 +16,11 @@ public class EventService {
     Event join(Event event) {
         User user = springSecurityService.currentUser;
         event.addToParticipants(user)
+        user.addToEvents(event)
         event.validate();
 
         if (!event.hasErrors()) {
+            user.save flush:true;
             event.save flush:true;
         }
         event
