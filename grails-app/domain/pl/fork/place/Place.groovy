@@ -42,7 +42,7 @@ class Place {
     String phone
     String website
     User owner
-    Status status = Status.APPROVED;
+    Status status = Status.PENDING;
 
     //date is automatically filled with current timestamp
     Date dateCreated;
