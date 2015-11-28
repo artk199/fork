@@ -57,6 +57,10 @@
             android:label="@string/title_activity_add_opinion" >
         </activity>
         <activity
+            android:name="pl.fork.activity.AddPhotoActivity"
+            android:label="@string/title_activity_add_opinion" >
+        </activity>
+        <activity
             android:name="com.etiennelawlor.imagegallery.library.activities.ImageGalleryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label=""
