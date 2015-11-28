@@ -86,18 +86,37 @@ class UserController {
     }
 
     def editPassword(User user){
-        respond user
+        if( userService.isValid(user) )
+            respond user
+        else{
+            response.status = 403
+            render view :"/errors/error403"
+        }
+    }
+
+    def submitChange(User user){
+        def message = userService.changePassword(user,params)
+        if( message != "OK"){
+            flash.message = message
+            redirect(uri:"/user/editPassword/${user.id}")
+        }
+        else {
+            flash.message = "user.changed.success"
+            redirect(uri: "/user/show/${user.id}")
+        }
     }
 
     def edit(User user) {
-        respond user
+        if( userService.isValid(user) )
+            respond user
+        else{
+            response.status = 403
+            render view :"/errors/error403"
+        }
     }
 
     @Transactional
     def update(User user) {
-        println user
-        println user.password
-        println user.password_confirm
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -106,11 +125,16 @@ class UserController {
 
         if (user.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond user.errors, view:'edit'
+            respond user.errors, view: 'edit'
             return
         }
-
-        user.save flush:true
+        if (userService.isValid(user)){
+            user.save flush: true
+        }
+        else{
+            response.status = 403
+            render view :"/errors/error403"
+        }
 
         request.withFormat {
             form multipartForm {
@@ -118,36 +142,6 @@ class UserController {
                 redirect user
             }
             '*'{ respond user, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def delete(User user) {
-
-        if (user == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        user.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
         }
     }
 
@@ -159,16 +153,25 @@ class UserController {
 
     def setProfile(int userID, int imageID){
         User user = User.findById(userID)
+
         if( !user ){
             response.status = 404
         }
-        user.profilePicture = user.images.find{ it.id == imageID }
-        user.save flush:true
-        user.validate()
-        if( user.hasErrors() ){
-            response.status = 404
+
+        if( userService.isValid(user) ){
+            user.profilePicture = user.images.find{ it.id == imageID }
+            user.save flush:true
+            user.validate()
+            if( user.hasErrors() ){
+                response.status = 404
+            }
+            render "OK"
         }
-        render "OK"
+        else{
+            response.status = 403
+            render "FORBIDDEN"
+        }
+
     }
 
     def getActivities(int id){

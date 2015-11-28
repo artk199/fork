@@ -3,6 +3,7 @@ package pl.fork.admin
 import grails.transaction.Transactional
 import pl.fork.activity.Activity
 import pl.fork.auth.Status
+import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
 import pl.fork.place.Place
@@ -38,6 +39,21 @@ class AdminService {
     def acceptPlace(id){
         Place place= placeService.get(new Long(id));
         place.status = Status.APPROVED;
+        place.save();
+    }
+
+    def rejectAdmin(id){
+        Place place= placeService.get(new Long(id));
+        place.administratorStatus = null;
+        User user = place.owner;
+        user.removeFromAdministratedPlaces(place);
+        user.save();
+        place.save();
+    }
+
+    def acceptAdmin(id){
+        Place place= placeService.get(new Long(id));
+        place.administratorStatus = Status.APPROVED;
         place.save();
     }
 

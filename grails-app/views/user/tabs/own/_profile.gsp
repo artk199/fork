@@ -6,7 +6,7 @@
                     <img src="/image/${this.user.profilePicture.id}" width="100%" height="100%"/>
                 </g:if>
                 <g:else>
-                    <img src="http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg" width="100%" height="100%" />
+                    <img src="/assets/no-profile.jpg" width="100%" height="100%" />
                 </g:else>
             </div>
             <div style="min-width:200px;float:left;height: 100%;border: 1px #DDD solid;border-top:none;">
@@ -36,6 +36,9 @@
             </div>
         </div>
         <div profile-details style="padding-right:20px;">
+            <g:if test="${flash.message}">
+                <div class="successmsg" role="status">${g.message(code:flash.message)}</div>
+            </g:if>
 
             <g:if test="${this.user.friends.size() == 0 }">
                 <div class='col-md-12' style="height:100%; border: 1px #DDD solid; padding-bottom: 15px; line-height: 40px;color:#AAA;cursor:default;font-size:20px;padding-top:20px;">
@@ -62,6 +65,9 @@
                     </div>
                     <div ng-if="instance.type == 'FRIEND'">
                         <g:render template="/user/tabs/activity/friend"/>
+                    </div>
+                    <div ng-if="instance.type == 'EVENT'">
+                        <g:render template="/user/tabs/activity/event"/>
                     </div>
                 </div>
             </infinite-list>

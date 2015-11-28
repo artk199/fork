@@ -51,7 +51,7 @@
                             <div class="pull-left">
                                     <a ng-href="/user/show/${comment.owner.id}">
                                         <img ng-src="${comment.owner.profilePicture != null ? '/image/'+comment.owner.profilePicture.id :
-                                                'http://icenz.org/wp-content/themes/twentyfifteen/img/no-img.jpg'}" width="75px" height="75px"/>
+                                                '/assets/no-profile.jpg'}" width="75px" height="75px"/>
                                         <div style="text-aling:left" ng-app>
                                             ${comment.owner.username}
                                         </div>

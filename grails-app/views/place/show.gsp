@@ -5,11 +5,6 @@
     <title>${this.place.town ? this.place.town + " - " : ""}${this.place.name}</title>
 </head>
 <body>
-    <g:set var="isOwner"
-           value = "${(g.currentUserID().toInteger() == this.place.owner?.id)}"
-    />
-    <g:set var="isAdmin" value = "${false}"/>
-    <g:set var="hasPlaceEditPermissions" value = "${isOwner || isAdmin}"/>
     <div id="show-place">
         <div class="row">
             <div class="col-md-2 col-sm-1 hidden-xs"></div>

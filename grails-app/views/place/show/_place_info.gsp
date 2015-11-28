@@ -5,7 +5,7 @@
             <g:if test="${this.place.town}">${this.place.town} - </g:if> ${this.place.name}
 
             <sec:ifLoggedIn>
-                <g:if test="${hasPlaceEditPermissions}">
+                <g:if test="${(g.currentUserID().toInteger() == this.place.owner?.id)}">
                     <div class="edit-options">
                         <a href="/place/edit/${place.id}">
                             <span class="glyphicon glyphicon-edit"></span>
@@ -21,7 +21,7 @@
                     <img src="${g.createLink(absolute:true,uri:'/image/'+this.place.mainImage.id)}" class="img-responsive">
                 </g:if>
                 <g:else>
-                    <img src="http://www.parentcenterhub.org/wp-content/uploads/2014/03/No-Image-.jpg" class="img-responsive">
+                    <img src="/assets/no-image.jpg" class="img-responsive">
                 </g:else>
             </div>
 

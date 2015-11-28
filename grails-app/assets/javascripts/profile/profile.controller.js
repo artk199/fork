@@ -24,12 +24,6 @@ forkApp.controller('profileController', ['$scope', '$window', function($scope, $
 
 }]);
 
-
-
-
-
-
-
 forkApp.controller('friendsController', [ '$scope', '$http', function($scope, $http ){
 
     $scope.users = [];

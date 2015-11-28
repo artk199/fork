@@ -42,6 +42,9 @@ class PlaceService {
     List<Place> findAllPending() {
         filter(null, null, null, null, null, null, Status.PENDING);
     }
+    List<Place> findAllApproved() {
+        filter(null, null, null, null, null, null, Status.APPROVED);
+    }
 
     List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore, String address, Status status) {
 
@@ -109,9 +112,7 @@ class PlaceService {
                 ilike("town", "%"+town+"%")
             }
 
-            if (status) {
-                eq("status", status)
-            }
+            eq("status", Status.APPROVED)
 
             if(placeTypes != null && placeTypes.size() > 0){
                 createAlias("types", "t")
@@ -125,6 +126,7 @@ class PlaceService {
 
     Place save(Place place) {
         place.owner = springSecurityService.currentUser
+        place.administratorStatus = Status.APPROVED;
         place.save(flush:true);
     }
 
@@ -202,10 +204,16 @@ class PlaceService {
         List scores = new ArrayList()
         User user = User.findByUsername(springSecurityService.currentUser);
         if( user ){
-            scores.addAll(Score.find("from Score s where s.place.id=:place and s.owner.id<>:user order by dateCreated desc", [place: p.id, user: user.id], [offset: offset, max: max]))
+            def tmp = Score.find("from Score s where s.place.id=:place and s.owner.id<>:user order by dateCreated desc", [place: p.id, user: user.id], [offset: offset, max: max])
+            if( tmp ){
+                scores.addAll(tmp)
+            }
         }
         else {
-            scores.addAll(Score.find("from Score s where s.place.id=:place order by dateCreated desc", [place: p.id], [offset: offset, max: max]))
+            def tmp = Score.find("from Score s where s.place.id=:place order by dateCreated desc", [place: p.id], [offset: offset, max: max])
+            if( tmp ){
+                scores.addAll(tmp)
+            }
         }
         scores
     }
@@ -345,12 +353,33 @@ class PlaceService {
         if( user ) {
             Score s = Score.find("from Score s where place.id=:place and owner.id=:user", [place: place.id, user: user.id])
             map['submitted'] = s ? true : false
-            map['score'] = s
+            if( s ) {
+                map['score'] = s
+            }
         }
         else{
             map['submitted'] = false
         }
         map['empty'] = place.scores.empty
         map
+    }
+
+    Place registerOwner(Place place) {
+        User user = User.findByUsername(springSecurityService.currentUser);
+        place.owner = user;
+        place.administratorStatus = Status.PENDING;
+        user.addToAdministratedPlaces(place);
+        place.validate()
+        if( place && !place.hasErrors() ) {
+            user.save flush: true;
+            place.save flush: true;
+        }
+    }
+
+    List<Place> findPendingObjAdmin() {
+        List<Place> places = Place.createCriteria().list {
+            eq("administratorStatus", Status.PENDING)
+        }
+        places
     }
 }

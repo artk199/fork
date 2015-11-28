@@ -8,7 +8,8 @@ public enum ActivityType {
     INVITE("enum.activity.invite"),
     FRIEND("enum.activity.friend"),
     REVIEW("enum.activity.review"),
-    IMAGE("enum.activity.image");
+    IMAGE("enum.activity.image"),
+    EVENT("enum.activity.event");
 
     private String label;
 

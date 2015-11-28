@@ -33,6 +33,7 @@ forkApp.controller('galleryController', ['$scope', '$http', function($scope, $ht
             .success(function (data) {
                 $scope.description = data.description;
                 $scope.title = data.title;
+                $scope.dateCreated = data.dateCreated;
             });
     }
 
