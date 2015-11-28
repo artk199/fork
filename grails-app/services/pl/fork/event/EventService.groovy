@@ -26,6 +26,19 @@ public class EventService {
         event
     }
 
+    Event unjoin(Event event) {
+        User user = springSecurityService.currentUser;
+        event.removeFromParticipants(user)
+        user.removeFromEvents(event)
+        event.validate();
+
+        if (!event.hasErrors()) {
+            user.save flush:true;
+            event.save flush:true;
+        }
+        event
+    }
+
     List<Comment> getComments(Event event){
         event.comments.isEmpty() ? [] : event.comments.asList()
     }

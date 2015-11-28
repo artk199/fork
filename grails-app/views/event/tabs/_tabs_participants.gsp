@@ -10,6 +10,9 @@
             <g:if test="${!signedUser}">
                 <g:link action="join" resource="${event}" class="btn btn-default btn-block" ><g:message code="event.join" /></g:link>
             </g:if>
+            <g:if test="${signedUser}">
+                <g:link action="unjoin" resource="${event}" class="btn btn-default btn-block" ><g:message code="event.unjoin" /></g:link>
+            </g:if>
         </sec:ifLoggedIn>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
