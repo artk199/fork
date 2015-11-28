@@ -214,4 +214,11 @@ class UserService {
         }
     }
 
+    def isValid(User user){
+        User activeUser = springSecurityService.currentUser
+        if( user != activeUser )
+            return false
+        return true
+    }
+
 }
