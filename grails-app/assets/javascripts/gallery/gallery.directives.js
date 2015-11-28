@@ -10,7 +10,7 @@ forkApp.directive('userImages', function(){
     }
 });
 
-forkApp.directive('userImage',  ['$timeout', function($timeout) {
+forkApp.directive('userImage', function() {
     return {
         controller: ['$scope', function($scope) {
 
@@ -47,7 +47,7 @@ forkApp.directive('userImage',  ['$timeout', function($timeout) {
             });
         }
     }
-}]);
+});
 
 forkApp.directive('fullImage', ['$animateCss', function($animateCss) {
     return {
