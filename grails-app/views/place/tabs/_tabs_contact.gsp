@@ -35,7 +35,7 @@
             <span class="glyphicon glyphicon glyphicon-chevron-right pull-left"></span>
             <g:message code="place.show.contact.contactToOwner"/>
         </h2>
-        <g:if test="${this.place.owner}">
+        <g:if test="${this.place.owner && this.place.administratorStatus.toString() == 'APPROVED'}">
             <p><g:message code="place.show.contact.owner"/></p>
             <g:set var="place_owner" value="${this.place.owner}"/>
             <p>
@@ -59,6 +59,9 @@
                 </p>
             </g:if>
         </g:if>
+        <g:elseif test="${this.place.owner && this.place.administratorStatus.toString() == 'PENDING'}">
+            <p>${g.message(code:"place.show.contact.pending")}</p>
+        </g:elseif>
         <g:else>
             <p>${g.message(code:"place.show.contact.noOwner", args:["/place/registerOwner/"+this.place.id])}</p>
         </g:else>

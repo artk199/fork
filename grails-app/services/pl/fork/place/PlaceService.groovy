@@ -125,6 +125,7 @@ class PlaceService {
 
     Place save(Place place) {
         place.owner = springSecurityService.currentUser
+        place.administratorStatus = Status.APPROVED;
         place.save(flush:true);
     }
 
@@ -352,5 +353,24 @@ class PlaceService {
         }
         map['empty'] = place.scores.empty
         map
+    }
+
+    Place registerOwner(Place place) {
+        User user = User.findByUsername(springSecurityService.currentUser);
+        place.owner = user;
+        place.administratorStatus = Status.PENDING;
+        user.addToAdministratedPlaces(place);
+        place.validate()
+        if( place && !place.hasErrors() ) {
+            user.save flush: true;
+            place.save flush: true;
+        }
+    }
+
+    List<Place> findPendingObjAdmin() {
+        List<Place> places = Place.createCriteria().list {
+            eq("administratorStatus", Status.PENDING)
+        }
+        places
     }
 }
