@@ -133,10 +133,9 @@ class UserController {
         if (userService.isValid(user)){
             /* Update roles*/
             def roles = params.list('authorities');
-            if(roles){
-                roles.each { role ->
-                    userService.addRoleToUser(user,role)
-                }
+            UserRole.removeAll(user,true);
+            roles?.each { role ->
+                userService.addRoleToUser(user,role)
             }
             user.save flush: true
         }
