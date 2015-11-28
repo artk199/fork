@@ -63,6 +63,9 @@
                     <div ng-if="instance.type == 'FRIEND'">
                         <g:render template="/user/tabs/activity/friend"/>
                     </div>
+                    <div ng-if="instance.type == 'EVENT'">
+                        <g:render template="/user/tabs/activity/event"/>
+                    </div>
                 </div>
             </infinite-list>
         </div>

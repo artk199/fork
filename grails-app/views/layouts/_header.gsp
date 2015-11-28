@@ -18,16 +18,16 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="header-collapsable">
                             <ul class="nav navbar-nav navbar-right fork-layout-header-links">
-                                <li><a href="${createLink(uri:'/')}"><span><g:message code="layout.header.link.home"/></span></a></li>
-                                <li><a href="${createLink(controller:'place',action:'index')}"><span><g:message code="layout.header.link.place"/></span></a></li>
-                                <li><a href="${createLink(controller:'event',action:'index')}"><span><g:message code="layout.header.link.event"/></span></a></li>
+                                <li><a href="${createLink(uri:'/')}" target="_self"><span><g:message code="layout.header.link.home"/></span></a></li>
+                                <li><a href="${createLink(controller:'place',action:'index')}" target="_self"><span><g:message code="layout.header.link.place"/></span></a></li>
+                                <li><a href="${createLink(controller:'event',action:'index')}" target="_self"><span><g:message code="layout.header.link.event"/></span></a></li>
                                 <sec:ifLoggedIn>
                                     <form class="hidden"  id="logoutform" name="logout" method="POST" action="${createLink(controller:'logout') }">
                                     </form>
                                     <li><a href="javascript:void(0);" onclick="$('#logoutform').submit()"><span><g:message code="auth.logout"/></span></a></li>
                                 </sec:ifLoggedIn>
                                 <sec:ifNotLoggedIn>
-                                    <li><a href="${createLink(controller:'login',action:'auth')}"><span><g:message code="layout.header.link.login"/></span></a></li>
+                                    <li><a href="${createLink(controller:'login',action:'auth')}" target="_self"><span><g:message code="layout.header.link.login"/></span></a></li>
                                 </sec:ifNotLoggedIn>
                             </ul>
                         </div>

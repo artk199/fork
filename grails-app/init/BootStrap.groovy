@@ -260,7 +260,8 @@ class BootStrap {
                         title     : a.score.title,
                         review    : a.score.review,
                         place_name: a.score.place.name,
-                        place_id  : a.score.place.id
+                        place_id  : a.score.place.id,
+                        place_image : a.score.place.images.size() > 0 ? a.score.place.images[0].id : null
                 ]
             } else if (a.activityType == ActivityType.FRIEND) {
                 User friend = User.findById(a.friend)
@@ -268,6 +269,13 @@ class BootStrap {
                         friend        : friend.id,
                         friend_name   : friend.username,
                         friend_profile: friend.profilePicture ? friend.profilePicture.id : null,
+                ]
+            } else if (a.activityType == ActivityType.EVENT) {
+                return parameters + [
+                        event        : a.event.id,
+                        event_name   : a.event.title,
+                        event_date   : a.event.startDate,
+                        event_place   : a.event.place.name
                 ]
             } else {
                 return parameters

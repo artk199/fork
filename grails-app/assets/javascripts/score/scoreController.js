@@ -113,6 +113,6 @@ forkApp.directive( 'stars', function() {
             }
 
         }],
-        template: "<span ng-repeat='score in newArray() track by $index' class='glyphicon glyphicon-star fork-star' ng-class='{\'active\': isActive()}'></span>"
+        template: "<span ng-repeat='score in newArray() track by $index' class='glyphicon glyphicon-star fork-star' ng-class='{active: isActive()}'></span>"
     }
 });

@@ -109,9 +109,7 @@ class PlaceService {
                 ilike("town", "%"+town+"%")
             }
 
-            if (status) {
-                eq("status", status)
-            }
+            eq("status", Status.APPROVED)
 
             if(placeTypes != null && placeTypes.size() > 0){
                 createAlias("types", "t")
@@ -202,10 +200,16 @@ class PlaceService {
         List scores = new ArrayList()
         User user = User.findByUsername(springSecurityService.currentUser);
         if( user ){
-            scores.addAll(Score.find("from Score s where s.place.id=:place and s.owner.id<>:user order by dateCreated desc", [place: p.id, user: user.id], [offset: offset, max: max]))
+            def tmp = Score.find("from Score s where s.place.id=:place and s.owner.id<>:user order by dateCreated desc", [place: p.id, user: user.id], [offset: offset, max: max])
+            if( tmp ){
+                scores.addAll(tmp)
+            }
         }
         else {
-            scores.addAll(Score.find("from Score s where s.place.id=:place order by dateCreated desc", [place: p.id], [offset: offset, max: max]))
+            def tmp = Score.find("from Score s where s.place.id=:place order by dateCreated desc", [place: p.id], [offset: offset, max: max])
+            if( tmp ){
+                scores.addAll(tmp)
+            }
         }
         scores
     }
@@ -345,7 +349,9 @@ class PlaceService {
         if( user ) {
             Score s = Score.find("from Score s where place.id=:place and owner.id=:user", [place: place.id, user: user.id])
             map['submitted'] = s ? true : false
-            map['score'] = s
+            if( s ) {
+                map['score'] = [id: s.id, score: s.score, title: s.title, review: s.review]
+            }
         }
         else{
             map['submitted'] = false

@@ -21,7 +21,7 @@
                <div style='text-align: left; margin-bottom:20px;margin-top:10px;'>
                    <h2 style="font-family: times, Times New Roman, times-roman, georgia, serif;color: #444;margin: 0;padding: 0px 0px 6px 0px;font-size: 41px;font-weight: bold; font-style: italic;">
                    &bdquo;{{title != null ? title : 'No title'}}&rdquo;
-                   <small style='font-size:45%'>{{created}}</small></h2>
+                   <small style='font-size:45%'>{{dateCreated | date : 'yyyy-MM-dd'}}</small></h2>
                    <span style="font-size:20px;">{{description}}</span>
                </div>
            </div>

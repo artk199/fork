@@ -174,7 +174,11 @@ class UserService {
 
     List<Activity> getActivities(int id, int offset, int max){
         User u = User.findById(id)
+        println u
         List<Activity> activities = Activity.findAll("from Activity as a where a.user.id=:user and a.activityType<>:type order by a.dateCreated desc",[user:u.id, type: ActivityType.INVITE], [max:max, offset: offset])
+        Activity.list().each{
+            println it
+        }
         activities
     }
 

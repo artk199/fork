@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'event.label', default: 'Event')}" />
+        <g:set var="entityName" value="${message(code: 'event.label', default: 'wydarzeń')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
         <asset:javascript src="jquery-2.1.3.js"/>
     </head>
