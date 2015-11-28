@@ -89,6 +89,18 @@ class UserController {
         respond user
     }
 
+    def submitChange(User user){
+        def message = userService.changePassword(user,params)
+        if( message != "OK"){
+            flash.message = message
+            redirect(uri:"/user/editPassword/${user.id}")
+        }
+        else {
+            flash.message = "user.changed.success"
+            redirect(uri: "/user/show/${user.id}")
+        }
+    }
+
     def edit(User user) {
         respond user
     }

@@ -9,11 +9,16 @@
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
             <div class="col-md-8 col-sm-10 col-xs-12">
                 <div style="width:100%; height:100%;padding-top:30px; padding-bottom:30px;">
-                    <g:form resource="${this.user}" method="PUT" class="form-horizontal">
+                    <g:if test="${flash.message}">
+                        <div class="flashmsg" role="status">${g.message(code:flash.message)}</div>
+                    </g:if>
+                    <div class="msg" role="status">${g.message(code:'password.requirements')}</div>
+
+                    <g:form resource="${this.user}" method="PUT" action="submitChange" class="form-horizontal">
                         <g:hiddenField name="version" value="${this.user?.version}" />
                         <fieldset class="form">
                             <div class="form-group">
-                                <label for="password" class="col-sm-4 control-label">
+                                <label for="old_password" class="col-sm-4 control-label">
                                     <g:message code="user.password.old" />
                                 </label>
                                 <div class="col-sm-8">
@@ -22,16 +27,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password_confirm" class="col-sm-4 control-label">
+                                <label for="new_password" class="col-sm-4 control-label">
                                     <g:message code="user.password.new" />
                                 </label>
                                 <div class="col-sm-8">
-                                    <g:passwordField class="form-control" name="password" />
+                                    <g:passwordField class="form-control" name="new_password" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="email" class="col-sm-4 control-label">
+                                <label for="password_confirm" class="col-sm-4 control-label">
                                     <g:message code="user.password.new.confirm" />
                                 </label>
                                 <div class="col-sm-8">

@@ -188,4 +188,30 @@ class UserService {
         activities
     }
 
+    def changePassword(User user, params){
+        User activeUser = springSecurityService.currentUser
+        if( activeUser != user ){
+            return "password.change.wrong.user"
+        }
+        if( user && params.old_password && params.new_password && params.password_confirm ){
+            boolean isPasswordValid = springSecurityService.passwordEncoder.isPasswordValid(activeUser.getPassword(),params.old_password , null )
+            if( !isPasswordValid ){
+                return "password.change.wrong.old"
+            }
+            if( params.new_password !=  params.password_confirm){
+                return "password.change.wrong.new"
+            }
+            user.password = params.new_password
+            user.validate()
+            if( user.hasErrors()){
+                return "password.change.wrong.password"
+            }
+            user.save()
+            return "OK"
+        }
+        else{
+            return "password.change.wrong.parameters"
+        }
+    }
+
 }

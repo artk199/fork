@@ -1064,3 +1064,38 @@ hr {
 .fork-table > tbody > tr:nth-child(even):hover:not(.inactive) {
     background: #639FFF;
 }
+
+.flashmsg{
+    padding: 10px;
+    border: 1px solid black;
+    background: #B90000;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 1px 1px 1px black
+}
+.msg{
+    padding: 10px;
+    border: 1px solid black;
+    background: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 1px 1px 1px black
+}
+
+.successmsg{
+    padding: 10px;
+    border: 1px solid black;
+    background: #0fff16;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 1px 1px 1px black
+}

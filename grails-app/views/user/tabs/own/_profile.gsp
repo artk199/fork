@@ -36,6 +36,9 @@
             </div>
         </div>
         <div profile-details style="padding-right:20px;">
+            <g:if test="${flash.message}">
+                <div class="successmsg" role="status">${g.message(code:flash.message)}</div>
+            </g:if>
 
             <g:if test="${this.user.friends.size() == 0 }">
                 <div class='col-md-12' style="height:100%; border: 1px #DDD solid; padding-bottom: 15px; line-height: 40px;color:#AAA;cursor:default;font-size:20px;padding-top:20px;">
