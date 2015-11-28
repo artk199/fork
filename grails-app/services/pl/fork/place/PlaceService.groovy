@@ -165,6 +165,18 @@ class PlaceService {
         place.scores.isEmpty() ? [] : place.scores
     }
 
+    List<Score> getScores(Place p,long offset,long max){
+        List scores = new ArrayList()
+        User user = User.findByUsername(springSecurityService.currentUser);
+        if( user ){
+            scores.addAll(Score.find("from Score s where s.place.id=:place and s.owner.id<>:user order by dateCreated desc", [place: p.id, user: user.id], [offset: offset, max: max]))
+        }
+        else {
+            scores.addAll(Score.find("from Score s where s.place.id=:place order by dateCreated desc", [place: p.id], [offset: offset, max: max]))
+        }
+        scores
+    }
+
     Score addScoreToPlace(Place place, parameters){
         Score score = new Score(parameters)
         User currentUser = User.findByUsername(springSecurityService.currentUser)
@@ -292,4 +304,20 @@ class PlaceService {
         return scores;
     }
 
+    public Map getMetascore(int id){
+        Place place = this.get(id)
+        User user = User.findByUsername(springSecurityService.currentUser);
+
+        Map map = new HashMap()
+        if( user ) {
+            Score s = Score.find("from Score s where place.id=:place and owner.id=:user", [place: place.id, user: user.id])
+            map['submitted'] = s ? true : false
+            map['score'] = s
+        }
+        else{
+            map['submitted'] = false
+        }
+        map['empty'] = place.scores.empty
+        map
+    }
 }

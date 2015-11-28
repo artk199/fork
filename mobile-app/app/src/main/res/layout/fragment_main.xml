@@ -18,8 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Zaloguj się!"
-            android:drawableLeft="@drawable/ic_person_outline_black_18dp"
-            android:id="@+id/loginButton" />
+            android:drawableLeft="@drawable/ic_person_outline_white_18dp"
+            android:id="@+id/loginButton"
+            android:textColor="@color/grey_white_1000" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -33,13 +34,13 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:drawableTop="@drawable/ic_restaurant_menu_black_18dp"
+                android:drawableTop="@drawable/ic_restaurant_menu_white_18dp"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/ic_local_activity_black_18dp"
+                android:drawableTop="@drawable/ic_local_activity_white_18dp"
                 android:id="@+id/attractions"
                 android:layout_weight="1" />
 
@@ -47,13 +48,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/hotels"
-                android:drawableTop="@drawable/ic_hotel_black_18dp"
+                android:drawableTop="@drawable/ic_local_hotel_white_18dp"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/ic_place_black_18dp"
+                android:drawableTop="@drawable/ic_place_white_18dp"
                 android:id="@+id/allPlaces"
                 android:layout_weight="1" />
 
@@ -65,21 +66,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:weightSum="1"
-            android:id="@+id/Latitude">
+            android:id="@+id/Latitude"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Wysokosc geograficzna:"
                 android:id="@+id/lat_label"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xxx"
                 android:id="@+id/lat_value"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,14 +97,16 @@
                 android:layout_height="wrap_content"
                 android:text="Szerokosc geograficzna"
                 android:id="@+id/lon_label"
-                android:layout_weight="0.50" />
+                android:layout_weight="0.50"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xxx"
                 android:id="@+id/lon_value"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:visibility="gone" />
         </LinearLayout>
 
         <ListView
@@ -113,8 +119,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pokaż na mapie"
-            android:drawableLeft="@drawable/ic_place_black_18dp"
-            android:id="@+id/allMapButton" />
+            android:drawableLeft="@drawable/ic_place_white_18dp"
+            android:id="@+id/allMapButton"
+            android:textColor="@color/grey_white_1000" />
 
 
     </LinearLayout>

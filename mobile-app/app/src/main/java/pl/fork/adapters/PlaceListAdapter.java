@@ -15,10 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.fork.Config;
-import pl.fork.activity.MainActivity;
-import pl.fork.entity.PlaceType;
-import pl.fork.fork.R;
 import pl.fork.entity.Place;
+import pl.fork.fork.R;
 
 /**
  * Created by Artur on 2015-11-07.

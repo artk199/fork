@@ -8,18 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.etiennelawlor.imagegallery.library.adapters.FullScreenImageGalleryAdapter;
 import com.etiennelawlor.imagegallery.library.enums.PaletteColorType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-      import pl.fork.fork.R;
+import pl.fork.adapters.FullScreenImageAdapter;
+import pl.fork.fork.R;
 
+/**
+ * This code is from https://github.com/lawloretienne/ImageGallery but its after a few changes
+ * to adjust it to current project.
+ */
 public class FullScreenImageActivity extends AppCompatActivity {
 
-    // region Member Variables
-    private FullScreenImageGalleryAdapter mFullScreenImageGalleryAdapter;
+    private FullScreenImageAdapter mFullScreenImageGalleryAdapter;
     private List<String> mImages;
     private int mPosition;
     private PaletteColorType mPaletteColorType;
@@ -102,7 +105,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
             images.add(image);
         }
 
-        mFullScreenImageGalleryAdapter = new FullScreenImageGalleryAdapter(images, mPaletteColorType);
+        mFullScreenImageGalleryAdapter = new FullScreenImageAdapter(images, mPaletteColorType);
         mViewPager.setAdapter(mFullScreenImageGalleryAdapter);
         mViewPager.addOnPageChangeListener(mViewPagerOnPageChangeListener);
         mViewPager.setCurrentItem(mPosition);

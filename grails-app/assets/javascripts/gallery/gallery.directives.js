@@ -191,7 +191,6 @@ forkApp.directive('fileDialog', function(){
                     var present = Math.floor(done/total*100);
                     scope.$apply(function(){
                         scope.progress = present+'%';
-                        console.log(scope.progress);
                     });
                 };
 
@@ -200,7 +199,7 @@ forkApp.directive('fileDialog', function(){
                         scope.$apply(function() {
                             scope.progress = '0%';
                             scope.uploading = false;
-                            scope.images.push(xhr.responseText);
+                            scope.images.unshift(xhr.responseText);
                         });
                     } else {
                         alert('An error occurred!');

@@ -65,6 +65,7 @@ class AdminService {
             notFound()
             return
         }
+        score.place.scores.remove(score);
 
         /* Quick fix, don't kill me for that*/
         def activities = Activity.findAllByScore(score);

@@ -18,7 +18,7 @@ forkApp.directive('profileImage', function() {
 
             var verticalStyle = function(){
                 element.css('height', '');
-                element.css('width', '200px');
+                element.css('width', '100%');
                 element.css('top','');
                 element.css('left','');
                 element.css('margin-left','');

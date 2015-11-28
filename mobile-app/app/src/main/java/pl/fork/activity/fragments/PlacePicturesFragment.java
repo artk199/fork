@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.etiennelawlor.imagegallery.library.util.ImageGalleryUtils;
 import com.etiennelawlor.imagegallery.library.view.GridSpacesItemDecoration;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
@@ -20,8 +21,8 @@ import pl.fork.UtilFunctions;
 import pl.fork.activity.FullScreenImageActivity;
 import pl.fork.adapters.ImageAdapter;
 import pl.fork.entity.ForkImage;
-import pl.fork.fork.R;
 import pl.fork.entity.Place;
+import pl.fork.fork.R;
 
 /**
  * Created by Artur on 2015-11-07.
@@ -61,6 +62,7 @@ public class PlacePicturesFragment extends Fragment implements ImageAdapter.OnIm
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_place_pics, container, false);
+        pictures.clear();
         for (ForkImage forkImage : place.getImages()) {
             pictures.add(UtilFunctions.getImageURI(forkImage.getId()));
         }

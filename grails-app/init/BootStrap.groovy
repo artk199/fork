@@ -1,3 +1,5 @@
+import pl.fork.activity.Activity
+import pl.fork.activity.ActivityType
 import pl.fork.auth.Role
 import pl.fork.auth.User
 import pl.fork.auth.UserService
@@ -6,6 +8,7 @@ import grails.converters.JSON
 import pl.fork.place.Score
 import pl.fork.place.other.PricedElement
 import pl.fork.place.other.Pricing
+import pl.fork.file.ForkFile
 import pl.fork.place.PlaceType
 import grails.util.Environment
 
@@ -211,9 +214,78 @@ class BootStrap {
 
 
         JSON.registerObjectMarshaller( Place ) { Place place ->
-            return place.properties + [avgScore: place.avgScore]
+            return [
+                    id : place.id,
+                    name : place.name,
+                    description : place.description,
+                    address : place.address,
+                    town : place.town,
+                    email : place.email,
+                    phone : place.phone,
+                    website : place.website,
+                    owner : place.owner,
+                    status : place.status,
+                    scores : place.scores,
+                    dateCreated : place.dateCreated,
+                    verified : place.verified,
+                    x : place.x,
+                    y : place.y,
+                    avgScore : place.avgScore,
+                    types : place.types,
+                    images : place.images
+
+            ]
         }
 
+        JSON.registerObjectMarshaller( Activity ) { Activity a ->
+
+            Map parameters = [
+                    id       : a.id,
+                    user     : a.user.id,
+                    user_name: a.user.username,
+                    profile  : a.user.profilePicture ? a.user.profilePicture.id : null,
+                    type     : a.activityType.name(),
+                    date     : a.dateCreated
+            ]
+
+            if (a.activityType == ActivityType.IMAGE) {
+                return parameters + [
+                        image      : a.image.id,
+                        title      : a.image.title,
+                        description: a.image.description
+                ]
+            } else if (a.activityType == ActivityType.REVIEW) {
+                return parameters + [
+                        score     : a.score.score,
+                        title     : a.score.title,
+                        review    : a.score.review,
+                        place_name: a.score.place.name,
+                        place_id  : a.score.place.id
+                ]
+            } else if (a.activityType == ActivityType.FRIEND) {
+                User friend = User.findById(a.friend)
+                return parameters + [
+                        friend        : friend.id,
+                        friend_name   : friend.username,
+                        friend_profile: friend.profilePicture ? friend.profilePicture.id : null,
+                ]
+            } else {
+                return parameters
+            }
+        }
+
+
+        JSON.registerObjectMarshaller( ForkFile ) { ForkFile forkFile ->
+            return [
+                    id : forkFile.id,
+                    fileType : forkFile.fileType,
+                    description : forkFile.description,
+                    title : forkFile.title,
+                    owner : forkFile.owner,
+                    dateCreated : forkFile.dateCreated,
+                    status : forkFile.status
+            ]
+        }
 
         println "Deployed."
     }

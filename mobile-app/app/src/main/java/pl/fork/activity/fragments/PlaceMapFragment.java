@@ -8,14 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 
 import pl.fork.activity.MapsActivity;
-import pl.fork.fork.R;
 import pl.fork.entity.Place;
+import pl.fork.fork.R;
 
 /**
  * Created by Artur on 2015-11-07.

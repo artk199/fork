@@ -1,21 +1,16 @@
 package pl.fork.activity;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -26,11 +21,11 @@ import java.util.List;
 
 import pl.fork.LocationService;
 import pl.fork.SessionHandler;
+import pl.fork.adapters.PlaceListAdapter;
+import pl.fork.entity.Place;
 import pl.fork.entity.PlaceType;
 import pl.fork.fork.R;
-import pl.fork.adapters.PlaceListAdapter;
 import pl.fork.listeners.PlaceListClickListener;
-import pl.fork.entity.Place;
 import pl.fork.web.LoadPlacesTask;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     /** Menus */
     private static final int MENU_LOGIN = 1;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,12 +181,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(location != null) {
-            new LoadPlacesTask(adapter, getApplicationContext(),placeType).execute(location.getLatitude(), location.getLongitude());
+            showLoadingProgressDialog();
+            new LoadPlacesTask(adapter, getApplicationContext(),placeType,this).execute(location.getLatitude(), location.getLongitude());
         }else{
-            new LoadPlacesTask(adapter, getApplicationContext(),placeType).execute(0.0, 0.0);
+            showLoadingProgressDialog();
+            new LoadPlacesTask(adapter, getApplicationContext(),placeType,this).execute(0.0, 0.0);
         }
     }
 
+
+    public void showLoadingProgressDialog() {
+        this.showProgressDialog("Proszę czekać...");
+    }
+
+    public void showProgressDialog(CharSequence message) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setIndeterminate(true);
+        }
+
+        progressDialog.setMessage(message);
+        progressDialog.show();
+    }
+
+    public void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
 }
 
 

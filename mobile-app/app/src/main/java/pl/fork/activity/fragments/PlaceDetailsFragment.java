@@ -8,28 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
-import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pl.fork.Config;
 import pl.fork.SessionHandler;
-import pl.fork.activity.MapsActivity;
-import pl.fork.adapters.OpinionsListAdapter;
-import pl.fork.entity.Opinion;
+import pl.fork.entity.Place;
 import pl.fork.fork.AddOpinionActivity;
 import pl.fork.fork.R;
-import pl.fork.entity.Place;
-import pl.fork.web.LoadOpinionsTask;
 
 /**
  * Created by Artur on 2015-11-07.
@@ -83,7 +71,7 @@ public class PlaceDetailsFragment extends Fragment {
         addressTextView.setText(place.getAddress());
 
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
-        ratingBar.setRating(place.getRating().floatValue());
+        ratingBar.setRating(place.getAvgScore().floatValue());
 
         if(!SessionHandler.getInstance().isActive()){
             Button addOpinionButton = (Button) rootView.findViewById(R.id.addOpinionButton);
