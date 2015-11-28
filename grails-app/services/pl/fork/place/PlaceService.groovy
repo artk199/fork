@@ -350,7 +350,7 @@ class PlaceService {
             Score s = Score.find("from Score s where place.id=:place and owner.id=:user", [place: place.id, user: user.id])
             map['submitted'] = s ? true : false
             if( s ) {
-                map['score'] = [id: s.id, score: s.score, title: s.title, review: s.review]
+                map['score'] = s
             }
         }
         else{

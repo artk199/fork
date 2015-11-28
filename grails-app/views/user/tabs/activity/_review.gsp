@@ -2,7 +2,7 @@
     <div style="float:left; width:140px;height:140px;">
         <div style="float:left">
             <img ng-if="instance.place_image" ng-src="/image/{{instance.place_image}}/mini" width="140px" height="140px" style="border: 1px solid #DDD;">
-            <img ng-if="!instance.place_image" src="http://www.parentcenterhub.org/wp-content/uploads/2014/03/No-Image-.jpg" width="140px" height="140px" style="border: 1px solid #DDD;">
+            <img ng-if="!instance.place_image" src="/assets/no-image.jpg" width="140px" height="140px" style="border: 1px solid #DDD;">
         </div>
     </div>
     <div style="float:left;text-align:left; margin-left: 10px;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);height:35px; overflow:hidden;white-space: nowrap;text-overflow:ellipsis;">

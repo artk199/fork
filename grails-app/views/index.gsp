@@ -11,6 +11,5 @@
 <body>
     <g:render template="/home/main"/>
     <g:render template="/home/content"/>
-
 </body>
 </html>

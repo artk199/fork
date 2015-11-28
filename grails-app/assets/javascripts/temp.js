@@ -48,7 +48,7 @@ forkApp.directive('tileImage', [ '$window', '$location', '$timeout', '$http', fu
                 $http.get('/place/' + $scope.id + '/image')
                     .success(function (data) {
                         if( data.length == 0 ){
-                            $scope.images.push("http://www.parentcenterhub.org/wp-content/uploads/2014/03/No-Image-.jpg");
+                            $scope.images.push("/assets/no-image.jpg");
                         }
                         angular.forEach( data, function( image){
                             $scope.images.push('/image/'+image+'/mini');
