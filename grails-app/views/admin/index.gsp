@@ -11,6 +11,9 @@
         setRejectLabel('${g.message(code:'admin.tabs.photos.reject')}');
         setAcceptLabel('${g.message(code:'admin.tabs.photos.accept')}');
         setNoPendingLabel('${g.message(code:'admin.tabs.photos.noPending')}');
+        setCloseReportLabel('${g.message(code:'admin.tabs.comments.closeReport')}');
+        setRemoveLabel('${g.message(code:'default.button.delete.label')}');
+        setNoFlaggedCommentsLabel('${g.message(code:'admin.tabs.comments.noFlagged')}');
     </script>
 </head>
 <body>

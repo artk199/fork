@@ -1,13 +1,17 @@
-// Getting places list
-var editLabel, emptyLabel, rejectLabel, acceptLabel, noPendingLabel;
-
+// Setting default labels in view
+var editLabel, emptyLabel, rejectLabel, acceptLabel,
+    noPendingLabel, closeReportLabel, removeLabel, noFlaggedCommentsLabel;
 
 function setEditLabel(label){editLabel = label;}
 function setEmptyLabel(label){emptyLabel = label;}
 function setRejectLabel(label){rejectLabel = label;}
 function setAcceptLabel(label){acceptLabel = label;}
 function setNoPendingLabel(label){noPendingLabel = label;}
+function setCloseReportLabel(label){closeReportLabel = label;}
+function setRemoveLabel(label){removeLabel = label;}
+function setNoFlaggedCommentsLabel(label){noFlaggedCommentsLabel = label;}
 
+// Getting places list
 function getPlacesFromController(controller, tableID){
     $.ajax({
         url: controller,
@@ -185,12 +189,71 @@ function updateImagesContainer(data, containerID){
     container.html(data);
 
     // Update count label on tab
-    $countLabel = $("#admin-photos-label");
+    var $countLabel = $("#admin-photos-label");
     if(updateImagesCount == 0){
         $countLabel.remove();
     }
     else{
         $countLabel.html(updateImagesCount);
     }
+}
 
+// Update comments section
+function updateComments(controller, containerID, scoreID){
+    $.ajax({
+        url: controller,
+        dataType: 'json',
+        data: {
+            id : scoreID
+        },
+        success: function(data) {
+            createTableWithComments(data, containerID);
+        },
+        error: function(request, status, error) {
+            alert(error)
+        },
+        complete: function() {
+        }
+    });
+}
+
+function createTableWithComments(data, containerID){
+    var i = 0;
+    var containerHTML = "";
+    data.forEach(function(element, index, array) {
+        containerHTML = containerHTML + "<tr>" +
+        "<td class='col-md-2 col-sm-2 col-xs-2'><a href='/user/show/"+element["owner_id"]+"'>"+element["owner_name"]+"</a></td>" +
+        "<td class='col-md-2 col-sm-2 col-xs-2'><a href='/score/edit/"+element["id"]+"'>"+element["title"]+"</a></td>" +
+        "<td class='col-md-4 col-sm-4 col-xs-4'>"+element["review"]+"</a></td>"+
+        "<td class='col-md-2 col-sm-2 col-xs-2'>"+element["reports_size"]+"</a></td>"+
+        "<td class='col-md-2 col-sm-2 col-xs-2'>"+
+            "<a class='btn btn-default btn-block' onclick=\"updateComments('/admin/closeReports', '"+containerID+"', '"+element["id"]+"')\">" +
+            "<span class='glyphicon glyphicon-remove-sign'></span><span>"+closeReportLabel+"</span></a>"+
+            "<a href='/score/edit/"+element["id"]+"' class='btn btn-default btn-block'>" +
+            "<span class='glyphicon glyphicon-edit'></span>" + editLabel + "</a>"+
+            "<a class='btn btn-default btn-block' onclick=\"updateComments('/admin/removeScore', '"+containerID+"', '"+element["id"]+"')\">" +
+            "<span class='glyphicon glyphicon-remove-sign'></span><span>"+removeLabel+"</span></a>"+
+            "</td>"+
+        "</tr>"
+        i = i + 1;
+    });
+
+    var $countLabel = $("#admin-comments-label");
+    // Display info about no pending requests
+    if(i == 0){
+        var table = $("#" + containerID);
+        var parent = table.parent();
+        table.remove();
+        var $newChild = $("<p>"+ noFlaggedCommentsLabel + "</p>");
+        parent.append($newChild);
+        $countLabel.remove();
+    }
+    else{
+        var tableBody = $("#" + containerID + " tbody");
+        tableBody.html(containerHTML);
+        //$.bootstrapSortable(true);
+        $countLabel.html(i);
+    }
+
+    return containerHTML;
 }

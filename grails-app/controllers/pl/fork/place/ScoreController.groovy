@@ -68,13 +68,14 @@ class ScoreController {
 
         score.save flush:true
 
-        request.withFormat {
+        /*request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'score.label', default: 'Score'), score.id])
                 redirect score
             }
             '*'{ respond score, [status: OK] }
-        }
+        }*/
+        redirect controller: "place", action: "show", id: score.place.id
     }
 
     @Transactional

@@ -22,18 +22,23 @@ class FooterTagLib {
 
         def places = placeService.getTopScoredPlaces(size);
 
-        out << "<ul>";
-        for(Place p : places){
-            out << "<li>";
-            if(p.town != null){
-                out << "<a href='/place?town=" + p.town + "'>" + p.town + "</a>";
-                out << " - ";
+        if(places) {
+            out << "<ul>";
+            for (Place p : places) {
+                out << "<li>";
+                if (p.town != null) {
+                    out << "<a href='/place?town=" + p.town + "'>" + p.town + "</a>";
+                    out << " - ";
+                }
+                out << "<a href='/place/show/" + p.id + "'>" + p.name + "</a>";
+                out << " - " + (p.avgScore > 0 ? p.avgScore : 0);
+                out << "</li>";
             }
-            out << "<a href='/place/show/" + p.id + "'>" + p.name + "</a>";
-            out << " - " + (p.avgScore > 0 ? p.avgScore : 0);
-            out << "</li>";
+            out << "</ul>";
         }
-        out << "</ul>";
+        else{
+            out<<"<p class='text-left pull-left' style='margin-top:10px;'>"+g.message(code:'footer.mostPopular.noEntries')+"</p>";
+        }
     }
 
     def getNewestUsers = { attrs ->

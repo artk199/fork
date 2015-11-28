@@ -33,12 +33,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description" class="col-sm-4 control-label">
+                            <label for="review" class="col-sm-4 control-label">
                                 <g:message code="score.review" />
                             </label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" name="description"
-                                          id="description" value="${score.review}">${score.review}</textarea>
+                                <textarea class="form-control" name="review"
+                                          id="review" value="${score.review}">${score.review}</textarea>
                             </div>
                         </div>
 

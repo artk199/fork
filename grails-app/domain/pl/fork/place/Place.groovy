@@ -11,6 +11,7 @@ class Place {
     static mapping = {
         images lazy:false
         pricing lazy:false
+        description type: 'text'
     }
 
     static constraints = {
@@ -41,7 +42,7 @@ class Place {
     String phone
     String website
     User owner
-    Status status = Status.APPROVED;
+    Status status = Status.PENDING;
 
     //date is automatically filled with current timestamp
     Date dateCreated;

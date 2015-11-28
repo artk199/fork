@@ -10,8 +10,10 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <g:img class="fork-layout-header-logo" file="logo.png" width="55px" height="55px"/>
-                            <span class="fork-layout-header-title" ><g:message code="application.name"/></span>
+                            <a href="${createLink(uri:'/')}" title="${g.message(code: 'application.name')}">
+                                <g:img class="fork-layout-header-logo" file="logo.png" width="55px" height="55px" alt="${g.message(code: 'application.name')}"/>
+                                <span class="fork-layout-header-title" ><g:message code="application.name"/></span>
+                            </a>
                         </div>
                             <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="header-collapsable">

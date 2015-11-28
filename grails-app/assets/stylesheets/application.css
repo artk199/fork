@@ -55,7 +55,6 @@ body{
     float:left;
     margin-right:10px;
     margin-top: 15px;
-    cursor: default;
 }
 
 .fork-layout-header-title{
@@ -66,7 +65,10 @@ body{
     font-size:45px;
     float:left;
     line-height:85px;
-    cursor: default;
+}
+
+h5.small-application-name{
+    color:#fff;
 }
 
 .fork-layout-header-links > li > a {
@@ -192,6 +194,10 @@ a:link, a:visited{
 
 a:active, a:hover{
     color:#9171b1;
+}
+
+.buttons a.btn-default:link, .buttons a.btn-default:visited{
+    color:#000;
 }
 
 #banner{
@@ -378,7 +384,11 @@ a.btn-orange:active{
 }
 
 .page-section .table-striped>tbody>tr:nth-of-type(odd){
-    background-color: #f9f9f9!important;
+    background-color: #f9f9f9;
+}
+
+.page-section .td{
+    word-wrap:break-word;
 }
 
 .blue-section{
@@ -423,6 +433,10 @@ a.btn-orange:active{
 
 .dark-section table.sortable thead th:hover:not([data-defaultsort=disabled]){
     background:#40526D;
+}
+
+.dark-section.table-striped>tbody>tr:nth-of-type(odd){
+    background-color: #4f4f4f !important;
 }
 
 iframe{

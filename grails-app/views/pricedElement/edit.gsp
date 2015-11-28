@@ -2,8 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'pricedElement.label', default: 'PricedElement')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <title>${pricedElement.pricing.title} - ${pricedElement.name}</title>
     </head>
     <body>
         <div id="edit-pricedElement" class="content scaffold-edit" role="main">
@@ -68,7 +67,7 @@
                                 </label>
                                 <div class="col-sm-8">
                                     <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
-                                              optionValue="title" class="form-control" value="${pricedElement.pricing}"
+                                              optionValue="title" class="form-control" value="${pricedElement.pricing.id}"
                                               optionKey="id"
                                     />
                                 </div>
@@ -79,6 +78,14 @@
                 </div>
                 <fieldset class="buttons">
                     <input class="save btn btn-default" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <g:link controller="place" action="show" id="${pricedElement.pricing.place?.id}" class="save btn btn-default">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                        <g:message code="pricing.backToPlace"/>
+                    </g:link>
+                    <g:link controller="pricing" action="show" id="${pricedElement.pricing?.id}" class="save btn btn-default">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                        <g:message code="pricing.elements.backToPricing"/>
+                    </g:link>
                 </fieldset>
             </g:form>
         </div>

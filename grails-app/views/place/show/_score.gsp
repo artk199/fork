@@ -29,6 +29,16 @@
                             {{ instance.review }}
                         </div>
                     </div>
+                    <div class="pull-right">
+                        <a ng-href="/place/reportScore/{{instance.id}}" style="color:#fff">
+                            <span class="glyphicon glyphicon-flag"></span>
+                            <g:message code="default.link.report"/>
+                        </a>
+                        <a ng-href="/score/edit/{{instance.id}}" style="color:#fff">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <g:message code="default.link.edit"/>
+                        </a>
+                    </div>
                 </div>
 
             </div>

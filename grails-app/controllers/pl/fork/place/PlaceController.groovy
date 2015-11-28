@@ -66,7 +66,7 @@ class PlaceController {
         }
 
         User user = User.findByUsername(springSecurityService.currentUser)
-        //jeżeli rola użytkownika różna od zwykłego użytkownika to miejsce od razu akceptowane
+        //jeżeli rola użytkownika to admin to miejsce od razu akceptowane
         if (SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_ADMIN.name())) {
             place.status=Status.APPROVED;
         }
@@ -220,6 +220,15 @@ class PlaceController {
             places = new ArrayList<Place>();
         }
         render places as JSON
+    }
+
+    def reportScore(long id) {
+        def score = placeService.getScore(id);
+        placeService.createReport(score);
+
+        def place = score.place
+        Score userScore = placeService.getUserScore(place);
+        redirect action: "show", id: place.id
     }
 
     def getMetascore(int id){

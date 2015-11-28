@@ -164,6 +164,9 @@ class UserService {
             order("id", "desc")
         };
 
+        if(users.size == 0){
+            return null;
+        }
         int size = maxSize >= users.size() ? users.size() -1 : maxSize;
 
         return users[0..size];

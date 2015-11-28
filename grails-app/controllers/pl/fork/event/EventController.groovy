@@ -17,7 +17,10 @@ class EventController {
     }
 
     def show(Event event) {
-        respond event
+        Comment comment = eventService.getUserComment(event);
+        List<Comment> comments = eventService.getComments(event);
+        boolean signedUser = eventService.isUserSigned(event);
+        respond event, model:[comment:comment, comments:comments, signedUser:signedUser]
     }
 
     def create() {
@@ -47,6 +50,11 @@ class EventController {
             }
             '*' { respond event, [status: CREATED] }
         }
+    }
+
+    def addComment(Event event) {
+        eventService.addCommentToEvent(event, params);
+        redirect action:"show",id:event.id;
     }
 
     def edit(Event event) {
@@ -111,6 +119,12 @@ class EventController {
     @Transactional
     def join(Event event) {
         Event respEvent = eventService.join(event);
+        redirect action:"show", id: respEvent.id
+    }
+
+    @Transactional
+    def unjoin(Event event) {
+        Event respEvent = eventService.unjoin(event);
         redirect action:"show", id: respEvent.id
     }
 }
