@@ -42,6 +42,9 @@ class PlaceService {
     List<Place> findAllPending() {
         filter(null, null, null, null, null, null, Status.PENDING);
     }
+    List<Place> findAllApproved() {
+        filter(null, null, null, null, null, null, Status.APPROVED);
+    }
 
     List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore, String address, Status status) {
 
