@@ -121,4 +121,10 @@ class EventController {
         Event respEvent = eventService.join(event);
         redirect action:"show", id: respEvent.id
     }
+
+    @Transactional
+    def unjoin(Event event) {
+        Event respEvent = eventService.unjoin(event);
+        redirect action:"show", id: respEvent.id
+    }
 }
