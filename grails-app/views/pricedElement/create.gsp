@@ -2,8 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'pricedElement.label', default: 'PricedElement')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <title><g:message code="pricing.elements.header"/> ${pricedElement.pricing?.id ? pricedElement.pricing.title : ""}</title>
     </head>
     <body>
         <div id="create-pricedElement" class="content scaffold-create" role="main">
@@ -73,11 +72,23 @@
                 </div>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                    <a href="/pricedElement/" class="save btn btn-default">
-                        <span class="glyphicon glyphicon-step-backward"></span>
-                        <g:message code="pricing.element.showAll"/>
-                    </a>
-                </fieldset>
+                    <g:if test="${pricedElement.pricing?.id}">
+                        <g:link controller="pricing" action="show" id="${pricedElement.pricing?.id}" class="save btn btn-default">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                            <g:message code="pricing.elements.backToPricing"/>
+                        </g:link>
+                        <g:link controller="place" action="show" id="${pricedElement.pricing.place?.id}" class="save btn btn-default">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                            <g:message code="pricing.backToPlace"/>
+                        </g:link>
+                    </g:if>
+                    <g:else>
+                        <g:link controller="pricedElement" action="index" class="save btn btn-default">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                            <g:message code="pricing.element.showAll"/>
+                        </g:link>
+                    </g:else>
+              </fieldset>
             </g:form>
         </div>
     </body>

@@ -3,7 +3,7 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'pricedElement.label', default: 'PricedElement')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <title>${pricedElement.pricing.title} - ${pricedElement.name}</title>
     </head>
     <body>
         <div id="show-pricedElement" class="content scaffold-show" role="main">
@@ -79,10 +79,14 @@
                         </div>
 
                         <div class="panel-footer buttons">
-                            <a href="/pricedElement/" class="save btn btn-default">
+                            <g:link controller="place" action="show" id="${pricedElement.pricing.place?.id}" class="save btn btn-default">
                                 <span class="glyphicon glyphicon-step-backward"></span>
-                                <g:message code="pricing.element.showAll"/>
-                            </a>
+                                <g:message code="pricing.backToPlace"/>
+                            </g:link>
+                            <g:link controller="pricing" action="show" id="${pricedElement.pricing?.id}" class="save btn btn-default">
+                                <span class="glyphicon glyphicon-step-backward"></span>
+                                <g:message code="pricing.elements.backToPricing"/>
+                            </g:link>
                         </div>
                     </div>
                 </div>
