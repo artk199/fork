@@ -2,8 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main" />
-    <g:set var="entityName" value="${message(code: 'pricing.label', default: 'Pricing')}" />
-    <title><g:message code="default.edit.label" args="[entityName]" /></title>
+    <title>${pricing.place.name} - ${pricing.title}</title>
 </head>
 <body>
     <div id="edit-pricing" class="content scaffold-edit" role="main">
@@ -55,7 +54,7 @@
                             </label>
                             <div class="col-sm-8">
                                 <g:select name="place" id="place" from="${pl.fork.place.Place.list()}"
-                                          optionValue="name" class="form-control" value="${pricing.place}"
+                                          optionValue="name" class="form-control" value="${pricing.place.id}"
                                           optionKey="id"
                                 />
                             </div>

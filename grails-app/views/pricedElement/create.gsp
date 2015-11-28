@@ -21,6 +21,8 @@
                 <div class="text-left row">
                     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
                     <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                        <p><g:message code="pricing.element.info"/></p>
+
                         <fieldset class="form">
                             <!-- FIELDS ON MENU !-->
                             <div class="form-group">

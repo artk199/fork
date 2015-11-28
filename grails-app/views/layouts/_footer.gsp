@@ -24,8 +24,10 @@
         </div>
         <div class="row">
             <div class="col-md-4 col-sm-4 col-lg-4 col-xs-6 logo">
-                <g:img file="logo.png"/>
-                <h5><g:message code="application.name"/></h5>
+                <a href="${createLink(uri:'/')}" title="${g.message(code: 'application.name')}">
+                    <g:img file="logo.png"/>
+                    <h5 class="small-application-name"><g:message code="application.name"/></h5>
+                </a>
             </div>
             <div class="col-md-4 col-sm-4 col-lg-4 hidden-xs"></div>
             <div class="col-md-4 col-sm-4 col-lg-4 col-xs-6 authors">
