@@ -29,7 +29,7 @@
                 <g:render template="tabs" model="[event:event]"/>
             </div>
             <div class="col-md-8 col-sm-10 col-xs-12">
-                <g:render template="comments" model="[event:event, comment:comment, comments:comments]"/>
+                <g:render template="comments" model="[event:event, comment:comment, comments:comments, signedUser:signedUser]"/>
             </div>
         </div>
     </div>

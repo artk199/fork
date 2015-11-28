@@ -19,7 +19,8 @@ class EventController {
     def show(Event event) {
         Comment comment = eventService.getUserComment(event);
         List<Comment> comments = eventService.getComments(event);
-        respond event, model:[comment:comment, comments:comments]
+        boolean signedUser = eventService.isUserSigned(event);
+        respond event, model:[comment:comment, comments:comments, signedUser:signedUser]
     }
 
     def create() {

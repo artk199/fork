@@ -28,6 +28,11 @@ public class EventService {
         event.comments.isEmpty() ? [] : event.comments.asList()
     }
 
+    boolean isUserSigned(Event event) {
+        User user = User.findByUsername(springSecurityService.currentUser);
+        event.participants.contains(user);
+    }
+
     Comment addCommentToEvent(Event event, parameters){
         Comment comment = new Comment(parameters);
         User currentUser = User.findByUsername(springSecurityService.currentUser);

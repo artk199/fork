@@ -7,7 +7,9 @@
             ${participant.username} <br>
         </g:each>
         <sec:ifLoggedIn>
-            <g:link action="join" resource="${event}" class="btn btn-default btn-block" ><g:message code="event.join" /></g:link>
+            <g:if test="${!signedUser}">
+                <g:link action="join" resource="${event}" class="btn btn-default btn-block" ><g:message code="event.join" /></g:link>
+            </g:if>
         </sec:ifLoggedIn>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>

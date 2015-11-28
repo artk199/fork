@@ -66,7 +66,7 @@ class PlaceController {
         }
 
         User user = User.findByUsername(springSecurityService.currentUser)
-        //jeżeli rola użytkownika różna od zwykłego użytkownika to miejsce od razu akceptowane
+        //jeżeli rola użytkownika to admin to miejsce od razu akceptowane
         if (SpringSecurityUtils.ifAnyGranted(RoleType.ROLE_ADMIN.name())) {
             place.status=Status.APPROVED;
         }
