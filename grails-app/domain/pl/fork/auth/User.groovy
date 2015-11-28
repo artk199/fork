@@ -1,5 +1,6 @@
 package pl.fork.auth
 
+import pl.fork.event.Comment
 import pl.fork.place.other.Report
 import pl.fork.file.ForkFile
 import pl.fork.place.Score
@@ -12,7 +13,7 @@ class User implements Serializable {
 	transient springSecurityService
 
 	static mappedBy = [requestedFriends: 'requester', receivedFriends: 'receiver']
-	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend, activities:Activity, reports:Report]
+	static hasMany = [images: ForkFile, scores: Score, requestedFriends: UserFriend, receivedFriends: UserFriend, activities:Activity, reports:Report, comments:Comment]
 
 	String username
 	String password

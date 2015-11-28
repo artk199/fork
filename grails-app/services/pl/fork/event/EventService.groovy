@@ -2,8 +2,9 @@ package pl.fork.event;
 
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.transaction.Transactional
+import org.apache.commons.collections.CollectionUtils
 import pl.fork.auth.User
-import pl.fork.event.Event;
+import pl.fork.event.Event
 
 /**
  * Created by Patryk on 15.11.2015.
@@ -21,5 +22,44 @@ public class EventService {
             event.save flush:true;
         }
         event
+    }
+
+    List<Comment> getComments(Event event){
+        event.comments.isEmpty() ? [] : event.comments.asList()
+    }
+
+    Comment addCommentToEvent(Event event, parameters){
+        Comment comment = new Comment(parameters);
+        User currentUser = User.findByUsername(springSecurityService.currentUser);
+        comment.language = 'PL';
+        comment.owner = currentUser;
+        comment.event = event;
+        comment.validate();
+        if( comment && !comment.hasErrors() ){
+            event.addToComments(comment);
+            comment.save(flush:true)
+            event.save(flush:true)
+        }
+        else{
+            return null
+        }
+        comment
+    }
+
+    Comment getUserComment(Event event) {
+        User currentUser = User.findByUsername(springSecurityService.currentUser);
+        List<Comment> comments = Comment.createCriteria().list {
+            if (currentUser) {
+                eq("owner", currentUser)
+            }
+
+            if(event) {
+                eq("event", event)
+            }
+        }
+        if (!CollectionUtils.isEmpty(comments)) {
+            return comments.get(0);
+        }
+        return null;
     }
 }
