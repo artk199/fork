@@ -5,14 +5,24 @@
             <g:if test="${this.place.town}">${this.place.town} - </g:if> ${this.place.name}
 
             <sec:ifLoggedIn>
-                <g:if test="${(g.currentUserID().toInteger() == this.place.owner?.id)}">
+                <sec:ifAllGranted roles='ROLE_ADMIN'>
                     <div class="edit-options">
                         <a href="/place/edit/${place.id}">
                             <span class="glyphicon glyphicon-edit"></span>
                             <span><g:message code="default.link.edit"/></span>
                         </a>
                     </div>
-                </g:if>
+                </sec:ifAllGranted>
+                <sec:ifAllGranted roles='ROLE_USER'>
+                    <g:if test="${(g.currentUserID().toInteger() == this.place.owner?.id)}">
+                        <div class="edit-options">
+                            <a href="/place/edit/${place.id}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                <span><g:message code="default.link.edit"/></span>
+                            </a>
+                        </div>
+                    </g:if>
+                </sec:ifAllGranted>
             </sec:ifLoggedIn>
         </h1>
         <div class="row">

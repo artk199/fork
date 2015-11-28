@@ -9,9 +9,14 @@
         <g:if test="${this.place.pricing.size() == 0}">
             <p><g:message code="place.show.pricing.noPricing"/></p>
             <sec:ifLoggedIn>
-                <g:if test="${hasPlaceEditPermissions}">
+                <sec:ifAllGranted roles='ROLE_ADMIN'>
                     <p><g:message code="place.show.pricing.addMenu" args="['/pricing/create?place.id='+this.place.id]"/></p>
-                </g:if>
+                </sec:ifAllGranted>
+                <sec:ifNotGranted roles='ROLE_ADMIN'>
+                    <g:if test="${g.currentUserID().toInteger() == this.place.owner?.id}">
+                        <p><g:message code="place.show.pricing.addMenu" args="['/pricing/create?place.id='+this.place.id]"/></p>
+                    </g:if>
+                </sec:ifNotGranted>
             </sec:ifLoggedIn>
         </g:if>
         <g:else>
@@ -22,16 +27,25 @@
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         ${pricing.title}
-                        
                         <sec:ifLoggedIn>
-                            <g:if test="${(g.currentUserID().toInteger() == this.place.owner?.id)}">
+                            <sec:ifAllGranted roles='ROLE_ADMIN'>
                                 <div class="pull-right">
                                     <a href="/pricing/edit/${pricing.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                         <g:message code="default.link.edit"/>
                                     </a>
                                 </div>
-                            </g:if>
+                            </sec:ifAllGranted>
+                            <sec:ifNotGranted roles='ROLE_ADMIN'>
+                                <g:if test="${g.currentUserID().toInteger() == this.place.owner?.id}">
+                                    <div class="pull-right">
+                                        <a href="/pricing/edit/${pricing.id}">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                            <g:message code="default.link.edit"/>
+                                        </a>
+                                    </div>
+                                </g:if>
+                            </sec:ifNotGranted>
                         </sec:ifLoggedIn>
                     </div>
                     <div class="panel-body">
@@ -73,14 +87,24 @@
                 </div>
             </g:each>
             <sec:ifLoggedIn>
-                <g:if test="${(g.currentUserID().toInteger() == this.place.owner?.id)}">
+                <sec:ifAllGranted roles='ROLE_ADMIN'>
                     <div class="buttons">
                         <a href="/pricing/create?place.id=${this.place.id}" class="save btn btn-orange">
                             <span class="glyphicon glyphicon-plus"></span>
                             <g:message code="pricing.add.new"/>
                         </a>
                     </div>
-                </g:if>
+                </sec:ifAllGranted>
+                <sec:ifNotGranted roles='ROLE_ADMIN'>
+                    <g:if test="${g.currentUserID().toInteger() == this.place.owner?.id}">
+                        <div class="buttons">
+                            <a href="/pricing/create?place.id=${this.place.id}" class="save btn btn-orange">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                <g:message code="pricing.add.new"/>
+                            </a>
+                        </div>
+                    </g:if>
+                </sec:ifNotGranted>
             </sec:ifLoggedIn>
         </g:else>
     </div>

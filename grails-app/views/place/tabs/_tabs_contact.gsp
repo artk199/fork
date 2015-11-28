@@ -63,7 +63,10 @@
             <p>${g.message(code:"place.show.contact.pending")}</p>
         </g:elseif>
         <g:else>
-            <p>${g.message(code:"place.show.contact.noOwner", args:["/place/registerOwner/"+this.place.id])}</p>
+            <p><g:message code="place.show.contact.noOwner.notLogged"/></p>
+            <sec:ifLoggedIn>
+                <p>${g.message(code:"place.show.contact.noOwner", args:["/place/registerOwner/"+this.place.id])}</p>
+            </sec:ifLoggedIn>
         </g:else>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
