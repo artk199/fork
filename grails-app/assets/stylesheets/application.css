@@ -977,3 +977,33 @@ hr {
 .fork-star.active {
     color: #F9FF00;
 }
+
+.fork-table{
+    table-layout: fixed;
+    cursor:default;
+}
+
+.fork-table > thead > tr {
+    background:#498FFF;
+    color: white;
+}
+
+.fork-table > tbody > tr:not(.inactive) {
+    cursor:pointer;
+}
+
+.fork-table > tbody > tr:nth-child(odd) {
+    background: white;
+}
+
+.fork-table > tbody > tr:nth-child(odd):hover:not(.inactive) {
+    background: #EEE;
+}
+
+.fork-table > tbody > tr:nth-child(even) {
+    background: #96BEFF;
+}
+
+.fork-table > tbody > tr:nth-child(even):hover:not(.inactive) {
+    background: #639FFF;
+}

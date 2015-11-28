@@ -8,7 +8,7 @@
     </head>
     <body>
     <br/>
-        <div class="row" style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none; user-select: none;">
+        <div class="row" ng-controller="placesController" style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none; user-select: none;">
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
             <div class="col-md-8 col-sm-10 col-xs-12">
                 <div class="row">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
                         <div class="pull-left">
-                            <infinite-list link="/place/all" amount="1">
+                            <infinite-list link="{{baseURL}}{{dynamicURL}}" amount="1">
                                 <g:render template="tile"/>
                             </infinite-list>
                         </div>

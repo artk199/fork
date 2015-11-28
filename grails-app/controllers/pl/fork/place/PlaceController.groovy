@@ -51,7 +51,7 @@ class PlaceController {
     }
 
     def all(){
-        render Place.list(max:params.max, offset:params.offset) as JSON
+        render placeService.filter_dynamic(params.offset,params.max, params.name, placeService.toList(params.types), params.town, null) as JSON
     }
 
     def create() {

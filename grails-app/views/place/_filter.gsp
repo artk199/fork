@@ -22,10 +22,9 @@
         <g:message code="place.search.filter.header"/>
     </div>
     <div class="panel-body">
-        <g:form action="index" controller="place" class="form-horizontal" >
+        <form action="index" method="get" dynamic-filtering>
             <div class="form-group">
                 <input id="name" type="text" name="name" class="form-control" placeholder="${g.message(code:'placeList.name', default:'Name')}">
-                <%--<input id="type" type="text" name="type" placeholder="${g.message(code:'placeList.type', default:'Type')}">--%>
             </div>
             <div class="form-group" id="place-type">
                 <g:select name="types" id="types" from="${pl.fork.place.PlaceType.list()}"
@@ -36,15 +35,6 @@
             <div class="form-group">
                 <input id="town" type="text" name="town" class="form-control" placeholder="${g.message(code:'placeList.town', default:'Town')}">
             </div>
-            <div class="form-group">
-                <input filter-date type="text" name="timeAfter"  class="form-control" placeholder="${g.message(code:'placeList.created.after', default:'Created after')}">
-            </div>
-            <div class="form-group">
-                <input filter-date type="text" name="timeBefore" class="form-control" placeholder="${g.message(code:'placeList.created.before', default:'Created before')}">
-            </div>
-            <div class="form-group">
-                <input id="distance" type="text" name="distance" class="form-control"  placeholder="${g.message(code:'placeList.distance', default:'Distance')}">
-            </div>
 
             <div class="buttons">
                 <label for="index" class="btn btn-primary">
@@ -53,7 +43,7 @@
                 </label>
                 <g:submitButton id="index" name="index" class="save" class="hidden"/>
             </div>
-        </g:form>
+        </form>
     </div>
 </div>
 

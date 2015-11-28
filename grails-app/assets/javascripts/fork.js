@@ -474,221 +474,19 @@ forkApp.directive('placeLink', function(){
     }
 });
 
-
-
-
-
-forkApp.controller('friendsController', [ '$scope', '$http', function($scope, $http ){
-
-    $scope.users = [];
-    $scope.friends = [];
-    $scope.requests = [];
-    $scope.tab = 1;
-    $scope.notAddedClass = 'glyphicon-plus-sign';
-    $scope.requestedClass = 'glyphicon-question-sign';
-
-    $scope.getFriends = function(){
-        $http.get('/user/friend')
-            .success ( function( data ){
-                $scope.friends = data['friends'];
-                $scope.requests = data['requests'];
-                $scope.invitations = data['invitations'];
-            });
-    }
-
-    $scope.findUsers = function(){
-        $http.get('/user/search/?query='+$scope.query)
-            .success( function( data ){
-                $scope.users = data;
-            });
-    }
-
-    $scope.addFriend = function(receiver){
-        $http.post('/user/friend/'+$scope.users[receiver].id)
-            .success( function(data){
-                $scope.invitations.push( $scope.users[receiver] );
-            });
-    }
-
-    $scope.modifyFriend = function(receiver, status, array){
-        $http.put('/user/friend/'+$scope[array][receiver].id, { status: status}).success( function( data ){
-            $scope[array].splice(receiver,1)
-        });
-    }
-
-}]);
-
-forkApp.directive('addFriend', function(){
-   return {
-       link: function( scope, element ){
-
-           var blocker = false;
-
-           element.bind( 'click', function(){
-               if( !blocker ){
-                   blocker = true;
-                   element.removeClass(scope.notAddedClass);
-                   element.addClass(scope.requestedClass);
-                   element.addClass('active');
-                   scope.addFriend(scope.$index);
-               }
-           });
-       }
-   }
-});
-
-forkApp.directive('acceptFriend', function() {
-    return {
-        link: function (scope, element, attrs) {
-            element.bind( 'click', function(){
-                scope.friends.push(scope[attrs['array'][scope.$index]]);
-                scope.modifyFriend(scope.$index, 'accept', attrs['array']);
-            });
-        }
-    }
-});
-
-forkApp.directive('rejectFriend', function() {
-    return {
-        link: function (scope, element, attrs) {
-            element.bind( 'click', function(){
-                scope.modifyFriend(scope.$index, 'reject', attrs['array']);
-            });
-        }
-    }
-});forkApp.directive('searchSelect', function(){
+forkApp.directive('searchSelect', function(){
     return {
         restrict: 'A',
         scope: {
             placeholder: '@'
         },
         link: function (scope, element){
-                element.select2();
+            element.select2();
         }
     }
 });
 
-forkApp.factory('timeService', function(){
-
-    var monthNames = [
-        "Styczeń", "Luty", "Marzec", "Kwiecień",
-        "Maj", "Lipiec", "Czerwiec", "Sierpień",
-        "Wrzesień", "Październik", "Listopad", "Grudzień"
-    ];
-
-    var days = [ "dzień,", "dni"];
-    var hours = {};
-    hours["godzinę"] = [1];
-    hours["godziny"] = [2,3,4,22,23,24];
-    hours["godzin"] = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
-
-    var minutes = {};
-    minutes["minutę"] = [1];
-    minutes["minuty"] = [2,3,4,22,23,24,32,33,34,42,43,44,52,53,54];
-    minutes["minut"] = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,25,26,27,28,29,30,31,34,35,36,37,38,39,40,41,45,46,47,48,49,50,51,55,56,57,58,59,60]
-
-    function getMonthDate(id){
-        return monthNames[id];
-    };
-
-    function getDayString(days_){
-        if( days_ == 1 ){
-            return days[0];
-        }
-        return days[1];
-    };
-
-    function getHourString(hours_){
-        var hour;
-        for (var key in hours) {
-            if (hours.hasOwnProperty(key)) {
-                if( hours[key].indexOf(hours_) > -1){
-                    hour = key;
-                }
-            }
-        }
-        return hour;
-    };
-
-    function getMinutesString(minute_){
-        var minute;
-        for (var key in minutes) {
-            if (minutes.hasOwnProperty(key)) {
-                if( minutes[key].indexOf(minute_) > -1){
-                    minute = key;
-                }
-            }
-        }
-        return minute;
-    };
-
-    var service = {
-        getMonthDate : getMonthDate,
-        getDayString : getDayString,
-        getHourString : getHourString,
-        getMinutesString : getMinutesString
-    };
-
-    return service;
-
-});
-
-forkApp.directive('timeDifference', function(timeService){
-    return {
-        restrict: 'E',
-        replace: 'true',
-        template: `
-            <span>{{difference}}</span>
-        `,
-        scope: { date: '@'},
-        link: function(scope){
-
-            var currentTime = new Date().getTime();
-            var oldDate = new Date(scope.date);
-            var oldTime = oldDate.getTime();
-            var timeDifference = currentTime - oldTime;
-            var daysDifference = Math.floor(timeDifference / ( 1000 * 3600 * 24 ));
-            var hoursDifference = Math.floor(timeDifference / ( 1000 * 3600 ));
-            var minutesDifference = Math.floor(timeDifference / ( 1000 * 60 ));
-
-            var monthName = timeService.getMonthDate(oldDate.getMonth());
-            var day = timeService.getDayString(daysDifference);
-
-            if( daysDifference >= 7 ) {
-                scope.difference = oldDate.getDate() + ' ' + monthName + ' ' + oldDate.getFullYear() + 'r.';
-                return;
-            }
-            if( daysDifference < 7 && daysDifference >= 1 ){
-                var hour = timeService.getHourString(hoursDifference);
-                hoursDifference = hoursDifference - (daysDifference * 24);
-                scope.difference = daysDifference + ' ' + day + ' ' + hoursDifference + ' ' + hour + ' temu';
-                return;
-            }
-
-            if ( daysDifference == 0 ){
-                var hour = timeService.getHourString(hoursDifference);
-                minutesDifference = minutesDifference - (hoursDifference * 60);
-                var minute = timeService.getMinutesString(minutesDifference);
-                if( hoursDifference >= 1 ){
-                    scope.difference = hoursDifference + ' ' + hour + ' ' + minutesDifference + ' ' + minute + ' temu';
-                    return;
-                }
-                if( hoursDifference == 0 ){
-                    if( minutesDifference < 60 && minutesDifference > 3 ){
-                        scope.difference = minutesDifference + ' ' + minute + ' temu';
-                        return;
-                    }
-                    if( minutesDifference <= 3 ) {
-                        scope.difference = "Dosłowanie przed chwilą";
-                    }
-                }
-
-            }
-        }
-    }
-});
-
-forkApp.directive('movingText', function($interval, $timeout){
+forkApp.directive('movingText', [ '$interval', '$timeout', function($interval, $timeout){
     return {
         link: function(scope, element){
             var left = 0;
@@ -723,4 +521,24 @@ forkApp.directive('movingText', function($interval, $timeout){
             });
         }
     }
+}]);
+
+
+forkApp.directive('dynamicFiltering', function(){
+   return{
+       link: function(scope, element){
+           element.bind('submit', function(event){
+               event.preventDefault();
+               scope.$apply( function (){
+                   scope.dynamicURL = '?'+$(element).serialize();
+               });
+           });
+       }
+   }
 });
+
+forkApp.controller('placesController', [ '$scope', function($scope){
+
+    $scope.baseURL = 'place/all';
+    $scope.dynamicURL = '';
+}]);

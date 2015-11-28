@@ -27,6 +27,8 @@
         <asset:javascript src="angular.js"/>
         <asset:javascript src="angular-animate.js"/>
         <asset:javascript src="fork.js"/>
+        <asset:javascript src="time/time.service.js"/>
+        <asset:javascript src="time/time.directives.js"/>
         <asset:javascript src="quicksearch/directives.js"/>
         <asset:javascript src="score/scoreController.js"/>
         <asset:javascript src="infiniteScroll/infinite.controller.js"/>

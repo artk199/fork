@@ -54,7 +54,7 @@
         </div>
 
         <div id="events" class="tab-pane fade">
-
+            <g:render template="tabs/events"/>
         </div>
     </div>
 </div>

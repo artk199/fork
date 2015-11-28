@@ -101,3 +101,44 @@ forkApp.directive('profileDetails', function() {
         }
     }
 });
+
+
+forkApp.directive('addFriend', function(){
+    return {
+        link: function( scope, element ){
+
+            var blocker = false;
+
+            element.bind( 'click', function(){
+                if( !blocker ){
+                    blocker = true;
+                    element.removeClass(scope.notAddedClass);
+                    element.addClass(scope.requestedClass);
+                    element.addClass('active');
+                    scope.addFriend(scope.$index);
+                }
+            });
+        }
+    }
+});
+
+forkApp.directive('acceptFriend', function() {
+    return {
+        link: function (scope, element, attrs) {
+            element.bind( 'click', function(){
+                scope.friends.push(scope[attrs['array'][scope.$index]]);
+                scope.modifyFriend(scope.$index, 'accept', attrs['array']);
+            });
+        }
+    }
+});
+
+forkApp.directive('rejectFriend', function() {
+    return {
+        link: function (scope, element, attrs) {
+            element.bind( 'click', function(){
+                scope.modifyFriend(scope.$index, 'reject', attrs['array']);
+            });
+        }
+    }
+});

@@ -89,6 +89,39 @@ class PlaceService {
         return places.unique();
     }
 
+    List<Place> filter_dynamic(String offset, String max, String name, List<String> placeTypes, String town, Status status) {
+
+        List types = []
+        placeTypes.each {
+            types.add(it.toLong())
+        }
+
+        List places = Place.createCriteria().list {
+            projections {
+                distinct 'id'
+            }
+            if (name != null && !"".equals(name)) {
+                ilike("name", "%"+name+"%")
+            }
+
+            if(town != null && !"".equals(town)) {
+                ilike("town", "%"+town+"%")
+            }
+
+            if (status) {
+                eq("status", status)
+            }
+
+            if(placeTypes != null && placeTypes.size() > 0){
+                createAlias("types", "t")
+                'in'("t.id", types)
+            }
+            maxResults(max.toInteger())
+            firstResult(offset.toInteger())
+        }
+        return Place.getAll(places)
+    }
+
     Place save(Place place) {
         place.owner = springSecurityService.currentUser
         place.save(flush:true);
