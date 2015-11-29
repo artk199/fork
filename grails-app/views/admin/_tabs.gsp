@@ -5,14 +5,17 @@
                 <span class="glyphicon glyphicon-map-marker"></span>
                 <span class="title"><g:message code="admin.tabs.places"/></span>
                 <g:if test = "${pendingPlaces?.size()>0}">
-                    <span class="label label-primary" id="admin-places-label">${pendingPlaces.size()}</span>
+                    <span class="label label-primary" id="admin-places-label" title="${g.message(code: 'admin.tabs.places.addedByUser')}">${pendingPlaces.size()}</span>
+                </g:if>
+                <g:if test = "${pendingObjectAdmins?.size()>0}">
+                    <span class="label label-info" id="admin-places-label" title="${g.message(code: 'admin.tabs.places.adminRequest')}">${pendingObjectAdmins.size()}</span>
                 </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#comments">
                 <span class="glyphicon glyphicon-comment"></span>
                 <span class="title"><g:message code="admin.tabs.comments"/></span>
                 <g:if test = "${flaggedScores?.size()>0}">
-                    <span class="label label-warning" id="admin-comments-label">${flaggedScores.size()}</span>
+                    <span class="label label-warning" id="admin-comments-label" title="${g.message(code: 'admin.tabs.comments.flagged')}">${flaggedScores.size()}</span>
                 </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#users">
@@ -23,7 +26,7 @@
                 <span class="glyphicon glyphicon-picture"></span>
                 <span class="title"><g:message code="admin.tabs.photos"/></span>
                 <g:if test = "${waitingImages?.size()>0}">
-                    <span class="label label-primary" id="admin-photos-label">${waitingImages.size()}</span>
+                    <span class="label label-primary" id="admin-photos-label" title="${g.message(code: 'admin.tabs.photos.header')}">${waitingImages.size()}</span>
                 </g:if>
             </a></li>
             <li><a data-toggle="tab" href="#events">

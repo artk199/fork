@@ -3,12 +3,27 @@
         <h1 class='text-left place-title'>
             <span class="glyphicon glyphicon-tags"></span>
             <g:if test="${this.place.town}">${this.place.town} - </g:if> ${this.place.name}
-            <div class="edit-options">
-                <a href="/place/edit/${place.id}">
-                    <span class="glyphicon glyphicon-edit"></span>
-                    <span><g:message code="default.link.edit"/></span>
-                </a>
-            </div>
+
+            <sec:ifLoggedIn>
+                <sec:ifAllGranted roles='ROLE_ADMIN'>
+                    <div class="edit-options">
+                        <a href="/place/edit/${place.id}">
+                            <span class="glyphicon glyphicon-edit"></span>
+                            <span><g:message code="default.link.edit"/></span>
+                        </a>
+                    </div>
+                </sec:ifAllGranted>
+                <sec:ifNotGranted roles='ROLE_ADMIN'>
+                    <g:if test="${(g.currentUserID().toInteger() == this.place.owner?.id)}">
+                        <div class="edit-options">
+                            <a href="/place/edit/${place.id}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                <span><g:message code="default.link.edit"/></span>
+                            </a>
+                        </div>
+                    </g:if>
+                </sec:ifNotGranted>
+            </sec:ifLoggedIn>
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
@@ -16,7 +31,7 @@
                     <img src="${g.createLink(absolute:true,uri:'/image/'+this.place.mainImage.id)}" class="img-responsive">
                 </g:if>
                 <g:else>
-                    <img src="/assets/no-image.jpg">
+                    <img src="/assets/no-image.jpg" class="img-responsive">
                 </g:else>
             </div>
 

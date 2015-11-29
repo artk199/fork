@@ -10,7 +10,11 @@
                     <li><a href="${createLink(uri:'/')}"><span><g:message code="layout.header.link.home"/></span></a></li>
                     <li><a href="${createLink(controller:'place',action:'index')}"><span><g:message code="layout.header.link.place"/></span></a></li>
                     <li><a href="${createLink(controller:'event',action:'index')}"><span><g:message code="layout.header.link.event"/></span></a></li>
-                    <li><a href="${createLink(controller:'admin',action:'index')}"><span><g:message code="layout.footer.link.administration"/></span></a></li>
+                    <sec:ifLoggedIn>
+                        <sec:ifAllGranted roles='ROLE_ADMIN'>
+                            <li><a href="${createLink(controller:'admin',action:'index')}"><span><g:message code="layout.footer.link.administration"/></span></a></li>
+                        </sec:ifAllGranted>
+                    </sec:ifLoggedIn>
                 </ul>
             </div>
             <div class="col-md-4 col-sm-4 col-lg-4 col-xs-6">

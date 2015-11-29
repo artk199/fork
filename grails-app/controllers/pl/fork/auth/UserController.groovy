@@ -117,6 +117,8 @@ class UserController {
 
     @Transactional
     def update(User user) {
+
+        /*  */
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -129,6 +131,12 @@ class UserController {
             return
         }
         if (userService.isValid(user)){
+            /* Update roles*/
+            def roles = params.list('authorities');
+            UserRole.removeAll(user,true);
+            roles?.each { role ->
+                userService.addRoleToUser(user,role)
+            }
             user.save flush: true
         }
         else{

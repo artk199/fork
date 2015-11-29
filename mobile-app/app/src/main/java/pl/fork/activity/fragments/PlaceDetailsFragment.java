@@ -15,6 +15,7 @@ import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 
 import pl.fork.SessionHandler;
+import pl.fork.activity.AddPhotoActivity;
 import pl.fork.entity.Place;
 import pl.fork.fork.AddOpinionActivity;
 import pl.fork.fork.R;
@@ -59,6 +60,16 @@ public class PlaceDetailsFragment extends Fragment {
             }
         });
 
+        Button photoBtn = (Button) rootView.findViewById(R.id.addPhotoButton);
+        photoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AddPhotoActivity.class);
+                intent.putExtra("place",place);
+                startActivity(intent);
+            }
+        });
+
 
 
         TextView descriptionTextView = (TextView) rootView.findViewById(R.id.descriptionTextView);
@@ -77,6 +88,12 @@ public class PlaceDetailsFragment extends Fragment {
             Button addOpinionButton = (Button) rootView.findViewById(R.id.addOpinionButton);
             addOpinionButton.getLayoutParams().height = 0;
             addOpinionButton.setVisibility(View.INVISIBLE);
+
+            /*
+            Button addPhotoButton = (Button) rootView.findViewById(R.id.addPhotoButton);
+            addPhotoButton.getLayoutParams().height = 0;
+            addPhotoButton.setVisibility(View.INVISIBLE);
+            */
         }
 
         return rootView;

@@ -31,17 +31,17 @@
             <g:form action="findUser" controller="admin" class="form-horizontal admin-findUser-form" >
                 <g:set var="ajaxFunction" value="getUsersFromController('${g.createLink(controller:'admin',action:'findUser')}', 'all-users-table')" />
                 <div class="form-group row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <input id="username" type="text" name="username" class="form-control" placeholder="${g.message(code:'admin.tabs.users.find.username')}"
                                oninput="${ajaxFunction}">
                     </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <input id="email" type="text" name="email" class="form-control" placeholder="${g.message(code:'admin.tabs.users.find.email')}"
                                oninput="${ajaxFunction}">
                     </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <div class="buttons">
-                            <a class="btn btn-primary" onclick="${ajaxFunction}">
+                            <a class="btn btn-primary form-control" onclick="${ajaxFunction}">
                                 <span class="glyphicon glyphicon-search"></span>
                                 <g:message code="admin.search"/>
                             </a>
@@ -71,22 +71,22 @@
                     <caption>
                         <span class="pull-right">
                             <span class="glyphicon glyphicon-th"></span>
-                            <g:message code="default.count" args="[pl.fork.auth.User.list().size()]" />
+                            <span><g:message code="default.count" args="[pl.fork.auth.User.list().size()]" /></span>
                         </span>
                     </caption>
                     <thead>
                     <tr>
                         <th class='col-md-4 col-sm-4 col-xs-4' data-defaultsort="asc" data-firstsort="desc">
                             <span class="glyphicon glyphicon-user"></span>
-                            <g:message code="admin.tabs.users.username"/>
+                            <span><g:message code="admin.tabs.users.username"/></span>
                         </th>
                         <th class='col-md-4 col-sm-4 col-xs-4'>
                             <span class="glyphicon glyphicon-envelope"></span>
-                            <g:message code="admin.tabs.users.email"/>
+                            <span><g:message code="admin.tabs.users.email"/></span>
                         </th>
                         <th class='col-md-4 col-sm-4 col-xs-4'>
                             <span class="glyphicon glyphicon-star-empty"></span>
-                            <g:message code="admin.tabs.users.role"/>
+                            <span><g:message code="admin.tabs.users.role"/></span>
                         </th>
                     </tr>
                     </thead>
@@ -111,9 +111,14 @@
                                 </a>
                             </td>
                             <td class='col-md-4 col-sm-4 col-xs-4'>
-                                <g:each in="${user.authorities}" var="role" >
-                                    ${role.authority}
-                                </g:each>
+                                <g:if test="${user.authorities?.size() > 0}">
+                                    <g:each in="${user.authorities}" var="role" >
+                                        ${role.authority}${role != user.authorities.last()? ',' : ""}
+                                    </g:each>
+                                </g:if>
+                                <g:else>
+                                   <span><g:message code="default.input.empty"/></span>
+                                </g:else>
                             </td>
                         </tr>
                     </g:each>

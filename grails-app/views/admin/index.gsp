@@ -17,8 +17,12 @@
     </script>
 </head>
 <body>
-    <h1><g:message code="admin.header"/></h1>
-
-    <g:render template="tabs"/>
+<h1><g:message code="admin.header"/></h1>
+    <sec:ifAllGranted roles='ROLE_ADMIN'>
+        <g:render template="tabs"/>
+    </sec:ifAllGranted>
+    <sec:ifNotGranted roles='ROLE_ADMIN'>
+        <g:render template="../noPermissions"/>
+    </sec:ifNotGranted>
 </body>
 </html>
