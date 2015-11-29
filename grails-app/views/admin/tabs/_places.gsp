@@ -14,6 +14,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-place">
                         <li><a href="#places-added-by-users"><g:message code="admin.tabs.places.addedByUser"/></a></li>
+                        <li><a href="#places-pending-owners"><g:message code="admin.tabs.places.adminRequest"/></a></li>
                         <li><a href="#places-search-place"><g:message code="admin.tabs.places.find"/></a></li>
                         <li><a href="#places-all-places"><g:message code="admin.tabs.places.allPlaces"/></a></li>
                     </ul>
@@ -113,14 +114,14 @@
                                         <g:message code="default.input.empty"/>
                                     </g:else>
                                 </td>
-                                <td class='col-md-1 col-sm-1 col-xs-1'>
+                                <td class='col-md-1 col-sm-1 col-xs-1 buttons'>
                                     <g:set var="sendPlace" value="[placeId: place.id]" />
-                                    <a class="btn btn-default"
+                                    <a class="btn btn-default btn-block"
                                        href="${g.createLink(controller:'admin',action:'rejectPlace', params:sendPlace)}">
                                         <span class='glyphicon glyphicon-remove-sign'></span>
                                         <span><g:message code="admin.tabs.photos.reject"/></span>
                                     </a>
-                                    <a class="btn btn-default"
+                                    <a class="btn btn-default btn-block"
                                        href="${g.createLink(controller:'admin',action:'acceptPlace', params:sendPlace)}">
                                         <span class='glyphicon glyphicon-ok-sign'></span>
                                         <span><g:message code="admin.tabs.photos.accept"/></span>
@@ -136,68 +137,8 @@
     </div>
 </div>
 
-<!-- SEARCH FOR A PLACE !-->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#types').multiselect({
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true,
-            buttonWidth: '100%',
-            buttonClass: 'text-left btn btn-default',
-            includeSelectAllOption: true,
-            maxHeight: 400,
-            nonSelectedText: '${g.message(code:'placeList.type', default:'Type')}',
-            nSelectedText: '${g.message(code:'default.input.multiselect.tooMany')}',
-            allSelectedText: '${g.message(code:'default.input.multiselect.all')}',
-            selectAllText: '${g.message(code:'default.input.multiselect.selectAll')}',
-            filterPlaceholder: '${g.message(code:'default.input.multiselect.search')}'
-        });
-    });
-</script>
-
-<div class="page-section blue-section" id="places-search-place">
-    <div class="row">
-        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
-        <div class="col-md-8 col-sm-8 col-xs-11 text-right">
-            <h3 class="text-center"><g:message code="admin.tabs.places.find"/></h3>
-
-            <g:form id="findPlace" action="findPlace" controller="admin" class="form-horizontal admin-findPlace-form" enctype="multipart/form-data" >
-                <g:set var="ajaxFunction" value="getPlacesFromController('${g.createLink(controller:'admin',action:'findPlace')}', 'all-places-table')" />
-                <div class="form-group row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="name" type="text" name="name" class="form-control" placeholder="${g.message(code:'placeList.name', default:'Name')}"
-                          oninput="${ajaxFunction}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="town" type="text" name="town" class="form-control" placeholder="${g.message(code:'placeList.town', default:'Town')}"
-                        oninput="${ajaxFunction}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <input id="address" type="text" name="address" class="form-control" placeholder="${g.message(code:'placeList.address', default:'Address')}"
-                         oninput="${ajaxFunction}">
-                    </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <g:select name="types" id="types" from="${pl.fork.place.PlaceType.list()}"
-                                  optionValue="tag" class="form-control" multiple="multiple"
-                                  optionKey="id"
-                        />
-                    </div>
-                </div>
-
-                <div class="buttons">
-                    <a class="btn btn-primary" onclick="${ajaxFunction}">
-                        <span class="glyphicon glyphicon-search"></span>
-                        <g:message code="admin.search"/>
-                    </a>
-                </div>
-            </g:form>
-        </div>
-        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
-    </div>
-</div>
-
 <!-- LIST OF PENDING ADMINISTRATORS -->
-<div class="page-section" id="places-added-by-users">
+<div class="page-section dark-section" id="places-pending-owners">
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
         <div class="col-md-8 col-sm-8 col-xs-11">
@@ -267,14 +208,14 @@
                                     <g:message code="default.input.empty"/>
                                 </g:else>
                             </td>
-                            <td class='col-md-1 col-sm-1 col-xs-1'>
+                            <td class='col-md-1 col-sm-1 col-xs-1 buttons'>
                                 <g:set var="sendPlace" value="[placeId: place.id]" />
-                                <a class="btn btn-default"
+                                <a class="btn btn-default btn-block"
                                    href="${g.createLink(controller:'admin',action:'rejectAdmin', params:sendPlace)}">
                                     <span class='glyphicon glyphicon-remove-sign'></span>
                                     <span><g:message code="admin.tabs.photos.reject"/></span>
                                 </a>
-                                <a class="btn btn-default"
+                                <a class="btn btn-default btn-block"
                                    href="${g.createLink(controller:'admin',action:'acceptAdmin', params:sendPlace)}">
                                     <span class='glyphicon glyphicon-ok-sign'></span>
                                     <span><g:message code="admin.tabs.photos.accept"/></span>
@@ -285,6 +226,61 @@
                     </tbody>
                 </table>
             </g:else>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+    </div>
+</div>
+
+<!-- SEARCH FOR A PLACE !-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#types').multiselect({
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '100%',
+            buttonClass: 'text-left btn btn-default',
+            includeSelectAllOption: true,
+            maxHeight: 400,
+            nonSelectedText: '${g.message(code:'placeList.type', default:'Type')}',
+            nSelectedText: '${g.message(code:'default.input.multiselect.tooMany')}',
+            allSelectedText: '${g.message(code:'default.input.multiselect.all')}',
+            selectAllText: '${g.message(code:'default.input.multiselect.selectAll')}',
+            filterPlaceholder: '${g.message(code:'default.input.multiselect.search')}'
+        });
+    });
+</script>
+
+<div class="page-section blue-section" id="places-search-place">
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+        <div class="col-md-8 col-sm-8 col-xs-11 text-right">
+            <h3 class="text-center"><g:message code="admin.tabs.places.find"/></h3>
+
+            <g:form id="findPlace" action="findPlace" controller="admin" class="form-horizontal admin-findPlace-form" enctype="multipart/form-data" >
+                <g:set var="ajaxFunction" value="getPlacesFromController('${g.createLink(controller:'admin',action:'findPlace')}', 'all-places-table')" />
+                <div class="form-group row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="name" type="text" name="name" class="form-control" placeholder="${g.message(code:'placeList.name', default:'Name')}"
+                          oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="town" type="text" name="town" class="form-control" placeholder="${g.message(code:'placeList.town', default:'Town')}"
+                        oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input id="address" type="text" name="address" class="form-control" placeholder="${g.message(code:'placeList.address', default:'Address')}"
+                         oninput="${ajaxFunction}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="buttons">
+                            <a class="btn btn-primary form-control" onclick="${ajaxFunction}">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <g:message code="admin.search"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </g:form>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
     </div>

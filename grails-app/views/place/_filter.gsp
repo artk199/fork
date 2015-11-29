@@ -47,6 +47,7 @@
     </div>
 </div>
 
+<sec:ifAllGranted roles='ROLE_ADMIN'>
 <div class="fork-filter-input-container panel text-left" style="background: none">
     <div class="panel-heading">
         <span class="glyphicon glyphicon-info-sign"></span>
@@ -63,18 +64,4 @@
         </a>
     </div>
 </div>
-
-        <%--
-             <g:message code="placeList.created.after" default="Created after"/>
-            <input id="datetimepicker1" type="text" name="timeAfter">
-            <g:message code="placeList.created.before" default="before"/>
-            <input id="datetimepicker2" type="text" name="timeBefore">
-            <g:message code="placeList.distance" default="Distance"/>
-            <input id="distance" type="text" name="distance">
-
-                    <script>
-            $('#datetimepicker1').datetimepicker();
-            $('#datetimepicker2').datetimepicker();
-        </script>
-
-        --%>
+</sec:ifAllGranted>
