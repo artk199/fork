@@ -58,7 +58,7 @@
         </div>
     </sec:ifNotLoggedIn>
     <hr class="divider">
-    <infinite-list link="/place/${place.id}/score" amount="1">
+    <infinite-list link="/place/${place.id}/score" amount="5">
         <g:render template="show/score"/>
     </infinite-list>
 </div>

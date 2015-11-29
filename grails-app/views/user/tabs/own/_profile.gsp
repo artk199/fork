@@ -54,7 +54,7 @@
 
 
             </g:else>
-            <infinite-list link="${'/user/'+this.user.id+'/friends/activities'}" amount="1">
+            <infinite-list link="${'/user/'+this.user.id+'/friends/activities'}" amount="4">
                 <div class='col-md-12 fork-profile-activity'>
                     <g:render template="/user/tabs/activity/common"/>
                     <div ng-if="instance.type == 'IMAGE'">
