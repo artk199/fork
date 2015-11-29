@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
                         <div class="pull-left">
-                            <infinite-list link="{{baseURL}}{{dynamicURL}}" amount="1">
+                            <infinite-list link="{{baseURL}}{{dynamicURL}}" amount="6">
                                 <g:render template="tile"/>
                             </infinite-list>
                         </div>

@@ -193,7 +193,19 @@ class PlaceController {
         JSONObject parameters = new JSONObject(request.reader.text)
         Place place = placeService.get(id)
         Score score = placeService.addScoreToPlace(place,parameters)
-        render score as JSON
+
+        if( score.hasErrors() ){
+            response.status = 422
+            List errors = []
+            score.errors.fieldErrors.each{
+                errors.add(g.message(code:"${it.field}.error.${it.code}"))
+            }
+            render errors as JSON
+        }
+        else{
+            render score as JSON
+        }
+
     }
 
     /** Metoda do testowania logowania */

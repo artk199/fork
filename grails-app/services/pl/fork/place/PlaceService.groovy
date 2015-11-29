@@ -227,9 +227,6 @@ class PlaceService {
             place.save(flush:true)
             activityService.createReviewActivity(score)
         }
-        else{
-            return null
-        }
         score
     }
 
