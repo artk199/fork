@@ -38,8 +38,18 @@ class PlaceController {
     }
 
     def show(Place place) {
+
         Score score = placeService.getUserScore(place);
-        respond place, model:[score:score]
+        def roles = springSecurityService.getPrincipal().getAuthorities();
+        def isAdmin = roles.any{ it.authority == "ROLE_ADMIN" }
+
+        if( place.status != Status.PENDING || isAdmin){
+            respond place, model:[score:score]
+        }
+        else{
+            response.status = 403
+            render view :"/errors/error403"
+        }
     }
 
     def get(int id){

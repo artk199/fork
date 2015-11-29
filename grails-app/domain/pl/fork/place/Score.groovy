@@ -26,22 +26,29 @@ class Score {
     static transients = ['springSecurityService','isCurrentUserOwner','isAlreadyReportedByCurrentUser']
 
 
+    def springSecurityService
     // Returns true if currently logged user is owner of this score
     def isCurrentUserOwner(){
-        User user = User.findByUsername(springSecurityService.currentUser);
-        return (user.id == owner.id);
+        String u = springSecurityService.currentUser
+        if( u ) {
+            User user = User.findByUsername(springSecurityService.currentUser);
+            return (user.id == owner.id);
+        }
+        false
     }
 
     // Returns true if currently logged user has already reported this score
     def isAlreadyReportedByCurrentUser(){
-        User user = User.findByUsername(springSecurityService.currentUser);
-
-        for(Report r : user.reports){
-            if(r.score.id == this.id){
-                return true;
+        String u = springSecurityService.currentUser
+        if( u ) {
+            User user = User.findByUsername(u);
+            for (Report r : user.reports) {
+                if (r.score.id == this.id) {
+                    return true;
+                }
             }
         }
-        return false;
+        false;
     }
 
 }
