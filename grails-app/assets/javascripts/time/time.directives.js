@@ -22,8 +22,8 @@ forkApp.directive('timeDifference', [ 'timeService', function(timeService){
                 return;
             }
             if( daysDifference < 7 && daysDifference >= 1 ){
-                var hour = timeService.getHourString(hoursDifference);
                 hoursDifference = hoursDifference - (daysDifference * 24);
+                var hour = timeService.getHourString(hoursDifference);
                 scope.difference = daysDifference + ' ' + day + ' ' + hoursDifference + ' ' + hour + ' temu';
                 return;
             }

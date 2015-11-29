@@ -1,5 +1,6 @@
 package fork
 
+import pl.fork.auth.UserRole
 import pl.fork.place.Place
 import pl.fork.place.PlaceService
 
@@ -14,8 +15,11 @@ class CheckPermissionTagLib {
         def isAdmin = false;
         def isOwner = attrs.boolean('isOwner');
         isOwner = isOwner as Boolean;
-        def roles = springSecurityService.getPrincipal().getAuthorities();
-        for(def role in roles){ if(role.getAuthority() == "ROLE_ADMIN") isAdmin = true };
+
+        UserRole.withTransaction {
+            def roles = springSecurityService.getPrincipal().getAuthorities();
+            for(def role in roles){ if(role.getAuthority() == "ROLE_ADMIN") isAdmin = true };
+        }
 
         def displayNoPermInfo = attrs.boolean('displayNoPermInfo');
 

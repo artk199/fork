@@ -2,10 +2,12 @@ package pl.fork.file
 
 import grails.converters.JSON
 import org.grails.web.json.JSONObject
+import pl.fork.auth.UserService
 
 class ImageController {
 
     ImageService imageService;
+    UserService userService
 
     def getImage(int id){
         ForkFile image = imageService.getImage(id)
@@ -43,7 +45,13 @@ class ImageController {
 
     def editImage(int id){
         ForkFile image = imageService.getImage(id)
-        render view: "edit", model:[image:image]
+        if( userService.isValid(image.owner) ) {
+            render view: "edit", model: [image: image]
+        }
+        else{
+            response.status = 403
+            render view :"/errors/error403"
+        }
     }
 
 

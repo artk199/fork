@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<sec:ifAllGranted roles='ROLE_ADMIN'>
+<sec:ifLoggedIn>
 <div class="fork-filter-input-container panel text-left" style="background: none">
     <div class="panel-heading">
         <span class="glyphicon glyphicon-info-sign"></span>
@@ -58,10 +58,13 @@
             <span class="glyphicon glyphicon-plus"></span>
             <g:message code="place.add" />
         </g:link>
+
+        <sec:ifAllGranted roles="ROLE_ADMIN">
         <a href="placeType/create" class="btn btn-default btn-block" >
             <span class="glyphicon glyphicon-plus"></span>
             <g:message code="placeType.add.new" />
         </a>
+        </sec:ifAllGranted>
     </div>
 </div>
-</sec:ifAllGranted>
+</sec:ifLoggedIn>

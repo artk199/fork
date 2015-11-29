@@ -21,14 +21,14 @@ class PlaceController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+    def index() {
         String accepts = request.getHeader('accept')
         if( accepts.contains('html')){
-            def places = placeService.filter(params.name, placeService.toList(params.types),
-                    params.town, params.timeAfter, params.timeBefore, null)
-            println "HTML"
-            render view:"index", model:[placeList: places, placeCount: Place.count()]
+            if( params['search'] ) {
+                render view: "index", model: [search: params.search]
+            }
+            else
+                render view:"index"
             return
         }
         if( accepts.contains('json')){
@@ -38,8 +38,18 @@ class PlaceController {
     }
 
     def show(Place place) {
+
         Score score = placeService.getUserScore(place);
-        respond place, model:[score:score]
+        def roles = springSecurityService.getPrincipal().getAuthorities();
+        def isAdmin = roles.any{ it.authority == "ROLE_ADMIN" }
+
+        if( place.status != Status.PENDING || isAdmin){
+            respond place, model:[score:score]
+        }
+        else{
+            response.status = 403
+            render view :"/errors/error403"
+        }
     }
 
     def get(int id){
@@ -158,10 +168,7 @@ class PlaceController {
     }
 
     def searchAll(def params){
-
-        List foundPlaces = placeService.search(params['search'])
-
-        render view:'/place/index', model:[places:foundPlaces, placeCount: Place.count()]
+        redirect action:'index', method:'GET', params:[search: "?name=${params['search']}"]
     }
 
     def getScores(Long id){
