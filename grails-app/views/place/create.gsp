@@ -6,6 +6,7 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
+    <sec:ifAllGranted roles='ROLE_ADMIN'>
         <div class="row" role="main">
             <div  class="col-md-8 col-md-offset-2">
                 <h1><g:message code="add.new.place" args="[entityName]" /></h1>
@@ -102,5 +103,9 @@
                 </g:form>
             </div>
         </div>
+    </sec:ifAllGranted>
+    <sec:ifNotGranted roles='ROLE_ADMIN'>
+        <g:render template="../noPermissions"/>
+    </sec:ifNotGranted>
     </body>
 </html>

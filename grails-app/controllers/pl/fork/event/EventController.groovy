@@ -1,6 +1,7 @@
 package pl.fork.event
 
 import pl.fork.place.Place
+import pl.fork.place.PlaceService
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -10,6 +11,7 @@ class EventController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     EventService eventService;
+    PlaceService placeService;
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -24,7 +26,8 @@ class EventController {
     }
 
     def create() {
-        respond new Event(params), model:[places: Place.list()]
+        List<Place> places = placeService.findAllApproved();
+        respond new Event(params), model:[places: places]
     }
 
     @Transactional

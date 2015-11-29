@@ -42,6 +42,9 @@ class PlaceService {
     List<Place> findAllPending() {
         filter(null, null, null, null, null, null, Status.PENDING);
     }
+    List<Place> findAllApproved() {
+        filter(null, null, null, null, null, null, Status.APPROVED);
+    }
 
     List<Place> filter(String name, List<String> placeTypes, String town, String timeAfter, String timeBefore, String address, Status status) {
 
@@ -123,6 +126,7 @@ class PlaceService {
 
     Place save(Place place) {
         place.owner = springSecurityService.currentUser
+        place.administratorStatus = Status.APPROVED;
         place.save(flush:true);
     }
 
@@ -354,5 +358,24 @@ class PlaceService {
         }
         map['empty'] = place.scores.empty
         map
+    }
+
+    Place registerOwner(Place place) {
+        User user = User.findByUsername(springSecurityService.currentUser);
+        place.owner = user;
+        place.administratorStatus = Status.PENDING;
+        user.addToAdministratedPlaces(place);
+        place.validate()
+        if( place && !place.hasErrors() ) {
+            user.save flush: true;
+            place.save flush: true;
+        }
+    }
+
+    List<Place> findPendingObjAdmin() {
+        List<Place> places = Place.createCriteria().list {
+            eq("administratorStatus", Status.PENDING)
+        }
+        places
     }
 }

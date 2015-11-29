@@ -24,6 +24,7 @@ class Place {
         types minSize: 0
         mainImage nullable:true
         pricing nullable:true
+        administratorStatus nullable:true
     }
 
     List scores
@@ -43,6 +44,7 @@ class Place {
     String website
     User owner
     Status status = Status.PENDING;
+    Status administratorStatus;
 
     //date is automatically filled with current timestamp
     Date dateCreated;

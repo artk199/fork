@@ -236,4 +236,9 @@ class PlaceController {
     def getMetascore(int id){
         render placeService.getMetascore(id) as JSON
     }
+
+    def registerOwner(Place place) {
+        placeService.registerOwner(place);
+        redirect action: "show", id: place.id
+    }
 }

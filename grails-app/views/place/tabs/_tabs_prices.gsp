@@ -8,7 +8,11 @@
 
         <g:if test="${this.place.pricing.size() == 0}">
             <p><g:message code="place.show.pricing.noPricing"/></p>
-            <p><g:message code="place.show.pricing.addMenu" args="['/pricing/create?place.id='+this.place.id]"/></p>
+            <sec:ifLoggedIn>
+                <permission:hasAccess isOwner="${((g.currentUserID()?.toInteger()) == this.place.owner?.id)}">
+                    <p><g:message code="place.show.pricing.addMenu" args="['/pricing/create?place.id='+this.place.id]"/></p>
+                </permission:hasAccess>
+            </sec:ifLoggedIn>
         </g:if>
         <g:else>
 
@@ -18,12 +22,16 @@
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         ${pricing.title}
-                        <div class="pull-right">
-                            <a href="/pricing/edit/${pricing.id}">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                <g:message code="default.link.edit"/>
-                            </a>
-                        </div>
+                        <sec:ifLoggedIn>
+                            <permission:hasAccess isOwner="${((g.currentUserID()?.toInteger()) == this.place.owner?.id)}">
+                                <div class="pull-right">
+                                    <a href="/pricing/edit/${pricing.id}">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                        <g:message code="default.link.edit"/>
+                                    </a>
+                                </div>
+                            </permission:hasAccess>
+                        </sec:ifLoggedIn>
                     </div>
                     <div class="panel-body">
                         <div class="well well-sm">
@@ -63,12 +71,16 @@
                     </g:if>
                 </div>
             </g:each>
-            <div class="buttons">
-                <a href="/pricing/create?place.id=${this.place.id}" class="save btn btn-orange">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <g:message code="pricing.add.new"/>
-                </a>
-            </div>
+            <sec:ifLoggedIn>
+                <permission:hasAccess isOwner="${((g.currentUserID()?.toInteger()) == this.place.owner?.id)}">
+                    <div class="buttons">
+                        <a href="/pricing/create?place.id=${this.place.id}" class="save btn btn-orange">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <g:message code="pricing.add.new"/>
+                        </a>
+                    </div>
+                </permission:hasAccess>
+            </sec:ifLoggedIn>
         </g:else>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>

@@ -19,8 +19,9 @@ class AdminController {
     def index() {
         def images = adminService.getImagesWaitingForDecision();
         def pendingPlaces = placeService.findAllPending();
+        def pendingObjectAdmins = placeService.findPendingObjAdmin();
         def flaggedScores = placeService.getFlaggedScores();
-        render view: "index", model: [waitingImages: images, pendingPlaces: pendingPlaces, flaggedScores: flaggedScores];
+        render view: "index", model: [waitingImages: images, pendingPlaces: pendingPlaces, flaggedScores: flaggedScores, pendingObjectAdmins: pendingObjectAdmins];
     }
 
     def findPlace(){
@@ -56,6 +57,13 @@ class AdminController {
         redirect(controller: "admin", action: "index")
     }
 
+     def rejectAdmin(){
+        if(params.placeId){
+            adminService.rejectAdmin(params.placeId);
+        }
+        redirect(controller: "admin", action: "index")
+    }
+
     def acceptImage(){
         if(params.id){
             adminService.acceptImage(params.id);
@@ -70,6 +78,13 @@ class AdminController {
     def acceptPlace(){
         if(params.placeId){
             adminService.acceptPlace(params.placeId);
+        }
+        redirect(controller: "admin", action: "index")
+    }
+
+    def acceptAdmin(){
+        if(params.placeId){
+            adminService.acceptAdmin(params.placeId);
         }
         redirect(controller: "admin", action: "index")
     }
