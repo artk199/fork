@@ -135,12 +135,8 @@ class PlaceService {
             if (query) {
                 ilike("name", "%" + query + "%")
             }
+            eq("status", Status.APPROVED)
         }
-        /*
-        zabytek_1['id'] = 10
-        zabytek_1['name'] = 'Fontanna Neptuna'
-        zabytek_1['description'] = 'Sika na wszystkich przechodniow od poczatku istnienia tego miasta'
-         */
         places
     }
 

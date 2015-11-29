@@ -8,7 +8,7 @@
     </head>
     <body>
     <br/>
-        <div class="row" ng-controller="placesController" style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none; user-select: none;">
+        <div class="row" ng-controller="placesController" ng-init="init('${search}')" style="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none; user-select: none;">
             <div class="col-md-2 col-sm-1 hidden-xs"></div>
             <div class="col-md-8 col-sm-10 col-xs-12">
                 <div class="row">
