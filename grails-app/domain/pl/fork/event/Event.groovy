@@ -17,6 +17,10 @@ class Event {
         place nullable: true
         visibility nullable: true
         participants nullable: true
+        startDate min: new Date()
+        endDate (validator: { val, obj ->
+            val > obj.properties['startDate']
+        })
     }
 
     static hasMany = [comments:Comment, participants:User]

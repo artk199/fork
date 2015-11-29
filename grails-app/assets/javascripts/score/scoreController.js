@@ -6,27 +6,28 @@ forkApp.controller('ScoreController', ['$scope', '$location', '$http', function(
     $scope.submitted = false;
     $scope.hovered = 0;
     $scope.instance = {};
+    $scope.errors = [];
 
     $scope.init = function(id){
         $scope.id = id;
 
         $scope.data.score = 0;
 
-        $http.get("/place/"+$scope.id+"/metascore"). success(function(data) {
+        $http.get("/place/"+$scope.id+"/metascore").success(function(data) {
             $scope.empty = data['empty'];
             $scope.submitted = data['submitted'];
             $scope.instance = data['score'];
-            console.log(data);
         });
     }
 
     $scope.addScore = function(){
+        $scope.errors = [];
         $http.post("/place/"+$scope.id+"/score", $scope.data). success(function(data) {
             $scope.empty = false;
             $scope.submitted = true;
             $scope.instance = data;
-            console.log(data);
-            console.log($scope.instance);
+        }).error( function( data, status ){
+            $scope.errors = data;
         });
     }
 

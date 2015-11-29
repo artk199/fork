@@ -12,6 +12,15 @@
         <form ng-show="!submitted" ng-submit="addScore()">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fork-place-score-add" >
                 <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                    <div ng-show="errors.length > 0" class="col-lg-10 col-md-10 col-sm-12 col-xs-12" style="border:1px solid black; padding:15px; color:white; background:#af0000">
+                        <span ng-repeat="error in errors" style="display:block;">
+                            {{error}}
+                        </span>
+                    </div>
+                    <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-1 col-md-1 hidden-sm hidden-xs pull-right"></div>
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 score-selector pull-right" style="font-size:20px; cursor:pointer; text-align:right;">
                         <span star="1" class="glyphicon glyphicon-star" style="margin:-2px;"></span>

@@ -191,5 +191,4 @@ class UserController {
         List activities = userService.getFriendsActivities(id,params.offset.toInteger(), params.max.toInteger())
         render activities as JSON
     }
-
 }
