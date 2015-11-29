@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,18 +18,23 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import pl.fork.Config;
 import pl.fork.SessionHandler;
+import pl.fork.entity.Opinion;
 import pl.fork.fork.R;
 
 /**
@@ -37,6 +44,7 @@ public class AddPhotoActivity  extends AppCompatActivity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     ImageView mImageView;
+    Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,15 @@ public class AddPhotoActivity  extends AppCompatActivity {
         // start the image capture Intent
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
+        Button uploadButton = (Button) findViewById(R.id.uploadButton);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(imageBitmap != null){
+                    new UploadPhoto().execute(imageBitmap);
+                }
+            }
+        });
     }
 
     @Override
@@ -57,7 +74,7 @@ public class AddPhotoActivity  extends AppCompatActivity {
                 Toast.makeText(this, "Image saved to:\n" +
                         data.getData(), Toast.LENGTH_LONG).show();
                 Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imageBitmap = (Bitmap) extras.get("data");
                 mImageView.setImageBitmap(imageBitmap);
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -75,20 +92,33 @@ public class AddPhotoActivity  extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Bitmap... params) {
 
-            Bitmap bitmap = params[0];
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream); // convert Bitmap to ByteArrayOutputStream
+            try {
+                Bitmap bitmap = params[0];
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream); // convert Bitmap to ByteArrayOutputStream
+                MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-            MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+                final String filename = "image.jpg";
+                ByteArrayResource contentsAsResource = new ByteArrayResource(stream.toByteArray()) {
+                    @Override
+                    public String getFilename() {
+                        return filename;
+                    }
+                };
+                map.add("file", contentsAsResource);
 
-            Resource res = new ByteArrayResource(stream.toByteArray());
-            HttpHeaders imageHeaders = new HttpHeaders();
-            imageHeaders.add("Cookie", "JSESSIONID="+ SessionHandler.getInstance().getCookie());
-            imageHeaders.setContentType(MediaType.IMAGE_JPEG);
-            HttpEntity<Resource> imageEntity = new HttpEntity<Resource>(res, imageHeaders);
-            map.add("item[image]", imageEntity);
+                RestTemplate restTemplate = new RestTemplate();
 
-            return null;
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Cookie", "JSESSIONID=" + SessionHandler.getInstance().getCookie());
+                HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(map,headers);
+                final String url = Config.baseURL + "user/upload";
+                restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+            }catch (Exception e){
+                return false;
+            }
+            return true;
         }
     }
 
