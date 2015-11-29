@@ -39,8 +39,12 @@
     </label>
     <div class="col-xs-7 col-sm-6 col-md-6 col-lg-6">
         ${user.authorities}
-        <g:select name="authorities" id="authorities" from="${pl.fork.auth.Role.list()}"
-                  class="form-control"  multiple="multiple"
+        <g:select name="authorities"
+                  id="authorities"
+                  from="${pl.fork.auth.Role.list()}"
+                  class="form-control"
+                  multiple="multiple"
+                  value="${user.authorities}"
         />
     </div>
     <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 hidden-xs"></div>
