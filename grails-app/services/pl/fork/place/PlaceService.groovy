@@ -7,6 +7,7 @@ import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
+import pl.fork.place.other.Pricing
 import pl.fork.place.other.Report
 
 import java.text.DateFormat
@@ -29,6 +30,10 @@ class PlaceService {
 
     Place get(Long id){
         return Place.get(id)
+    }
+
+    Pricing getPricing(Long id){
+        return Pricing.get(id);
     }
 
     def toList(value) {
