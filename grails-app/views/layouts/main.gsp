@@ -13,11 +13,6 @@
         <asset:stylesheet src="bootstrap-multiselect.css"/>
         <asset:stylesheet src="jquery.datetimepicker.css"/>
         <asset:stylesheet src="select2.css"/>
-
-        <asset:javascript src="application.js"/>
-        <asset:javascript src="select2.js"/>
-
-        <asset:javascript src="jquery.datetimepicker.full.min.js"/>
         <g:layoutHead/>
     </head>
     <body>
@@ -30,6 +25,9 @@
             <g:render template="/layouts/footer"/>
         </div>
         <asset:javascript src="jquery-2.1.3.js"/>
+        <asset:javascript src="select2.js"/>
+        <asset:javascript src="jquery.datetimepicker.full.min.js"/>
+
         <asset:javascript src="/plugins/sockjs.min.js"/>
         <asset:javascript src="/plugins/stomp.min.js"/>
         <asset:javascript src="bootstrap.js"/>
@@ -40,5 +38,7 @@
         <asset:javascript src="angular-animate.js"/>
         <asset:javascript src="fork.js"/>
         <asset:javascript src="temp.js"/>
+
+        <asset:javascript src="application.js"/>
     </body>
 </html>
