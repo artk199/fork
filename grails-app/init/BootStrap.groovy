@@ -196,7 +196,8 @@ class BootStrap {
                     review : score.review,
                     language : score.language,
                     title : score.title,
-                    dateCreated : dateCreated,
+                    owner : score.owner,
+                    dateCreated : score.dateCreated,
                     alreadyReported : score.isAlreadyReportedByCurrentUser(),
                     isOwner : score.isCurrentUserOwner()
             ]
