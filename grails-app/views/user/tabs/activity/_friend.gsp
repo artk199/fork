@@ -1,8 +1,8 @@
 <div style="height:100px;">
     <div style="float:left; width:140px;height:140px;">
          <div style="float:left">
-             <img ng-if="instance.friend_profilen" g-src="/image/{{instance.friend_profile}}/mini" width="140px" height="140px" style="border: 1px solid #DDD;">
-             <img ng-if="!instance.friend_profilen" src="/assets/no-profile.jpg" width="140px" height="140px" style="border: 1px solid #DDD;">
+             <img ng-if="instance.friend_profile" ng-src="/image/{{instance.friend_profile}}/mini" width="140px" height="140px" style="border: 1px solid #DDD;">
+             <img ng-if="!instance.friend_profile" src="/assets/no-profile.jpg" width="140px" height="140px" style="border: 1px solid #DDD;">
          </div>
     </div>
     <div style="margin-top:35px;float:left;text-align:left; margin-left: 10px;width: -moz-calc(100% - 160px);width: -webkit-calc(100% - 160px); width: calc(100% - 160px);height:35px; overflow:hidden;white-space: nowrap;text-overflow:ellipsis;">
