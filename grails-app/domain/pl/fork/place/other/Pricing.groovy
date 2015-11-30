@@ -4,6 +4,10 @@ import pl.fork.place.Place
 
 class Pricing {
 
+    static mapping = {
+        place lazy:false
+    }
+
     static constraints = {
     }
 

@@ -70,14 +70,8 @@ public class AllPlacesMapsActivity extends FragmentActivity {
             mMap.animateCamera(update);
         }
 
-        Random rand = new Random();
-
         for (Place place : places) {
-
-            double rndX = rand.nextFloat() * (0.2 - 0.0) + 0.0;
-            double rndY = rand.nextFloat() * (0.2 - 0.0) + 0.0;
-
-            LatLng position = new LatLng(place.getLatitude()+rndX, place.getLongitude()+rndY);
+            LatLng position = new LatLng(place.getLatitude(), place.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(position);
             markerOptions.title(place.getName());

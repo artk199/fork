@@ -56,7 +56,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         /** Pobranie obrazka oraz wstawienie go */
         if(place.getImageID() != -1) {
             ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.displayImage(Config.baseURL + "image/" + place.getImageID(), placeImageView);
+            imageLoader.displayImage(Config.baseURL + "image/" + place.getImageID()+"/mini", placeImageView);
         }
 
         /** Ustawienie nazwy miejsca */

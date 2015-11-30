@@ -50,17 +50,19 @@
                                               id="description" value="${pricing.description}">${pricing.description}</textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="place" class="col-sm-4 control-label">
-                                    <g:message code="pricing.place" />
-                                </label>
-                                <div class="col-sm-8">
-                                    <g:select name="place" id="place" from="${pl.fork.place.Place.list()}"
-                                              optionValue="name" class="form-control" value="${pricing.place.id}"
-                                              optionKey="id"
-                                    />
+                            <permission:hasAccess>
+                                <div class="form-group">
+                                    <label for="place" class="col-sm-4 control-label">
+                                        <g:message code="pricing.place" />
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <g:select name="place" id="place" from="${pl.fork.place.Place.list()}"
+                                                  optionValue="name" class="form-control" value="${pricing.place.id}"
+                                                  optionKey="id"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            </permission:hasAccess>
                         </fieldset>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>

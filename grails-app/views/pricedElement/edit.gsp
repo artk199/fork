@@ -65,18 +65,19 @@
                                             <input class="form-control" name="price" id="price" value="${pricedElement.price}"/>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="pricing" class="col-sm-4 control-label">
-                                            <g:message code="pricing.element.menu" />
-                                        </label>
-                                        <div class="col-sm-8">
-                                            <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
-                                                      optionValue="title" class="form-control" value="${pricedElement.pricing.id}"
-                                                      optionKey="id"
-                                            />
+                                    <permission:hasAccess>
+                                        <div class="form-group">
+                                            <label for="pricing" class="col-sm-4 control-label">
+                                                <g:message code="pricing.element.menu" />
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <g:select name="pricing" id="pricing" from="${pl.fork.place.other.Pricing.list()}"
+                                                          optionValue="title" class="form-control" value="${pricedElement.pricing.id}"
+                                                          optionKey="id"
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </permission:hasAccess>
                                 </fieldset>
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>

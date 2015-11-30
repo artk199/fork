@@ -38,9 +38,9 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        this.place = (Place) getIntent().getSerializableExtra("place");
         setUpMapIfNeeded();
 
-        this.place = (Place) getIntent().getSerializableExtra("place");
 
     }
 
@@ -70,7 +70,7 @@ public class MapsActivity extends FragmentActivity {
         if(location != null) {
             LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
             new GetPathTask(place).execute(position,position);
-            mMap.addMarker(new MarkerOptions().position(position).title("Marker"));
+            mMap.addMarker(new MarkerOptions().position(position).title("Moja pozycja"));
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(position, 17);
             mMap.animateCamera(update);
         }
@@ -99,8 +99,8 @@ public class MapsActivity extends FragmentActivity {
             lat2 = from.latitude;
             lon2 = from.longitude;
 
-            lat1 = 54.3716509;
-            lon1 = 18.6202039;
+            lat1 = place.getLatitude();
+            lon1 = place.getLongitude();
 
             String url = "http://maps.googleapis.com/maps/api/directions/json?origin=" +lat1 + "," + lon1  + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=metric";
             Log.d("MapsActivity", url);
