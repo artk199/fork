@@ -20,7 +20,7 @@
             android:id="@+id/placeImageView"
             android:src="@mipmap/ic_launcher"
             android:paddingTop="2dp"
-            />
+            android:visibility="visible" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -54,7 +54,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="10/10/2012"
-                    android:id="@+id/textView4" />
+                    android:id="@+id/textView4"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <TextView

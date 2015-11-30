@@ -191,13 +191,12 @@ class BootStrap {
 
         JSON.registerObjectMarshaller( Score ) { Score score ->
             return [
-                    owner : score.owner,
                     id : score.id,
                     score : score.score,
-                    place : score.place,
                     review : score.review,
                     language : score.language,
                     title : score.title,
+                    dateCreated : dateCreated
             ]
         }
 
@@ -225,7 +224,6 @@ class BootStrap {
                     website : place.website,
                     owner : place.owner,
                     status : place.status,
-                    scores : place.scores,
                     dateCreated : place.dateCreated,
                     verified : place.verified,
                     x : place.x,
@@ -294,6 +292,7 @@ class BootStrap {
                     status : forkFile.status
             ]
         }
+
 
         println "Deployed."
     }

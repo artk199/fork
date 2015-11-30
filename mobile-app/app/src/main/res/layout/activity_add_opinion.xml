@@ -9,7 +9,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="Dodaj opinię"
         android:id="@+id/addOpinion"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

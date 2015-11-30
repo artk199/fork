@@ -5,7 +5,7 @@ package pl.fork;
  */
 public class UtilFunctions {
     public static String getImageURI(int id){
-        String url = Config.baseURL + "image/" + id;
+        String url = Config.baseURL + "image/" + id + "/mini";
         return url;
     }
 

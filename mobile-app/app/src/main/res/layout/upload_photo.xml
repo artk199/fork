@@ -5,8 +5,8 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:id="@+id/imageThumbnail"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerInside" />
@@ -15,5 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Dodaj"
-        android:id="@+id/uploadButton" />
+        android:id="@+id/uploadButton"
+        android:textColor="@color/grey_white_1000" />
 </LinearLayout>

@@ -3,9 +3,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.zeroturnaround.jrebel.android'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'art'
+            keyPassword '123456'
+            storeFile file('C:/Users/Artur/AndroidStudioProjects/key.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-
     defaultConfig {
         applicationId "pl.fork.fork"
         minSdkVersion 15
@@ -27,16 +34,19 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/notice.txt'
     }
+    dexOptions {
+        incremental true
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
-        compile ('com.github.florent37:materialviewpager:1.1.2@aar'){
+    compile('com.github.florent37:materialviewpager:1.1.2@aar') {
         transitive = true
     }
     compile 'com.github.lawloretienne:imagegallery:0.0.9'

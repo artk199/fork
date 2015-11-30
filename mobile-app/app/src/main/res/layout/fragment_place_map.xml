@@ -27,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Otwórz mapę!"
-                android:id="@+id/mapButton" />
+                android:id="@+id/mapButton"
+                android:textColor="@color/grey_white_1000" />
 
         </android.support.v7.widget.CardView>
     </LinearLayout>

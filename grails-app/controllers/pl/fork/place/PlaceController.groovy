@@ -183,7 +183,7 @@ class PlaceController {
     }
 
     def addScore(Long id){
-        JSONObject parameters = new JSONObject(request.reader.text)
+        JSONObject parameters = new JSONObject(request.reader.text.trim())
         Place place = placeService.get(id)
         Score score = placeService.addScoreToPlace(place,parameters)
         render score as JSON
