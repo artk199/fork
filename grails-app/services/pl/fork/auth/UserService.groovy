@@ -53,7 +53,7 @@ class UserService {
         Role role = Role.findWhere(authority:s)
         UserRole userRole = new UserRole(user,role)
         userRole.save( flush:true )
-
+        user
     }
 
     List<ForkFile> getUserImages(User user) {

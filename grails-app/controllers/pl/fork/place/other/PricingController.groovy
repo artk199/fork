@@ -1,6 +1,9 @@
 package pl.fork.place.other
 
+import pl.fork.auth.User
+import pl.fork.auth.UserRole
 import pl.fork.place.Place
+import pl.fork.place.PlaceService
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,6 +12,8 @@ import grails.transaction.Transactional
 class PricingController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    PlaceService placeService
+    def springSecurityService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -19,7 +24,31 @@ class PricingController {
         respond pricing
     }
 
+    @Transactional
     def create(Place place) {
+        def isAdmin = false;
+        UserRole.withTransaction {
+            def roles = springSecurityService.getPrincipal().getAuthorities();
+            for(def role in roles){ if(role.getAuthority() == "ROLE_ADMIN") isAdmin = true };
+        }
+        User currentUser = User.findByUsername(springSecurityService.currentUser);
+
+        // if params are set
+        if(params['place.id']){
+            Place p = placeService.get(params.long('place.id'))
+
+            if(!isAdmin && (currentUser == null || p.owner == null || currentUser.id != p.owner.id)){
+                redirect view: "/noPermError"
+                return
+            }
+        }
+        else{
+            if(!isAdmin){
+                redirect view:  "/noPermError"
+                return
+            }
+        }
+
         Pricing pricing = new Pricing(params);
         pricing.place = place;
         respond pricing

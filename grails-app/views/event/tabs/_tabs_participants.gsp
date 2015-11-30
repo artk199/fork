@@ -4,7 +4,12 @@
         Lista zapisanych uczestników wydarzenia
         <br>
         <g:each var="participant" in="${event.participants}">
-            ${participant.username} <br>
+            <p>
+                <span class="glyphicon glyphicon-user"></span>
+                <g:link controller="user" action="show" id="${participant.id}">
+                    ${participant.username}
+                </g:link>
+            </p>
         </g:each>
         <sec:ifLoggedIn>
             <g:if test="${!signedUser}">

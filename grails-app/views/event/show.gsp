@@ -28,9 +28,13 @@
             <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
                 <g:render template="tabs" model="[event:event]"/>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-1 hidden-xs"></div>
             <div class="col-md-8 col-sm-10 col-xs-12">
                 <g:render template="comments" model="[event:event, comment:comment, comments:comments, signedUser:signedUser]"/>
             </div>
+            <div class="col-md-2 col-sm-1 hidden-xs"></div>
         </div>
     </div>
     </body>

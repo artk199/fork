@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label for="description" class="col-sm-4 control-label">
-                            <g:message code="place.description" />
+                            <g:message code="user.event.place" />
                         </label>
                         <div class="col-sm-8">
                             <select search-select id="place" name="place">
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">
-                            <g:message code="startDate" />
+                            <g:message code="event.startDate" />
                         </label>
                         <div class="col-sm-8">
                             <input filter-date-and-time type="text" name="startDate" value="${event.startDate}">
@@ -64,7 +64,7 @@
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">
-                            <g:message code="endDate" />
+                            <g:message code="event.endDate" />
                         </label>
                         <div class="col-sm-8">
                             <input filter-date-and-time type="text" name="endDate" value="${event.endDate}">

@@ -7,6 +7,7 @@ import pl.fork.auth.Status
 import pl.fork.auth.User
 import pl.fork.file.ForkFile
 import pl.fork.file.ImageService
+import pl.fork.place.other.Pricing
 import pl.fork.place.other.Report
 
 import java.text.DateFormat
@@ -29,6 +30,10 @@ class PlaceService {
 
     Place get(Long id){
         return Place.get(id)
+    }
+
+    Pricing getPricing(Long id){
+        return Pricing.get(id);
     }
 
     def toList(value) {
@@ -139,12 +144,8 @@ class PlaceService {
             if (query) {
                 ilike("name", "%" + query + "%")
             }
+            eq("status", Status.APPROVED)
         }
-        /*
-        zabytek_1['id'] = 10
-        zabytek_1['name'] = 'Fontanna Neptuna'
-        zabytek_1['description'] = 'Sika na wszystkich przechodniow od poczatku istnienia tego miasta'
-         */
         places
     }
 
@@ -230,9 +231,6 @@ class PlaceService {
             score.save(flush:true)
             place.save(flush:true)
             activityService.createReviewActivity(score)
-        }
-        else{
-            return null
         }
         score
     }

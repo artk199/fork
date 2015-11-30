@@ -300,14 +300,14 @@ forkApp.directive('linkController', function(){
             $scope.image = -1;
 
             $scope.init = function(){
-                $http.get("/place")
+                $http.get("/place/all?offset=0&max=5")
                     .success( function (data){
                         $scope.places = data;
                     });
             }
 
             $scope.search = function(){
-                $http.get('/place/search', { params: { search : $scope.searchValue } } )
+                $http.get("/place/all?offset=0&max=5&name="+$scope.searchValue)
                     .success(function(data){
                         $scope.places = data;
                     });
@@ -416,4 +416,11 @@ forkApp.controller('placesController', [ '$scope', function($scope){
 
     $scope.baseURL = 'place/all';
     $scope.dynamicURL = '';
+
+    $scope.init = function(dynamicURL){
+        if( dynamicURL ) {
+            $scope.dynamicURL = dynamicURL;
+        }
+    }
+
 }]);

@@ -1,7 +1,7 @@
-
-    <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
-        <h1 style="float:left;"><g:message code="place.scores.title"/>
-    </div>
+<div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
+    <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+        <h1 style="float:left;"><g:message code="event.comments"/></h1>
     <sec:ifLoggedIn>
         <g:if test="${comment == null}">
             <g:hasErrors bean="${this.comment}">
@@ -12,31 +12,33 @@
                 </ul>
             </g:hasErrors>
             <g:form action="addComment" class="form-horizontal" resource="${this.event}">
-                <fieldset class="form" >
+                <fieldset class="form" style="width: 100%;" >
 
                     <div class="form-group">
-                        <label for="title" class="col-sm-4 control-label">
+                        <label for="title" class="col-sm-4 control-label" style="text-align: left;">
                             <g:message code="custom.title" />
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8" style="width: 100%;">
                             <input class="form-control" name="title" id="title" value="${comment != null ? comment.title : ''}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="description" class="col-sm-4 control-label">
-                            <g:message code="custom.description" />
+                        <label for="description" class="col-sm-4 control-label" style="text-align: left;">
+                            <g:message code="custom.text" />
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8" style="width: 100%;">
                             <textarea class="form-control" name="description" id="description" value="${comment != null ? comment.description : ''}"> </textarea>
                         </div>
                     </div>
-
-                    <g:submitButton name="addComment" class="save btn btn-default" value="${message(code: 'default.button.create.label', default: 'Dodaj!')}" />
+                    <div style="text-align: right;">
+                        <g:submitButton name="addComment" class="save btn btn-default" value="${message(code: 'default.button.add.label', default: 'Add')}" />
+                    </div>
                 </fieldset>
             </g:form>
         </g:if>
     </sec:ifLoggedIn>
+    <br>
     <sec:ifNotLoggedIn>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:10px;margin-bottom:20px;" >
             <g:message code="place.scores.add.logged.in.required"/> <a href="${createLink(controller:'login',action:'auth')}"><span><g:message code="layout.header.link.login"/></span></a>
@@ -52,7 +54,7 @@
                                     <a ng-href="/user/show/${comment.owner.id}">
                                         <img ng-src="${comment.owner.profilePicture != null ? '/image/'+comment.owner.profilePicture.id :
                                                 '/assets/no-profile.jpg'}" width="75px" height="75px"/>
-                                        <div style="text-aling:left" ng-app>
+                                        <div style="text-align:center" ng-app>
                                             ${comment.owner.username}
                                         </div>
                                     </a>
@@ -78,3 +80,4 @@
             </div>
         </g:each>
     </div>
+</div>
