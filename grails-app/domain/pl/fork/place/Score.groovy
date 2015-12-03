@@ -6,8 +6,6 @@ import pl.fork.place.other.Report
 class Score {
 
     static constraints = {
-        title matches: "[a-zA-Z].+"
-        review matches: "[a-zA-Z].+"
     }
 
     static mapping = {

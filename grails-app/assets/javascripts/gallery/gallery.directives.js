@@ -179,6 +179,11 @@ forkApp.directive('fileDialog', function(){
 
             element.bind('change', function(){
                 var file = element[0].files[0];
+
+                if( typeof file === 'undefined'){
+                    return false;
+                }
+
                 var form = new FormData();
                 form.append('file', file, 'image.png');
 
@@ -200,6 +205,9 @@ forkApp.directive('fileDialog', function(){
                             scope.progress = '0%';
                             scope.uploading = false;
                             scope.images.unshift(xhr.responseText);
+                            if( scope.selectedImage != -1 ){
+                                scope.selectedImage++;
+                            }
                         });
                     } else {
                         alert('An error occurred!');

@@ -20,7 +20,6 @@
                             {{friend.username}}
                         </a>
                         <span reject-friend array="friends" class="glyphicon glyphicon-minus-sign fork-friend-icon-add pull-right"></span>
-                        <span send-message class="glyphicon glyphicon-send fork-friend-icon-add pull-right"></span>
                     </div>
 
                 </div>

@@ -29,25 +29,14 @@ class ImageScaleService {
 
             int biggerDimension = height > width ? height : width;
 
-            double ratio = maxLength / biggerDimension;
-            ratio = ((double)maxLength / (double)biggerDimension);
+            double ratio = ((double)maxLength / (double)biggerDimension)
 
             int newWidth = width*ratio
             int newHeight = height*ratio
 
-            Image scaledImage = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH)
-
-            BufferedImage imageBuff = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-            imageBuff.getGraphics().drawImage(scaledImage, 0, 0, new Color(0, 0, 0), null);
-
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-
-            ImageIO.write(imageBuff, "jpg", buffer);
-
-            return buffer.toByteArray();
+            return scale_(img, newWidth,newHeight)
         } catch (IOException e) {
-            throw new Exception("IOException in scale");
+            throw new Exception("IOException in scale")
         }
     }
 
@@ -67,22 +56,27 @@ class ImageScaleService {
             int imgWidth = img.getWidth()
 
             if (height == 0) {
-                height = (width * imgHeight  ) / imgWidth;
+                height = (width * imgHeight  ) / imgWidth
             }
             if (width == 0) {
-                width = (height * imgWidth) / imgHeight ;
+                width = (height * imgWidth) / imgHeight
             }
-            Image scaledImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            BufferedImage imageBuff = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            imageBuff.getGraphics().drawImage(scaledImage, 0, 0, new Color(0, 0, 0), null);
 
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
-            ImageIO.write(imageBuff, "jpg", buffer);
-
-            return buffer.toByteArray();
+            return scale_(img, width,height)
         } catch (IOException e) {
             throw new Exception("IOException in scale");
         }
+    }
+
+    private byte[] scale_(BufferedImage img, int width, int height) {
+        Image scaledImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage imageBuff = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        imageBuff.getGraphics().drawImage(scaledImage, 0, 0, new Color(0, 0, 0), null);
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+        ImageIO.write(imageBuff, "jpg", buffer);
+        buffer.toByteArray()
     }
 }
