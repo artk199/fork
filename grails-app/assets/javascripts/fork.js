@@ -1,4 +1,6 @@
 //= require_self
+//= require edit/edit.controller.js
+//= require edit/edit.directives.js
 //= require time/time.service.js
 //= require time/time.directives.js
 //= require infiniteScroll/infinite.controller.js
@@ -7,8 +9,6 @@
 //= require profile/profile.directives.js
 //= require gallery/gallery.controller.js
 //= require gallery/gallery.directives.js
-//= require edit/edit.controller.js
-//= require edit/edit.directives.js
 //= require quicksearch/directives.js
 //= require score/scoreController.js
 
@@ -206,6 +206,7 @@ forkApp.controller('imageController', [ '$timeout', '$scope', '$http', '$window'
     $scope.show = false;
     $scope.place= null;
     $scope.isProfile = false;
+    $scope.msg = "";
 
     $scope.showPlace = function(){
         if( $scope.place != null ){
@@ -222,11 +223,21 @@ forkApp.controller('imageController', [ '$timeout', '$scope', '$http', '$window'
             });
     }
     $scope.setProfile = function(url){
-        if( !$scope.isProfile )
-        $http.post(url)
-            .success( function (data){
-                $scope.isProfile = true;
-            });
+        if( !$scope.isProfile ){
+            $http.post(url)
+                .success( function (data){
+                    $scope.msg = "Zdjęcie zostało ustawione na profilowe.";
+                    $scope.isProfile = true;
+                });
+        }
+        else{
+            $http.post(url+'?unset=true')
+                .success( function (data){
+                    $scope.isProfile = false;
+                    $scope.msg = "Zdjęcie przestało być profilowym.";
+                });
+        }
+
     }
 
 }]);

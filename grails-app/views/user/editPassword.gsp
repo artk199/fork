@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="layout" content="main" />
         <title>${this.user.username}</title>
     </head>
     <body>

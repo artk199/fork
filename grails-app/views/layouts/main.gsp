@@ -17,7 +17,9 @@
     </head>
     <body>
         <sec:ifLoggedIn>
-            <g:render template="/layouts/userpanel"/>
+            <g:if test="${request.forwardURI != "/user/show/${g.currentUserID()}"}">
+                <g:render template="/layouts/userpanel"/>
+            </g:if>
         </sec:ifLoggedIn>
         <g:render template="/layouts/header"/>
         <div class="container-fluid fork-content">

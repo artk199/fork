@@ -48,18 +48,27 @@
                 </popup>
 
 
-
-                <div class="pull-right">
+                <div ng-show="msg" class="pull-right" style="width:100%">
                     <div class="fork-image-edit-buttons">
-                        <div ng-click="deleteImage('/image/${image.id}')"><span class="glyphicon glyphicon-trash"></span> <g:message code="image.delete"/></div>
-                        <div ng-class="{'active' : isProfile}" ng-click="setProfile('/user/${image.owner.id}/image/${image.id}')"><span class="glyphicon glyphicon glyphicon-pushpin"></span> <g:message code="image.set.profile"/></div>
-                        <div ng-click="show = true">
-                            <span ng-hide="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link"/> </span>
-                            <span ng-show="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link.change"/></span>
+                        <div class="fork-image-edit-buttons active">
+                            {{msg}}
                         </div>
                     </div>
-                    <div class="fork-image-edit-buttons">
-                        <div change-url="/user/show/${g.currentUserID()}" ><span class="glyphicon glyphicon-share-alt icon-flipped"></span> <g:message code="application.back"/></div>
+                </div>
+
+                <div class="pull-right" style="width:100%">
+                    <div class="pull-right">
+                        <div class="fork-image-edit-buttons">
+                            <div ng-click="deleteImage('/image/${image.id}')"><span class="glyphicon glyphicon-trash"></span> <g:message code="image.delete"/></div>
+                            <div ng-class="{'active' : isProfile}" ng-click="setProfile('/user/${image.owner.id}/image/${image.id}')"><span class="glyphicon glyphicon glyphicon-pushpin"></span> <g:message code="image.set.profile"/></div>
+                            <div ng-click="show = true">
+                                <span ng-hide="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link"/> </span>
+                                <span ng-show="showPlace()"> <span class="glyphicon glyphicon-link"></span> <g:message code="image.link.change"/></span>
+                            </div>
+                        </div>
+                        <div class="fork-image-edit-buttons">
+                            <div change-url="/user/show/${g.currentUserID()}" ><span class="glyphicon glyphicon-share-alt icon-flipped"></span> <g:message code="application.back"/></div>
+                        </div>
                     </div>
                 </div>
             </div>

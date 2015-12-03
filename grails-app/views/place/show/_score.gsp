@@ -5,10 +5,10 @@
             <div class="col-md-2 col-sm-3 col-xs-3" style="height: 125px;">
                 <div class="pull-left">
                         <a ng-href="/user/show/{{instance.owner.id}}">
-                            <img ng-if="instance.owner.profile" ng-src="/image/{{instance.profile}}/mini" width="75px" height="75px">
+                            <img ng-if="instance.owner.profile" ng-src="/image/{{instance.owner.profile}}/mini" width="75px" height="75px">
                             <img ng-if="!instance.owner.profile" src="/assets/no-profile.jpg" width="75px" height="75px">
                             <div style="text-aling:left" ng-app>
-                                {{ instance.owner.username }}
+                                {{ instance.owner.username }} {{instance.owner.profile}}
                             </div>
                         </a>
                 </div>

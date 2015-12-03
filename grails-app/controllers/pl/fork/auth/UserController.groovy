@@ -167,7 +167,13 @@ class UserController {
         }
 
         if( userService.isValid(user) ){
-            user.profilePicture = user.images.find{ it.id == imageID }
+            if( params.unset ){
+                user.profilePicture = null
+            }
+            else{
+                user.profilePicture = user.images.find{ it.id == imageID }
+            }
+
             user.save flush:true
             user.validate()
             if( user.hasErrors() ){

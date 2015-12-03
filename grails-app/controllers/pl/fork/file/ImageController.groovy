@@ -2,6 +2,7 @@ package pl.fork.file
 
 import grails.converters.JSON
 import org.grails.web.json.JSONObject
+import pl.fork.activity.Activity
 import pl.fork.auth.UserService
 
 class ImageController {
@@ -32,14 +33,22 @@ class ImageController {
     def deleteImage(int id){
         String accepts = request.getHeader('accept')
         ForkFile image = imageService.getImage(id)
-        int owner = image.owner.id
-        imageService.delete(id)
-        println accepts
-        if( accepts.contains('html')) {
-            render '/user/show/'+owner
+        if( !userService.isValid(image.owner) ){
+            render status: 403
         }
-        else{
-            render status: 204
+        else {
+            def owner = image.owner
+            if (owner.profilePicture == image) {
+                owner.profilePicture = null
+            }
+            Activity.findByImage(image).delete flush:true
+            imageService.delete(id)
+            owner.save flush:true
+            if (accepts.contains('html')) {
+                render '/user/show/' + owner.id
+            } else {
+                render status: 204
+            }
         }
     }
 

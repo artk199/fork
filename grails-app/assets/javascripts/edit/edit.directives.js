@@ -9,7 +9,8 @@ forkApp.directive('fieldEdit', function(){
             id: '@'
         },
         link: function(scope, element){
-
+            console.log(scope.fieldName);
+            console.log(scope.fieldValue);
             scope.editFieldValue = scope.fieldValue;
             if( scope.fieldValue == "" ){
                 scope.notSet = true;
