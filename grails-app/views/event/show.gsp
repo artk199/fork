@@ -13,7 +13,10 @@
                 <div class="row">
 
                     <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
-                        <h1>${event.title}</h1>
+                        <h1 class='text-left place-title'>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            ${event.title}
+                        </h1>
 
                         <div class="col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 20px;">
                             <g:if test="${event.place.mainImage }">
