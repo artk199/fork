@@ -8,7 +8,7 @@
     <body>
         <div class="row" role="main">
             <div  class="col-md-8 col-md-offset-2">
-                <h1><g:message code="add.new.place" args="[entityName]" /></h1>
+                <h1><g:message code="add.new.event" args="[entityName]" /></h1>
                 <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
                 </g:if>
