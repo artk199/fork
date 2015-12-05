@@ -25,11 +25,11 @@
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-11 text-left">
                             <span><b><g:message code="event.startDate"/></b></span>
-                            ${event.startDate}
+                            ${event.startDate != null ? event.startDate.format('yyyy/MM/dd HH:mm') : ''}
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-11 text-left">
                             <span><b><g:message code="event.endDate"/></b></span>
-                            ${event.endDate}
+                            ${event.endDate != null ? event.endDate.format('yyyy/MM/dd HH:mm') : ''}
                         </div>
                     </div>
                 </div>

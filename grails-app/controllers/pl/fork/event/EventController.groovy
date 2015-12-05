@@ -62,7 +62,8 @@ class EventController {
     }
 
     def edit(Event event) {
-        respond event
+        List<Place> places = placeService.findAllApproved();
+        respond event, model:[places: places]
     }
 
     @Transactional
