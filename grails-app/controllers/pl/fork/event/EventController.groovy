@@ -40,7 +40,8 @@ class EventController {
 
         if (event.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond event.errors, view:'create'
+            List<Place> places = placeService.findAllApproved();
+            respond event.errors, view:'create', model:[places: places]
             return
         }
 
