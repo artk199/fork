@@ -15,7 +15,7 @@ class EventController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Event.list(params), model:[eventCount: Event.count()]
+        respond eventService.filter(params.title, params.timeAfter, params.timeBefore), model:[eventCount: Event.count()]
     }
 
     def show(Event event) {

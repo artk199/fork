@@ -7,6 +7,9 @@ import pl.fork.activity.ActivityService
 import pl.fork.auth.User
 import pl.fork.event.Event
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 /**
  * Created by Patryk on 15.11.2015.
  */
@@ -84,5 +87,43 @@ public class EventService {
             return comments.get(0);
         }
         return null;
+    }
+
+    List<Event> filter(String name, String timeAfter, String timeBefore) {
+
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.ENGLISH);
+        String minDate = "1000/01/01 00:00";
+        String maxDate = "3000/12/31 23:59"
+
+        Date dateAfter = timeAfter != null && !"".equals(timeAfter) ? format.parse(timeAfter) : format.parse(minDate);
+        Date dateBefore = timeBefore != null && !"".equals(timeBefore) ? format.parse(timeBefore) : format.parse(maxDate);
+
+        List<Event> events = Event.createCriteria().list {
+            if (name != null && !"".equals(name)) {
+                ilike("title", "%"+name+"%")
+            }
+
+            if(timeAfter != null && !timeBefore) {
+                ge("endDate", dateAfter)
+            }
+
+            if(timeBefore != null && !timeAfter) {
+                le("startDate", dateBefore)
+            }
+
+            if(timeAfter != null && timeBefore != null) {
+                or{
+                    and {
+                        ge("endDate", dateAfter)
+                        le("endDate", dateBefore)
+                    }
+                    and {
+                        ge("startDate", dateAfter)
+                        le("startDate", dateBefore)
+                    }
+                }
+            }
+        }
+        return events.unique();
     }
 }
