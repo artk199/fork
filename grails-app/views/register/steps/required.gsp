@@ -43,6 +43,7 @@
                         </label>
                         <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                             <g:passwordField class="form-control" name="password" />
+                            <span class="small"><em><g:message code="register.passwordInfo"/></em></span>
                         </div>
                         <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 hidden-xs"></div>
                     </div>

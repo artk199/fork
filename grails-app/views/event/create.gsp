@@ -8,7 +8,7 @@
     <body>
         <div class="row" role="main">
             <div  class="col-md-8 col-md-offset-2">
-                <h1><g:message code="add.new.place" args="[entityName]" /></h1>
+                <h1><g:message code="add.new.event" args="[entityName]" /></h1>
                 <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
                 </g:if>
@@ -36,7 +36,7 @@
                             <g:message code="place.description" />
                         </label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" name="description" id="description" value="${event.description}"> </textarea>
+                            <textarea class="form-control" name="description" id="description">${event.description}</textarea>
                         </div>
                     </div>
 
@@ -47,7 +47,12 @@
                         <div class="col-sm-8">
                             <select search-select id="place" name="place">
                                 <g:each var="place" in="${places}">
-                                    <option value="${place.id}"> ${place.name} </option>
+                                    <g:if test="${event != null && event.place != null && place.id == event.place.id}">
+                                        <option selected="selected" value="${place.id}"> ${place.name} </option>
+                                    </g:if>
+                                    <g:else>
+                                        <option value="${place.id}"> ${place.name} </option>
+                                    </g:else>
                                 </g:each>
                             </select>
                         </div>
@@ -58,7 +63,7 @@
                             <g:message code="event.startDate" />
                         </label>
                         <div class="col-sm-8">
-                            <input filter-date-and-time type="text" name="startDate" value="${event.startDate}">
+                            <input filter-date-and-time type="text" name="startDate" value="${event.startDate != null ? event.startDate.format('yyyy/MM/dd HH:mm') : ''}">
                         </div>
                     </div>
 
@@ -67,7 +72,7 @@
                             <g:message code="event.endDate" />
                         </label>
                         <div class="col-sm-8">
-                            <input filter-date-and-time type="text" name="endDate" value="${event.endDate}">
+                            <input filter-date-and-time type="text" name="endDate" value="${event.endDate != null ? event.endDate.format('yyyy/MM/dd HH:mm') : ''}">
                         </div>
                     </div>
 

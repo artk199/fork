@@ -15,7 +15,7 @@ class EventController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Event.list(params), model:[eventCount: Event.count()]
+        respond eventService.filter(params.title, params.timeAfter, params.timeBefore), model:[eventCount: Event.count()]
     }
 
     def show(Event event) {
@@ -40,7 +40,8 @@ class EventController {
 
         if (event.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond event.errors, view:'create'
+            List<Place> places = placeService.findAllApproved();
+            respond event.errors, view:'create', model:[places: places]
             return
         }
 
@@ -61,7 +62,8 @@ class EventController {
     }
 
     def edit(Event event) {
-        respond event
+        List<Place> places = placeService.findAllApproved();
+        respond event, model:[places: places]
     }
 
     @Transactional

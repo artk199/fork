@@ -15,20 +15,20 @@
                 <fieldset class="form" style="width: 100%;" >
 
                     <div class="form-group">
-                        <label for="title" class="col-sm-4 control-label" style="text-align: left;">
+                        <label for="commentTitle" class="col-sm-4 control-label" style="text-align: left;">
                             <g:message code="custom.title" />
                         </label>
                         <div class="col-sm-8" style="width: 100%;">
-                            <input class="form-control" name="title" id="title" value="${comment != null ? comment.title : ''}"/>
+                            <input class="form-control" name="commentTitle" id="commentTitle" value="${comment != null ? comment.title : ''}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="description" class="col-sm-4 control-label" style="text-align: left;">
+                        <label for="commentDescription" class="col-sm-4 control-label" style="text-align: left;">
                             <g:message code="custom.text" />
                         </label>
                         <div class="col-sm-8" style="width: 100%;">
-                            <textarea class="form-control" name="description" id="description" value="${comment != null ? comment.description : ''}"> </textarea>
+                            <textarea class="form-control" name="commentDescription" id="commentDescription" value="${comment != null ? comment.description : ''}"> </textarea>
                         </div>
                     </div>
                     <div style="text-align: right;">
