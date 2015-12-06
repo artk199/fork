@@ -55,8 +55,10 @@ public class EventService {
     }
 
     Comment addCommentToEvent(Event event, parameters){
-        Comment comment = new Comment(parameters);
+        Comment comment = new Comment();
         User currentUser = User.findByUsername(springSecurityService.currentUser);
+        comment.title=parameters.get("commentTitle");
+        comment.description=parameters.get("commentDescription");
         comment.language = 'PL';
         comment.owner = currentUser;
         comment.event = event;
