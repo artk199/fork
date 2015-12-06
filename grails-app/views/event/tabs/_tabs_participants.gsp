@@ -2,7 +2,7 @@
     <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs"></div>
     <div class="col-md-8 col-sm-8 col-xs-11 text-left">
         Lista zapisanych uczestników wydarzenia:
-        <g:if test="event.participants?.size() == 0">
+        <g:if test="${event.participants?.size() == 0}">
             <g:message code="event.participants.empty"/>
         </g:if>
         <br/>
