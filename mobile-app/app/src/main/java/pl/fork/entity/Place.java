@@ -24,8 +24,8 @@ public class Place implements Serializable {
     private String website = "";
     private Double avgScore = 2.0;
     private Integer imageID = -1;
-    private Double longitude = 18.6900271;
-    private Double latitude = 54.3610873;
+    private Double x;
+    private Double y;
     private LinkedList<ForkImage> images = new LinkedList<>();
     private LinkedList<ForkScore> scores = new LinkedList<>();
     private LinkedList<PlaceType> types = new LinkedList<>();
@@ -63,19 +63,19 @@ public class Place implements Serializable {
     }
 
     public Double getLongitude() {
-        return longitude;
+        return y;
     }
 
     public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+        this.y = longitude;
     }
 
     public Double getLatitude() {
-        return latitude;
+        return x;
     }
 
     public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+        this.x = latitude;
     }
 
     public Integer getId() {
@@ -130,7 +130,7 @@ public class Place implements Serializable {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(   String phone) {
         this.phone = phone;
     }
 
@@ -157,5 +157,21 @@ public class Place implements Serializable {
 
     public void setAvgScore(Double avgScore) {
         this.avgScore = avgScore;
+    }
+
+    public Double getX() {
+        return x;
+    }
+
+    public void setX(Double x) {
+        this.x = x;
+    }
+
+    public Double getY() {
+        return y;
+    }
+
+    public void setY(Double y) {
+        this.y = y;
     }
 }

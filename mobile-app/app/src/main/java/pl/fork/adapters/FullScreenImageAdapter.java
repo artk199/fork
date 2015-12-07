@@ -16,18 +16,13 @@ import java.util.List;
 
 import pl.fork.fork.R;
 
-/**
- * Created by etiennelawlor on 8/20/15.
- */
+
 public class FullScreenImageAdapter extends PagerAdapter {
 
     private List<String> mImages;
-    private PaletteColorType mPaletteColorType;
-    // endregion
 
     public FullScreenImageAdapter(List<String> images, PaletteColorType paletteColorType) {
         mImages = images;
-        mPaletteColorType = paletteColorType;
     }
 
     @Override

@@ -21,7 +21,7 @@ import pl.fork.fork.R;
 
 public class AllPlacesMapsActivity extends FragmentActivity {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private GoogleMap mMap;
     List<Place> places;
 
     @Override
@@ -41,12 +41,9 @@ public class AllPlacesMapsActivity extends FragmentActivity {
     }
 
     private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
             }

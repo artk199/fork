@@ -44,7 +44,6 @@ public class AddPhotoActivity  extends AppCompatActivity {
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     ImageView mImageView;
     Button mUploadButton;
-    Bitmap imageBitmap;
     private ProgressDialog progressDialog;
     Place place;
     File photoFile = null;
@@ -94,7 +93,7 @@ public class AddPhotoActivity  extends AppCompatActivity {
     String mCurrentPhotoPath;
 
     private File createImageFile() throws IOException {
-        // Create an image file name
+
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(
@@ -172,12 +171,12 @@ public class AddPhotoActivity  extends AppCompatActivity {
             dismissProgressDialog();
             if(aBoolean){
                 Log.d("UploadPhoto","Dodawnie zdjecia poprawnie.");
-                Toast.makeText(AddPhotoActivity.this, "Dodawanie zdjęcia powiodło się.", Toast.LENGTH_LONG);
+                Toast.makeText(AddPhotoActivity.this, "Dodawanie zdjęcia powiodło się.", Toast.LENGTH_LONG).show();
                 AddPhotoActivity.this.onBackPressed();
             }else{
                 Log.d("UploadPhoto","Blad podlacz dodawania zdjecia.");
                 AddPhotoActivity.this.mUploadButton.setEnabled(true);
-                Toast.makeText(AddPhotoActivity.this,"Błąd podczas wysyłania pliku",Toast.LENGTH_LONG);
+                Toast.makeText(AddPhotoActivity.this,"Błąd podczas wysyłania pliku",Toast.LENGTH_LONG).show();
             }
         }
 

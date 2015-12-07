@@ -117,6 +117,8 @@ public class FullScreenImageActivity extends AppCompatActivity {
         if (mViewPager != null && mImages.size() > 1) {
             int totalPages = mViewPager.getAdapter().getCount();
             getSupportActionBar().setTitle(String.format("%d of %d", (position + 1), totalPages));
+        }else{
+            getSupportActionBar().setTitle("Zdjecie");
         }
     }
 }

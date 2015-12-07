@@ -24,26 +24,19 @@ import pl.fork.entity.ForkImage;
 import pl.fork.entity.Place;
 import pl.fork.fork.R;
 
-/**
- * Created by Artur on 2015-11-07.
- */
+
 public class PlacePicturesFragment extends Fragment implements ImageAdapter.OnImageClickListener {
 
     private RecyclerView mRecyclerView;
+
     private ImageAdapter mImageGalleryAdapter;
+
     ArrayList<String> pictures;
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
+
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     Place place;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static PlacePicturesFragment newInstance(int sectionNumber,Place place) {
         PlacePicturesFragment fragment = new PlacePicturesFragment();
 

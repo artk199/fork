@@ -14,12 +14,8 @@ import java.util.List;
 
 import pl.fork.fork.R;
 
-/**
- * Created by etiennelawlor on 8/20/15.
- */
 public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    // region Member Variables
     private List<String> mImages;
     private int mGridItemWidth;
     private int mGridItemHeight;

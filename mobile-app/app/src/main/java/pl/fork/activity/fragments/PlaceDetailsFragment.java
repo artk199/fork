@@ -70,8 +70,6 @@ public class PlaceDetailsFragment extends Fragment {
             }
         });
 
-
-
         TextView descriptionTextView = (TextView) rootView.findViewById(R.id.descriptionTextView);
         descriptionTextView.setText(place.getDescription());
 
@@ -84,16 +82,19 @@ public class PlaceDetailsFragment extends Fragment {
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
         ratingBar.setRating(place.getAvgScore().floatValue());
 
+
+        //Ukrycie przycisków od dodawania zdjęcia/opinii
         if(!SessionHandler.getInstance().isActive()){
+
             Button addOpinionButton = (Button) rootView.findViewById(R.id.addOpinionButton);
             addOpinionButton.getLayoutParams().height = 0;
             addOpinionButton.setVisibility(View.INVISIBLE);
 
-            /*
+
             Button addPhotoButton = (Button) rootView.findViewById(R.id.addPhotoButton);
             addPhotoButton.getLayoutParams().height = 0;
             addPhotoButton.setVisibility(View.INVISIBLE);
-            */
+
         }
 
         return rootView;

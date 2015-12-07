@@ -20,19 +20,13 @@ import pl.fork.fork.R;
  * Created by Artur on 2015-11-07.
  */
 public class PlaceMapFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
+
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     Place place;
+
     private ObservableScrollView mScrollView;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static PlaceMapFragment newInstance(int sectionNumber,Place place) {
         PlaceMapFragment fragment = new PlaceMapFragment();
 
@@ -53,6 +47,7 @@ public class PlaceMapFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_place_map, container, false);
 
         Button btn = (Button) rootView.findViewById(R.id.mapButton);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +64,6 @@ public class PlaceMapFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mScrollView = (ObservableScrollView) view.findViewById(R.id.scrollView);
-
         MaterialViewPagerHelper.registerScrollView(getActivity(), mScrollView, null);
     }
 }

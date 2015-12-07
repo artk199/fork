@@ -22,18 +22,10 @@ public class PlaceOpinionsFragment extends Fragment {
 
     private ObservableScrollView mScrollView;
 
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     Place place;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static PlaceOpinionsFragment newInstance(int sectionNumber,Place place) {
         PlaceOpinionsFragment fragment = new PlaceOpinionsFragment();
 

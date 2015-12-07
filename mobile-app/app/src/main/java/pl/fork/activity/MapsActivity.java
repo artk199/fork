@@ -89,7 +89,7 @@ public class MapsActivity extends FragmentActivity {
         @Override
         protected List<LatLng> doInBackground(LatLng... params) {
             if(params.length < 2){
-                Log.e("GetPathTask","Nie podano wystarczajacej liczny wspolzendych.");
+                Log.e("GetPathTask","Nie podano wystarczajacej liczny wspolzednych.");
             }
 
             LatLng from = params[0];
