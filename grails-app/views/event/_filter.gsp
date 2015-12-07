@@ -9,10 +9,10 @@
                 <input id="title" type="text" name="title"  class="form-control"  placeholder="${g.message(code:'event.title', default:'Title')}">
             </div>
             <div class="form-group">
-                <input filter-date type="text" name="timeAfter"  class="form-control" placeholder="${g.message(code:'placeList.created.after', default:'Is being after')}">
+                <input filter-date-and-time type="text" name="timeAfter"  class="form-control" placeholder="${g.message(code:'placeList.created.after', default:'Is being after')}">
             </div>
             <div class="form-group">
-                <input filter-date type="text" name="timeBefore" class="form-control"  placeholder="${g.message(code:'placeList.created.before', default:'Is being before')}">
+                <input filter-date-and-time type="text" name="timeBefore" class="form-control"  placeholder="${g.message(code:'placeList.created.before', default:'Is being before')}">
             </div>
 
             <div class="buttons">
