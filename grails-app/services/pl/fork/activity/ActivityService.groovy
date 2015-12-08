@@ -77,6 +77,7 @@ class ActivityService {
     }
 
     void notifyUsers(Activity activity){
+        println activity.activityType
         switch ( activity.activityType ){
             case ActivityType.IMAGE :
             case ActivityType.REVIEW :
@@ -90,8 +91,10 @@ class ActivityService {
                 notify "userNotification", "{receiver: ${u.username}, notification: friendInvite }"
                 break
             case ActivityType.FRIEND:
+                User u = User.findById(activity.friend)
+                notify "userNotification", "{receiver: ${u.username}, notification: friend }"
                 activity.user.friends.each{ User friend ->
-                    notify "userNotification", "{receiver: ${friend.username}, notification: friend }"
+                    notify "userNotification", "{receiver: ${friend.username}, notification: activity }"
                 }
                 break
         }
