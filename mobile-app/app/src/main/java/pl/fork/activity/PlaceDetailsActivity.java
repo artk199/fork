@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -43,6 +44,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
 
         this.place = (Place) getIntent().getSerializableExtra("place");
 
+        Log.d("PlaceDetailsActivity",place.toString());
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),place);
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
 

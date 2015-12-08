@@ -79,6 +79,15 @@ public class PlaceDetailsFragment extends Fragment {
         TextView addressTextView = (TextView) rootView.findViewById(R.id.addressTextView);
         addressTextView.setText(place.getAddress());
 
+        TextView phoneTextView = (TextView) rootView.findViewById(R.id.phoneTextView);
+        phoneTextView.setText(place.getPhone());
+
+        TextView emailTextView = (TextView) rootView.findViewById(R.id.emailTextView);
+        emailTextView.setText(place.getEmail());
+
+        TextView wwwTextView = (TextView) rootView.findViewById(R.id.wwwTextView);
+        wwwTextView.setText(place.getWebsite());
+
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
         ratingBar.setRating(place.getAvgScore().floatValue());
 
