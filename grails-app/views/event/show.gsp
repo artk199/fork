@@ -30,6 +30,7 @@
                             <p>
                                 <span class="glyphicon glyphicon-calendar"></span>
                                 <span><b><g:message code="event.startDate"/></b></span>
+                                ${event.startDate != null ? event.startDate.format('yyyy/MM/dd HH:mm') : ''}
                             </p>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-11 text-left">
