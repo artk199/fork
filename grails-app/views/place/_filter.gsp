@@ -1,6 +1,6 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#types').multiselect({
+        $('#types2').multiselect({
             enableFiltering: true,
             enableCaseInsensitiveFiltering: true,
             buttonWidth: '100%',
@@ -31,6 +31,7 @@
                           optionValue="tag" class="form-control" multiple="multiple"
                           optionKey="id"
                 />
+                <span style="font-size:9px;"><em><g:message code="default.multiselect.info"/></em></span>
             </div>
             <div class="form-group">
                 <input id="town" type="text" name="town" class="form-control" placeholder="${g.message(code:'placeList.town', default:'Town')}">

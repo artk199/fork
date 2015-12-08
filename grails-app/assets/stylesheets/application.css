@@ -443,6 +443,10 @@ a.btn-orange:active{
     padding: 0 10px;
 }
 
+.blue-section table.table-striped>tbody>tr:nth-of-type(odd){
+    background-color: #2C5588;
+}
+
 .blue-section table.sortable thead th:hover:not([data-defaultsort=disabled]){
     background:#40526D;
 }

@@ -99,7 +99,7 @@
                                 </a>
 
                                 <div class="pull-right">
-                                    <a href="/user/edit/${user.id}">
+                                    <a href="/user/adminEdit/${user.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                         <g:message code="default.link.edit"/>
                                     </a>

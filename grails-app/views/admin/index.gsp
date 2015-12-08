@@ -4,6 +4,7 @@
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'place.label', default: 'Place')}" />
     <title><g:message code="admin.title"/></title>
+    <asset:javascript src="admin.js"/>
     <asset:javascript src="jquery-2.1.3.js"/>
     <script>
         setEditLabel('${g.message(code:'default.link.edit')}');

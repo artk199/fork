@@ -18,7 +18,6 @@ class FooterTagLib {
 
     def getTopScoredPlaces = { attrs ->
         int size = Integer.parseInt(attrs.maxSize)
-        size = (size == 0 ? 0 : size - 1);
 
         def places = placeService.getTopScoredPlaces(size);
 
@@ -31,7 +30,6 @@ class FooterTagLib {
                     out << " - ";
                 }
                 out << "<a href='/place/show/" + p.id + "'>" + p.name + "</a>";
-                out << " - " + (p.avgScore > 0 ? p.avgScore : 0);
                 out << "</li>";
             }
             out << "</ul>";
@@ -43,15 +41,19 @@ class FooterTagLib {
 
     def getNewestUsers = { attrs ->
         int maxSize = Integer.parseInt(attrs.maxSize)
-        maxSize = (maxSize == 0 ? 0 : maxSize - 1);
         def users = userService.getNewestUsers(maxSize);
 
-        out << "<ul>";
-        for(User u : users){
-            out << "<li>";
-            out << "<a href='/user/show/" + u.id + "'>" + u.username + "</a>";
-            out << "</li>";
+        if(users){
+            out << "<ul>";
+            for(User u : users){
+                out << "<li>";
+                out << "<a href='/user/show/" + u.id + "'>" + u.username + "</a>";
+                out << "</li>";
+            }
+            out << "</ul>";
         }
-        out << "</ul>";
+        else{
+            out<<"<p class='text-left pull-left' style='margin-top:10px;'>Brak zarejestrowanych u¿ytkowników.</p>";
+        }
     }
 }

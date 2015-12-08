@@ -160,16 +160,21 @@ class UserService {
     }
 
     List<User> getNewestUsers(int maxSize){
-       def users = User.createCriteria().list{
+        if(maxSize == 0){
+            return null
+        }
+
+        def users = User.createCriteria().list{
             order("id", "desc")
+            maxResults(maxSize)
         };
 
         if(users.size == 0){
             return null;
         }
-        int size = maxSize >= users.size() ? users.size() -1 : maxSize;
 
-        return users[0..size];
+
+        return users;
     }
 
     List<Activity> getActivities(int id, int offset, int max){

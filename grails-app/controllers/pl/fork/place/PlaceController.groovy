@@ -43,12 +43,15 @@ class PlaceController {
         def roles = springSecurityService.getPrincipal().getAuthorities();
         def isAdmin = roles.any{ it.authority == "ROLE_ADMIN" }
 
-        if( place.status != Status.PENDING || isAdmin){
+        if(place && ( place.status == Status.APPROVED|| isAdmin)){
             respond place, model:[score:score]
+        }
+        else if(place?.status == Status.PENDING ){
+            render view : "placePending"
         }
         else{
             response.status = 403
-            render view :"/errors/error403"
+            render view :"noPlace"
         }
     }
 

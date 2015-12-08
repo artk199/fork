@@ -27,12 +27,47 @@
                             </g:else>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-11 text-left">
-                            <span><b><g:message code="event.startDate"/></b></span>
-                            ${event.startDate != null ? event.startDate.format('yyyy/MM/dd HH:mm') : ''}
+                            <p>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span><b><g:message code="event.startDate"/></b></span>
+                            </p>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-11 text-left">
-                            <span><b><g:message code="event.endDate"/></b></span>
-                            ${event.endDate != null ? event.endDate.format('yyyy/MM/dd HH:mm') : ''}
+                            <p>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span><b><g:message code="event.endDate"/></b></span>
+                                ${event.endDate != null ? event.endDate.format('yyyy/MM/dd HH:mm') : ''}
+                            </p>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                            <p>
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                <strong><g:message code="event.place"/></strong>
+                                <g:link controller="place" action="show" id="${event.place?.id}">
+                                    ${event.place?.name}
+                                </g:link>
+                            </p>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                            <p>
+                                <span class="glyphicon glyphicon-home"></span>
+                                <strong><g:message code="event.place.town"/></strong>
+                                ${event.place?.town}
+                            </p>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                            <p>
+                                <span class="glyphicon glyphicon-road"></span>
+                                <strong><g:message code="event.place.address"/></strong>
+                                ${event.place?.address}
+                            </p>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-11 text-left">
+                            <p>
+                                <span class="glyphicon glyphicon-th-large"></span>
+                                <strong><g:message code="event.participants.count"/></strong>
+                                ${event.participants?.size()}
+                            </p>
                         </div>
                     </div>
                 </div>

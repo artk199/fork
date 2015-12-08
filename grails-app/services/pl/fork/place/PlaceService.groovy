@@ -290,15 +290,18 @@ class PlaceService {
 
     // Sort places list by descending score
     public List<Place> getTopScoredPlaces(int maxSize){
-        def allPlaces = filter(null, null, null, null, null, null, Status.APPROVED);
-
-        if(allPlaces.size() == 0){
+        if(maxSize == 0){
             return null
         }
 
-        allPlaces.sort{-it.getProperty("avgScore")};
-        int size = maxSize >= allPlaces.size() ? allPlaces.size() -1 : maxSize;
-        return allPlaces[0..size];
+        def allPlaces = Place.createCriteria().list {
+            eq("status", Status.APPROVED)
+            maxResults(maxSize)
+        }
+
+        // Bug z wysiwtlaniem miejsc w stopce wedlug posortowania oceny
+        //allPlaces.sort{-it.getProperty("avgScore")};
+        return allPlaces;
     }
 
     Score getScore(long id){

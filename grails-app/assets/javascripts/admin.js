@@ -84,9 +84,24 @@ function getUsersFromController(controller, tableID){
     });
 }
 
+function getAuthoritiesFromRole(role){
+    var roles = "";
+    role.forEach(function(element, index, array){
+        roles = roles + element["authority"];
+        if(index > 0){
+            roles = roles +  ", ";
+        }
+    });
+    return roles;
+}
+
 function createTableWithUsers(data){
     var tableBody = "";
     data.forEach(function(element, index, array){
+        var roles = getAuthoritiesFromRole(element["role"]);
+        if(roles.length == 0){
+            roles = emptyLabel;
+        }
         tableBody = tableBody +
             "<tr>"+
             // username column
@@ -95,7 +110,7 @@ function createTableWithUsers(data){
             element["username"] +
             "</a>" +
                 "<div class='pull-right'>" +
-                "<a href='/place/edit/"+ element["id"] + "'>" +
+                "<a href='/user/adminEdit/"+ element["id"] + "'>" +
                 "<span class='glyphicon glyphicon-edit'></span> " +
                 editLabel + "</a></div>" +
             "</td>" +
@@ -105,7 +120,7 @@ function createTableWithUsers(data){
             "</td>" +
             // roles column
             "<td class='col-md-4 col-sm-4 col-xs-4'>" +
-                element["role"] +
+                roles +
             "</td>" +
             "</tr>";
     })

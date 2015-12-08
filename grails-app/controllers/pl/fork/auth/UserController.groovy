@@ -9,6 +9,7 @@ class UserController {
 
     UserService userService
     ResourceLocator grailsResourceLocator
+    def springSecurityService;
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -117,7 +118,6 @@ class UserController {
 
     @Transactional
     def update(User user) {
-
         /*  */
         if (user == null) {
             transactionStatus.setRollbackOnly()
@@ -130,7 +130,10 @@ class UserController {
             respond user.errors, view: 'edit'
             return
         }
-        if (userService.isValid(user)){
+
+        def rolesAdmin = springSecurityService.getPrincipal().getAuthorities();
+        def isAdmin = rolesAdmin.any{ it.authority == "ROLE_ADMIN" }
+        if (userService.isValid(user) || isAdmin){
             /* Update roles*/
             def roles = params.list('authorities');
             UserRole.removeAll(user,true);
@@ -142,6 +145,11 @@ class UserController {
         else{
             response.status = 403
             render view :"/errors/error403"
+        }
+
+        if(isAdmin){
+            redirect controller: "user", action: "adminEdit", id: user.id
+            return;
         }
 
         request.withFormat {
@@ -196,5 +204,9 @@ class UserController {
     def getFriendsActivities(int id){
         List activities = userService.getFriendsActivities(id,params.offset.toInteger(), params.max.toInteger())
         render activities as JSON
+    }
+
+    def adminEdit(User user){
+        respond user
     }
 }
