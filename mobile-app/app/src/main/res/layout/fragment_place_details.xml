@@ -22,6 +22,51 @@
             android:layout_marginTop="@dimen/cardMarginVertical"
             android:background="@android:color/white"
             app:cardElevation="4dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar"
+                    android:layout_gravity="center_horizontal"
+                    android:numStars="5"
+                    android:rating="1"
+                    android:stepSize="0.1"
+                    android:isIndicator="true"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dodaj opinie"
+                    android:id="@+id/addOpinionButton"
+                    android:visibility="visible"
+                    android:textColor="@color/grey_white_1000" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dodaj zdjecie"
+                    android:id="@+id/addPhotoButton"
+                    android:visibility="visible"
+                    android:textColor="@color/grey_white_1000" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/cardMarginVertical"
+            android:layout_marginLeft="@dimen/cardMarginHorizontal"
+            android:layout_marginRight="@dimen/cardMarginHorizontal"
+            android:layout_marginTop="@dimen/cardMarginVertical"
+            android:background="@android:color/white"
+            app:cardElevation="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -59,7 +104,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/townTextView" />
+                        android:id="@+id/townTextView"
+                        android:padding="1dp" />
+
                 </TableRow>
 
                 <TableRow
@@ -74,56 +121,66 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/addressTextView" />
+                        android:id="@+id/addressTextView"
+                        android:padding="1dp" />
                 </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView3" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/emailTextView"
+                        android:padding="1dp" />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView4" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/phoneTextView"
+                        android:padding="1dp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView5" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/wwwTextView"
+                        android:padding="5dp" />
+
+                </TableRow>
+
+
             </TableLayout>
 
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/cardMarginVertical"
-            android:layout_marginLeft="@dimen/cardMarginHorizontal"
-            android:layout_marginRight="@dimen/cardMarginHorizontal"
-            android:layout_marginTop="@dimen/cardMarginVertical"
-            android:background="@android:color/white"
-            app:cardElevation="4dp">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ratingBar"
-                    android:layout_gravity="center_horizontal"
-                    android:numStars="5"
-                    android:rating="1"
-                    android:stepSize="0.1"
-                    android:isIndicator="true"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dodaj opinie"
-                    android:id="@+id/addOpinionButton"
-                    android:visibility="visible"
-                    android:textColor="@color/grey_white_1000" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dodaj zdjecie"
-                    android:id="@+id/addPhotoButton"
-                    android:visibility="visible"
-                    android:textColor="@color/grey_white_1000" />
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>

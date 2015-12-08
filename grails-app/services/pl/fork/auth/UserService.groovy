@@ -68,8 +68,7 @@ class UserService {
     List<User> search(String query){
         User currentUser = User.findByUsername(springSecurityService.currentUser)
         List<User> users = User.findAllByUsernameIlike("%"+query+"%")
-        users = users - currentUser - currentUser.allFriends
-        println currentUser.friends
+        users = users - currentUser - currentUser.friends - currentUser.yourInvitations - currentUser.friendInvitations
         users
     }
 
@@ -77,17 +76,39 @@ class UserService {
         User currentUser = User.findByUsername(springSecurityService.currentUser)
         User receiver = User.findById(id)
 
-        UserFriend friendship = new UserFriend()
-        friendship.requester = currentUser
-        friendship.receiver = receiver
-
-        friendship.validate()
-        if( !friendship.hasErrors() ){
-            currentUser.addToRequestedFriends(friendship)
-            receiver.addToReceivedFriends(friendship)
-            friendship.save flush:true
-            activityService.createInviteActivity(currentUser,receiver)
+        UserFriend friendship
+        friendship = UserFriend.findByRequesterAndReceiver(currentUser, receiver)
+        if( !friendship ){
+            friendship = UserFriend.findByRequesterAndReceiver(receiver, currentUser)
         }
+        if( !friendship ){
+            friendship = new UserFriend()
+            friendship.requester = currentUser
+            friendship.receiver = receiver
+
+            friendship.validate()
+            if( !friendship.hasErrors() ){
+                currentUser.addToRequestedFriends(friendship)
+                receiver.addToReceivedFriends(friendship)
+                friendship.save flush:true
+                activityService.createInviteActivity(currentUser,receiver)
+            }
+        }
+        else{
+            currentUser.removeFromRequestedFriends(friendship)
+            receiver.removeFromReceivedFriends(friendship)
+            friendship.status = FriendshipStatus.PENDING
+            friendship.requester = currentUser
+            friendship.receiver = receiver
+            friendship.validate()
+            if( !friendship.hasErrors() ) {
+                currentUser.addToRequestedFriends(friendship)
+                receiver.addToReceivedFriends(friendship)
+                friendship.save flush: true
+                activityService.createInviteActivity(currentUser, receiver)
+            }
+        }
+
         friendship
     }
 

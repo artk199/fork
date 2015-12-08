@@ -126,7 +126,8 @@ forkApp.directive('acceptFriend', function() {
     return {
         link: function (scope, element, attrs) {
             element.bind( 'click', function(){
-                scope.friends.push(scope[attrs['array'][scope.$index]]);
+                var arr = scope[attrs['array']];
+                scope.friends.push(arr[scope.$index]);
                 scope.modifyFriend(scope.$index, 'accept', attrs['array']);
             });
         }
