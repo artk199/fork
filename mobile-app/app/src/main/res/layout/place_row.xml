@@ -17,7 +17,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/placeImageView"
-            android:paddingTop="2dp" />
+            android:paddingTop="2dp"
+            android:paddingRight="2dp" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

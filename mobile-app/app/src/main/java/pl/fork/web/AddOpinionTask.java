@@ -10,7 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.Charset;
 
 import pl.fork.Config;
 import pl.fork.SessionHandler;
@@ -46,11 +50,13 @@ public class AddOpinionTask extends AsyncTask<Object,Void,Opinion> {
             Log.d(LOG_TAG, "JSON =" + opinionJson);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Cookie", "JSESSIONID="+SessionHandler.getInstance().getCookie());
+            headers.add("Cookie", "JSESSIONID=" + SessionHandler.getInstance().getCookie());
+            headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8");
             RestTemplate restTemplate = new RestTemplate();
             HttpEntity<String> entity = new HttpEntity<String>(opinionJson,headers);
             restTemplate.put(url, entity);
-
+            restTemplate.getMessageConverters()
+                    .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
             Opinion opinion1 = restTemplate.getForObject(url, Opinion.class);
             return opinion1;
         }catch (Exception e){
@@ -60,8 +66,8 @@ public class AddOpinionTask extends AsyncTask<Object,Void,Opinion> {
     }
 
     @Override
-    protected void onPostExecute(Opinion place) {
-        if(place == null){
+    protected void onPostExecute(Opinion opinion) {
+        if(opinion == null){
             CharSequence text = "Błąd! Spróbuj jeszcze raz!";
             int duration = Toast.LENGTH_SHORT;
 

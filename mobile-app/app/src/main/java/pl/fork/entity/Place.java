@@ -174,4 +174,25 @@ public class Place implements Serializable {
     public void setY(Double y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", address='" + address + '\'' +
+                ", town='" + town + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", website='" + website + '\'' +
+                ", avgScore=" + avgScore +
+                ", imageID=" + imageID +
+                ", x=" + x +
+                ", y=" + y +
+                ", images=" + images +
+                ", scores=" + scores +
+                ", types=" + types +
+                '}';
+    }
 }
