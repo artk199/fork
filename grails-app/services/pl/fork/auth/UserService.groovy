@@ -44,8 +44,6 @@ class UserService {
             return user
         }
 
-        addRoleToUser(user,"ROLE_ADMIN");
-
         return user
     }
 
